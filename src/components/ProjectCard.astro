@@ -16,7 +16,7 @@ const { project } = Astro.props;
     <p class="project-meta">{project.status}</p>
     {project.github && (
         <div class="project-links">
-            <a href="#">View case study</a>
+            {project.slug && <a href={`/projects/${project.slug}/`}>View case study</a>}
             <a href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
     )}

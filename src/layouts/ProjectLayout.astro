@@ -1,0 +1,30 @@
+---
+import Layout from "./Layout.astro";
+import Nav from "../components/Nav.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={`${frontmatter.title} | Brian Huang`} description={frontmatter.description}>
+    <Nav />
+    <main class="case-study">
+        <header class="case-header">
+            <a class="back-link" href="/#projects">&larr; All projects</a>
+            <p class="project-tag">{frontmatter.tag}</p>
+            <h1>{frontmatter.title}</h1>
+            <p class="case-lede">{frontmatter.description}</p>
+            <p class="project-meta">{frontmatter.status}</p>
+            <ul class="chips">
+                {frontmatter.chips.map((chip) => (
+                    <li>{chip}</li>
+                ))}
+            </ul>
+            {frontmatter.github && (
+                <p class="case-links"><a href={frontmatter.github} target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+            )}
+        </header>
+        <article class="case-body">
+            <slot />
+        </article>
+    </main>
+</Layout>

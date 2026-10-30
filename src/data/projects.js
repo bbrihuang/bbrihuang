@@ -7,6 +7,7 @@ export const projects = [
         status: "Done | 2026",
         github: "https://github.com/bbrihuang/temperature-sensor",
         featured: true,
+        slug: "room-temperature-monitor",
     },
     {
         title: "Project JetHexa",

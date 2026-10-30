@@ -399,3 +399,135 @@ nav a:hover,
         opacity: 0;
     }
 }
+
+/* Case study pages */
+.case-study {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-3xl);
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    color: #8793a5;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--text);
+}
+
+.case-header h1 {
+    margin: 0 0 var(--space-sm);
+    font-family: "Satoshi", sans-serif;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.case-header .project-tag {
+    margin: 0 0 var(--space-xs);
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--hardware);
+}
+
+.case-lede {
+    max-width: 680px;
+    margin: 0 0 var(--space-sm);
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: #aab4c2;
+}
+
+.case-links {
+    margin: 0;
+}
+
+.case-body {
+    max-width: 760px;
+}
+
+.case-body h2 {
+    margin: var(--space-2xl) 0 var(--space-sm);
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+}
+
+.case-body p,
+.case-body li {
+    color: #cbd5e1;
+}
+
+.case-body li {
+    margin-bottom: var(--space-xs);
+}
+
+.case-hero {
+    display: block;
+    width: 100%;
+    margin: var(--space-xl) 0 var(--space-lg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-sm);
+}
+
+.stat {
+    padding: var(--space-md);
+    background-color: rgba(20, 26, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+.stat strong {
+    display: block;
+    font-family: "Geist Mono", monospace;
+    font-size: 1.25rem;
+    color: var(--hardware);
+}
+
+.stat span {
+    font-size: 14px;
+    color: #8793a5;
+}
+
+.case-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-sm) 0;
+}
+
+.case-body th,
+.case-body td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+}
+
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
