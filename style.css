@@ -101,7 +101,9 @@ section {
 
 .project-card {
     padding: 24px;
-    background-color: var(--card);
+    background-color: rgba(20, 26, 40, 0.6);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     transition: transform 0.2s ease, border-color 0.2s ease;
@@ -266,4 +268,26 @@ nav a {
 
 .grad-hardware {
     background-image: linear-gradient(90deg, var(--hardware), #fbbf24);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(74, 222, 128, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 40%, rgba(251, 146, 60, 0.1), transparent 40%);
+}
+
+nav a,
+#contact a {
+    transition: color 0.2s ease;
+}
+
+nav a:hover,
+#contact a:hover,
+.project-links a:hover {
+    color: var(--software);
 }
