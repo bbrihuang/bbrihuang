@@ -1995,8 +1995,10 @@ main > :first-child {
 /* Reduced motion: the hero photo fades in place. */
 @media (prefers-reduced-motion: reduce) {
     .photo-card,
-    .photo-card img,
+    .photo-card img {
+        animation-name: fade-in;
     }
+}
 
 /* Small phones: three links and three icons fit inside the pill. */
 @media (max-width: 430px) {
