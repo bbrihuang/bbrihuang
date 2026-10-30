@@ -23,6 +23,15 @@ const { title, description } = Astro.props;
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700&display=swap" rel="stylesheet">
     <title>{title}</title>
     <ClientRouter />
+    <!-- Hold sections in their starting pose before the first paint so their
+         entrances play (see setUpReveal in main.js). If the main script never
+         runs, show everything after 3 seconds. -->
+    <script is:inline>
+        document.documentElement.classList.add("js-reveal");
+        setTimeout(function () {
+            if (!window.__revealReady) document.documentElement.classList.remove("js-reveal");
+        }, 3000);
+    </script>
 </head>
 
 <body>

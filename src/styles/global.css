@@ -1694,25 +1694,6 @@ body:has(.up-next) .site-footer {
     background-color: color-mix(in srgb, var(--experience) 85%, white);
 }
 
-/* Scroll reveal (main.js marks elements below the screen with data-reveal) */
-[data-reveal] {
-    transition:
-        opacity 600ms var(--ease-out),
-        transform 600ms var(--ease-out);
-}
-
-[data-reveal]:not([data-visible]) {
-    opacity: 0;
-    transform: translateY(16px);
-}
-
-/* Reduced motion: fade only, no movement. */
-@media (prefers-reduced-motion: reduce) {
-    [data-reveal]:not([data-visible]) {
-        transform: none;
-    }
-}
-
 /* Hover motion, mouse only: touch screens fire a hover on tap. */
 @media (hover: hover) and (pointer: fine) {
     .project-card:hover {
@@ -1810,4 +1791,85 @@ body:has(.up-next) .site-footer {
 
 #terminal-output::-webkit-scrollbar {
     display: none;
+}
+
+/* ------------------------------------------------------------------
+   Section entrances (see setUpReveal in main.js). Each group waits in
+   its starting pose until it gets .is-in, then its entrance plays.
+   Keyframes, not transitions, so entrances never fight hover effects.
+   ------------------------------------------------------------------ */
+@keyframes enter-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+@keyframes enter-left {
+    from {
+        opacity: 0;
+        transform: translateX(-16px);
+    }
+}
+
+@keyframes line-draw {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes dot-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+/* Default: a group's direct children rise in one after another. */
+.js-reveal :is(main > section:not(.hero), .page-header, .case-header):not(.is-in) > *,
+.js-reveal .case-body > :not(.is-in) {
+    opacity: 0;
+}
+
+:is(main > section:not(.hero), .page-header, .case-header).is-in > *,
+.case-body > .is-in {
+    animation: enter-up 700ms var(--ease-out) backwards;
+}
+
+:is(main > section, .page-header, .case-header).is-in > :nth-child(2) { animation-delay: 120ms; }
+:is(main > section, .page-header, .case-header).is-in > :nth-child(3) { animation-delay: 200ms; }
+:is(main > section, .page-header, .case-header).is-in > :nth-child(4) { animation-delay: 280ms; }
+:is(main > section, .page-header, .case-header).is-in > :nth-child(5) { animation-delay: 360ms; }
+:is(main > section, .page-header, .case-header).is-in > :nth-child(6) { animation-delay: 440ms; }
+
+/* Section titles: the dot pops, the line draws out of it, the words slide in. */
+:is(main > section, .page-header, .case-header).is-in > .section-title {
+    animation: enter-left 600ms var(--ease-out) backwards;
+}
+
+.is-in > .section-title::after {
+    animation: dot-pop 500ms var(--ease-out) 60ms backwards;
+}
+
+.is-in > .section-title::before {
+    transform-origin: left;
+    animation: line-draw 600ms var(--ease-out) 180ms backwards;
+}
+
+/* Reduced motion: every entrance becomes a plain fade. */
+@media (prefers-reduced-motion: reduce) {
+    .is-in,
+    .is-in *,
+    .is-in *::before,
+    .is-in *::after {
+        animation-name: fade-in !important;
+    }
+
+    .photo-card::before {
+        animation: none !important;
+    }
 }

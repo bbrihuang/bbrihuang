@@ -166,48 +166,37 @@ function setUpProjectFilters() {
     });
 }
 
-// Sections and cards fade up the first time they scroll into view. Only
-// things that start below the screen are hidden, so nothing visible on load
-// flickers, and without JavaScript everything simply shows.
-const revealTargets = [
-    ".section-title",
-    ".about-main > *",
-    ".photo-card",
-    ".stack-group",
-    ".jobs",
-    ".project-card",
-    ".projects-more",
-    ".case-body > *",
-].join(", ");
+// Section entrances. An inline script in the layout adds .js-reveal to <html>
+// before the page paints, which holds each section in its starting pose; a
+// section gets .is-in when it scrolls into view (straight away if it's
+// already on screen) and its CSS entrance plays. Without JavaScript the class
+// is never added and everything shows as normal.
+const revealGroups = "main > section:not(.hero), .page-header, .case-header, .case-body > *";
 
 function setUpReveal() {
-    if (!("IntersectionObserver" in window)) return;
-    const pending = [...document.querySelectorAll(revealTargets)].filter(
-        (element) => element.getBoundingClientRect().top > window.innerHeight,
-    );
-    pending.forEach((element) => element.setAttribute("data-reveal", ""));
-
+    const root = document.documentElement;
+    root.classList.add("js-reveal");
+    window.__revealReady = true;
+    const groups = [...document.querySelectorAll(revealGroups)];
+    if (!("IntersectionObserver" in window)) {
+        groups.forEach((group) => group.classList.add("is-in"));
+        return;
+    }
     const observer = new IntersectionObserver((entries) => {
-        // Things that arrive together come in one after another.
-        entries
-            .filter((entry) => entry.isIntersecting)
-            .forEach((entry, index) => {
-                const element = entry.target;
-                observer.unobserve(element);
-                const delay = Math.min(index, 4) * 60;
-                element.style.transitionDelay = `${delay}ms`;
-                element.setAttribute("data-visible", "");
-                // Hand the element back to its own transitions once it's in.
-                setTimeout(() => {
-                    element.removeAttribute("data-reveal");
-                    element.removeAttribute("data-visible");
-                    element.style.transitionDelay = "";
-                }, delay + 700);
-            });
-    }, { rootMargin: "0px 0px -10% 0px" });
-
-    pending.forEach((element) => observer.observe(element));
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    groups.forEach((group) => observer.observe(group));
 }
+
+// The new page's <html> replaces the old one's classes on navigation, so put
+// the class back before the new page paints.
+document.addEventListener("astro:after-swap", () => {
+    document.documentElement.classList.add("js-reveal");
+});
 
 // Runs on the first load and after every page change.
 document.addEventListener("astro:page-load", () => {
