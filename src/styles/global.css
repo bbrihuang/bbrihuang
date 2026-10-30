@@ -83,7 +83,7 @@ section {
 }
 
 .hero-intro {
-    max-width: 560px;
+    max-width: 640px;
     margin: var(--space-md) 0 0;
     font-size: 1.125rem;
     color: var(--fog);
