@@ -12,7 +12,7 @@ body {
     margin: 0;
     background-color: var(--bg);
     color: var(--text);
-    font-family: "Archivo", sans-serif;
+    font-family: "Geist", sans-serif;
     font-size: 17px;
     line-height: 1.6;
 }
@@ -50,6 +50,7 @@ section {
 
 .hero h1 {
     margin: 0 0 24px;
+    font-family: "Satoshi", sans-serif;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     line-height: 1.05;
@@ -133,7 +134,7 @@ section {
 
 .project-tag {
     margin: 0 0 12px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -153,7 +154,7 @@ section {
     padding: 4px 10px;
     background-color: rgba(255, 255, 255, 0.06);
     border-radius: 6px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 13px;
 }
 
@@ -173,4 +174,54 @@ section {
     .project-grid {
         grid-template-columns: 1fr;
     }
+}
+
+h2 {
+    margin: 0 0 32px;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+nav a {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+#experience article {
+    margin-bottom: 40px;
+}
+
+#experience h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+#experience article > p {
+    margin: 4px 0 12px;
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    color: #8793a5;
+}
+
+#experience ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+#experience li {
+    margin-bottom: 8px;
+    color: #d3dae4;
+}
+
+#contact ul {
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
