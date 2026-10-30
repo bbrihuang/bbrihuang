@@ -11,11 +11,13 @@ const { project } = Astro.props;
     </div>
     <div class="project-body">
         <p class="project-tag">{project.tag}</p>
-        <h3>
-            {project.slug
-                ? <a class="project-link" href={`/projects/${project.slug}/`}>{project.title}</a>
-                : project.title}
-        </h3>
+        <div class="project-heading">
+            <h3>
+                {project.slug
+                    ? <a class="project-link" href={`/projects/${project.slug}/`}>{project.title}</a>
+                    : project.title}
+            </h3>
+            </div>
         <p>{project.description}</p>
         {project.chips.length > 0 && (
             <ul class="chips">

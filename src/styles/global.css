@@ -152,8 +152,9 @@ section {
 
 .project-meta {
     margin: 0;
-    font-size: 14px;
-    color: var(--steel);
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    color: var(--fog);
 }
 
 .project-links {
@@ -2239,4 +2240,21 @@ main > :first-child {
     margin-top: var(--space-xs);
     font-size: 14px;
     color: var(--fog);
+}
+
+/* Project cards: the year sits on the title's line */
+.project-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.project-card .project-heading h3 {
+    margin: 0;
+}
+
+.project-card .project-heading .project-meta {
+    flex-shrink: 0;
 }
