@@ -1285,73 +1285,6 @@ main > :first-child {
     }
 }
 
-/* Up next: a small pill pinned to the bottom corner, always in reach */
-.up-next {
-    position: fixed;
-    right: var(--space-md);
-    bottom: var(--space-md);
-    z-index: 40;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 44px;
-    padding: 6px 6px 6px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9999px;
-    background: linear-gradient(180deg, rgba(28, 28, 31, 0.8), rgba(20, 20, 22, 0.7));
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-    backdrop-filter: blur(24px) saturate(150%);
-    box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.75);
-    text-decoration: none;
-    transition: border-color 0.2s ease;
-}
-
-.up-next:hover,
-.up-next:focus-visible {
-    border-color: color-mix(in srgb, var(--next-color) 60%, transparent);
-}
-
-.up-next:focus-visible {
-    outline: 2px solid var(--next-color);
-    outline-offset: 3px;
-}
-
-.up-next-label {
-    font-family: "Geist Mono", monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--next-color);
-}
-
-.up-next-title {
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.up-next-arrow {
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: var(--next-color);
-    color: var(--void);
-    transition: transform 0.2s ease;
-}
-
-
-/* Leave room at the bottom so the pill never covers the footer text. */
-body:has(.up-next) .site-footer {
-    padding-bottom: calc(var(--space-xl) + 56px);
-}
-
-@media (max-width: 560px) {
-    .up-next {
-        right: var(--space-sm);
-        bottom: var(--space-sm);
-    }
-}
 
 
 /* Projects: "More projects" heading with filter tabs */
@@ -1788,15 +1721,11 @@ body:has(.up-next) .site-footer {
         transform: translate(2px, -2px);
     }
 
-    .up-next:hover .up-next-arrow {
-        transform: translateX(2px);
-    }
 }
 
 /* Press feedback: buttons give a little when clicked. */
 .contact-links a,
 .filters button,
-.up-next,
 .job-tab,
 .nav-socials a,
 .site-header nav ul a {
@@ -1809,7 +1738,6 @@ body:has(.up-next) .site-footer {
 
 .contact-links a:active,
 .filters button:active,
-.up-next:active,
 .job-tab:active,
 .nav-socials a:active,
 .site-header nav ul a:active {
