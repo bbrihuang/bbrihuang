@@ -937,4 +937,17 @@ export const projects = [
             "Published it free and public on Notion."
         ]
     },
+    {
+        title: "Finance Dashboard / Paycheck Splitter",
+        areas: [
+            "software"
+        ],
+        tag: "Software",
+        description: "A personal finance dashboard with a paycheck splitter.",
+        chips: [],
+        slug: "finance-dashboard",
+        cover: "/projects/finance-dashboard/cover.svg",
+        coverAlt: "Cover image for Finance Dashboard / Paycheck Splitter.",
+        summary: "A personal finance dashboard with a paycheck splitter. The full write-up is still being written."
+    },
 ];
