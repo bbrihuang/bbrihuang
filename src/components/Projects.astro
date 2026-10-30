@@ -7,7 +7,7 @@ const others = projects.filter((project) => !project.featured);
 ---
 
 <section id="projects">
-    <h2 class="section-title">Projects</h2>
+    <h1 class="section-title">Projects</h1>
     {featured && <ProjectCard project={featured} />}
     <div class="project-grid">
         {others.map((project) => (
