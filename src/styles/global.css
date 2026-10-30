@@ -1505,10 +1505,6 @@ main > :first-child {
     text-align: left;
 }
 
-.hero-main .contact-card {
-    margin-top: var(--space-lg);
-}
-
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
     aspect-ratio: 1;
@@ -1609,43 +1605,6 @@ main > :first-child {
     }
 }
 
-/* Hero contact card: a short heading over the main links */
-.contact-card {
-    padding: var(--space-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
-    -webkit-backdrop-filter: blur(28px) saturate(140%);
-    backdrop-filter: blur(28px) saturate(140%);
-}
-
-
-
-
-
-
-
-.contact-links {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xs);
-}
-
-.contact-links a {
-    padding: 8px 0;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.contact-links a:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-}
 
 /* Featured badge, pinned to the corner of the featured card's image */
 .project-cover {
@@ -1687,27 +1646,6 @@ main > :first-child {
     color: var(--text);
 }
 
-.contact-links .link-projects,
-.contact-links .link-experience {
-    border-color: transparent;
-    color: var(--void);
-}
-
-.contact-links .link-projects {
-    background-color: var(--projects);
-}
-
-.contact-links .link-experience {
-    background-color: var(--experience);
-}
-
-.contact-links .link-projects:hover {
-    background-color: color-mix(in srgb, var(--projects) 85%, white);
-}
-
-.contact-links .link-experience:hover {
-    background-color: color-mix(in srgb, var(--experience) 85%, white);
-}
 
 /* Hover motion, mouse only: touch screens fire a hover on tap. */
 @media (hover: hover) and (pointer: fine) {
@@ -1734,7 +1672,7 @@ main > :first-child {
 }
 
 /* Press feedback: buttons give a little when clicked. */
-.contact-links a,
+.hero-actions a,
 .filters button,
 .job-tab,
 .nav-socials a,
@@ -1746,7 +1684,7 @@ main > :first-child {
         transform 120ms var(--ease-out);
 }
 
-.contact-links a:active,
+.hero-actions a:active,
 .filters button:active,
 .job-tab:active,
 .nav-socials a:active,
@@ -1783,14 +1721,6 @@ main > :first-child {
     }
 }
 
-.contact-heading {
-    margin: 0 0 var(--space-sm);
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--text);
-}
 
 #terminal-output {
     flex: 1;
@@ -2311,4 +2241,53 @@ main > :first-child {
     html {
         scroll-behavior: smooth;
     }
+}
+
+/* Hero next steps: projects first, experience quieter, resume a plain link. */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+}
+
+.hero-actions a {
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.action-primary,
+.action-outline {
+    padding: 12px var(--space-md);
+}
+
+.action-primary {
+    border: 1px solid var(--projects);
+    background-color: var(--projects);
+    color: var(--void);
+}
+
+.action-primary:hover {
+    background-color: color-mix(in srgb, var(--projects) 85%, white);
+}
+
+.action-outline {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.action-outline:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.action-text {
+    padding: 12px var(--space-xs);
+    color: var(--fog);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.action-text:hover {
+    color: var(--text);
 }
