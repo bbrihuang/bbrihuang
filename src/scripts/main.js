@@ -164,30 +164,6 @@ function setUpProjectFilters() {
     });
 }
 
-// Email in the profile card: click to copy, it says "Copied!" for a moment.
-// If the browser won't allow copying, open the mail app instead.
-function setUpCopyEmail() {
-    document.querySelectorAll("[data-copy]").forEach((button) => {
-        const text = button.querySelector(".copy-text");
-        let timer = 0;
-        button.addEventListener("click", async () => {
-            try {
-                await navigator.clipboard.writeText(button.dataset.copy);
-            } catch {
-                window.location.href = `mailto:${button.dataset.copy}`;
-                return;
-            }
-            text.textContent = "Copied!";
-            button.classList.add("is-copied");
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                text.textContent = button.dataset.copy;
-                button.classList.remove("is-copied");
-            }, 1600);
-        });
-    });
-}
-
 // Sections and cards fade up the first time they scroll into view. Only
 // things that start below the screen are hidden, so nothing visible on load
 // flickers, and without JavaScript everything simply shows.
@@ -237,6 +213,5 @@ document.addEventListener("astro:page-load", () => {
     startTerminal();
     setUpJobTabs();
     setUpProjectFilters();
-    setUpCopyEmail();
     setUpReveal();
 });

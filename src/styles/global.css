@@ -1376,34 +1376,10 @@ body:has(.up-next) .site-footer {
 
 
 
-.profile-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-}
 
-.profile-email {
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--text);
-    font-family: "Geist Mono", monospace;
-    font-size: 14px;
-    cursor: copy;
-}
 
-.profile-email.is-copied {
-    color: var(--software);
-}
 
-.profile-email:hover {
-    color: var(--software);
-}
 
-.profile-school {
-    font-size: 14px;
-    color: var(--fog);
-}
 
 /* Terminal window bar: three dots and a title */
 .terminal-bar {
@@ -1531,17 +1507,8 @@ body:has(.up-next) .site-footer {
     object-position: 50% 35%;
 }
 
-.photo-card-text {
-    padding: var(--space-sm) var(--space-md) var(--space-md);
-}
 
-.photo-card-text p {
-    margin: 0;
-}
 
-.photo-card .profile-email {
-    margin: 4px 0;
-}
 
 @media (max-width: 900px) {
     .about-layout {
