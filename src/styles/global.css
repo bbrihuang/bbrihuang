@@ -173,7 +173,7 @@ section {
 
 @media (max-width: 640px) {
     .project-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
@@ -575,7 +575,7 @@ nav a:hover,
 
 @media (max-width: 720px) {
     .project-card.featured {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .project-card.featured .project-cover {
@@ -933,7 +933,7 @@ main > :first-child {
 
 @media (max-width: 640px) {
     .clubs {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
@@ -970,7 +970,7 @@ main > :first-child {
 
 @media (max-width: 640px) {
     .stack-group {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: var(--space-xs);
     }
 }
@@ -1266,7 +1266,7 @@ main > :first-child {
 
 @media (max-width: 800px) {
     .jobs {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
@@ -1276,7 +1276,7 @@ main > :first-child {
     }
 
     .job-facts {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .job-facts div + div {
@@ -1415,7 +1415,7 @@ main > :first-child {
 
 @media (max-width: 900px) {
     .hero {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .hero-side .terminal {
@@ -2261,5 +2261,23 @@ main > :first-child {
     .photo-card img,
     .frame-corner {
         animation-name: fade-in;
+    }
+}
+
+/* Small phones: three links and three icons fit inside the pill. */
+@media (max-width: 430px) {
+    .site-header nav ul a {
+        padding: 0 6px;
+        font-size: 13px;
+    }
+
+    .nav-socials {
+        gap: 0;
+    }
+
+    .nav-socials a,
+    .nav-copy {
+        width: 30px;
+        height: 30px;
     }
 }
