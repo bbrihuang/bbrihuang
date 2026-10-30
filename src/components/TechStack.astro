@@ -1,0 +1,21 @@
+---
+import { stack } from "../data/stack.js";
+---
+
+<section id="stack">
+    <h2 class="section-title">Tech Stack</h2>
+    <dl class="stack">
+        {stack.map((group) => (
+            <div class="stack-group">
+                <dt>{group.group}</dt>
+                <dd>
+                    <ul class="chips">
+                        {group.items.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
+                </dd>
+            </div>
+        ))}
+    </dl>
+</section>

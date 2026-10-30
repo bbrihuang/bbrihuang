@@ -665,6 +665,7 @@ nav a:hover,
 #about { --line: var(--software); }
 #experience { --line: var(--experience); }
 #projects { --line: var(--projects); }
+#stack { --line: var(--experience); }
 #contact { --line: var(--hardware); }
 
 #experience article {
@@ -904,4 +905,42 @@ main {
 .clubs a:hover .club-arrow {
     color: var(--text);
     transform: translate(2px, -2px);
+}
+
+/* Tech stack: group name on the left, chips on the right */
+.stack {
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stack-group {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stack dt {
+    padding-top: 4px;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+}
+
+.stack dd {
+    margin: 0;
+}
+
+.stack .chips {
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .stack-group {
+        grid-template-columns: 1fr;
+        gap: var(--space-xs);
+    }
 }
