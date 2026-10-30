@@ -1516,3 +1516,28 @@ main > :first-child {
 .site-footer a:hover {
     color: var(--text);
 }
+
+/* Cards with a case study open it from anywhere on the card */
+.project-card.linked {
+    position: relative;
+    cursor: pointer;
+}
+
+.project-link {
+    text-decoration: none;
+}
+
+.project-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.project-card.linked:hover .project-link {
+    color: var(--projects);
+}
+
+.project-card .project-links a {
+    position: relative;
+    z-index: 1;
+}
