@@ -2227,21 +2227,18 @@ main > :first-child {
     color: var(--fog);
 }
 
-/* Project cards: the year sits on the title's line */
+/* Project cards: the year sits under the title, bold and purple */
 .project-heading {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-sm);
     margin-bottom: var(--space-xs);
 }
 
 .project-card .project-heading h3 {
-    margin: 0;
+    margin: 0 0 2px;
 }
 
 .project-card .project-heading .project-meta {
-    flex-shrink: 0;
+    font-weight: 700;
+    color: var(--projects);
 }
 
 /* Project cards: the tech stack sits at the bottom, whatever the text length */
