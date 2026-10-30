@@ -757,15 +757,15 @@ main > :first-child {
     color: var(--steel);
 }
 
-/* Education: a full-width card with a BU-red stripe, degree on the left,
-   class year on the right. */
+/* Education: a full-width card with a soft BU-red glow behind the logo,
+   degree on the left, class year on the right. */
 .education {
     position: relative;
     display: flex;
     align-items: center;
     gap: var(--space-md);
     overflow: hidden;
-    padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-md) + 4px);
+    padding: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
@@ -773,11 +773,18 @@ main > :first-child {
 .education::before {
     content: "";
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 4px;
-    background-color: #cc0000;
+    top: 50%;
+    left: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(204, 0, 0, 0.22), transparent 65%);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.education img {
+    position: relative;
 }
 
 .education img {
