@@ -5,7 +5,6 @@ tag: Hardware
 description: Built an Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed.
 year: "2026"
 chips: ["Arduino UNO", "C++", "TMP36", "Onshape"]
-github: https://github.com/bbrihuang/temperature-sensor
 ---
 
 <img class="case-hero" src="/projects/room-temperature-monitor/hero.webp" alt="The finished temperature monitor: a black 3D-printed case with an LCD on top, a power switch, a green power LED, a USB port, a red alarm LED and a buzzer.">

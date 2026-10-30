@@ -6,7 +6,6 @@ export const projects = [
         description: "Built an Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed.",
         chips: ["Arduino UNO", "C++", "TMP36", "Onshape"],
         year: "2026",
-        github: "https://github.com/bbrihuang/temperature-sensor",
         featured: true,
         slug: "room-temperature-monitor",
         cover: "/projects/room-temperature-monitor/hero.webp",
