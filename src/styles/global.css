@@ -1873,3 +1873,78 @@ body:has(.up-next) .site-footer {
         animation: none !important;
     }
 }
+
+/* About: text and education rise in turn, clubs cascade, the photo wipes up
+   into its frame and the corner marks snap on last. */
+@keyframes photo-wipe {
+    from {
+        clip-path: inset(100% -24px -24px -24px round 14px);
+    }
+    to {
+        clip-path: inset(-24px round 14px);
+    }
+}
+
+@keyframes photo-settle {
+    from {
+        transform: scale(1.12);
+    }
+}
+
+@keyframes corner-in {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+.js-reveal #about:not(.is-in) > .about-layout {
+    opacity: 1;
+}
+
+#about.is-in > .about-layout {
+    animation: none;
+}
+
+.js-reveal #about:not(.is-in) :is(.about-main > :not(.clubs), .clubs li, .photo-card, .frame-corner) {
+    opacity: 0;
+}
+
+#about.is-in .about-main > :not(.clubs) {
+    animation: enter-up 700ms var(--ease-out) backwards;
+}
+
+#about.is-in .about-main > :nth-child(1) { animation-delay: 150ms; }
+#about.is-in .about-main > :nth-child(2) { animation-delay: 230ms; }
+#about.is-in .about-main > :nth-child(3) { animation-delay: 290ms; }
+#about.is-in .about-main > :nth-child(4) { animation-delay: 370ms; }
+
+#about.is-in .clubs li {
+    animation: enter-up 600ms var(--ease-out) backwards;
+}
+
+#about.is-in .clubs li:nth-child(1) { animation-delay: 420ms; }
+#about.is-in .clubs li:nth-child(2) { animation-delay: 465ms; }
+#about.is-in .clubs li:nth-child(3) { animation-delay: 510ms; }
+#about.is-in .clubs li:nth-child(4) { animation-delay: 555ms; }
+#about.is-in .clubs li:nth-child(5) { animation-delay: 600ms; }
+#about.is-in .clubs li:nth-child(6) { animation-delay: 645ms; }
+#about.is-in .clubs li:nth-child(7) { animation-delay: 690ms; }
+#about.is-in .clubs li:nth-child(8) { animation-delay: 735ms; }
+
+#about.is-in .photo-card {
+    animation: photo-wipe 900ms var(--ease-in-out) 200ms backwards;
+}
+
+#about.is-in .photo-card img {
+    animation: photo-settle 1400ms var(--ease-out) 200ms backwards;
+}
+
+#about.is-in .frame-corner {
+    animation: corner-in 400ms var(--ease-out) backwards;
+}
+
+#about.is-in .frame-corner:nth-child(1) { animation-delay: 950ms; }
+#about.is-in .frame-corner:nth-child(2) { animation-delay: 1010ms; }
+#about.is-in .frame-corner:nth-child(3) { animation-delay: 1070ms; }
+#about.is-in .frame-corner:nth-child(4) { animation-delay: 1130ms; }
