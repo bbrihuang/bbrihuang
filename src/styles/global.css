@@ -2210,3 +2210,16 @@ body:has(.up-next) .site-footer {
 .terminal-input:focus-within {
     background-color: rgba(255, 255, 255, 0.03);
 }
+
+/* Small phones: four links leave room for one icon, so GitHub and LinkedIn
+   step out of the top bar (they're in the footer) and the mail icon stays. */
+@media (max-width: 480px) {
+    .nav-socials a {
+        display: none;
+    }
+
+    .site-header nav ul a {
+        padding: 0 7px;
+        font-size: 13px;
+    }
+}
