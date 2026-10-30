@@ -164,10 +164,35 @@ function setUpProjectFilters() {
     });
 }
 
+// Email in the profile card: click to copy, it says "Copied!" for a moment.
+// If the browser won't allow copying, open the mail app instead.
+function setUpCopyEmail() {
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+        const text = button.querySelector(".copy-text");
+        let timer = 0;
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(button.dataset.copy);
+            } catch {
+                window.location.href = `mailto:${button.dataset.copy}`;
+                return;
+            }
+            text.textContent = "Copied!";
+            button.classList.add("is-copied");
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                text.textContent = button.dataset.copy;
+                button.classList.remove("is-copied");
+            }, 1600);
+        });
+    });
+}
+
 // Runs on the first load and after every page change.
 document.addEventListener("astro:page-load", () => {
     placeShapes();
     startTerminal();
     setUpJobTabs();
     setUpProjectFilters();
+    setUpCopyEmail();
 });

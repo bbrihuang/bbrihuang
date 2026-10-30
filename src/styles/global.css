@@ -1468,9 +1468,17 @@ main > :first-child {
 }
 
 .profile-email {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--text);
     font-family: "Geist Mono", monospace;
     font-size: 14px;
-    text-decoration: none;
+    cursor: copy;
+}
+
+.profile-email.is-copied {
+    color: var(--software);
 }
 
 .profile-email:hover {
