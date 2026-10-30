@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Backdrop from "../components/Backdrop.astro";
 
 const { title, description } = Astro.props;
@@ -20,6 +21,7 @@ const { title, description } = Astro.props;
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=Geist+Mono&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700&display=swap" rel="stylesheet">
     <title>{title}</title>
+    <ClientRouter />
 </head>
 
 <body>

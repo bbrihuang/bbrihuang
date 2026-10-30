@@ -393,6 +393,12 @@ nav a:hover,
     transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .shape-pos {
+        transition: none;
+    }
+}
+
 .shape-pos > svg {
     display: block;
     overflow: visible;

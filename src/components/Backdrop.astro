@@ -1,26 +1,31 @@
 ---
-// Position is the top-left offset in vw / vh, size is in vmin, rotation in degrees.
-// Depth is how far the shape drifts with the mouse.
+import { layoutFor, shapeStyle } from "../scripts/shape-layouts.js";
+
+// Size is in vmin. Depth is how far the shape drifts with the mouse.
+// Where each shape sits on each page is in shape-layouts.js.
 const shapes = [
-    { id: "orb", depth: 56, size: [54, 54], left: 60, top: 6, r: 0 },
-    { id: "ring", depth: 28, size: [82, 82], left: -22, top: 34, r: 0 },
-    { id: "diamond", depth: 72, size: [26, 26], left: 82, top: 64, r: 45 },
-    { id: "triangle", depth: 44, size: [28, 28], left: 4, top: -4, r: 14 },
-    { id: "capsule", depth: 36, size: [44, 12], left: 34, top: 82, r: -18 },
-    { id: "dots", depth: 88, size: [15, 15], left: 90, top: 16, r: 0 },
-    { id: "axis", depth: 16, size: [0, 0], left: 92, top: 86, r: 0 },
+    { id: "orb", depth: 56, size: [54, 54] },
+    { id: "ring", depth: 28, size: [82, 82] },
+    { id: "diamond", depth: 72, size: [26, 26] },
+    { id: "triangle", depth: 44, size: [28, 28] },
+    { id: "capsule", depth: 36, size: [44, 12] },
+    { id: "dots", depth: 88, size: [15, 15] },
+    { id: "axis", depth: 16, size: [0, 0] },
 ];
+
+const layout = layoutFor(Astro.url.pathname);
 
 const dots = Array.from({ length: 49 }, (_, i) => ({ cx: 5 + (i % 7) * 10, cy: 5 + Math.floor(i / 7) * 10 }));
 ---
 
-<div class="backdrop" aria-hidden="true">
+<div class="backdrop" aria-hidden="true" transition:persist="backdrop">
     <div class="shapes">
         {shapes.map((shape) => (
             <div class="shape" data-depth={shape.depth}>
                 <div
                     class="shape-pos"
-                    style={`--left: ${shape.left}vw; --top: ${shape.top}vh; --r: ${shape.r}deg; width: ${shape.size[0]}vmin; height: ${shape.size[1]}vmin;`}
+                    data-shape={shape.id}
+                    style={`${shapeStyle(layout[shape.id])} width: ${shape.size[0]}vmin; height: ${shape.size[1]}vmin;`}
                 >
                     {shape.id === "orb" && (
                         <svg viewBox="0 0 100 100" width="100%" height="100%">

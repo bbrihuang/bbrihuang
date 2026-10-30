@@ -1,3 +1,5 @@
+import { layoutFor } from "./shape-layouts.js";
+
 const shapes = document.querySelectorAll(".shape");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -29,7 +31,18 @@ if (!reduceMotion.matches) {
     window.addEventListener("scroll", queueMove, { passive: true });
 }
 
-const terminalOutput = document.querySelector("#terminal-output");
+// The background stays in place between pages, so each new page moves its
+// shapes to that page's layout and the CSS transition eases them there.
+function placeShapes() {
+    const layout = layoutFor(window.location.pathname);
+    document.querySelectorAll(".shape-pos").forEach((shape) => {
+        const place = layout[shape.dataset.shape];
+        shape.style.setProperty("--left", `${place.left}vw`);
+        shape.style.setProperty("--top", `${place.top}vh`);
+        shape.style.setProperty("--r", `${place.r}deg`);
+        shape.style.setProperty("--s", place.s);
+    });
+}
 
 const terminalScript = [
     { command: "whoami", reply: "Brian Huang | Computer Engineering at Boston University" },
@@ -41,17 +54,17 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function addLine(className, text) {
+function addLine(output, className, text) {
     const line = document.createElement("div");
     line.className = className;
     line.textContent = text;
-    terminalOutput.appendChild(line);
+    output.appendChild(line);
     return line;
 }
 
-async function runTerminal() {
+async function runTerminal(output) {
     for (const step of terminalScript) {
-        const line = addLine("terminal-command", "");
+        const line = addLine(output, "terminal-command", "");
         const typed = document.createElement("span");
         typed.className = "typing";
         line.appendChild(typed);
@@ -63,28 +76,37 @@ async function runTerminal() {
 
         typed.classList.remove("typing");
         await sleep(300);
-        addLine("terminal-reply", step.reply);
+        addLine(output, "terminal-reply", step.reply);
         await sleep(600);
     }
 }
 
-function showTerminalAtOnce() {
+function showTerminalAtOnce(output) {
     for (const step of terminalScript) {
-        addLine("terminal-command", step.command);
-        addLine("terminal-reply", step.reply);
+        addLine(output, "terminal-command", step.command);
+        addLine(output, "terminal-reply", step.reply);
     }
 }
 
-if (terminalOutput) {
+function startTerminal() {
+    const output = document.querySelector("#terminal-output");
+    if (!output) return;
+
     if (reduceMotion.matches) {
-        showTerminalAtOnce();
+        showTerminalAtOnce(output);
     } else {
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 observer.disconnect();
-                runTerminal();
+                runTerminal(output);
             }
         });
-        observer.observe(terminalOutput);
+        observer.observe(output);
     }
 }
+
+// Runs on the first load and after every page change.
+document.addEventListener("astro:page-load", () => {
+    placeShapes();
+    startTerminal();
+});
