@@ -824,8 +824,8 @@ main > :first-child {
 .clubs a {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: var(--space-xs) 4px;
+    gap: 10px;
+    padding: 6px 4px;
     text-decoration: none;
     transition: background-color 0.2s ease;
 }
@@ -837,8 +837,8 @@ main > :first-child {
 .clubs img,
 .club-initials {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     object-fit: cover;
@@ -869,12 +869,12 @@ main > :first-child {
 }
 
 .club-name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .club-role {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--fog);
 }
 
@@ -1534,10 +1534,12 @@ main > :first-child {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: var(--space-lg);
-    align-items: start;
 }
 
+/* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -1551,10 +1553,11 @@ main > :first-child {
 
 .photo-card img {
     display: block;
+    flex: 1 1 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1;
+    min-height: 0;
     object-fit: cover;
+    object-position: 50% 35%;
 }
 
 .photo-card-text {
@@ -1576,6 +1579,11 @@ main > :first-child {
 
     .photo-card {
         max-width: 340px;
+    }
+
+    .photo-card img {
+        flex: none;
+        aspect-ratio: 1;
     }
 }
 
