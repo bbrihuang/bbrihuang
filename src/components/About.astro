@@ -4,32 +4,47 @@ import { clubs } from "../data/clubs.js";
 
 <section id="about">
     <h2 class="section-title">About Me</h2>
-    <p>I'm interested in engineering at the intersection of software and hardware, particularly robotics, embedded systems, and AI inference. I really love work that brings code into the physical world, whether that's controlling devices, optimizing performance, or deploying intelligent systems on real hardware.</p>
+    <div class="about-layout">
+        <div class="about-main">
+            <p>I'm interested in engineering at the intersection of software and hardware, particularly robotics, embedded systems, and AI inference. I really love work that brings code into the physical world, whether that's controlling devices, optimizing performance, or deploying intelligent systems on real hardware.</p>
 
-    <h3 class="about-heading">Education</h3>
-    <div class="education">
-        <img src="/logos/bu.png" alt="" width="36" height="36">
-        <div>
-            <p class="education-degree">B.S. Computer Engineering</p>
-            <p class="education-school">Boston University | Expected May 2029</p>
+            <h3 class="about-heading">Education</h3>
+            <div class="education">
+                <img src="/logos/bu.png" alt="" width="36" height="36">
+                <div>
+                    <p class="education-degree">B.S. Computer Engineering</p>
+                    <p class="education-school">Boston University | Expected May 2029</p>
+                </div>
+            </div>
+
+            <h3 class="about-heading">Clubs & activities</h3>
+            <ul class="clubs">
+                {clubs.map((club) => (
+                    <li>
+                        <a href={club.href} target="_blank" rel="noopener noreferrer">
+                            {club.logo
+                                ? <img src={club.logo} alt="" width="32" height="32" loading="lazy">
+                                : <span class="club-initials" aria-hidden="true">{club.initials}</span>}
+                            <span class="club-text">
+                                <span class="club-name">{club.org}</span>
+                                <span class="club-role" title={club.role}>{club.role}</span>
+                            </span>
+                            <span class="club-arrow" aria-hidden="true">&nearr;</span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
         </div>
-    </div>
 
-    <h3 class="about-heading">Clubs & activities</h3>
-    <ul class="clubs">
-        {clubs.map((club) => (
-            <li>
-                <a href={club.href} target="_blank" rel="noopener noreferrer">
-                    {club.logo
-                        ? <img src={club.logo} alt="" width="44" height="44" loading="lazy">
-                        : <span class="club-initials" aria-hidden="true">{club.initials}</span>}
-                    <span class="club-text">
-                        <span class="club-name">{club.org}</span>
-                        <span class="club-role" title={club.role}>{club.role}</span>
-                    </span>
-                    <span class="club-arrow" aria-hidden="true">&nearr;</span>
-                </a>
-            </li>
-        ))}
-    </ul>
+        <aside class="photo-card" aria-label="Profile">
+            <img src="/avatar.jpg" alt="Brian Huang" width="400" height="400" loading="lazy">
+            <div class="photo-card-text">
+                <p class="profile-name">Brian Huang</p>
+                <button type="button" class="profile-email" data-copy="bbhuang@bu.edu" title="Copy email">
+                    <span class="copy-text" aria-live="polite">bbhuang@bu.edu</span>
+                </button>
+                <p class="profile-school">Boston University · Class of '29</p>
+            </div>
+        </aside>
+    </div>
 </section>

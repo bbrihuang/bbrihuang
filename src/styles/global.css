@@ -1404,28 +1404,6 @@ main > :first-child {
     background-color: color-mix(in srgb, var(--experience) 85%, white);
 }
 
-.profile-card {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
-    -webkit-backdrop-filter: blur(28px) saturate(140%);
-    backdrop-filter: blur(28px) saturate(140%);
-}
-
-.profile-card img {
-    flex-shrink: 0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-.profile-card p {
-    margin: 0;
-}
 
 .profile-name {
     font-size: 1.25rem;
@@ -1546,6 +1524,57 @@ main > :first-child {
 }
 
 /* Running text stays at a readable line length on the wide layout. */
-#about > p {
+.about-main > p {
     max-width: 760px;
+    margin-top: 0;
+}
+
+/* About: text, education and clubs on the left, a big photo card on the right */
+.about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.photo-card {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+    -webkit-backdrop-filter: blur(28px) saturate(140%);
+    backdrop-filter: blur(28px) saturate(140%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 18px 40px -18px rgba(0, 0, 0, 0.7);
+}
+
+.photo-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.photo-card-text {
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+
+.photo-card-text p {
+    margin: 0;
+}
+
+.photo-card .profile-email {
+    margin: 4px 0;
+}
+
+@media (max-width: 900px) {
+    .about-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-card {
+        max-width: 340px;
+    }
 }
