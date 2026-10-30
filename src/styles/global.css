@@ -211,7 +211,6 @@ nav a {
 .hero-main > :nth-child(2) { animation-delay: 70ms; }
 .hero-main > :nth-child(3) { animation-delay: 140ms; }
 .hero-main > :nth-child(4) { animation-delay: 210ms; }
-.hero-main > :nth-child(5) { animation-delay: 280ms; }
 .hero-side > :nth-child(1) { animation-delay: 210ms; }
 .hero-side > :nth-child(2) { animation-delay: 280ms; }
 
@@ -750,16 +749,6 @@ main > :first-child {
 }
 
 /* About: education and clubs, kept compact */
-.about-heading {
-    margin: var(--space-xl) 0 var(--space-sm);
-    font-family: "Geist Mono", monospace;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--steel);
-}
-
 /* Education: a full-width card with a soft BU-red glow behind the logo,
    degree on the left, class year on the right. */
 .education {
@@ -1484,22 +1473,40 @@ main > :first-child {
 }
 
 /* Running text stays at a readable line length on the wide layout. */
-/* Top of the right column: square photo beside the Check out my... card. */
+/* Top of the right column: square photo beside the education card. */
 .hero-top {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: var(--space-md);
 }
 
-.hero-top .contact-card {
-    display: flex;
+/* Education beside the photo: stacked to fit the narrow column. */
+.hero-top .education {
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
+    gap: 12px;
     padding: var(--space-sm);
 }
 
-.hero-top .contact-links {
-    grid-template-columns: minmax(0, 1fr);
+.hero-top .education-main {
+    flex: none;
+}
+
+.hero-top .education-degree {
+    font-size: 1.125rem;
+}
+
+.hero-top .education-when {
+    width: 100%;
+    padding: 12px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    text-align: left;
+}
+
+.hero-main .contact-card {
+    margin-top: var(--space-lg);
 }
 
 /* The card matches the left column's height; the photo crops to fill it. */
@@ -2276,32 +2283,25 @@ main > :first-child {
     }
 }
 
-/* The photo and card animate on their own, not as one block. */
+/* The photo and education card animate on their own, not as one block. */
 .hero-side > .hero-top {
     animation: none;
 }
 
-.hero-top .contact-card {
+.hero-top .education {
     animation: rise 600ms var(--ease-out) 210ms backwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-top .contact-card {
+    .hero-top .education {
         animation-name: fade-in;
     }
 }
 
-/* Phones: photo above the card, buttons back in a row. */
+/* Phones: photo above the education card. */
 @media (max-width: 560px) {
     .hero-top {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .hero-top .contact-links {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .education-main {
-        flex-basis: calc(100% - 56px - var(--space-md));
-    }
 }
