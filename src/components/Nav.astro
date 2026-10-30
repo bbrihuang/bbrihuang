@@ -2,6 +2,8 @@
 const links = [
     { href: "/", label: "Home" },
     { href: "/#experience", label: "Experience" },
+    { href: "/#stack", label: "Skills", wide: true },
+    { href: "/#involvement", label: "Involvement", wide: true },
     { href: "/projects/", label: "Projects" },
 ];
 
@@ -28,7 +30,7 @@ const isCurrent = (href) => (href === "/" ? path === "/" : path.startsWith(href.
         <a class="nav-name" href="/">Brian Huang</a>
         <ul>
             {links.map((link) => (
-                <li><a href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a></li>
+                <li class:list={{ "nav-wide": link.wide }}><a href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a></li>
             ))}
         </ul>
         <div class="nav-socials">
