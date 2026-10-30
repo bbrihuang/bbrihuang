@@ -927,7 +927,7 @@ export const projects = [
             "Hardware diagnostics",
             "Notion"
         ],
-        year: "2024-2026",
+        year: "2024-Present",
         slug: "pc-building-guide",
         cover: "/projects/pc-building-guide/cover.svg",
         coverAlt: "Cover image for How to Build a PC.",
