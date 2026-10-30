@@ -389,7 +389,7 @@ nav a:hover,
 }
 
 .terminal-command::before {
-    content: "brian@portfolio:~$ ";
+    content: "$ ";
     color: var(--software);
 }
 
@@ -1364,7 +1364,7 @@ main > :first-child {
 .hero-side .terminal {
     flex: 1 1 auto;
     height: auto;
-    min-height: 260px;
+    min-height: 190px;
 }
 
 
@@ -1411,7 +1411,7 @@ main > :first-child {
 
     .hero-side .terminal {
         flex: none;
-        height: 260px;
+        height: 210px;
     }
 }
 
@@ -2100,42 +2100,6 @@ main > :first-child {
     }
 }
 
-/* Terminal command line, pinned to the bottom of the window */
-.terminal-input {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin: var(--space-sm) calc(var(--space-md) * -1) calc(var(--space-md) * -1);
-    padding: 12px var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0 0 6px 6px;
-    cursor: text;
-}
-
-.terminal-prompt {
-    flex-shrink: 0;
-    color: var(--software);
-}
-
-.terminal-input input {
-    flex: 1;
-    min-width: 0;
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--text);
-    font: inherit;
-    caret-color: var(--software);
-    outline: none;
-}
-
-.terminal-input input::placeholder {
-    color: var(--steel);
-}
-
-.terminal-input:focus-within {
-    background-color: rgba(255, 255, 255, 0.03);
-}
 
 /* Narrow screens: Skills and Involvement step out so the rest fits on one line. */
 @media (max-width: 760px) {

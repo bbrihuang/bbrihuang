@@ -45,9 +45,8 @@ function placeShapes() {
 }
 
 const terminalScript = [
-    { command: "whoami", reply: "Brian Huang | Computer Engineering at Boston University" },
-    { command: "cat interests.txt", reply: "robotics | embedded systems | AI inference" },
-    { command: "echo $STATUS", reply: "open to summer 2027 internships" },
+    { command: "cat current-build.txt", reply: "JetHexa: hexapod robot, simulated in ROS 2 and Gazebo" },
+    { command: "cat latest-result.txt", reply: "2-bit local LLM: importance matrix cut damage about 4x" },
 ];
 
 function sleep(ms) {
