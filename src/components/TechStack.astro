@@ -17,15 +17,15 @@ function logo(item) {
 <section id="stack">
     <h2 class="section-title">Tech Stack</h2>
     <dl class="stack">
-        {stack.map((group) => (
-            <div class="stack-group">
+        {stack.map((group, groupIndex) => (
+            <div class="stack-group" style={`--g: ${groupIndex}`}>
                 <dt>{group.group}</dt>
                 <dd>
                     <ul class="chips">
-                        {group.items.map((item) => {
+                        {group.items.map((item, itemIndex) => {
                             const mark = logo(item);
                             return (
-                                <li>
+                                <li style={`--i: ${itemIndex}`}>
                                     <svg
                                         class:list={["stack-logo", { "is-glyph": !mark.filled }]}
                                         viewBox="0 0 24 24"

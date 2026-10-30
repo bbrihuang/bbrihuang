@@ -1948,3 +1948,33 @@ body:has(.up-next) .site-footer {
 #about.is-in .frame-corner:nth-child(2) { animation-delay: 1010ms; }
 #about.is-in .frame-corner:nth-child(3) { animation-delay: 1070ms; }
 #about.is-in .frame-corner:nth-child(4) { animation-delay: 1130ms; }
+
+/* Tech stack: groups rise in turn, and each row's chips cascade after it. */
+@keyframes chip-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
+}
+
+.js-reveal #stack:not(.is-in) > .stack {
+    opacity: 1;
+}
+
+#stack.is-in > .stack {
+    animation: none;
+}
+
+.js-reveal #stack:not(.is-in) :is(.stack-group, .stack .chips li) {
+    opacity: 0;
+}
+
+#stack.is-in .stack-group {
+    animation: enter-up 600ms var(--ease-out) backwards;
+    animation-delay: calc(150ms + var(--g) * 90ms);
+}
+
+#stack.is-in .stack .chips li {
+    animation: chip-in 450ms var(--ease-out) backwards;
+    animation-delay: calc(250ms + var(--g) * 90ms + var(--i) * 30ms);
+}
