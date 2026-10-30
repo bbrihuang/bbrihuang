@@ -2305,3 +2305,10 @@ main > :first-child {
     }
 
 }
+
+/* Top bar links glide to their section. */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
