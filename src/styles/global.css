@@ -1355,3 +1355,71 @@ main > :first-child {
 .contact-actions .contact-primary:hover {
     background-color: #ffffff;
 }
+
+/* Projects: "More projects" heading with filter tabs */
+.projects-more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+}
+
+.projects-more h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.filters {
+    display: flex;
+    gap: 2px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.filters[hidden] {
+    display: none;
+}
+
+.filters button {
+    height: 36px;
+    padding: 0 var(--space-sm);
+    border: none;
+    border-radius: 9999px;
+    background: none;
+    color: var(--fog);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filters button:hover {
+    color: var(--text);
+}
+
+.filters button[aria-pressed="true"] {
+    background-color: var(--projects);
+    color: var(--void);
+}
+
+.project-count {
+    margin: var(--space-xs) 0 var(--space-md);
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    color: var(--steel);
+}
+
+.project-slot[hidden] {
+    display: none;
+}
+
+.project-slot > .project-card {
+    height: 100%;
+}

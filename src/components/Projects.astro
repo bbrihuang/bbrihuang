@@ -4,13 +4,35 @@ import { projects } from "../data/projects.js";
 
 const featured = projects.find((project) => project.featured);
 const others = projects.filter((project) => !project.featured);
+
+const filters = [
+    { value: "all", label: "All" },
+    { value: "software", label: "Software" },
+    { value: "hardware", label: "Hardware" },
+];
 ---
 
 <section id="projects">
     {featured && <ProjectCard project={featured} />}
+
+    <div class="projects-more">
+        <h2>More projects</h2>
+        <!-- Filters only work with JavaScript, so they stay hidden without it. -->
+        <div class="filters" role="group" aria-label="Filter projects" hidden>
+            {filters.map((filter, index) => (
+                <button type="button" data-filter={filter.value} aria-pressed={index === 0 ? "true" : "false"}>
+                    {filter.label}
+                </button>
+            ))}
+        </div>
+    </div>
+    <p class="project-count" aria-live="polite">{others.length} projects</p>
+
     <div class="project-grid">
         {others.map((project) => (
-            <ProjectCard project={project} />
+            <div class="project-slot" data-areas={project.areas.join(" ")}>
+                <ProjectCard project={project} />
+            </div>
         ))}
     </div>
 </section>

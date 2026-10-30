@@ -1,6 +1,7 @@
 export const projects = [
     {
         title: "Room Temperature Monitor",
+        areas: ["hardware"],
         tag: "Hardware",
         description: "Built an Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed.",
         chips: ["Arduino UNO", "C++", "TMP36", "Onshape"],
@@ -13,6 +14,7 @@ export const projects = [
     },
     {
         title: "Project JetHexa",
+        areas: ["software", "hardware"],
         tag: "Robotics",
         description: "Details coming soon.",
         chips: [],
@@ -23,6 +25,7 @@ export const projects = [
     },
     {
         title: "Local LLM Research",
+        areas: ["software"],
         tag: "AI",
         description: "Ran twelve local LLM experiments on an RTX 5070, including a 2-bit model whose damage an importance matrix cut about 4x.",
         chips: ["llama.cpp", "Python", "PyTorch"],

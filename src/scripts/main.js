@@ -140,9 +140,34 @@ function setUpJobTabs() {
     select(tabs.find((tab) => tab.getAttribute("aria-selected") === "true") ?? tabs[0], false);
 }
 
+// Projects: show only software or hardware projects.
+function setUpProjectFilters() {
+    const group = document.querySelector(".filters");
+    if (!group) return;
+    group.hidden = false;
+
+    const buttons = [...group.querySelectorAll("button")];
+    const slots = [...document.querySelectorAll(".project-slot")];
+    const count = document.querySelector(".project-count");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const filter = button.dataset.filter;
+            buttons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
+            let shown = 0;
+            slots.forEach((slot) => {
+                slot.hidden = filter !== "all" && !slot.dataset.areas.split(" ").includes(filter);
+                if (!slot.hidden) shown += 1;
+            });
+            count.textContent = `${shown} project${shown === 1 ? "" : "s"}`;
+        });
+    });
+}
+
 // Runs on the first load and after every page change.
 document.addEventListener("astro:page-load", () => {
     placeShapes();
     startTerminal();
     setUpJobTabs();
+    setUpProjectFilters();
 });
