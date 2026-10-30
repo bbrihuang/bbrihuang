@@ -2189,7 +2189,7 @@ main > :first-child {
     align-items: start;
 }
 
-/* Involvement: staggered cards with the logo over alternating photos, and links
+/* Involvement: staggered cards with alternating photos, the logo beside the name, and links
    to related projects. Without JavaScript the first photo simply stays. */
 .clubs {
     columns: 3 300px;
@@ -2210,14 +2210,12 @@ main > :first-child {
 
 .club-cover {
     position: relative;
-    display: grid;
-    place-items: center;
     overflow: hidden;
     aspect-ratio: 5 / 2;
     background-color: rgba(255, 255, 255, 0.04);
 }
 
-/* Photos sit behind the logo and take turns (main.js moves .is-active). */
+/* Photos take turns (main.js moves .is-active). */
 .club-photo {
     position: absolute;
     inset: 0;
@@ -2232,13 +2230,24 @@ main > :first-child {
     opacity: 1;
 }
 
+/* Name and role on the left, logo on the right */
+.club-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-sm);
+}
+
+.club-text {
+    min-width: 0;
+}
+
 .club-logo {
-    position: relative;
-    width: 72px;
-    height: 72px;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
     object-fit: cover;
 }
 
@@ -2247,7 +2256,7 @@ main > :first-child {
     place-items: center;
     background-color: var(--ash);
     font-family: "Geist Mono", monospace;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--mist);
 }
@@ -2267,9 +2276,8 @@ main > :first-child {
 }
 
 .club-link {
-    display: flex;
+    display: inline-flex;
     align-items: baseline;
-    justify-content: space-between;
     gap: var(--space-xs);
     text-decoration: none;
 }

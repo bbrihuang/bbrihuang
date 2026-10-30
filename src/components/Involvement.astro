@@ -16,20 +16,26 @@ const cards = clubs.map((club) => ({
     <ul class="clubs">
         {cards.map((club) => (
             <li class="club-card">
-                <div class="club-cover">
-                    {club.gallery?.map((photo, index) => (
-                        <img class:list={["club-photo", { "is-active": index === 0 }]} src={photo.src} alt={photo.alt} loading="lazy">
-                    ))}
-                    {club.logo
-                        ? <img class="club-logo" src={club.logo} alt="" width="72" height="72" loading="lazy">
-                        : <span class="club-logo club-initials" aria-hidden="true">{club.initials}</span>}
-                </div>
+                {club.gallery?.length > 0 && (
+                    <div class="club-cover">
+                        {club.gallery.map((photo, index) => (
+                            <img class:list={["club-photo", { "is-active": index === 0 }]} src={photo.src} alt={photo.alt} loading="lazy">
+                        ))}
+                    </div>
+                )}
                 <div class="club-body">
-                    <a class="club-link" href={club.href} target="_blank" rel="noopener noreferrer">
-                        <span class="club-name">{club.org}</span>
-                        <span class="club-arrow" aria-hidden="true">&nearr;</span>
-                    </a>
-                    <p class="club-role">{club.role}</p>
+                    <div class="club-top">
+                        <div class="club-text">
+                            <a class="club-link" href={club.href} target="_blank" rel="noopener noreferrer">
+                                <span class="club-name">{club.org}</span>
+                                <span class="club-arrow" aria-hidden="true">&nearr;</span>
+                            </a>
+                            <p class="club-role">{club.role}</p>
+                        </div>
+                        {club.logo
+                            ? <img class="club-logo" src={club.logo} alt="" width="52" height="52" loading="lazy">
+                            : <span class="club-logo club-initials" aria-hidden="true">{club.initials}</span>}
+                    </div>
                     {club.related.length > 0 && (
                         <ul class="club-related" aria-label="Related projects">
                             {club.related.map((project) => (
