@@ -831,4 +831,88 @@ export const projects = [
             }
         ]
     },
+    {
+        title: "Cubic Builds Storefront",
+        areas: [
+            "software"
+        ],
+        tag: "Software",
+        description: "Storefront for my PC business, with a live part customizer and a 7-step configurator.",
+        chips: [
+            "React",
+            "Vite",
+            "React Router",
+            "Tailwind CSS",
+            "Vercel"
+        ],
+        year: "2023",
+        slug: "cubic-builds-storefront",
+        cover: "/projects/cubic-builds-storefront/cover.svg",
+        coverAlt: "Cover image for Cubic Builds Storefront.",
+        links: [
+            {
+                label: "Live site",
+                href: "https://cubicbuilds.vercel.app"
+            }
+        ],
+        summary: "The storefront for Cubic Builds. Visitors browse builds, swap parts with live pricing, compare builds side by side, or answer a short questionnaire for a recommendation, then send an order or quote request straight to me.",
+        highlights: [
+            "Built a part customizer that swaps CPU, GPU, memory, storage, cooling, and more with live pricing.",
+            "Designed a 7-step guided configurator that turns answers into a build brief, with progress saved on-device.",
+            "Added a filterable catalog with shareable URL filters, side-by-side compare for up to 4 builds, and quick search.",
+            "Kept it account-free: the cart and compare list persist in localStorage and orders are invoiced by reply."
+        ],
+        caseStudy: [
+            {
+                title: "The problem",
+                text: "Every Cubic Builds PC is built to order, so the site couldn’t be a normal shop with a checkout. It had to work for visitors who know exactly which GPU they want and for visitors who only know their budget and what they play, and turn both into a request I can quote."
+            },
+            {
+                title: "How it works",
+                flow: [
+                    {
+                        label: "Browse or answer 7 steps",
+                        note: "Catalog or configurator"
+                    },
+                    {
+                        label: "Customize parts",
+                        note: "Live pricing"
+                    },
+                    {
+                        label: "Cart or build brief",
+                        note: "Saved on the device"
+                    },
+                    {
+                        label: "Order request",
+                        note: "Sent to me as JSON"
+                    },
+                    {
+                        label: "Invoice by reply",
+                        note: "No payment on the site"
+                    }
+                ],
+                text: [
+                    "Each build has a base price and a default part for every component group. Swapping a part changes the price by the difference between the new part and the default, so one catalog file drives every build page, the compare view and the cart.",
+                    "The configurator asks about use case, budget, resolution, refresh rate, cooling, case size, style and peripherals, and maps the answers onto the catalog’s categories. Forms post JSON to a configurable endpoint such as Formspree or a webhook, and fall back to a pre-filled email if none is set."
+                ]
+            },
+            {
+                title: "Decisions",
+                points: [
+                    {
+                        title: "No accounts and no payments",
+                        text: "The cart and compare list live in localStorage, and orders are invoiced by reply. The site stays static and never handles payment details."
+                    },
+                    {
+                        title: "Filters you can share",
+                        text: "Category, budget and GPU filters live in the URL, so a view like /builds?budget=1000-1600&gpu=nvidia can be bookmarked or sent to a friend."
+                    },
+                    {
+                        title: "A path for people who don’t know parts",
+                        text: "The 7-step configurator speaks in outcomes (“1440p high refresh”, “quiet, simple, reliable”) instead of part numbers, and saves progress so a visitor can come back later."
+                    }
+                ]
+            }
+        ]
+    },
 ];
