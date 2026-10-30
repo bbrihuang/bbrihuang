@@ -1235,9 +1235,6 @@ main > :first-child {
     display: none;
 }
 
-.project-slot > .project-card {
-    height: 100%;
-}
 
 /* Home hero: headline and buttons on the left, profile card and terminal on the right */
 .hero {
@@ -2262,4 +2259,21 @@ main > :first-child {
 .project-body .chips {
     margin: auto 0 0;
     padding-top: var(--space-sm);
+}
+
+/* Staggered cards: each is only as tall as its content. The Projects page packs
+   them into columns; Home keeps its three in one row, starting level. */
+#projects .project-grid {
+    display: block;
+    columns: 3 300px;
+    column-gap: var(--space-md);
+}
+
+#projects .project-slot {
+    break-inside: avoid;
+    margin-bottom: var(--space-md);
+}
+
+#featured .project-grid {
+    align-items: start;
 }
