@@ -62,12 +62,11 @@ section {
     padding: var(--space-2xl) 0;
 }
 
-.hero {
-    padding: var(--space-3xl) 0 var(--space-2xl);
-}
 
+/* Large letters carry built-in left spacing, so pull them back to line up
+   with the text below. */
 .hero h1 {
-    margin: 0 0 var(--space-xs);
+    margin: 0 0 var(--space-xs) -0.05em;
     font-family: "Satoshi", sans-serif;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
@@ -243,7 +242,7 @@ nav a {
 }
 
 #experience .job-header p {
-    margin: var(--space-xs) 0 var(--space-sm);
+    margin: 4px 0 0;
     font-family: "Geist Mono", monospace;
     font-size: 13px;
     color: var(--steel);
@@ -485,7 +484,6 @@ nav a:hover,
 
 /* Case study pages */
 .case-study {
-    padding-top: var(--space-lg);
     padding-bottom: var(--space-3xl);
 }
 
@@ -501,7 +499,7 @@ nav a:hover,
 }
 
 .case-header h1 {
-    margin: 0 0 var(--space-sm);
+    margin: 0 0 var(--space-sm) -0.05em;
     font-family: "Satoshi", sans-serif;
     font-size: clamp(2.25rem, 5vw, 3.5rem);
     line-height: 1.1;
@@ -696,8 +694,13 @@ html {
     scroll-padding-top: 88px;
 }
 
+/* Every page starts the same distance below the nav. */
 main {
-    padding-top: 72px;
+    padding-top: 136px;
+}
+
+main > :first-child {
+    padding-top: 0;
 }
 
 .site-header {
@@ -706,10 +709,11 @@ main {
     left: 0;
     right: 0;
     z-index: 50;
-    padding: 0 var(--space-sm);
+    padding: 0 var(--space-md);
 }
 
 .site-header nav {
+    max-width: calc(960px - 2 * var(--space-md));
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -981,6 +985,3 @@ main {
     object-fit: cover;
 }
 
-#experience .job-header p {
-    margin: 4px 0 0;
-}
