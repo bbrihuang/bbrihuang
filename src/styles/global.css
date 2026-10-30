@@ -2237,6 +2237,7 @@ main > :first-child {
 }
 
 .project-card .project-heading .project-meta {
+    font-size: 15px;
     font-weight: 700;
     color: var(--projects);
 }
