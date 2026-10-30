@@ -109,7 +109,6 @@ section {
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -865,7 +864,6 @@ main > :first-child {
 
 .clubs a:hover .club-arrow {
     color: var(--text);
-    transform: translate(2px, -2px);
 }
 
 @media (max-width: 640px) {
@@ -1277,9 +1275,6 @@ main > :first-child {
     transition: transform 0.2s ease;
 }
 
-.up-next:hover .up-next-arrow {
-    transform: translateX(2px);
-}
 
 /* Leave room at the bottom so the pill never covers the footer text. */
 body:has(.up-next) .site-footer {
@@ -1720,6 +1715,65 @@ body:has(.up-next) .site-footer {
 /* Reduced motion: fade only, no movement. */
 @media (prefers-reduced-motion: reduce) {
     [data-reveal]:not([data-visible]) {
+        transform: none;
+    }
+}
+
+/* Hover motion, mouse only: touch screens fire a hover on tap. */
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .project-card.placeholder:hover {
+        transform: none;
+    }
+
+    .project-cover img {
+        transition: transform 400ms var(--ease-out);
+    }
+
+    .project-card.linked:hover .project-cover img {
+        transform: scale(1.03);
+    }
+
+    .clubs a:hover .club-arrow {
+        transform: translate(2px, -2px);
+    }
+
+    .up-next:hover .up-next-arrow {
+        transform: translateX(2px);
+    }
+}
+
+/* Press feedback: buttons give a little when clicked. */
+.contact-links a,
+.contact-email,
+.filters button,
+.up-next,
+.job-tab,
+.nav-socials a,
+.site-header nav ul a {
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 120ms var(--ease-out);
+}
+
+.contact-links a:active,
+.contact-email:active,
+.filters button:active,
+.up-next:active,
+.job-tab:active,
+.nav-socials a:active,
+.site-header nav ul a:active {
+    transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-card:hover,
+    .project-card.linked:hover .project-cover img {
         transform: none;
     }
 }
