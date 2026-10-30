@@ -571,4 +571,264 @@ export const projects = [
             }
         ]
     },
+    {
+        title: "BURPG HIP: Rocket Nozzle Design",
+        areas: [
+            "hardware"
+        ],
+        tag: "Hardware (Aerospace)",
+        description: "Designed, analyzed, printed and hot-fire tested an 80% bell nozzle for a small hybrid rocket motor.",
+        chips: [
+            "SOLIDWORKS",
+            "SOLIDWORKS Simulation (FEA)",
+            "Resin 3D printing"
+        ],
+        year: "2026",
+        slug: "burpg-hip",
+        cover: "/projects/burpg-hip/cover-169.webp",
+        coverAlt: "Cover image for BURPG HIP: Rocket Nozzle Design.",
+        links: [
+            {
+                label: "Wikifactory project",
+                href: "https://wikifactory.com/+burpg/hybrid-intro-project"
+            }
+        ],
+        summary: "A converging–diverging nozzle for a small hybrid rocket motor, taken from chamber conditions to hand calculations, CAD, FEA, a 3D print and a hot-fire test. Critical Design Review presented 3/4/26.",
+        highlights: [
+            "Sized a de Laval nozzle from the chamber conditions: 7.22 mm throat, 18.45 mm exit, area ratio 6.52.",
+            "Chose an 80% bell over a cone and a 100% bell for near-maximum thrust efficiency at much lower length and weight.",
+            "Ran FEA in SOLIDWORKS Simulation: peak von Mises stress of about 1.5 MPa against a 37.5 MPa yield strength, minimum factor of safety about 25.",
+            "3D printed the nozzle in ABS-type resin and hot-fire tested it."
+        ],
+        caseStudy: [
+            {
+                title: "Overview",
+                text: "I designed, analyzed, printed and hot-fire tested a converging–diverging (de Laval) nozzle for a small hybrid rocket motor. This was BURPG’s intro project, done with Jacob Knight and Hikaru Uribe, and we presented the Critical Design Review on 3/4/26."
+            },
+            {
+                title: "Design inputs",
+                stats: [
+                    {
+                        label: "Chamber pressure",
+                        value: "551.6",
+                        unit: "kPa"
+                    },
+                    {
+                        label: "Chamber temperature",
+                        value: "3250",
+                        unit: "K"
+                    },
+                    {
+                        label: "Mass flow rate",
+                        value: "0.013",
+                        unit: "kg/s"
+                    },
+                    {
+                        label: "Specific heat ratio, k",
+                        value: "1.13"
+                    },
+                    {
+                        label: "Molar mass",
+                        value: "0.022195",
+                        unit: "kg/mol"
+                    },
+                    {
+                        label: "Optimized exit pressure",
+                        value: "14.479",
+                        unit: "kPa"
+                    },
+                    {
+                        label: "Ambient pressure",
+                        value: "101.35",
+                        unit: "kPa"
+                    }
+                ]
+            },
+            {
+                title: "Calculations",
+                stats: [
+                    {
+                        label: "Throat diameter",
+                        value: "7.22",
+                        unit: "mm"
+                    },
+                    {
+                        label: "Exit diameter",
+                        value: "18.45",
+                        unit: "mm"
+                    },
+                    {
+                        label: "Area ratio",
+                        value: "6.52"
+                    },
+                    {
+                        label: "Exit velocity",
+                        value: "2691",
+                        unit: "m/s"
+                    },
+                    {
+                        label: "Critical pressure ratio",
+                        value: "0.578"
+                    },
+                    {
+                        label: "Specific impulse",
+                        value: "274.4",
+                        unit: "s"
+                    },
+                    {
+                        label: "Optimal thrust",
+                        value: "34.98",
+                        unit: "N"
+                    },
+                    {
+                        label: "Sea-level thrust",
+                        value: "11.77",
+                        unit: "N"
+                    },
+                    {
+                        label: "80% bell length",
+                        value: "16.75",
+                        unit: "mm"
+                    }
+                ]
+            },
+            {
+                title: "Nozzle shape decision",
+                text: [
+                    "I compared a cone, a 100% bell and an 80% bell. A cone’s sharper angle sends the exhaust out wider, and only the velocity along the nozzle’s axis makes thrust, so it gives less axial thrust. A 100% bell is theoretically best but slightly longer and heavier.",
+                    "I chose the 80% bell. Its exhaust isn’t quite as aligned with the axis as the 100% bell’s, but it gets near-maximum thrust efficiency at much lower length and weight, and that saving is worth more than the small loss in velocity."
+                ],
+                gallery: [
+                    {
+                        src: "/projects/burpg-hip/nozzle-contour.webp",
+                        alt: "Two reference diagrams. Top: a rocket chamber and converging-diverging nozzle with pressures and the converging section, throat, diverging section and exit labeled. Bottom: 60% and 80% bell contours from the throat, with the 80% bell’s length marked.",
+                        caption: "Reference diagrams: converging–diverging nozzle (top) and 60% and 80% bell contours (bottom)"
+                    }
+                ]
+            },
+            {
+                title: "CAD",
+                text: "Modeled in SOLIDWORKS: the nozzle sits on a flange with six bolt holes, shown below from several views, exploded, and as the dimensioned drawing.",
+                gallery: [
+                    {
+                        src: "/projects/burpg-hip/cad-overall.webp",
+                        alt: "Isometric CAD view of the nozzle on its round flange with six bolt holes.",
+                        caption: "Overall view"
+                    },
+                    {
+                        src: "/projects/burpg-hip/cad-front.webp",
+                        alt: "Side view of the nozzle’s flared bell sitting on a flat flange.",
+                        caption: "Front view"
+                    },
+                    {
+                        src: "/projects/burpg-hip/cad-section.webp",
+                        alt: "Cross-section of the nozzle showing the wall thickness and the narrowing to the throat.",
+                        caption: "Section view"
+                    },
+                    {
+                        src: "/projects/burpg-hip/cad-top.webp",
+                        alt: "Top-down CAD view of the flange with six bolt holes around the central nozzle bore.",
+                        caption: "Top view"
+                    },
+                    {
+                        src: "/projects/burpg-hip/cad-exploded.webp",
+                        alt: "Exploded CAD view: the nozzle on its six-hole flange, separated from a matching flange and the part behind it.",
+                        caption: "Exploded view: the nozzle on a six-hole bolted flange"
+                    },
+                    {
+                        src: "/projects/burpg-hip/drawing.webp",
+                        alt: "Dimensioned engineering drawing of the nozzle with side, top and isometric views, showing throat, exit and flange diameters and the 16.75 mm bell length.",
+                        caption: "Dimensioned drawing"
+                    }
+                ]
+            },
+            {
+                title: "Simulation",
+                text: "I ran a static FEA in SOLIDWORKS Simulation. The part is ABS resin with a tetrahedral mesh, a pressure load on the internal surface, and the flange bolt holes held fixed. Stress peaks at the throat/nozzle fillet, still far below yield.",
+                stats: [
+                    {
+                        label: "Peak von Mises stress",
+                        value: "~1.5",
+                        unit: "MPa"
+                    },
+                    {
+                        label: "Yield strength",
+                        value: "37.5",
+                        unit: "MPa"
+                    },
+                    {
+                        label: "Minimum factor of safety",
+                        value: "~25"
+                    }
+                ],
+                gallery: [
+                    {
+                        src: "/projects/burpg-hip/fea-mesh.webp",
+                        alt: "Tetrahedral mesh on the nozzle and flange, with the internal pressure load in purple and fixed bolt holes in green.",
+                        caption: "Mesh and boundary conditions"
+                    },
+                    {
+                        src: "/projects/burpg-hip/fea-mesh-top.webp",
+                        alt: "Top view of the mesh with the internal pressure load in purple and the six fixed bolt holes.",
+                        caption: "Mesh and boundary conditions, top view"
+                    },
+                    {
+                        src: "/projects/burpg-hip/fea-stress.webp",
+                        alt: "Von Mises stress plot, mostly blue with a green-to-red band at the throat, peaking at 1.496e6 N/m² against a 3.751e7 yield strength.",
+                        caption: "Von Mises stress: peak about 1.5 MPa near the throat"
+                    },
+                    {
+                        src: "/projects/burpg-hip/fea-stress-top.webp",
+                        alt: "Top view of the von Mises stress plot, blue across the flange with a green-yellow ring around the nozzle bore.",
+                        caption: "Von Mises stress, top view"
+                    },
+                    {
+                        src: "/projects/burpg-hip/fea-fos.webp",
+                        alt: "Factor of safety plot, uniformly red, meaning the lowest values on the scale across the whole part.",
+                        caption: "Factor of safety: minimum about 25"
+                    },
+                    {
+                        src: "/projects/burpg-hip/fea-fos-top.webp",
+                        alt: "Top view of the factor of safety plot, uniformly red.",
+                        caption: "Factor of safety, top view"
+                    }
+                ]
+            },
+            {
+                title: "Build and test",
+                text: [
+                    "The nozzle was 3D printed in ABS-type resin and hot-fire tested. Photos of the printed part and two hot-fire clips are below.",
+                    "TODO: propellant, burn duration, measured results, and what I would change."
+                ],
+                gallery: [
+                    {
+                        src: "/projects/burpg-hip/nozzle-photo-1.webp",
+                        alt: "The 3D-printed amber resin nozzle on its flange, sitting on a lab bench.",
+                        caption: "Printed nozzle"
+                    },
+                    {
+                        src: "/projects/burpg-hip/nozzle-photo-2.webp",
+                        alt: "A second view of the 3D-printed amber resin nozzle and flange on a lab bench.",
+                        caption: "Printed nozzle"
+                    },
+                    {
+                        src: "/projects/burpg-hip/hotfire-short.mp4",
+                        poster: "/projects/burpg-hip/hotfire-short-poster.webp",
+                        alt: "Close-up of a flame coming out of the nozzle on the test stand during a hot-fire test.",
+                        caption: "Hot-fire test, short clip (about 4 s)"
+                    },
+                    {
+                        src: "/projects/burpg-hip/hotfire-long.mp4",
+                        poster: "/projects/burpg-hip/hotfire-long-poster.webp",
+                        alt: "Wide view of the test stand with a flame coming out of the nozzle during a hot-fire test.",
+                        caption: "Hot-fire test, longer clip (about 29 s)"
+                    }
+                ]
+            },
+            {
+                title: "What I learned",
+                text: "TODO: what I learned."
+            }
+        ]
+    },
 ];
