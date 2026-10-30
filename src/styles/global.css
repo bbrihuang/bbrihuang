@@ -680,7 +680,8 @@ nav a:hover,
 .project-card,
 #experience article,
 .terminal,
-.stat {
+.stat,
+.education {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
     -webkit-backdrop-filter: blur(28px) saturate(140%);
     backdrop-filter: blur(28px) saturate(140%);
@@ -791,4 +792,41 @@ main {
         padding: 0 10px;
         font-size: 14px;
     }
+}
+
+/* About: education */
+.about-heading {
+    margin: var(--space-xl) 0 var(--space-sm);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.education {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md) var(--space-sm) var(--space-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+.education img {
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.education p {
+    margin: 0;
+}
+
+.education-degree {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.education-school {
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    color: var(--steel);
 }
