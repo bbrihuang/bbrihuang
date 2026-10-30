@@ -1704,3 +1704,22 @@ body:has(.up-next) .site-footer {
 .contact-links .link-experience:hover {
     background-color: color-mix(in srgb, var(--experience) 85%, white);
 }
+
+/* Scroll reveal (main.js marks elements below the screen with data-reveal) */
+[data-reveal] {
+    transition:
+        opacity 600ms var(--ease-out),
+        transform 600ms var(--ease-out);
+}
+
+[data-reveal]:not([data-visible]) {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+/* Reduced motion: fade only, no movement. */
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal]:not([data-visible]) {
+        transform: none;
+    }
+}

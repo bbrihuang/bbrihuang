@@ -188,6 +188,49 @@ function setUpCopyEmail() {
     });
 }
 
+// Sections and cards fade up the first time they scroll into view. Only
+// things that start below the screen are hidden, so nothing visible on load
+// flickers, and without JavaScript everything simply shows.
+const revealTargets = [
+    ".section-title",
+    ".about-main > *",
+    ".photo-card",
+    ".stack-group",
+    ".jobs",
+    ".project-card",
+    ".projects-more",
+    ".case-body > *",
+].join(", ");
+
+function setUpReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    const pending = [...document.querySelectorAll(revealTargets)].filter(
+        (element) => element.getBoundingClientRect().top > window.innerHeight,
+    );
+    pending.forEach((element) => element.setAttribute("data-reveal", ""));
+
+    const observer = new IntersectionObserver((entries) => {
+        // Things that arrive together come in one after another.
+        entries
+            .filter((entry) => entry.isIntersecting)
+            .forEach((entry, index) => {
+                const element = entry.target;
+                observer.unobserve(element);
+                const delay = Math.min(index, 4) * 60;
+                element.style.transitionDelay = `${delay}ms`;
+                element.setAttribute("data-visible", "");
+                // Hand the element back to its own transitions once it's in.
+                setTimeout(() => {
+                    element.removeAttribute("data-reveal");
+                    element.removeAttribute("data-visible");
+                    element.style.transitionDelay = "";
+                }, delay + 700);
+            });
+    }, { rootMargin: "0px 0px -10% 0px" });
+
+    pending.forEach((element) => observer.observe(element));
+}
+
 // Runs on the first load and after every page change.
 document.addEventListener("astro:page-load", () => {
     placeShapes();
@@ -195,4 +238,5 @@ document.addEventListener("astro:page-load", () => {
     setUpJobTabs();
     setUpProjectFilters();
     setUpCopyEmail();
+    setUpReveal();
 });
