@@ -256,6 +256,8 @@ nav a {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    padding-right: 0.1em;
+    margin-right: -0.1em;
 }
 
 .grad-software {
