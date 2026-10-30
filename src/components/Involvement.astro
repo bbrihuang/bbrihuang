@@ -16,21 +16,14 @@ const cards = clubs.map((club) => ({
     <ul class="clubs">
         {cards.map((club) => (
             <li class="club-card">
-                {club.gallery?.length > 0
-                    ? (
-                        <div class="club-gallery" tabindex="0" role="group" aria-label={`Photos from ${club.org}`}>
-                            {club.gallery.map((photo) => (
-                                <img src={photo.src} alt={photo.alt} loading="lazy">
-                            ))}
-                        </div>
-                    )
-                    : (
-                        <div class="club-cover">
-                            {club.logo
-                                ? <img src={club.logo} alt="" width="88" height="88" loading="lazy">
-                                : <span class="club-initials" aria-hidden="true">{club.initials}</span>}
-                        </div>
-                    )}
+                <div class="club-cover">
+                    {club.gallery?.map((photo, index) => (
+                        <img class:list={["club-photo", { "is-active": index === 0 }]} src={photo.src} alt={photo.alt} loading="lazy">
+                    ))}
+                    {club.logo
+                        ? <img class="club-logo" src={club.logo} alt="" width="72" height="72" loading="lazy">
+                        : <span class="club-logo club-initials" aria-hidden="true">{club.initials}</span>}
+                </div>
                 <div class="club-body">
                     <a class="club-link" href={club.href} target="_blank" rel="noopener noreferrer">
                         <span class="club-name">{club.org}</span>

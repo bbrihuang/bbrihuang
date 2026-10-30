@@ -734,93 +734,6 @@ main > :first-child {
     }
 }
 
-/* Clubs: two columns of small hairline-divided rows */
-.clubs {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    column-gap: var(--space-lg);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.clubs li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.clubs a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 4px;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.clubs a:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-}
-
-.clubs img,
-.club-initials {
-    flex-shrink: 0;
-    width: 34px;
-    height: 34px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.club-initials {
-    display: grid;
-    place-items: center;
-    background-color: var(--ash);
-    font-family: "Geist Mono", monospace;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--mist);
-}
-
-.club-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.club-name,
-.club-role {
-    display: block;
-    overflow: hidden;
-    line-height: 1.4;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.club-name {
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.club-role {
-    font-size: 13px;
-    color: var(--fog);
-}
-
-.club-arrow {
-    font-size: 13px;
-    color: var(--steel);
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.clubs a:hover .club-arrow {
-    color: var(--text);
-}
-
-@media (max-width: 640px) {
-    .clubs {
-        grid-template-columns: minmax(0, 1fr);
-    }
-}
-
 /* Tech stack: group name on the left, chips on the right */
 .stack {
     margin: 0;
@@ -1483,7 +1396,7 @@ main > :first-child {
         transform: scale(1.03);
     }
 
-    .clubs a:hover .club-arrow {
+    .club-link:hover .club-arrow {
         transform: translate(2px, -2px);
     }
 
@@ -2274,4 +2187,137 @@ main > :first-child {
 
 #featured .project-grid {
     align-items: start;
+}
+
+/* Involvement: staggered cards with the logo over alternating photos, and links
+   to related projects. Without JavaScript the first photo simply stays. */
+.clubs {
+    columns: 3 300px;
+    column-gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.club-card {
+    overflow: hidden;
+    break-inside: avoid;
+    margin-bottom: var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+}
+
+.club-cover {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    aspect-ratio: 5 / 2;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Photos sit behind the logo and take turns (main.js moves .is-active). */
+.club-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 800ms var(--ease-in-out);
+}
+
+.club-photo.is-active {
+    opacity: 1;
+}
+
+.club-logo {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+    object-fit: cover;
+}
+
+.club-initials {
+    display: grid;
+    place-items: center;
+    background-color: var(--ash);
+    font-family: "Geist Mono", monospace;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--mist);
+}
+
+.club-initials {
+    display: grid;
+    place-items: center;
+    background-color: var(--ash);
+    font-family: "Geist Mono", monospace;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--mist);
+}
+
+.club-body {
+    padding: var(--space-md);
+}
+
+.club-link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    text-decoration: none;
+}
+
+.club-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.club-arrow {
+    flex-shrink: 0;
+    color: var(--steel);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.club-link:hover .club-arrow {
+    color: var(--text);
+}
+
+.club-role {
+    margin: 4px 0 0;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--fog);
+}
+
+.club-related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin: var(--space-sm) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.club-related a {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid color-mix(in srgb, var(--projects) 45%, transparent);
+    border-radius: 9999px;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--projects);
+    transition: background-color 0.2s ease;
+}
+
+.club-related a:hover {
+    background-color: color-mix(in srgb, var(--projects) 16%, transparent);
 }

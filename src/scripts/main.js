@@ -189,6 +189,30 @@ function setUpCopyEmail() {
     });
 }
 
+// Involvement: each club's photos take turns behind its logo, one card at a
+// time so they don't all change together. Hovering a card holds its photo.
+let clubTimers = [];
+
+function setUpClubPhotos() {
+    clubTimers.forEach(clearInterval);
+    clubTimers = [];
+    if (reduceMotion.matches) return;
+
+    document.querySelectorAll(".club-cover").forEach((cover, index) => {
+        const photos = [...cover.querySelectorAll(".club-photo")];
+        if (photos.length < 2) return;
+        let current = 0;
+        setTimeout(() => {
+            clubTimers.push(setInterval(() => {
+                if (cover.matches(":hover")) return;
+                photos[current].classList.remove("is-active");
+                current = (current + 1) % photos.length;
+                photos[current].classList.add("is-active");
+            }, 3500));
+        }, index * 900);
+    });
+}
+
 // Section entrances. An inline script in the layout adds .js-reveal to <html>
 // before the page paints, which holds each section in its starting pose; a
 // section gets .is-in when it scrolls into view (straight away if it's
@@ -229,6 +253,7 @@ document.addEventListener("astro:page-load", () => {
     setUpProjectFilters();
     setUpReveal();
     setUpCopyEmail();
+    setUpClubPhotos();
     // Hiding the other Experience panels shrinks the page, so coming from another
     // page the section is no longer where the browser scrolled to. Land on it again.
     if (window.location.hash) {
