@@ -372,4 +372,203 @@ export const projects = [
             }
         ]
     },
+    {
+        title: "PC Homelab",
+        areas: [
+            "software",
+            "hardware"
+        ],
+        tag: "Hardware · Software",
+        description: "My daily drivers, and the gaming PC that doubles as a homelab: self-hosted services, local LLMs and remote access.",
+        chips: [
+            "Docker",
+            "WSL2",
+            "Tailscale",
+            "Sunshine",
+            "Moonlight",
+            "Ollama",
+            "n8n",
+            "Jellyfin",
+            "Uptime Kuma",
+            "Homarr"
+        ],
+        year: "2026",
+        slug: "homelab",
+        cover: "/projects/homelab/cover-169.webp",
+        coverAlt: "Cover image for PC Homelab.",
+        summary: "Everything I use day to day, plus one Mini-ITX PC that games, builds and serves. It runs self-hosted services in Docker on WSL2, local LLMs on the RTX 5070, and streams to my laptop and phone, all reachable from anywhere over Tailscale.",
+        caseStudy: [
+            {
+                title: "The build",
+                gallery: [
+                    {
+                        src: "/projects/homelab/pc.webp",
+                        alt: "The Mini-ITX gaming PC that doubles as a homelab."
+                    }
+                ],
+                points: [
+                    {
+                        title: "CPU",
+                        text: "AMD Ryzen 7 3700X · 8 cores · 3.6 GHz"
+                    },
+                    {
+                        title: "CPU Cooler",
+                        text: "Thermalright RK120 SE · Dual Tower Cooler"
+                    },
+                    {
+                        title: "Motherboard",
+                        text: "ASUS ROG Strix B450-I Gaming · Mini-ITX · AM4"
+                    },
+                    {
+                        title: "Memory",
+                        text: "G.Skill Trident Z Royal 16 GB · 2 × 8 GB · DDR4-3200 · CL16"
+                    },
+                    {
+                        title: "Storage",
+                        text: "Crucial P3 Plus 1 TB · M.2 2280 NVMe · PCIe 4.0 x4"
+                    },
+                    {
+                        title: "Storage",
+                        text: "Inland Professional 240 GB · 2.5″ SATA SSD"
+                    },
+                    {
+                        title: "Graphics",
+                        text: "Zotac Gaming GeForce RTX 5070 Twin Edge OC · 12 GB VRAM"
+                    },
+                    {
+                        title: "Case",
+                        text: "NZXT H200 · Mini-ITX tower"
+                    },
+                    {
+                        title: "Power Supply",
+                        text: "Lian Li EDGE Gold 750 W · 80+ Gold · fully modular"
+                    },
+                    {
+                        title: "Case Fans",
+                        text: "Thermalright TL-C12C-S · 120 mm · 3-pack"
+                    }
+                ]
+            },
+            {
+                title: "What it does",
+                points: [
+                    {
+                        title: "Gaming",
+                        text: "1080p at 144 Hz on the RTX 5070, and streamed to my laptop and phone with Sunshine and Moonlight."
+                    },
+                    {
+                        title: "Development",
+                        text: "WSL2 runs ROS 2 and Gazebo for the JetHexa sim, alongside Docker and local LLMs in Ollama."
+                    },
+                    {
+                        title: "Homelab",
+                        text: "Docker runs n8n, Jellyfin, Uptime Kuma, Homarr and SnapOtter, reachable anywhere over Tailscale."
+                    }
+                ]
+            },
+            {
+                title: "How it fits together",
+                text: "I wanted one machine that could game, build and serve, instead of three that each do one thing. Every choice below follows from that.",
+                flow: [
+                    {
+                        label: "My laptop & phone",
+                        note: "Moonlight · browser"
+                    },
+                    {
+                        label: "Windows 11 Pro",
+                        note: "Games · Sunshine · Ollama · VS Code"
+                    },
+                    {
+                        label: "WSL2",
+                        note: "A real Linux kernel running inside Windows"
+                    },
+                    {
+                        label: "Ubuntu",
+                        note: "ROS 2 · Gazebo (JetHexa)"
+                    },
+                    {
+                        label: "Docker",
+                        note: "n8n · Jellyfin · Uptime Kuma · Homarr · SnapOtter"
+                    },
+                    {
+                        label: "Hardware",
+                        note: "Ryzen 7 3700X · RTX 5070 · 16 GB · 1.24 TB"
+                    }
+                ]
+            },
+            {
+                title: "Why it’s built this way",
+                points: [
+                    {
+                        title: "One machine, three jobs",
+                        text: "Instead of a separate gaming PC, server and dev box, one PC does all three. Windows runs games and everyday apps directly on the hardware, and everything else sits on top. That’s one set of parts to buy, power and maintain."
+                    },
+                    {
+                        title: "Linux without a second computer",
+                        text: "WSL2 runs a real Linux kernel inside Windows, so I never dual-boot. It hosts the Ubuntu environment for the JetHexa ROS 2 and Gazebo sim, and Docker uses it as its Linux backend, so Linux containers run here just like on a Linux server."
+                    },
+                    {
+                        title: "Isolated, so nothing breaks the rest",
+                        text: "Each homelab service lives in its own container with everything it needs, so updating one can’t take down another, and any of them can be rebuilt or moved to another machine."
+                    },
+                    {
+                        title: "The GPU earns its keep twice",
+                        text: "The RTX 5070’s 12 GB of VRAM runs games and local LLMs. The same card that plays at 144 Hz runs and profiles the models for my inference research."
+                    },
+                    {
+                        title: "A light laptop, a heavy PC",
+                        text: "Rather than carry a gaming laptop, I carry a thin 2-in-1. Sunshine streams the PC and Moonlight plays it on my laptop and phone, so the heavy lifting stays at home and I get it anywhere."
+                    },
+                    {
+                        title: "Private by default",
+                        text: "Tailscale links the PC, laptop and phone in a private network, so I reach every service from anywhere without exposing any of them to the public internet."
+                    },
+                    {
+                        title: "Small, but not compromised",
+                        text: "The whole build stays compact on a desk, but it still fits a full-size RTX 5070, a dual-tower cooler and a 750 W power supply, so size didn’t cost performance."
+                    }
+                ]
+            },
+            {
+                title: "Self-hosted services",
+                points: [
+                    {
+                        title: "n8n",
+                        text: "Workflow automation that connects apps and runs scheduled jobs."
+                    },
+                    {
+                        title: "Jellyfin",
+                        text: "Media server that streams my library to any device."
+                    },
+                    {
+                        title: "Uptime Kuma",
+                        text: "Watches every service and tells me when something goes down."
+                    },
+                    {
+                        title: "Homarr",
+                        text: "One dashboard with every service in one place."
+                    },
+                    {
+                        title: "SnapOtter",
+                        text: "A self-hosted file-processing toolkit, so files never leave my hardware."
+                    }
+                ]
+            },
+            {
+                title: "The trade-offs",
+                points: [
+                    "Mini-ITX means two RAM slots and one PCIe slot, so there’s less room to expand than on a full-size board.",
+                    "Games and local LLMs share one GPU, so I don’t run heavy models while gaming.",
+                    "When the PC restarts, the homelab restarts with it. It’s a homelab, not a data center."
+                ]
+            },
+            {
+                title: "Why not host my own storage?",
+                text: [
+                    "I don’t run a NAS or keep my backups on my own drives. I pay for iCloud+ with 2 TB instead.",
+                    "Since I have an iPhone, one service backs up my entire digital life, and I don’t have to worry about a drive failing. Apple’s servers are far more reliable than anything I could set up myself. iCloud Drive also works on Windows, so my files are right there on this PC too."
+                ]
+            }
+        ]
+    },
 ];
