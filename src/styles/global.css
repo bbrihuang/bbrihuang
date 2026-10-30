@@ -985,3 +985,23 @@ main > :first-child {
     object-fit: cover;
 }
 
+
+/* Tech stack logos: brand marks are filled, glyphs are drawn as lines */
+.stack .chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stack-logo {
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+.stack-logo.is-glyph {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
