@@ -618,6 +618,7 @@ nav a:hover,
 #about { --line: var(--software); }
 #projects { --line: var(--projects); }
 #featured { --line: var(--projects); }
+#experience { --line: var(--experience); }
 #stack { --line: var(--experience); }
 
 /* Frosted glass panels: a faint white wash over a heavy blur of the
@@ -1181,7 +1182,7 @@ main > :first-child {
     flex-shrink: 0;
 }
 
-.job-detail-header h2 {
+.job-detail-header h3 {
     margin: 0;
     font-size: 1.75rem;
     font-weight: 600;
@@ -2108,25 +2109,33 @@ body:has(.up-next) .site-footer {
     }
 }
 
-.js-reveal .jobs:not(.is-in) .job-tab {
+.js-reveal #experience:not(.is-in) > .jobs {
+    opacity: 1;
+}
+
+#experience.is-in > .jobs {
+    animation: none;
+}
+
+.js-reveal #experience:not(.is-in) :is(.job-list, .job-panels, .job-tab) {
     opacity: 0;
 }
 
-.jobs.is-in > .job-list {
+#experience.is-in .job-list {
     animation: fade-in 400ms var(--ease-out) backwards;
 }
 
-.jobs.is-in > .job-list::before {
+#experience.is-in .job-list::before {
     transform-origin: top;
     animation: rail-draw 900ms var(--ease-out) 150ms backwards;
 }
 
-.jobs.is-in .job-tab {
+#experience.is-in .job-tab {
     animation: plop 550ms var(--ease-out) backwards;
     animation-delay: calc(150ms + var(--i) * 110ms);
 }
 
-.jobs.is-in > .job-panels {
+#experience.is-in .job-panels {
     animation: enter-right 700ms var(--ease-out) 450ms backwards;
 }
 

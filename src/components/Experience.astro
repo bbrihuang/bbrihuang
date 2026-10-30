@@ -10,7 +10,9 @@ const jobs = experience.map((job, index) => ({
 
 <!-- A list of roles on the left and the selected role's details on the
      right. Without JavaScript every role's details show, one after another. -->
-<section id="experience" class="jobs">
+<section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="jobs">
     <div class="job-list" role="tablist" aria-label="Roles" aria-orientation="vertical">
         {jobs.map((job, index) => (
             <button
@@ -43,7 +45,7 @@ const jobs = experience.map((job, index) => ({
                 <header class="job-detail-header">
                     <img src={job.logo} alt="" width="64" height="64" loading="lazy">
                     <div>
-                        <h2>{job.role}</h2>
+                        <h3>{job.role}</h3>
                         <p>
                             {job.url
                                 ? <a href={job.url} target="_blank" rel="noopener noreferrer">{job.org} &nearr;</a>
@@ -72,5 +74,6 @@ const jobs = experience.map((job, index) => ({
                 </ul>
             </article>
         ))}
+    </div>
     </div>
 </section>
