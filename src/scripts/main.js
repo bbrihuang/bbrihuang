@@ -105,8 +105,44 @@ function startTerminal() {
     }
 }
 
+// Experience: pick a role on the left to show its details on the right.
+// Up and down arrows move between roles.
+function setUpJobTabs() {
+    const tabs = [...document.querySelectorAll(".job-tab")];
+    if (!tabs.length) return;
+
+    function select(tab, focus) {
+        tabs.forEach((other) => {
+            const selected = other === tab;
+            other.setAttribute("aria-selected", String(selected));
+            other.tabIndex = selected ? 0 : -1;
+            document.getElementById(other.getAttribute("aria-controls")).hidden = !selected;
+        });
+        if (focus) tab.focus();
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+            select(tab, false);
+            // Stacked on narrow screens, so bring the details into view.
+            if (window.matchMedia("(max-width: 800px)").matches) {
+                document.getElementById(tab.getAttribute("aria-controls")).scrollIntoView({ block: "start" });
+            }
+        });
+        tab.addEventListener("keydown", (event) => {
+            const step = { ArrowDown: 1, ArrowUp: -1 }[event.key];
+            if (!step) return;
+            event.preventDefault();
+            select(tabs[(index + step + tabs.length) % tabs.length], true);
+        });
+    });
+
+    select(tabs.find((tab) => tab.getAttribute("aria-selected") === "true") ?? tabs[0], false);
+}
+
 // Runs on the first load and after every page change.
 document.addEventListener("astro:page-load", () => {
     placeShapes();
     startTerminal();
+    setUpJobTabs();
 });

@@ -228,36 +228,6 @@ nav a {
     text-decoration: none;
 }
 
-#experience article {
-    margin-bottom: var(--space-lg);
-}
-
-#experience article:last-child {
-    margin-bottom: 0;
-}
-
-#experience h3 {
-    margin: 0;
-    font-size: 1.25rem;
-}
-
-#experience .job-header p {
-    margin: 4px 0 0;
-    font-family: "Geist Mono", monospace;
-    font-size: 13px;
-    color: var(--steel);
-}
-
-#experience ul {
-    margin: 0;
-    padding-left: var(--space-md);
-}
-
-#experience li {
-    margin-bottom: var(--space-xs);
-    color: var(--mist);
-}
-
 #contact ul {
     display: flex;
     gap: var(--space-md);
@@ -661,23 +631,15 @@ nav a:hover,
 }
 
 #about { --line: var(--software); }
-#experience { --line: var(--experience); }
 #projects { --line: var(--projects); }
 #stack { --line: var(--experience); }
 #contact { --line: var(--hardware); }
 
-#experience article {
-    padding: var(--space-md);
-    background-color: var(--card);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: 3px solid var(--experience);
-    border-radius: 6px;
-}
-
 /* Frosted glass panels: a faint white wash over a heavy blur of the
    background shapes, with a lit top edge. Borders stay as set above. */
 .project-card,
-#experience article,
+.job-list,
+.job-detail,
 .terminal,
 .stat,
 .education {
@@ -968,23 +930,6 @@ main > :first-child {
     }
 }
 
-/* Experience: company logo beside the role */
-.job-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
-}
-
-.job-header img {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    object-fit: cover;
-}
-
 
 /* Tech stack logos: brand marks are filled, glyphs are drawn as lines */
 .stack .chips li {
@@ -1037,4 +982,264 @@ main > :first-child {
     margin: 0;
     font-size: 1.125rem;
     color: var(--fog);
+}
+
+/* Experience: role list on the left, the selected role's details on the right */
+.jobs {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-md);
+    align-items: start;
+}
+
+.job-list,
+.job-detail {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.job-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-xs);
+}
+
+/* Timeline rail behind the diamond markers */
+.job-list::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    bottom: 40px;
+    left: 28px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.job-tab {
+    position: relative;
+    display: grid;
+    grid-template-columns: 24px 44px 1fr;
+    align-items: start;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-sm) var(--space-sm) 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.job-tab:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.job-tab[aria-selected="true"] {
+    border-color: color-mix(in srgb, var(--experience) 45%, transparent);
+    background-color: color-mix(in srgb, var(--experience) 14%, transparent);
+}
+
+.job-marker {
+    justify-self: center;
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    border: 1px solid var(--steel);
+    background-color: var(--bg);
+    transform: rotate(45deg);
+}
+
+.job-tab[aria-selected="true"] .job-marker {
+    border-color: var(--experience);
+    background-color: var(--experience);
+}
+
+.job-tab img,
+.job-detail-header img {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.job-tab-text,
+.job-tab-role,
+.job-tab-org {
+    display: block;
+    min-width: 0;
+}
+
+.job-tab-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    margin-bottom: 4px;
+}
+
+.job-dates {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+}
+
+.badge-current {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 9999px;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--software);
+}
+
+.badge-current::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.job-tab-role {
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.job-tab-org {
+    font-size: 15px;
+    color: var(--fog);
+}
+
+.job-detail {
+    padding: var(--space-lg);
+}
+
+.job-panels {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.job-detail-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.job-detail-header img {
+    flex-shrink: 0;
+}
+
+.job-detail-header h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.job-detail-header p {
+    margin: 4px 0 0;
+    color: var(--text);
+}
+
+.job-detail-header a {
+    text-decoration: none;
+}
+
+.job-detail-header a:hover {
+    color: var(--experience);
+}
+
+.job-org-note {
+    color: var(--fog);
+}
+
+.job-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 0 var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.job-facts div {
+    padding: 12px var(--space-sm);
+}
+
+.job-facts div + div {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.job-facts dt {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--steel);
+}
+
+.job-facts dd {
+    margin: 4px 0 0;
+    font-size: 15px;
+}
+
+.job-bullets {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.job-bullets li {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: var(--space-md);
+    color: var(--mist);
+}
+
+.job-bullets li::before {
+    content: "";
+    position: absolute;
+    top: 0.6em;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--experience);
+    transform: rotate(45deg);
+}
+
+.job-detail .chips {
+    margin-bottom: 0;
+}
+
+@media (max-width: 800px) {
+    .jobs {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .job-detail {
+        padding: var(--space-md);
+    }
+
+    .job-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .job-facts div + div {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
 }
