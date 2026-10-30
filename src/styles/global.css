@@ -757,21 +757,35 @@ main > :first-child {
     color: var(--steel);
 }
 
+/* Education: a full-width card with a BU-red stripe, degree on the left,
+   class year on the right. */
 .education {
-    display: inline-flex;
+    position: relative;
+    display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px var(--space-sm) 10px 10px;
+    gap: var(--space-md);
+    overflow: hidden;
+    padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-md) + 4px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 10px;
+}
+
+.education::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: #cc0000;
 }
 
 .education img {
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
+    width: 56px;
+    height: 56px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .education p {
@@ -779,14 +793,53 @@ main > :first-child {
     line-height: 1.35;
 }
 
+.education-main {
+    flex: 1;
+    min-width: 0;
+}
+
 .education-degree {
+    font-size: 1.25rem;
     font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .education-school {
+    margin-top: 4px;
+    color: var(--fog);
+}
+
+.education-when {
+    flex-shrink: 0;
+    padding-left: var(--space-md);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: right;
+}
+
+.education-class {
+    font-weight: 600;
+}
+
+.education-date {
     font-family: "Geist Mono", monospace;
     font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--steel);
+}
+
+@media (max-width: 560px) {
+    .education {
+        flex-wrap: wrap;
+    }
+
+    .education-when {
+        width: 100%;
+        padding: var(--space-sm) 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: none;
+        text-align: left;
+    }
 }
 
 /* Clubs: two columns of small hairline-divided rows */
