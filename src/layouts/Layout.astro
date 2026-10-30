@@ -21,10 +21,14 @@ const { title, description } = Astro.props;
 </head>
 
 <body>
-    <div class="shapes" aria-hidden="true">
-        <span class="shape shape-ring" data-depth="40"></span>
-        <span class="shape shape-diamond" data-depth="80"></span>
-        <span class="shape shape-dots" data-depth="60"></span>
+    <div class="backdrop" aria-hidden="true">
+        <div class="shapes">
+            <span class="shape shape-ring" data-depth="40"></span>
+            <span class="shape shape-diamond" data-depth="80"></span>
+            <span class="shape shape-dots" data-depth="60"></span>
+        </div>
+        <div class="backdrop-grid"></div>
+        <div class="backdrop-grain"></div>
     </div>
 
     <slot />
