@@ -3,7 +3,6 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import UpNext from "../../components/UpNext.astro";
-import ContactCard from "../../components/ContactCard.astro";
 import Projects from "../../components/Projects.astro";
 ---
 
@@ -13,9 +12,7 @@ import Projects from "../../components/Projects.astro";
 >
     <Nav />
     <main>
-        <PageHeader title="Projects" lede="From local AI experiments to robotics and hardware design: projects where I’ve turned ideas into working systems." color="var(--projects)">
-            <ContactCard />
-        </PageHeader>
+        <PageHeader title="Projects" lede="From local AI experiments to robotics and hardware design: projects where I’ve turned ideas into working systems." color="var(--projects)" />
         <Projects />
         <UpNext title="Experience" href="/experience/" color="var(--experience)" />
     </main>

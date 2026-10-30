@@ -135,10 +135,6 @@ section {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-.project-card.featured {
-    margin-bottom: var(--space-md);
-    padding: var(--space-lg);
-}
 
 .project-card.placeholder {
     opacity: 0.6;
@@ -576,8 +572,31 @@ nav a:hover,
     background-color: rgba(255, 255, 255, 0.04);
 }
 
+/* Featured card: image on the left, text on the right */
+.project-card.featured {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    padding: 0;
+}
+
 .project-card.featured .project-cover {
-    margin: calc(var(--space-lg) * -1) calc(var(--space-lg) * -1) var(--space-md);
+    aspect-ratio: auto;
+    min-height: 100%;
+    margin: 0;
+}
+
+.project-card.featured .project-body {
+    padding: var(--space-md);
+}
+
+@media (max-width: 720px) {
+    .project-card.featured {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card.featured .project-cover {
+        aspect-ratio: 16 / 9;
+    }
 }
 
 .project-cover img {
@@ -1276,62 +1295,6 @@ main > :first-child {
     transform: translateX(4px);
 }
 
-/* Contact card: availability and quick ways to reach me */
-.contact-card {
-    max-width: 420px;
-    padding: var(--space-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
-    -webkit-backdrop-filter: blur(28px) saturate(140%);
-    backdrop-filter: blur(28px) saturate(140%);
-}
-
-.contact-card p {
-    margin: 0 0 var(--space-sm);
-    font-size: 15px;
-    color: var(--mist);
-}
-
-.contact-card .contact-status {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-family: "Geist Mono", monospace;
-    font-size: 13px;
-    color: var(--fog);
-}
-
-.contact-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-}
-
-.contact-actions a {
-    padding: 8px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9999px;
-    background-color: rgba(255, 255, 255, 0.06);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.contact-actions a:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-}
-
-.contact-actions .contact-primary {
-    border-color: var(--text);
-    background-color: var(--text);
-    color: var(--bg);
-}
-
-.contact-actions .contact-primary:hover {
-    background-color: #ffffff;
-}
 
 /* Projects: "More projects" heading with filter tabs */
 .projects-more {
