@@ -2160,3 +2160,16 @@ body:has(.up-next) .site-footer {
         transform: translate(-50%, 0);
     }
 }
+
+/* Small phones: three icons plus three links still fit on one line. */
+@media (max-width: 560px) {
+    .nav-socials a,
+    .nav-copy {
+        width: 34px;
+        height: 34px;
+    }
+
+    .site-header nav ul a {
+        padding: 0 8px;
+    }
+}
