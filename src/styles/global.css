@@ -2068,3 +2068,31 @@ body:has(.up-next) .site-footer {
 .jobs.is-in > .job-panels {
     animation: enter-right 700ms var(--ease-out) 450ms backwards;
 }
+
+/* Projects: the featured card rises with its image settling, then the grid
+   cards follow one at a time. */
+#projects.is-in > .project-card.featured .project-cover img {
+    animation: photo-settle 1200ms var(--ease-out) backwards;
+}
+
+.js-reveal #projects:not(.is-in) > .project-grid {
+    opacity: 1;
+}
+
+#projects.is-in > .project-grid {
+    animation: none;
+}
+
+.js-reveal #projects:not(.is-in) .project-slot {
+    opacity: 0;
+}
+
+#projects.is-in .project-slot {
+    animation: enter-up 700ms var(--ease-out) backwards;
+}
+
+#projects.is-in .project-slot:nth-child(1) { animation-delay: 350ms; }
+#projects.is-in .project-slot:nth-child(2) { animation-delay: 450ms; }
+#projects.is-in .project-slot:nth-child(3) { animation-delay: 550ms; }
+#projects.is-in .project-slot:nth-child(4) { animation-delay: 650ms; }
+#projects.is-in .project-slot:nth-child(n + 5) { animation-delay: 750ms; }
