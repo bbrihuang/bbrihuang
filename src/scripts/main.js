@@ -166,6 +166,30 @@ function setUpProjectFilters() {
     });
 }
 
+// Mail icon in the top bar: click to copy the email, "Copied!" shows for a
+// moment. If the browser won't allow copying, open the mail app instead.
+function setUpCopyEmail() {
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+        const bubble = button.querySelector(".copy-bubble");
+        let timer = 0;
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(button.dataset.copy);
+            } catch {
+                window.location.href = `mailto:${button.dataset.copy}`;
+                return;
+            }
+            bubble.textContent = "Copied!";
+            button.classList.add("is-copied");
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                bubble.textContent = "";
+                button.classList.remove("is-copied");
+            }, 1600);
+        });
+    });
+}
+
 // Section entrances. An inline script in the layout adds .js-reveal to <html>
 // before the page paints, which holds each section in its starting pose; a
 // section gets .is-in when it scrolls into view (straight away if it's
@@ -205,4 +229,5 @@ document.addEventListener("astro:page-load", () => {
     setUpJobTabs();
     setUpProjectFilters();
     setUpReveal();
+    setUpCopyEmail();
 });

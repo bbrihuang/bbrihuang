@@ -2096,3 +2096,67 @@ body:has(.up-next) .site-footer {
 #projects.is-in .project-slot:nth-child(3) { animation-delay: 550ms; }
 #projects.is-in .project-slot:nth-child(4) { animation-delay: 650ms; }
 #projects.is-in .project-slot:nth-child(n + 5) { animation-delay: 750ms; }
+
+/* Mail icon in the top bar: copies the email, "Copied!" bubble below */
+.nav-copy {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 9999px;
+    background: none;
+    color: var(--fog);
+    cursor: copy;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 120ms var(--ease-out);
+}
+
+.nav-copy:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--snow);
+}
+
+.nav-copy:active {
+    transform: scale(0.97);
+}
+
+.nav-copy.is-copied {
+    color: var(--software);
+}
+
+.copy-bubble {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    padding: 4px 10px;
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 9999px;
+    background-color: rgba(11, 11, 12, 0.9);
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    white-space: nowrap;
+    color: var(--software);
+    opacity: 0;
+    transform: translate(-50%, -4px);
+    transition:
+        opacity 150ms var(--ease-out),
+        transform 150ms var(--ease-out);
+    pointer-events: none;
+}
+
+.nav-copy.is-copied .copy-bubble {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .copy-bubble,
+    .nav-copy.is-copied .copy-bubble {
+        transform: translate(-50%, 0);
+    }
+}
