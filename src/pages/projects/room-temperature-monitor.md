@@ -3,7 +3,7 @@ layout: ../../layouts/ProjectLayout.astro
 title: Room Temperature Monitor
 tag: Hardware
 description: Built an Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed.
-status: Done | 2026
+year: "2026"
 chips: ["Arduino UNO", "C++", "TMP36", "Onshape"]
 github: https://github.com/bbrihuang/temperature-sensor
 ---

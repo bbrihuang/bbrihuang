@@ -13,7 +13,7 @@ const { frontmatter } = Astro.props;
             <p class="project-tag">{frontmatter.tag}</p>
             <h1>{frontmatter.title}</h1>
             <p class="case-lede">{frontmatter.description}</p>
-            <p class="project-meta">{frontmatter.status}</p>
+            <p class="project-meta">{frontmatter.year}</p>
             <ul class="chips">
                 {frontmatter.chips.map((chip) => (
                     <li>{chip}</li>

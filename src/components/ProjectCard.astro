@@ -24,7 +24,7 @@ const { project } = Astro.props;
                 ))}
             </ul>
         )}
-        <p class="project-meta">{project.status}</p>
+        <p class="project-meta">{project.year}</p>
         {project.github && (
             <div class="project-links">
                 <a href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a>
