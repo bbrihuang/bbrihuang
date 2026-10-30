@@ -275,4 +275,101 @@ export const projects = [
             }
         ]
     },
+    {
+        title: "BU Dining Meal Planner",
+        areas: [
+            "software"
+        ],
+        tag: "Software (AI/ML)",
+        description: "Turns live menus from BU’s four dining halls into meal plans that hit your macros.",
+        chips: [
+            "TypeScript",
+            "React",
+            "Tailwind CSS",
+            "Vite",
+            "Node.js",
+            "Cheerio",
+            "GitHub Actions",
+            "Claude API",
+            "Vercel"
+        ],
+        year: "2026",
+        slug: "bu-dining-meal-planner",
+        cover: "/projects/bu-dining-meal-planner/cover.svg",
+        coverAlt: "Cover image for BU Dining Meal Planner.",
+        github: "https://github.com/bbrihuang/bu-dining-meals-planner",
+        links: [
+            {
+                label: "Live site",
+                href: "https://bumeals.vercel.app"
+            }
+        ],
+        summary: "Tell it your calories, protein, carbs and fat, and it builds a plate for every meal from what your dining hall is actually serving today, with real serving amounts like “1½ cups” or “3 links”. Swap a plate or rule out a dish and the rest of the day re-plans around it.",
+        highlights: [
+            "Built a web app that turns live menus from BU’s 4 dining halls into macro-based meal plans.",
+            "Wrote scrapers for BU Dining and Sodexo menus, auto-refreshed twice daily with GitHub Actions.",
+            "Designed a meal-planning algorithm averaging 4% calorie error across 92 automated test scenarios.",
+            "Integrated the Claude API so students can adjust their plans in plain English without fake menu items."
+        ],
+        caseStudy: [
+            {
+                title: "The problem",
+                text: "BU’s dining halls post a full nutrition label for every dish, but nothing helps you hit a target. If you track macros, that means adding up labels yourself and guessing what “one serving” of a stir-fry looks like on a plate. I wanted to open one page and see exactly what to take at each meal."
+            },
+            {
+                title: "How it works",
+                flow: [
+                    {
+                        label: "Hall menu pages",
+                        note: "BU Dining and Sodexo"
+                    },
+                    {
+                        label: "Build-time scraper",
+                        note: "Cheerio, twice a day"
+                    },
+                    {
+                        label: "JSON per hall per day",
+                        note: "Static files on Vercel"
+                    },
+                    {
+                        label: "Planner in the browser",
+                        note: "A whole day in a few ms"
+                    },
+                    {
+                        label: "Your plates",
+                        note: "In amounts you can take"
+                    }
+                ],
+                text: [
+                    "The menu side has no server and no database. Every Vercel build runs a scraper that reads each hall’s menu pages and writes one small JSON file per hall per day. BU’s pages hold two weeks of menus each, more than 20 MB of HTML, so they’re read once at build time instead of on every visit. A GitHub Action triggers a rebuild at about 5 am and 2 pm Boston time.",
+                    "The planner is pure TypeScript running in the browser. For each meal it tries every sensible plate shape (protein + starch + vegetable, an entrée + a side, and so on) in every combination of portions you can actually serve yourself, scores each one against that meal’s share of your targets, and keeps the closest few that are genuinely different. Each meal aims at what’s left of the day after the meals before it, so if breakfast runs a little over, dinner comes in lighter."
+                ]
+            },
+            {
+                title: "Challenges",
+                points: [
+                    {
+                        title: "Amounts a person can actually take",
+                        text: "Labels say things like “1/2 cup”, “2 link” or “1/8 cut”, and a planner that answers “0.3× chicken” is useless at the counter. A portion model turns every serving into whole pieces, quarter cups from ½ to 2 cups, or whole ounces from 2 to 8 oz, and the planner can only choose from those."
+                    },
+                    {
+                        title: "Knowing what counts as a dish",
+                        text: "Menus list everything served: sauces, dressings, drinks, desserts and toppings. A classifier decides which items can anchor a plate and what role each plays (protein, starch, entrée or side), so a plan isn’t built out of salad dressing and cookies."
+                    },
+                    {
+                        title: "Plates that look like a meal",
+                        text: "A pure macro fit will happily suggest four burgers. Scoring adds small realism penalties for oversized scoops, doubling up on big items and overcrowded plates, so the best-scoring plate is also one you’d eat."
+                    },
+                    {
+                        title: "Menu sites that go down",
+                        text: "Requests retry with backoff, and halls are read one at a time to go easy on BU’s servers. If one hall can’t be read, it’s skipped until the next build. If nothing can be read, the build fails on purpose so Vercel keeps the last good version live."
+                    }
+                ]
+            },
+            {
+                title: "Testing",
+                text: "The menu readers are tested against saved copies of BU’s and Sodexo’s pages. The planner is tested on real BU days (a weekday at Warren, a brunch day at West, and Fenway) for four target profiles from a 1,700-calorie day to a 3,200-calorie bulk. Every plan has to land within 10% of the calorie target, reach 85% of the protein target, use only takeable amounts, and leave out any dish you’ve ruled out."
+            }
+        ]
+    },
 ];
