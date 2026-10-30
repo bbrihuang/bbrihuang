@@ -617,6 +617,7 @@ nav a:hover,
 
 #about { --line: var(--software); }
 #projects { --line: var(--projects); }
+#featured { --line: var(--projects); }
 #stack { --line: var(--experience); }
 
 /* Frosted glass panels: a faint white wash over a heavy blur of the
@@ -2223,3 +2224,45 @@ body:has(.up-next) .site-footer {
         font-size: 13px;
     }
 }
+
+/* Home: featured projects strip */
+.all-projects {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-md);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--projects);
+}
+
+.all-projects span {
+    transition: transform 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .all-projects:hover span {
+        transform: translateX(3px);
+    }
+}
+
+/* Entrance: the cards come in one at a time, like the Projects grid. */
+.js-reveal #featured:not(.is-in) > .project-grid {
+    opacity: 1;
+}
+
+#featured.is-in > .project-grid {
+    animation: none;
+}
+
+.js-reveal #featured:not(.is-in) .project-slot {
+    opacity: 0;
+}
+
+#featured.is-in .project-slot {
+    animation: enter-up 700ms var(--ease-out) backwards;
+}
+
+#featured.is-in .project-slot:nth-child(1) { animation-delay: 150ms; }
+#featured.is-in .project-slot:nth-child(2) { animation-delay: 250ms; }
+#featured.is-in .project-slot:nth-child(3) { animation-delay: 350ms; }
