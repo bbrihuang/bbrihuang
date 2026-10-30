@@ -91,3 +91,86 @@ section {
 .hero-links a:first-child:hover {
     background-color: #ffffff;
 }
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.project-card {
+    padding: 24px;
+    background-color: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-card.featured {
+    margin-bottom: 24px;
+    padding: 32px;
+}
+
+.project-card.placeholder {
+    opacity: 0.6;
+}
+
+.project-card.placeholder:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.project-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.project-tag {
+    margin: 0 0 12px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8793a5;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.chips li {
+    padding: 4px 10px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+}
+
+.project-meta {
+    margin: 0;
+    font-size: 14px;
+    color: #8793a5;
+}
+
+.project-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
