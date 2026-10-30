@@ -615,7 +615,6 @@ nav a:hover,
     background-color: var(--bg);
 }
 
-#about { --line: var(--software); }
 #projects { --line: var(--projects); }
 #featured { --line: var(--projects); }
 #experience { --line: var(--experience); }
@@ -1429,7 +1428,7 @@ body:has(.up-next) .site-footer {
 .hero {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: var(--space-xl);
+    gap: var(--space-2xl) var(--space-xl);
 }
 
 .hero-side {
@@ -1550,20 +1549,21 @@ body:has(.up-next) .site-footer {
 }
 
 /* Running text stays at a readable line length on the wide layout. */
-.about-main > p {
-    max-width: 760px;
-    margin-top: 0;
+/* Second hero row: about text and education on the left, framed photo on the
+   right, in the same columns as the row above and sharing top and bottom. */
+.hero-about {
+    display: flex;
+    flex-direction: column;
 }
 
-/* About: text, education and clubs on the left, a big photo card on the right */
-.about-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: var(--space-2xl);
+.hero-about > p {
+    max-width: 760px;
+    margin: 0;
 }
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
+    min-height: 340px;
     position: relative;
     isolation: isolate;
     display: flex;
@@ -1649,17 +1649,13 @@ body:has(.up-next) .site-footer {
     width: 100%;
     min-height: 0;
     object-fit: cover;
-    object-position: 50% 35%;
+    object-position: 50% 45%;
 }
 
 
 
 
 @media (max-width: 900px) {
-    .about-layout {
-        grid-template-columns: 1fr;
-    }
-
     .photo-card {
         max-width: 340px;
     }
@@ -1950,8 +1946,8 @@ body:has(.up-next) .site-footer {
     }
 }
 
-/* About: text and education rise in turn, clubs cascade, the photo fades up
-   into its frame and the corner marks snap on last. */
+/* Hero about row: text and education rise in turn, the photo fades up into
+   its frame and the corner marks snap on last. Clubs cascade in Involvement. */
 @keyframes photo-in {
     from {
         opacity: 0;
@@ -1972,26 +1968,13 @@ body:has(.up-next) .site-footer {
     }
 }
 
-.js-reveal #about:not(.is-in) > .about-layout {
-    opacity: 1;
+.hero-about > * {
+    animation: rise 600ms var(--ease-out) backwards;
 }
 
-#about.is-in > .about-layout {
-    animation: none;
-}
-
-.js-reveal #about:not(.is-in) :is(.about-main > *, .photo-card, .frame-corner) {
-    opacity: 0;
-}
-
-#about.is-in .about-main > * {
-    animation: enter-up 700ms var(--ease-out) backwards;
-}
-
-#about.is-in .about-main > :nth-child(1) { animation-delay: 150ms; }
-#about.is-in .about-main > :nth-child(2) { animation-delay: 230ms; }
-#about.is-in .about-main > :nth-child(3) { animation-delay: 290ms; }
-#about.is-in .about-main > :nth-child(4) { animation-delay: 370ms; }
+.hero-about > :nth-child(1) { animation-delay: 350ms; }
+.hero-about > :nth-child(2) { animation-delay: 420ms; }
+.hero-about > :nth-child(3) { animation-delay: 490ms; }
 
 .js-reveal #involvement:not(.is-in) > .clubs {
     opacity: 1;
@@ -2018,22 +2001,22 @@ body:has(.up-next) .site-footer {
 #involvement.is-in .clubs li:nth-child(7) { animation-delay: 370ms; }
 #involvement.is-in .clubs li:nth-child(8) { animation-delay: 415ms; }
 
-#about.is-in .photo-card {
-    animation: photo-in 900ms var(--ease-out) 150ms backwards;
+.photo-card {
+    animation: photo-in 900ms var(--ease-out) 350ms backwards;
 }
 
-#about.is-in .photo-card img {
-    animation: photo-settle 1400ms var(--ease-out) 200ms backwards;
+.photo-card img {
+    animation: photo-settle 1400ms var(--ease-out) 350ms backwards;
 }
 
-#about.is-in .frame-corner {
+.frame-corner {
     animation: corner-in 400ms var(--ease-out) backwards;
 }
 
-#about.is-in .frame-corner:nth-child(1) { animation-delay: 700ms; }
-#about.is-in .frame-corner:nth-child(2) { animation-delay: 760ms; }
-#about.is-in .frame-corner:nth-child(3) { animation-delay: 820ms; }
-#about.is-in .frame-corner:nth-child(4) { animation-delay: 880ms; }
+.frame-corner:nth-child(1) { animation-delay: 900ms; }
+.frame-corner:nth-child(2) { animation-delay: 960ms; }
+.frame-corner:nth-child(3) { animation-delay: 1020ms; }
+.frame-corner:nth-child(4) { animation-delay: 1080ms; }
 
 /* Tech stack: groups rise in turn, and each row's chips cascade after it. */
 @keyframes chip-in {
@@ -2348,3 +2331,13 @@ body:has(.up-next) .site-footer {
 #featured.is-in .project-slot:nth-child(1) { animation-delay: 150ms; }
 #featured.is-in .project-slot:nth-child(2) { animation-delay: 250ms; }
 #featured.is-in .project-slot:nth-child(3) { animation-delay: 350ms; }
+
+/* Reduced motion: the hero about row fades in place. */
+@media (prefers-reduced-motion: reduce) {
+    .hero-about > *,
+    .photo-card,
+    .photo-card img,
+    .frame-corner {
+        animation-name: fade-in;
+    }
+}

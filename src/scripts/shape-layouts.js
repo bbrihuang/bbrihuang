@@ -11,15 +11,6 @@ export const shapeLayouts = {
         dots: { left: 90, top: 16, r: 0, s: 1 },
         axis: { left: 92, top: 86, r: 0, s: 1 },
     },
-    about: {
-        orb: { left: -14, top: -18, r: 0, s: 1.1 },
-        ring: { left: 62, top: 30, r: 45, s: 0.95 },
-        diamond: { left: 6, top: 70, r: 30, s: 0.9 },
-        triangle: { left: 78, top: -6, r: -10, s: 1 },
-        capsule: { left: 40, top: 4, r: 12, s: 1 },
-        dots: { left: 92, top: 58, r: 0, s: 1 },
-        axis: { left: 8, top: 40, r: 0, s: 1 },
-    },
     projects: {
         orb: { left: 68, top: 48, r: 0, s: 0.95 },
         ring: { left: 14, top: -34, r: 180, s: 1.1 },
@@ -41,7 +32,6 @@ export const shapeLayouts = {
 };
 
 export function layoutFor(pathname) {
-    if (pathname.startsWith("/about")) return shapeLayouts.about;
     if (pathname === "/projects" || pathname === "/projects/") return shapeLayouts.projects;
     if (pathname.startsWith("/projects/")) return shapeLayouts.caseStudy;
     return shapeLayouts.home;
