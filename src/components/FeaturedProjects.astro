@@ -3,7 +3,9 @@ import ProjectCard from "./ProjectCard.astro";
 import { projects } from "../data/projects.js";
 
 // Home's quick look at current work, in the same cards as the Projects page.
-const shown = projects.map((project) => ({ ...project, featured: false }));
+const shown = projects
+    .filter((project) => project.home)
+    .map((project) => ({ ...project, featured: false }));
 ---
 
 <section id="featured">

@@ -113,15 +113,6 @@ section {
 }
 
 
-.project-card.placeholder {
-    opacity: 0.6;
-}
-
-.project-card.placeholder:hover {
-    transform: none;
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
 .project-card p {
     margin: 0;
 }
@@ -1497,9 +1488,6 @@ main > :first-child {
         transform: translateY(-4px);
     }
 
-    .project-card.placeholder:hover {
-        transform: none;
-    }
 
     .project-cover img {
         transition: transform 400ms var(--ease-out);
@@ -2161,4 +2149,94 @@ main > :first-child {
 /* The terminal fades in place so the box never appears to move. */
 .hero-side > .terminal {
     animation-name: fade-in;
+}
+
+/* Case studies from the data file */
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+    margin: var(--space-sm) 0 0;
+}
+
+.flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.case-body .flow li {
+    margin: 0;
+    padding: var(--space-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.flow p {
+    margin: 0;
+}
+
+.flow-number {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    color: var(--steel);
+}
+
+.case-body .flow-label {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.case-body .flow-note {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--fog);
+}
+
+.points {
+    margin: var(--space-md) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.case-body .points li {
+    margin: 0;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.points p {
+    margin: 0;
+}
+
+.case-body .point-title {
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.gallery figure {
+    margin: 0;
+}
+
+.gallery figure img,
+.gallery figure video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}
+
+.gallery figcaption {
+    margin-top: var(--space-xs);
+    font-size: 14px;
+    color: var(--fog);
 }

@@ -1,0 +1,67 @@
+---
+// A project's write-up from src/data/projects.js. Each section has a title and
+// any of: text, flow (pipeline steps), stats, points and gallery. Everything
+// sits directly in .case-body so it matches the Markdown case studies.
+const { project } = Astro.props;
+const asList = (value) => (value == null ? [] : Array.isArray(value) ? value : [value]);
+const point = (item) => (typeof item === "string" ? { text: item } : item);
+const step = (item) => (typeof item === "string" ? { label: item } : item);
+const isVideo = (src) => /\.(mp4|webm)$/.test(src);
+const sections = [
+    ...(project.highlights ? [{ title: "Highlights", points: project.highlights }] : []),
+    ...(project.caseStudy ?? []),
+    ...(project.gallery?.length ? [{ title: "Gallery", gallery: project.gallery }] : []),
+];
+---
+
+<img class="case-hero" src={project.cover} alt={project.coverAlt}>
+
+{sections.map((section) => (
+    <>
+        <h2>{section.title}</h2>
+        {section.flow && (
+            <ol class="flow">
+                {section.flow.map(step).map((item, index) => (
+                    <li>
+                        <span class="flow-number">{String(index + 1).padStart(2, "0")}</span>
+                        <p class="flow-label">{item.label}</p>
+                        {item.note && <p class="flow-note">{item.note}</p>}
+                    </li>
+                ))}
+            </ol>
+        )}
+        {asList(section.text).map((text) => <p>{text}</p>)}
+        {section.stats && (
+            <div class="stat-grid">
+                {section.stats.map((stat) => (
+                    <div class="stat">
+                        <strong>{stat.value}{stat.unit && ` ${stat.unit}`}</strong>
+                        <span>{stat.label}</span>
+                    </div>
+                ))}
+            </div>
+        )}
+        {section.points && (
+            <ul class="points">
+                {section.points.map(point).map((item) => (
+                    <li>
+                        {item.title && <p class="point-title">{item.title}</p>}
+                        <p>{item.text}</p>
+                    </li>
+                ))}
+            </ul>
+        )}
+        {section.gallery?.length > 0 && (
+            <div class="gallery">
+                {section.gallery.map((item) => (
+                    <figure>
+                        {isVideo(item.src)
+                            ? <video src={item.src} poster={item.poster} aria-label={item.alt} controls preload="metadata" playsinline></video>
+                            : <img src={item.src} alt={item.alt} loading="lazy">}
+                        {item.caption && <figcaption>{item.caption}</figcaption>}
+                    </figure>
+                ))}
+            </div>
+        )}
+    </>
+))}

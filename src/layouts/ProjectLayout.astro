@@ -3,6 +3,10 @@ import Layout from "./Layout.astro";
 import Nav from "../components/Nav.astro";
 
 const { frontmatter } = Astro.props;
+const links = [
+    ...(frontmatter.github ? [{ label: "GitHub", href: frontmatter.github }] : []),
+    ...(frontmatter.links ?? []),
+];
 ---
 
 <Layout title={`${frontmatter.title} | Brian Huang`} description={frontmatter.description}>
@@ -19,8 +23,12 @@ const { frontmatter } = Astro.props;
                     <li>{chip}</li>
                 ))}
             </ul>
-            {frontmatter.github && (
-                <p class="case-links"><a href={frontmatter.github} target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+            {links.length > 0 && (
+                <p class="case-links">
+                    {links.map((link) => (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                    ))}
+                </p>
             )}
         </header>
         <article class="case-body">

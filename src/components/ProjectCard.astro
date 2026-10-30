@@ -4,7 +4,7 @@
 const { project } = Astro.props;
 ---
 
-<article class:list={["project-card", { featured: project.featured, placeholder: project.placeholder, linked: project.slug }]}>
+<article class:list={["project-card", { featured: project.featured, linked: project.slug }]}>
     <div class="project-cover">
         {project.featured && <span class="badge-featured"><span aria-hidden="true">&#9733;</span> Featured</span>}
         {project.cover && <img src={project.cover} alt={project.coverAlt} loading="lazy">}
@@ -19,12 +19,12 @@ const { project } = Astro.props;
         <p>{project.description}</p>
         {project.chips.length > 0 && (
             <ul class="chips">
-                {project.chips.map((chip) => (
+                {project.chips.slice(0, 4).map((chip) => (
                     <li>{chip}</li>
                 ))}
             </ul>
         )}
-        <p class="project-meta">{project.year}</p>
+        {project.year && <p class="project-meta">{project.year}</p>}
         {project.github && (
             <div class="project-links">
                 <a href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a>

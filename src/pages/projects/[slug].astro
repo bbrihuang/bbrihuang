@@ -1,0 +1,28 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import CaseStudy from "../../components/CaseStudy.astro";
+import { projects } from "../../data/projects.js";
+
+// One page per project with a write-up in the data file. Markdown case studies
+// have no `summary`, so they keep their own pages.
+export function getStaticPaths() {
+    return projects
+        .filter((project) => project.slug && project.summary)
+        .map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const frontmatter = {
+    title: project.title,
+    description: project.summary,
+    tag: project.tag,
+    year: project.year,
+    chips: project.chips,
+    github: project.github,
+    links: project.links,
+};
+---
+
+<ProjectLayout frontmatter={frontmatter}>
+    <CaseStudy project={project} />
+</ProjectLayout>
