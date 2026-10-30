@@ -98,17 +98,21 @@ section {
 
 .hero-links a {
     padding: 12px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     text-decoration: none;
     font-weight: 600;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .hero-links a:first-child {
     background-color: var(--text);
     border-color: var(--text);
     color: var(--bg);
+    box-shadow: 0 8px 24px -10px rgba(255, 255, 255, 0.45);
 }
 
 .hero-links a:hover {
@@ -118,6 +122,7 @@ section {
 
 .hero-links a:first-child:hover {
     background-color: #ffffff;
+    box-shadow: 0 10px 30px -8px rgba(255, 255, 255, 0.55);
 }
 
 .project-grid {
@@ -182,9 +187,10 @@ section {
 }
 
 .chips li {
-    padding: 4px 10px;
-    background-color: rgba(255, 255, 255, 0.06);
-    border-radius: 6px;
+    padding: 4px 12px;
+    background-color: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
     font-family: "Geist Mono", monospace;
     font-size: 13px;
 }
