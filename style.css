@@ -225,3 +225,28 @@ nav a {
     padding: 0;
     list-style: none;
 }
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+}
+
+.hero > * {
+    animation: rise 0.7s ease both;
+}
+
+.hero > :nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.hero > :nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero > * {
+        animation: none;
+    }
+}
