@@ -1708,3 +1708,17 @@ body:has(.up-next) .site-footer {
     letter-spacing: 0.08em;
     color: #fbbf24;
 }
+
+/* Hero greeting: the name comes first */
+.hero-greeting {
+    margin: 0 0 var(--space-sm);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 500;
+    color: var(--fog);
+}
+
+.hero-name {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    color: var(--text);
+}
