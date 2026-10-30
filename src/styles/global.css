@@ -1243,3 +1243,58 @@ main > :first-child {
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
+
+/* Up next: a card at the end of a page that leads to the next one */
+.up-next {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+    -webkit-backdrop-filter: blur(28px) saturate(140%);
+    backdrop-filter: blur(28px) saturate(140%);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+}
+
+.up-next:hover {
+    border-color: color-mix(in srgb, var(--next-color) 50%, transparent);
+}
+
+.up-next-label {
+    display: block;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--next-color);
+}
+
+.up-next-title {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.up-next-arrow {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--next-color);
+    color: var(--void);
+    font-size: 1.25rem;
+    box-shadow: 0 8px 24px -8px var(--next-color);
+    transition: transform 0.2s ease;
+}
+
+.up-next:hover .up-next-arrow {
+    transform: translateX(4px);
+}

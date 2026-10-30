@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import PageHeader from "../components/PageHeader.astro";
+import UpNext from "../components/UpNext.astro";
 import Experience from "../components/Experience.astro";
 ---
 
@@ -13,5 +14,6 @@ import Experience from "../components/Experience.astro";
     <main>
         <PageHeader title="Experience" lede="Where I’ve worked, newest first." color="var(--experience)" />
         <Experience />
+        <UpNext title="Projects" href="/projects/" color="var(--projects)" />
     </main>
 </Layout>
