@@ -76,7 +76,7 @@ section {
 .hero h1 {
     margin: 0 0 var(--space-xs) -0.05em;
     font-family: "Satoshi", sans-serif;
-    font-size: clamp(2.75rem, 6.4vw, 5.25rem);
+    font-size: clamp(2.75rem, 7vw, 6.25rem);
     font-weight: 700;
     line-height: 0.98;
     letter-spacing: -0.04em;
@@ -85,7 +85,7 @@ section {
 .hero-intro {
     max-width: 640px;
     margin: var(--space-md) 0 0;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     color: var(--fog);
 }
 
@@ -628,8 +628,7 @@ nav a:hover,
 .job-list,
 .job-detail,
 .terminal,
-.stat,
-.education {
+.stat {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
     -webkit-backdrop-filter: blur(28px) saturate(140%);
     backdrop-filter: blur(28px) saturate(140%);
@@ -745,99 +744,6 @@ main > :first-child {
     .site-header nav ul a {
         padding: 0 10px;
         font-size: 14px;
-    }
-}
-
-/* About: education and clubs, kept compact */
-/* Education: a full-width card with a soft BU-red glow behind the logo,
-   degree on the left, class year on the right. */
-.education {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    overflow: hidden;
-    padding: var(--space-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-}
-
-.education::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -40px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(204, 0, 0, 0.22), transparent 65%);
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-.education img {
-    position: relative;
-}
-
-.education img {
-    flex-shrink: 0;
-    width: 56px;
-    height: 56px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-}
-
-.education p {
-    margin: 0;
-    line-height: 1.35;
-}
-
-.education-main {
-    flex: 1;
-    min-width: 0;
-}
-
-.education-degree {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-}
-
-.education-school {
-    margin-top: 4px;
-    color: var(--fog);
-}
-
-.education-when {
-    flex-shrink: 0;
-    padding-left: var(--space-md);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: right;
-}
-
-.education-class {
-    font-weight: 600;
-}
-
-.education-date {
-    font-family: "Geist Mono", monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--steel);
-}
-
-@media (max-width: 560px) {
-    .education {
-        flex-wrap: wrap;
-    }
-
-    .education-when {
-        width: 100%;
-        padding: var(--space-sm) 0 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        border-left: none;
-        text-align: left;
     }
 }
 
@@ -1351,7 +1257,7 @@ main > :first-child {
    where the intro ends. */
 .hero {
     display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     gap: var(--space-xl);
 }
 
@@ -1473,41 +1379,21 @@ main > :first-child {
 }
 
 /* Running text stays at a readable line length on the wide layout. */
-/* Top of the right column: square photo beside the education card. */
+/* Top of the right column: portrait with a one-line caption. */
 .hero-top {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: var(--space-md);
+    margin: 0;
 }
 
-/* Education beside the photo: stacked to fit the narrow column. */
-.hero-top .education {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 12px;
-    padding: var(--space-sm);
-}
-
-.hero-top .education-main {
-    flex: none;
-}
-
-.hero-top .education-degree {
-    font-size: 1.125rem;
-}
-
-.hero-top .education-when {
-    width: 100%;
-    padding: 12px 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: none;
-    text-align: left;
+.hero-top figcaption {
+    margin-top: 12px;
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    color: var(--fog);
 }
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 3;
     position: relative;
     isolation: isolate;
     display: flex;
@@ -2177,28 +2063,21 @@ main > :first-child {
     }
 }
 
-/* The photo and education card animate on their own, not as one block. */
+/* The photo and caption animate on their own, not as one block. */
 .hero-side > .hero-top {
     animation: none;
 }
 
-.hero-top .education {
-    animation: rise 600ms var(--ease-out) 210ms backwards;
+.hero-top figcaption {
+    animation: rise 600ms var(--ease-out) 420ms backwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-top .education {
+    .hero-top figcaption {
         animation-name: fade-in;
     }
 }
 
-/* Phones: photo above the education card. */
-@media (max-width: 560px) {
-    .hero-top {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-}
 
 /* Top bar links glide to their section. */
 @media (prefers-reduced-motion: no-preference) {
