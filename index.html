@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@90,400..700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Brian Huang | Computer Engineer</title>
 </head>
@@ -76,6 +79,46 @@
 
         <section id="projects">
             <h2>Projects</h2>
+            <article class="project-card featured">
+                <p class="project-tag">Hardware</p>
+                <h3>Room Temperature Monitor</h3>
+                <p>Built an Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed.</p>
+                <ul class="chips">
+                    <li>Arduino UNO</li>
+                    <li>C++</li>
+                    <li>TMP36</li>
+                    <li>Onshape</li>
+                </ul>
+                <p class="project-meta">Done | 2026</p>
+                <div class="project-links">
+                    <a href="#">View case study</a>
+                    <a href="https://github.com/bbrihuang/temperature-sensor" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <div class="project-grid">
+                <article class="project-card placeholder">
+                    <p class="project-tag">Robotics</p>
+                    <h3>Project JetHexa</h3>
+                    <p>Details coming soon.</p>
+                    <p class="project-meta">In progress | 2026</p>
+                </article>
+                <article class="project-card">
+                    <p class="project-tag">AI</p>
+                    <h3>Local LLM Research</h3>
+                    <p>Ran twelve local LLM experiments on an RTX 5070, including a 2-bit model whose damage an importance matrix cut about 4x.</p>
+                    <ul class="chips">
+                        <li>llama.cpp</li>
+                        <li>Python</li>
+                        <li>PyTorch</li>
+                    </ul>
+                    <p class="project-meta">In progress | 2026</p>
+                    <div class="project-links">
+                        <a href="#">View case study</a>
+                        <a href="https://github.com/bbrihuang/local-llm-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <section id="contact">
