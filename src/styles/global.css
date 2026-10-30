@@ -1558,7 +1558,7 @@ body:has(.up-next) .site-footer {
     }
 }
 
-/* Hero contact card: availability, email to copy, and links */
+/* Hero contact card: a short heading over the main links */
 .contact-card {
     padding: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1568,53 +1568,11 @@ body:has(.up-next) .site-footer {
     backdrop-filter: blur(28px) saturate(140%);
 }
 
-.contact-status {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin: 0 0 var(--space-sm);
-    font-family: "Geist Mono", monospace;
-    font-size: 13px;
-    color: var(--fog);
-}
 
-.contact-email {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 12px var(--space-sm);
-    border: 1px solid var(--text);
-    border-radius: 8px;
-    background-color: var(--text);
-    color: var(--void);
-    font-family: "Geist Mono", monospace;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: copy;
-    transition: background-color 0.2s ease;
-}
 
-.contact-email:hover {
-    background-color: #ffffff;
-}
 
-.contact-email.is-copied {
-    border-color: var(--software);
-    background-color: var(--software);
-}
 
-.contact-email-hint {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.55;
-}
 
-.contact-email.is-copied .contact-email-hint {
-    visibility: hidden;
-}
 
 .contact-links {
     display: grid;
@@ -1748,7 +1706,6 @@ body:has(.up-next) .site-footer {
 
 /* Press feedback: buttons give a little when clicked. */
 .contact-links a,
-.contact-email,
 .filters button,
 .up-next,
 .job-tab,
@@ -1762,7 +1719,6 @@ body:has(.up-next) .site-footer {
 }
 
 .contact-links a:active,
-.contact-email:active,
 .filters button:active,
 .up-next:active,
 .job-tab:active,
@@ -1798,4 +1754,11 @@ body:has(.up-next) .site-footer {
     .wave {
         animation: none;
     }
+}
+
+.contact-heading {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--fog);
 }
