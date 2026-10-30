@@ -16,6 +16,7 @@ const jobs = experience.map((job, index) => ({
             <button
                 type="button"
                 class="job-tab"
+                style={`--i: ${index}`}
                 role="tab"
                 id={`${job.id}-tab`}
                 aria-controls={job.id}

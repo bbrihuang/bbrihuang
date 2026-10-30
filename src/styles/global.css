@@ -1991,3 +1991,86 @@ body:has(.up-next) .site-footer {
     animation: chip-in 450ms var(--ease-out) backwards;
     animation-delay: calc(250ms + var(--g) * 90ms + var(--i) * 30ms);
 }
+
+/* Page titles rise up out of a mask, then the intro follows. */
+@keyframes title-rise {
+    from {
+        opacity: 0;
+        transform: translateY(40%);
+        clip-path: inset(0 0 100% 0);
+    }
+    to {
+        clip-path: inset(-10% -10% -20% -10%);
+    }
+}
+
+.page-header.is-in h1 {
+    animation: title-rise 800ms var(--ease-out) backwards;
+}
+
+.js-reveal .page-header:not(.is-in) > .page-header-text {
+    opacity: 1;
+}
+
+.page-header.is-in > .page-header-text {
+    animation: none;
+}
+
+.js-reveal .page-header:not(.is-in) :is(h1, p) {
+    opacity: 0;
+}
+
+.page-header.is-in p {
+    animation: enter-up 700ms var(--ease-out) 200ms backwards;
+}
+
+/* Experience: the panel appears, its timeline draws down, the roles pop in
+   one by one, then the details slide in from the right. */
+@keyframes plop {
+    0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.92);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.02);
+    }
+    100% {
+        transform: none;
+    }
+}
+
+@keyframes rail-draw {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+@keyframes enter-right {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+}
+
+.js-reveal .jobs:not(.is-in) .job-tab {
+    opacity: 0;
+}
+
+.jobs.is-in > .job-list {
+    animation: fade-in 400ms var(--ease-out) backwards;
+}
+
+.jobs.is-in > .job-list::before {
+    transform-origin: top;
+    animation: rail-draw 900ms var(--ease-out) 150ms backwards;
+}
+
+.jobs.is-in .job-tab {
+    animation: plop 550ms var(--ease-out) backwards;
+    animation-delay: calc(150ms + var(--i) * 110ms);
+}
+
+.jobs.is-in > .job-panels {
+    animation: enter-right 700ms var(--ease-out) 450ms backwards;
+}
