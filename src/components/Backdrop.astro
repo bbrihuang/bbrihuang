@@ -1,0 +1,100 @@
+---
+// Position is the top-left offset in vw / vh, size is in vmin, rotation in degrees.
+// Depth is how far the shape drifts with the mouse.
+const shapes = [
+    { id: "orb", depth: 56, size: [54, 54], left: 60, top: 6, r: 0 },
+    { id: "ring", depth: 28, size: [82, 82], left: -22, top: 34, r: 0 },
+    { id: "diamond", depth: 72, size: [26, 26], left: 82, top: 64, r: 45 },
+    { id: "triangle", depth: 44, size: [28, 28], left: 4, top: -4, r: 14 },
+    { id: "capsule", depth: 36, size: [44, 12], left: 34, top: 82, r: -18 },
+    { id: "dots", depth: 88, size: [15, 15], left: 90, top: 16, r: 0 },
+    { id: "axis", depth: 16, size: [0, 0], left: 92, top: 86, r: 0 },
+];
+
+const dots = Array.from({ length: 49 }, (_, i) => ({ cx: 5 + (i % 7) * 10, cy: 5 + Math.floor(i / 7) * 10 }));
+---
+
+<div class="backdrop" aria-hidden="true">
+    <div class="shapes">
+        {shapes.map((shape) => (
+            <div class="shape" data-depth={shape.depth}>
+                <div
+                    class="shape-pos"
+                    style={`--left: ${shape.left}vw; --top: ${shape.top}vh; --r: ${shape.r}deg; width: ${shape.size[0]}vmin; height: ${shape.size[1]}vmin;`}
+                >
+                    {shape.id === "orb" && (
+                        <svg viewBox="0 0 100 100" width="100%" height="100%">
+                            <defs>
+                                <radialGradient id="bg-orb" cx="34%" cy="28%" r="78%">
+                                    <stop offset="0" stop-color="#fff" stop-opacity="0.3" />
+                                    <stop offset="0.45" stop-color="#fff" stop-opacity="0.085" />
+                                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                            <circle cx="50" cy="50" r="50" fill="url(#bg-orb)" />
+                            <circle cx="50" cy="50" r="49.8" fill="none" stroke="#fff" stroke-opacity="0.08" vector-effect="non-scaling-stroke" />
+                        </svg>
+                    )}
+                    {shape.id === "ring" && (
+                        <svg viewBox="0 0 100 100" width="100%" height="100%">
+                            <circle cx="50" cy="50" r="50" fill="none" stroke="#4ade80" stroke-opacity="0.18" vector-effect="non-scaling-stroke" />
+                            <circle cx="50" cy="50" r="41" fill="none" stroke="#fff" stroke-opacity="0.07" stroke-dasharray="2 6" vector-effect="non-scaling-stroke" />
+                        </svg>
+                    )}
+                    {shape.id === "diamond" && (
+                        <svg viewBox="0 0 100 100" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="bg-diamond" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#fb923c" stop-opacity="0.2" />
+                                    <stop offset="1" stop-color="#fb923c" stop-opacity="0.015" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="100" height="100" fill="url(#bg-diamond)" />
+                            <rect x="-12" y="-12" width="124" height="124" fill="none" stroke="#fff" stroke-opacity="0.08" vector-effect="non-scaling-stroke" />
+                        </svg>
+                    )}
+                    {shape.id === "triangle" && (
+                        <svg viewBox="0 0 100 100" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="bg-triangle" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0" stop-color="#fff" stop-opacity="0.16" />
+                                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <polygon points="50,4 96,88 4,88" fill="url(#bg-triangle)" />
+                            <polygon points="50,-8 108,96 -8,96" fill="none" stroke="#fff" stroke-opacity="0.09" vector-effect="non-scaling-stroke" />
+                        </svg>
+                    )}
+                    {shape.id === "capsule" && (
+                        <svg viewBox="0 0 100 28" preserveAspectRatio="none" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="bg-capsule" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0" stop-color="#fff" stop-opacity="0.14" />
+                                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="100" height="28" rx="14" fill="url(#bg-capsule)" />
+                        </svg>
+                    )}
+                    {shape.id === "dots" && (
+                        <svg viewBox="0 0 70 70" width="100%" height="100%">
+                            {dots.map((dot) => (
+                                <circle cx={dot.cx} cy={dot.cy} r="1" fill="#fff" fill-opacity="0.28" />
+                            ))}
+                        </svg>
+                    )}
+                    {shape.id === "axis" && (
+                        <div class="axis">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    )}
+                </div>
+            </div>
+        ))}
+    </div>
+    <div class="backdrop-grid"></div>
+    <div class="backdrop-grain"></div>
+</div>

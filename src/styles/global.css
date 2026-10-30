@@ -371,37 +371,66 @@ nav a:hover,
     pointer-events: none;
 }
 
+/* Each shape has two wrappers so its motions stay independent:
+   .shape     - mouse parallax (--x, --y set by main.js)
+   .shape-pos - where it sits on the page, in vw / vh */
 .shape {
     position: absolute;
-    transform: translate(var(--x, 0px), var(--y, 0px));
+    top: 0;
+    left: 0;
+    transform: translate3d(var(--x, 0px), var(--y, 0px), 0);
     transition: transform 0.3s ease-out;
 }
 
-.shape-ring {
-    top: 12%;
-    right: 8%;
-    width: 280px;
-    height: 280px;
-    border: 2px solid rgba(74, 222, 128, 0.25);
+.shape-pos {
+    transform: translate3d(var(--left), var(--top), 0) rotate(var(--r, 0deg)) scale(var(--s, 1));
+    transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shape-pos > svg {
+    display: block;
+    overflow: visible;
+}
+
+/* Drafting crosshair: two hairlines across the screen that meet at a ring. */
+.axis {
+    position: relative;
+}
+
+.axis span {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.axis span:nth-child(1) {
+    left: -200vw;
+    width: 400vw;
+    height: 1px;
+}
+
+.axis span:nth-child(2) {
+    top: -200vh;
+    width: 1px;
+    height: 400vh;
+}
+
+.axis span:nth-child(3) {
+    top: -8px;
+    left: -8px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
+    background: none;
 }
 
-.shape-diamond {
-    top: 62%;
-    right: 20%;
-    width: 56px;
-    height: 56px;
-    border: 2px solid rgba(251, 146, 60, 0.35);
-    transform: translate(var(--x, 0px), var(--y, 0px)) rotate(45deg);
-}
-
-.shape-dots {
-    bottom: 10%;
-    left: 6%;
-    width: 120px;
-    height: 120px;
-    background-image: radial-gradient(rgba(96, 165, 250, 0.4) 2px, transparent 2px);
-    background-size: 20px 20px;
+.axis span:nth-child(4) {
+    top: -3px;
+    left: -3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .terminal {
