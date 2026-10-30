@@ -748,7 +748,7 @@ main > :first-child {
 
 /* About: education and clubs, kept compact */
 .about-heading {
-    margin: var(--space-lg) 0 var(--space-xs);
+    margin: var(--space-xl) 0 var(--space-sm);
     font-family: "Geist Mono", monospace;
     font-size: 12px;
     font-weight: 500;
@@ -853,7 +853,7 @@ main > :first-child {
 .clubs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    column-gap: var(--space-md);
+    column-gap: var(--space-lg);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -866,8 +866,8 @@ main > :first-child {
 .clubs a {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 6px 4px;
+    gap: 12px;
+    padding: 12px 4px;
     text-decoration: none;
     transition: background-color 0.2s ease;
 }
@@ -879,8 +879,8 @@ main > :first-child {
 .clubs img,
 .club-initials {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     object-fit: cover;
@@ -905,18 +905,18 @@ main > :first-child {
 .club-role {
     display: block;
     overflow: hidden;
-    line-height: 1.3;
+    line-height: 1.4;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .club-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
 }
 
 .club-role {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--fog);
 }
 
@@ -1557,7 +1557,7 @@ body:has(.up-next) .site-footer {
 .about-layout {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: var(--space-lg);
+    gap: var(--space-2xl);
 }
 
 /* The card matches the left column's height; the photo crops to fill it. */
