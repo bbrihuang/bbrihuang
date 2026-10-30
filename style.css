@@ -250,3 +250,18 @@ nav a {
         animation: none;
     }
 }
+
+.grad-software,
+.grad-hardware {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.grad-software {
+    background-image: linear-gradient(90deg, var(--software), #86efac);
+}
+
+.grad-hardware {
+    background-image: linear-gradient(90deg, var(--hardware), #fbbf24);
+}
