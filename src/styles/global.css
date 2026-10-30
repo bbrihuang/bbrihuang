@@ -157,12 +157,6 @@ section {
     color: var(--fog);
 }
 
-.project-links {
-    display: flex;
-    gap: var(--space-sm);
-    margin-top: var(--space-sm);
-}
-
 @media (max-width: 640px) {
     .project-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -287,8 +281,7 @@ nav a {
     transition: color 0.2s ease;
 }
 
-nav a:hover,
-.project-links a:hover {
+nav a:hover {
     color: var(--software);
 }
 
@@ -1360,11 +1353,6 @@ main > :first-child {
     color: var(--projects);
 }
 
-.project-card .project-links a {
-    position: relative;
-    z-index: 1;
-}
-
 /* Running text stays at a readable line length on the wide layout. */
 /* Top of the right column: portrait. */
 .hero-top {
@@ -2257,4 +2245,21 @@ main > :first-child {
 
 .project-card .project-heading .project-meta {
     flex-shrink: 0;
+}
+
+/* Project cards: the tech stack sits at the bottom, whatever the text length */
+.project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.project-body .chips {
+    margin: auto 0 0;
+    padding-top: var(--space-sm);
 }

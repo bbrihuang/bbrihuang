@@ -1,6 +1,6 @@
 ---
 // With a case study, the whole card (thumbnail included) opens it: the title
-// link stretches over the card, and the GitHub link sits above it.
+// link stretches over the card.
 const { project } = Astro.props;
 ---
 
@@ -27,10 +27,5 @@ const { project } = Astro.props;
             </ul>
         )}
         {project.year && <p class="project-meta">{project.year}</p>}
-        {project.github && (
-            <div class="project-links">
-                <a href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
-        )}
     </div>
 </article>
