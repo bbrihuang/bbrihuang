@@ -1389,13 +1389,15 @@ main > :first-child {
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
-    aspect-ratio: 4 / 3;
+    width: min(100%, 340px);
+    margin-inline: auto;
+    aspect-ratio: 1;
     position: relative;
     isolation: isolate;
     display: flex;
     flex-direction: column;
     padding: 8px;
-    border-radius: 14px;
+    border-radius: 50%;
     background-color: var(--coal);
     box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.8);
 }
@@ -1444,7 +1446,7 @@ main > :first-child {
 .photo-card img {
     display: block;
     flex: 1 1 0;
-    border-radius: 8px;
+    border-radius: 50%;
     width: 100%;
     min-height: 0;
     object-fit: cover;
@@ -1453,12 +1455,6 @@ main > :first-child {
 
 
 
-
-@media (max-width: 900px) {
-    .photo-card {
-        max-width: 340px;
-    }
-}
 
 
 /* Featured badge, pinned to the corner of the featured card's image */
