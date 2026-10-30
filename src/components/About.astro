@@ -9,7 +9,7 @@ import { clubs } from "../data/clubs.js";
 
     <h3 class="about-heading">Education</h3>
     <div class="education">
-        <img src="/logos/bu.png" alt="" width="56" height="56">
+        <img src="/logos/bu.png" alt="" width="36" height="36">
         <div>
             <p class="education-degree">B.S. Computer Engineering</p>
             <p class="education-school">Boston University | Expected May 2029</p>
@@ -26,7 +26,7 @@ import { clubs } from "../data/clubs.js";
                         : <span class="club-initials" aria-hidden="true">{club.initials}</span>}
                     <span class="club-text">
                         <span class="club-name">{club.org}</span>
-                        <span class="club-role">{club.role}</span>
+                        <span class="club-role" title={club.role}>{club.role}</span>
                     </span>
                     <span class="club-arrow" aria-hidden="true">&nearr;</span>
                 </a>

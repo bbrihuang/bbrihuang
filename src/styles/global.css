@@ -795,60 +795,68 @@ main {
     }
 }
 
-/* About: education */
+/* About: education and clubs, kept compact */
 .about-heading {
-    margin: var(--space-xl) 0 var(--space-sm);
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
+    margin: var(--space-lg) 0 var(--space-xs);
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel);
 }
 
 .education {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md) var(--space-sm) var(--space-sm);
+    gap: 12px;
+    padding: 10px var(--space-sm) 10px 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
 }
 
 .education img {
     flex-shrink: 0;
+    width: 36px;
+    height: 36px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .education p {
     margin: 0;
+    line-height: 1.35;
 }
 
 .education-degree {
-    font-size: 1.125rem;
     font-weight: 600;
 }
 
 .education-school {
     font-family: "Geist Mono", monospace;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--steel);
 }
 
-/* About: clubs, as hairline-divided rows */
+/* Clubs: two columns of small hairline-divided rows */
 .clubs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-md);
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .clubs li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .clubs a {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: 14px var(--space-xs);
+    gap: 12px;
+    padding: var(--space-xs) 4px;
     text-decoration: none;
     transition: background-color 0.2s ease;
 }
@@ -860,10 +868,10 @@ main {
 .clubs img,
 .club-initials {
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 8px;
     object-fit: cover;
 }
 
@@ -872,7 +880,7 @@ main {
     place-items: center;
     background-color: var(--ash);
     font-family: "Geist Mono", monospace;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--mist);
 }
@@ -885,19 +893,24 @@ main {
 .club-name,
 .club-role {
     display: block;
-    line-height: 1.35;
+    overflow: hidden;
+    line-height: 1.3;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .club-name {
+    font-size: 15px;
     font-weight: 600;
 }
 
 .club-role {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--fog);
 }
 
 .club-arrow {
+    font-size: 13px;
     color: var(--steel);
     transition: color 0.2s ease, transform 0.2s ease;
 }
@@ -905,6 +918,12 @@ main {
 .clubs a:hover .club-arrow {
     color: var(--text);
     transform: translate(2px, -2px);
+}
+
+@media (max-width: 640px) {
+    .clubs {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Tech stack: group name on the left, chips on the right */
