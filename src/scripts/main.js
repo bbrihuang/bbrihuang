@@ -229,4 +229,9 @@ document.addEventListener("astro:page-load", () => {
     setUpProjectFilters();
     setUpReveal();
     setUpCopyEmail();
+    // Hiding the other Experience panels shrinks the page, so coming from another
+    // page the section is no longer where the browser scrolled to. Land on it again.
+    if (window.location.hash) {
+        document.querySelector(window.location.hash)?.scrollIntoView({ behavior: "instant" });
+    }
 });
