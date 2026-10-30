@@ -1243,59 +1243,75 @@ main > :first-child {
     }
 }
 
-/* Up next: a card at the end of a page that leads to the next one */
+/* Up next: a small pill pinned to the bottom corner, always in reach */
 .up-next {
-    display: flex;
+    position: fixed;
+    right: var(--space-md);
+    bottom: var(--space-md);
+    z-index: 40;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-md);
-    margin-bottom: var(--space-2xl);
-    padding: var(--space-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
-    -webkit-backdrop-filter: blur(28px) saturate(140%);
-    backdrop-filter: blur(28px) saturate(140%);
+    gap: 10px;
+    min-height: 44px;
+    padding: 6px 6px 6px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    background: linear-gradient(180deg, rgba(28, 28, 31, 0.8), rgba(20, 20, 22, 0.7));
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+    box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.75);
     text-decoration: none;
     transition: border-color 0.2s ease;
 }
 
-.up-next:hover {
-    border-color: color-mix(in srgb, var(--next-color) 50%, transparent);
+.up-next:hover,
+.up-next:focus-visible {
+    border-color: color-mix(in srgb, var(--next-color) 60%, transparent);
+}
+
+.up-next:focus-visible {
+    outline: 2px solid var(--next-color);
+    outline-offset: 3px;
 }
 
 .up-next-label {
-    display: block;
     font-family: "Geist Mono", monospace;
-    font-size: 12px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     color: var(--next-color);
 }
 
 .up-next-title {
-    display: block;
-    font-size: 2rem;
+    font-size: 15px;
     font-weight: 600;
-    letter-spacing: -0.02em;
 }
 
 .up-next-arrow {
     display: grid;
     place-items: center;
-    flex-shrink: 0;
-    width: 56px;
-    height: 56px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: var(--next-color);
     color: var(--void);
-    font-size: 1.25rem;
-    box-shadow: 0 8px 24px -8px var(--next-color);
     transition: transform 0.2s ease;
 }
 
 .up-next:hover .up-next-arrow {
-    transform: translateX(4px);
+    transform: translateX(2px);
+}
+
+/* Leave room at the bottom so the pill never covers the footer text. */
+body:has(.up-next) .site-footer {
+    padding-bottom: calc(var(--space-xl) + 56px);
+}
+
+@media (max-width: 560px) {
+    .up-next {
+        right: var(--space-sm);
+        bottom: var(--space-sm);
+    }
 }
 
 
