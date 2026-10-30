@@ -1,7 +1,3 @@
----
-import { clubs } from "../data/clubs.js";
----
-
 <section id="about">
     <div class="about-layout">
         <div class="about-main">
@@ -19,24 +15,6 @@ import { clubs } from "../data/clubs.js";
                     <p class="education-date">Expected May 2029</p>
                 </div>
             </div>
-
-            <h3 class="about-heading">Clubs & activities</h3>
-            <ul class="clubs">
-                {clubs.map((club) => (
-                    <li>
-                        <a href={club.href} target="_blank" rel="noopener noreferrer">
-                            {club.logo
-                                ? <img src={club.logo} alt="" width="34" height="34" loading="lazy">
-                                : <span class="club-initials" aria-hidden="true">{club.initials}</span>}
-                            <span class="club-text">
-                                <span class="club-name">{club.org}</span>
-                                <span class="club-role" title={club.role}>{club.role}</span>
-                            </span>
-                            <span class="club-arrow" aria-hidden="true">&nearr;</span>
-                        </a>
-                    </li>
-                ))}
-            </ul>
         </div>
 
         <aside class="photo-card" aria-label="Profile">

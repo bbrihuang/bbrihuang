@@ -620,6 +620,7 @@ nav a:hover,
 #featured { --line: var(--projects); }
 #experience { --line: var(--experience); }
 #stack { --line: var(--software); }
+#involvement { --line: var(--hardware); }
 
 /* Frosted glass panels: a faint white wash over a heavy blur of the
    background shapes, with a lit top edge. Borders stay as set above. */
@@ -1979,11 +1980,11 @@ body:has(.up-next) .site-footer {
     animation: none;
 }
 
-.js-reveal #about:not(.is-in) :is(.about-main > :not(.clubs), .clubs li, .photo-card, .frame-corner) {
+.js-reveal #about:not(.is-in) :is(.about-main > *, .photo-card, .frame-corner) {
     opacity: 0;
 }
 
-#about.is-in .about-main > :not(.clubs) {
+#about.is-in .about-main > * {
     animation: enter-up 700ms var(--ease-out) backwards;
 }
 
@@ -1992,18 +1993,30 @@ body:has(.up-next) .site-footer {
 #about.is-in .about-main > :nth-child(3) { animation-delay: 290ms; }
 #about.is-in .about-main > :nth-child(4) { animation-delay: 370ms; }
 
-#about.is-in .clubs li {
+.js-reveal #involvement:not(.is-in) > .clubs {
+    opacity: 1;
+}
+
+#involvement.is-in > .clubs {
+    animation: none;
+}
+
+.js-reveal #involvement:not(.is-in) .clubs li {
+    opacity: 0;
+}
+
+#involvement.is-in .clubs li {
     animation: enter-up 600ms var(--ease-out) backwards;
 }
 
-#about.is-in .clubs li:nth-child(1) { animation-delay: 420ms; }
-#about.is-in .clubs li:nth-child(2) { animation-delay: 465ms; }
-#about.is-in .clubs li:nth-child(3) { animation-delay: 510ms; }
-#about.is-in .clubs li:nth-child(4) { animation-delay: 555ms; }
-#about.is-in .clubs li:nth-child(5) { animation-delay: 600ms; }
-#about.is-in .clubs li:nth-child(6) { animation-delay: 645ms; }
-#about.is-in .clubs li:nth-child(7) { animation-delay: 690ms; }
-#about.is-in .clubs li:nth-child(8) { animation-delay: 735ms; }
+#involvement.is-in .clubs li:nth-child(1) { animation-delay: 100ms; }
+#involvement.is-in .clubs li:nth-child(2) { animation-delay: 145ms; }
+#involvement.is-in .clubs li:nth-child(3) { animation-delay: 190ms; }
+#involvement.is-in .clubs li:nth-child(4) { animation-delay: 235ms; }
+#involvement.is-in .clubs li:nth-child(5) { animation-delay: 280ms; }
+#involvement.is-in .clubs li:nth-child(6) { animation-delay: 325ms; }
+#involvement.is-in .clubs li:nth-child(7) { animation-delay: 370ms; }
+#involvement.is-in .clubs li:nth-child(8) { animation-delay: 415ms; }
 
 #about.is-in .photo-card {
     animation: photo-in 900ms var(--ease-out) 150ms backwards;
