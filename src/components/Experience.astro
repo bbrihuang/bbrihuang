@@ -6,8 +6,13 @@ import { experience } from "../data/experience.js";
     <h1 class="section-title">Experience</h1>
     {experience.map((job) => (
         <article>
-            <h3>{job.role}</h3>
-            <p>{[job.org, job.place, job.dates].join(" | ")}</p>
+            <div class="job-header">
+                <img src={job.logo} alt="" width="48" height="48" loading="lazy">
+                <div>
+                    <h3>{job.role}</h3>
+                    <p>{[job.org, job.place, job.dates].join(" | ")}</p>
+                </div>
+            </div>
             <ul>
                 {job.bullets.map((bullet) => (
                     <li>{bullet}</li>

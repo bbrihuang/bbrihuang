@@ -2,6 +2,7 @@ export const experience = [
     {
         role: "Lead Software Engineer",
         org: "GradientV LLC",
+        logo: "/logos/gradientv.png",
         place: "New York, NY (Hybrid)",
         dates: "Oct 2026 to present",
         bullets: [
@@ -13,6 +14,7 @@ export const experience = [
     {
         role: "Student TechOps Assistant",
         org: "Boston University College of Communication",
+        logo: "/logos/bu.png",
         place: "Boston, MA",
         dates: "Sep 2026 to present",
         bullets: [
@@ -22,6 +24,7 @@ export const experience = [
     {
         role: "Audio and Video Recorder",
         org: "Babel Audio",
+        logo: "/logos/babel-audio.svg",
         place: "Remote",
         dates: "Feb to May 2026",
         bullets: [
@@ -31,6 +34,7 @@ export const experience = [
     {
         role: "Founder",
         org: "Cubic Builds",
+        logo: "/logos/cubic-builds.svg",
         place: "New York, NY",
         dates: "Jan 2023 to present",
         bullets: [
