@@ -1,6 +1,6 @@
 :root {
-    --bg: #090d16;
-    --card: #141a28;
+    --bg: #121418;
+    --card: #1c1f26;
     --text: #f1f5f9;
     --software: #4ade80;
     --hardware: #fb923c;
@@ -19,6 +19,8 @@
 body {
     margin: 0;
     background-color: var(--bg);
+    background-image: linear-gradient(180deg, #23262d 0%, var(--bg) 520px);
+    background-repeat: no-repeat;
     color: var(--text);
     font-family: "Geist", sans-serif;
     font-size: 17px;
@@ -118,11 +120,9 @@ section {
 
 .project-card {
     padding: var(--space-md);
-    background-color: rgba(20, 26, 40, 0.6);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    background-color: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -306,8 +306,8 @@ body::before {
     z-index: -1;
     pointer-events: none;
     background:
-        radial-gradient(circle at 15% 10%, rgba(74, 222, 128, 0.12), transparent 40%),
-        radial-gradient(circle at 85% 40%, rgba(251, 146, 60, 0.1), transparent 40%);
+        radial-gradient(circle at 15% 10%, rgba(74, 222, 128, 0.05), transparent 40%),
+        radial-gradient(circle at 85% 40%, rgba(251, 146, 60, 0.04), transparent 40%);
 }
 
 nav a,
@@ -366,9 +366,9 @@ nav a:hover,
     margin-top: var(--space-lg);
     padding: var(--space-md);
     min-height: 140px;
-    background-color: rgba(20, 26, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    background-color: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     font-family: "Geist Mono", monospace;
     font-size: 14px;
 }
@@ -470,7 +470,7 @@ nav a:hover,
     width: 100%;
     margin: var(--space-xl) 0 var(--space-lg);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 .stat-grid {
@@ -481,9 +481,9 @@ nav a:hover,
 
 .stat {
     padding: var(--space-md);
-    background-color: rgba(20, 26, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    background-color: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
 }
 
 .stat strong {
@@ -523,7 +523,7 @@ nav a:hover,
     height: 100%;
     object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 @media (max-width: 640px) {
@@ -552,4 +552,51 @@ nav a:hover,
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* Section headings: a short colored "line" ending in a station dot */
+h2 {
+    display: flex;
+    align-items: center;
+}
+
+h2::before {
+    content: "";
+    width: 40px;
+    height: 4px;
+    margin-right: var(--space-sm);
+    border-radius: 0 2px 2px 0;
+    background-color: var(--line, var(--text));
+}
+
+h2::after {
+    content: "";
+    width: 14px;
+    height: 14px;
+    order: -1;
+    border: 3px solid var(--line, var(--text));
+    border-radius: 50%;
+    background-color: var(--bg);
+}
+
+#about { --line: var(--software); }
+#experience { --line: var(--experience); }
+#projects { --line: var(--projects); }
+#contact { --line: var(--hardware); }
+
+#experience article {
+    padding: var(--space-md);
+    background-color: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid var(--experience);
+    border-radius: 6px;
+}
+
+.case-body h2 {
+    display: block;
+}
+
+.case-body h2::before,
+.case-body h2::after {
+    content: none;
 }
