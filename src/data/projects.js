@@ -915,4 +915,26 @@ export const projects = [
             }
         ]
     },
+    {
+        title: "How to Build a PC",
+        areas: [
+            "hardware"
+        ],
+        tag: "Hardware · Guide",
+        description: "A free beginner’s guide to choosing parts, assembling, and troubleshooting a PC.",
+        chips: [
+            "Technical writing",
+            "Hardware diagnostics",
+            "Notion"
+        ],
+        year: "2024-2026",
+        slug: "pc-building-guide",
+        cover: "/projects/pc-building-guide/cover.svg",
+        coverAlt: "Cover image for How to Build a PC.",
+        summary: "A free public guide that walks first-time builders through choosing compatible parts, assembling them, and troubleshooting the build.",
+        highlights: [
+            "Wrote a beginner-friendly guide covering part selection, assembly, and troubleshooting.",
+            "Published it free and public on Notion."
+        ]
+    },
 ];
