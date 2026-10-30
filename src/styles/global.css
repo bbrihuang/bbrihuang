@@ -220,13 +220,6 @@ nav a {
     text-decoration: none;
 }
 
-#contact ul {
-    display: flex;
-    gap: var(--space-md);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
 
 @keyframes rise {
     from {
@@ -320,13 +313,11 @@ nav a {
     background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
 }
 
-nav a,
-#contact a {
+nav a {
     transition: color 0.2s ease;
 }
 
 nav a:hover,
-#contact a:hover,
 .project-links a:hover {
     color: var(--software);
 }

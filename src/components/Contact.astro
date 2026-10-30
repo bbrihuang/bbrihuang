@@ -1,15 +1,8 @@
 ---
-const links = [
-    { href: "https://github.com/bbrihuang", label: "GitHub" },
-    { href: "https://www.linkedin.com/in/bbrihuang/", label: "LinkedIn" },
-];
+import ContactCard from "./ContactCard.astro";
 ---
 
 <section id="contact">
     <h2 class="section-title">Contact</h2>
-    <ul>
-        {links.map((link) => (
-            <li><a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a></li>
-        ))}
-    </ul>
+    <ContactCard />
 </section>
