@@ -110,13 +110,169 @@ export const projects = [
     },
     {
         title: "Local LLM Research",
-        areas: ["software"],
-        tag: "AI",
+        areas: [
+            "software"
+        ],
+        tag: "Software (AI/ML)",
         description: "Ran twelve local LLM experiments on an RTX 5070, including a 2-bit model whose damage an importance matrix cut about 4x.",
-        chips: ["llama.cpp", "Python", "PyTorch"],
+        chips: [
+            "llama.cpp",
+            "Python",
+            "PyTorch",
+            "Transformers",
+            "vLLM",
+            "Ollama",
+            "Google Colab"
+        ],
         year: "2026",
-        github: "https://github.com/bbrihuang/local-llm-lab",
+        home: true,
+        slug: "local-llm-research",
         cover: "/projects/local-llm-lab/cover.webp",
         coverAlt: "Chart of KL divergence against file size for plain and importance-matrix quantization.",
+        github: "https://github.com/bbrihuang/local-llm-lab",
+        links: [
+            {
+                label: "Quantization write-up",
+                href: "https://github.com/bbrihuang/local-llm-lab/tree/main/03-quantization"
+            },
+            {
+                label: "Inference engines write-up",
+                href: "https://github.com/bbrihuang/local-llm-lab/tree/main/07-inference-engines"
+            },
+            {
+                label: "Benchmarks write-up",
+                href: "https://github.com/bbrihuang/local-llm-lab/tree/main/08-benchmarks"
+            },
+            {
+                label: "Diffusion demo write-up",
+                href: "https://github.com/bbrihuang/local-llm-lab/tree/main/11-diffusion-demo"
+            },
+            {
+                label: "Models on Hugging Face",
+                href: "https://huggingface.co/bbrihuang"
+            }
+        ],
+        summary: "As a researcher in BU AI Society’s Local LLM Division, I ran twelve hands-on experiments on running language models on my own PC (an RTX 5070 with 12 GB) and a few rented Colab GPUs: speed, compression, attention, inference engines, agents, benchmarks and diffusion. Each one asks a question, measures it, and says what the numbers do and do not show.",
+        highlights: [
+            "Measured prefill and decode speed on an RTX 5070, then shrank Qwen3.5-4B from 16 bits to 2 bits and showed an importance matrix cuts the 2-bit damage about 4x.",
+            "Found that speculative decoding never helped on a fast GPU, and that llama.cpp beat vLLM on a Colab T4 from 8 users up.",
+            "Ran ARC-Challenge, MMLU-Pro and HumanEval locally with error bars, and tracked replies cut off before an answer.",
+            "Compared a diffusion language model with a regular one on the same GPU: 3.7x to 8.6x faster, with a caveat about my baseline."
+        ],
+        caseStudy: [
+            {
+                title: "The question",
+                text: "Local models are easy to run and hard to judge. How fast are they, what does shrinking them cost, which tricks actually help on my hardware, and how much should a benchmark score be trusted? I worked through twelve tasks for BU AI Society’s Local LLM Division, each with a measurement and a write-up."
+            },
+            {
+                title: "Reading a prompt is far faster than writing an answer",
+                text: "On Qwen3-1.7B, prefill ran at about 17,300 tokens per second and decode at about 220, because decode reads every weight from GPU memory for each new token. The cache costs 112 KiB per token."
+            },
+            {
+                title: "Compression is free until it is not",
+                text: "8 bits cost nothing measurable and 4 bits a little; plain 2 bits broke Qwen3.5-4B (its top guess matched the full model only 57% of the time); an importance matrix cut that damage about 4x at the same file size, and tool calling went from 47% right at plain 2 bits to 80% with the matrix and 95% at 4 bits.",
+                gallery: [
+                    {
+                        src: "/projects/llm-research/size_vs_kld.png",
+                        alt: "Line chart of how far each compression level drifts from the full 16-bit model, on a log scale, against file size. Plain quantization goes from 0.003 at Q8_0 (4.3 GiB) to 0.043 at Q4_K_M and 1.052 at Q2_K (1.8 GiB); with an importance matrix, Q4_K_M is 0.026 and Q2_K is 0.251.",
+                        caption: "File size against how far each compression level drifts from the full model"
+                    },
+                    {
+                        src: "/projects/llm-research/size_vs_speed.png",
+                        alt: "Line chart of generation speed in tokens per second against file size, on an RTX 5070. Speed rises as the file shrinks: 65 for F16 (8 GiB), 109 for Q8_0, 151 for Q4_K_M and 181 for Q2_K (1.8 GiB).",
+                        caption: "File size against generation speed on the RTX 5070"
+                    },
+                    {
+                        src: "/projects/llm-research/tools_scores.png",
+                        alt: "Bar chart of correct tries (%) in tool calling for Qwen3.5-4B, comparing q2_k, q2_k_imat and q4_k_m. Overall: 47%, 80% and 95%. One call: 31%, 83% and 89%. Several calls: 0%, 67% and 100%. No tool needed: 96%, 84% and 100%.",
+                        caption: "Tool calling accuracy at plain 2 bits, 2 bits with the matrix, and 4 bits"
+                    }
+                ]
+            },
+            {
+                title: "Where attention goes",
+                text: "In Qwen3-0.6B, the first token gets almost no attention in layers 0 to 2, then about 55% at layer 3 and 65% to 75% in the last layers. Heads differ a lot: some cover 90% of their attention with about one past token, and a few need more than 1,000.",
+                gallery: [
+                    {
+                        src: "/projects/llm-research/sink_and_local.png",
+                        alt: "Line chart across the 28 layers of Qwen3-0.6B of the share of attention going to the last 128 tokens and to the first token alone. The first token gets almost none in layers 0 to 2, jumps to about 55% at layer 3 and is near 65% to 75% in the last layers, while the last-128 share falls to about 13% to 21%.",
+                        caption: "Most attention goes to the first token and the most recent ones"
+                    },
+                    {
+                        src: "/projects/llm-research/k90_heatmap.png",
+                        alt: "Heatmap for Qwen3-0.6B with 28 layers down the side and 16 query heads across the top. Each cell is the median number of past tokens needed to cover 90% of that head’s attention, on a log scale from 1 to over 1,000. Some heads need about one token and a few need more than 1,000.",
+                        caption: "How many past tokens each attention head needs to cover 90% of its attention"
+                    }
+                ]
+            },
+            {
+                title: "Popular speed-ups do not always help",
+                text: "Speculative decoding never beat 0.96x on this GPU, and on a Colab T4 llama.cpp matched vLLM for 1 to 4 users and led from 8 users up.",
+                gallery: [
+                    {
+                        src: "/projects/llm-research/total_throughput.png",
+                        alt: "Line chart of total tokens per second against the number of users sending requests at once, from 1 to 32. llama.cpp on an RTX 5070 reaches 543 at 16 users. On a Colab T4, llama.cpp and vLLM are close until about 4 users, then llama.cpp leads, reaching 281 against 236 at 32 users.",
+                        caption: "llama.cpp against vLLM on a Colab T4, total speed by number of users"
+                    }
+                ]
+            },
+            {
+                title: "What agent frameworks cost",
+                text: "On Qwen3-8B, LangGraph, the OpenAI Agents SDK and PydanticAI sent 1,385 to 1,570 prompt tokens per question against 1,032 with no framework, all in about a second. smolagents sent 22,128 and took 52.9 seconds.",
+                gallery: [
+                    {
+                        src: "/projects/llm-research/cost_per_question.png",
+                        alt: "Two bar charts comparing agent frameworks on Qwen3-8B, both on a log scale. Prompt tokens sent per question: no framework 1,032, LangGraph 1,385, OpenAI Agents SDK 1,570, PydanticAI 1,422 and smolagents 22,128. Median seconds per question: 1.0, 1.0, 1.1, 0.9 and 52.9 for smolagents.",
+                        caption: "What each agent framework costs per question, in tokens sent and seconds taken"
+                    }
+                ]
+            },
+            {
+                title: "Scores depend on the setup",
+                text: "Qwen3.5-4B scored 95% to 96% on ARC-Challenge, 70% to 74% on MMLU-Pro against the 79.1% Qwen reports (part of the gap was replies cut off before an answer, counted as wrong), and 83.5% on HumanEval.",
+                gallery: [
+                    {
+                        src: "/projects/llm-research/harness_scores.png",
+                        alt: "Dot chart with error bars of Qwen3.5-4B scores: about 95% and 96% on ARC-Challenge, and 70.0%, 72.4% and 73.8% on MMLU-Pro. A dashed line marks Qwen’s official MMLU-Pro score of 79.1%. Hollow diamonds show scores counting only the questions it finished, which sit closer to that line.",
+                        caption: "Qwen3.5-4B on ARC-Challenge and MMLU-Pro, with error bars"
+                    },
+                    {
+                        src: "/projects/llm-research/benchmark_timeline.png",
+                        alt: "Timeline from 2018 to 2026 of how long each benchmark took to be maxed out, from its release (circle) to when top models came close to the ceiling (diamond). ARC-Challenge took 5.0 years, HellaSwag 3.8, WinoGrande 2.6, MMLU 3.2, GPQA-Diamond 2.0, IFEval 1.1 and MMLU-Pro 1.4. RULER had high scores from the start. SimpleQA (best so far 74.0%) and Humanity’s Last Exam (60.9%) are not maxed out yet.",
+                        caption: "How long each benchmark took to be maxed out by top models"
+                    }
+                ]
+            },
+            {
+                title: "Diffusion language models are fast but behind",
+                text: "DiffusionGemma wrote 3.7x to 8.6x faster than regular Gemma 4 on the same GPU; my baseline was probably slow, so those ratios are generous, and Google’s own results table shows it trailing on hard reasoning.",
+                gallery: [
+                    {
+                        src: "/projects/llm-research/bench_speed.png",
+                        alt: "Bar chart of tokens per second on six prompts (coffee-page, todo-app, pomodoro, explain, python-fn, summary). DiffusionGemma writes about 145 to 340 tokens per second, while regular Gemma 4 26B-A4B stays near 40 on every prompt.",
+                        caption: "DiffusionGemma against regular Gemma 4 on the same GPU"
+                    },
+                    {
+                        src: "/projects/llm-research/demo_todo.png",
+                        alt: "Screenshot of the diffusion demo page. A status line reads “Done: 1141 tokens in 4.36 s = 261.5 tokens/s (5 canvases)”. On the left is a panel of the generated page code, showing styles for the text box and the add button. On the right is the finished to-do app, titled “My Tasks”, with an add box and four items, each with a checkbox and a Delete button.",
+                        caption: "The demo page, with the code on the left and the finished to-do app on the right"
+                    },
+                    {
+                        src: "/projects/llm-research/flow_steps.png",
+                        alt: "Four scatter plots titled “Same model, fewer Euler steps”, for 1, 2, 8 and 100 steps. Grey dots are real data in two interlocking crescents. The blue dots are the model’s output: a small clump at 1 step, a loose blob at 2 steps, and close to the two crescents at 8 and 100 steps.",
+                        caption: "The same tiny model run with 1, 2, 8 and 100 steps"
+                    },
+                    {
+                        src: "/projects/llm-research/flow_animation.gif",
+                        alt: "Animation titled “Following the learned field”, with a time counter. A round cloud of about two thousand blue dots, over a grid of grey arrows showing the learned field, is moved step by step into a shape.",
+                        caption: "A tiny model turning noise into a shape, step by step"
+                    }
+                ]
+            },
+            {
+                title: "Who did what",
+                text: "I ran every command and measurement myself. Claude helped write and explain the scripts, drafted the reports and slide decks, and summarized the reading material; the READMEs say where that applies. Where a result is unexplained or unverified, the write-up says so."
+            }
+        ]
     },
 ];
