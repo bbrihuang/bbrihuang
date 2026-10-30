@@ -1272,7 +1272,7 @@ main > :first-child {
 .hero-side .terminal {
     flex: 1 1 auto;
     height: auto;
-    min-height: 190px;
+    min-height: 252px;
 }
 
 
@@ -1389,7 +1389,7 @@ main > :first-child {
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
-    width: min(100%, 340px);
+    width: min(100%, 324px);
     margin-inline: auto;
     aspect-ratio: 1;
     position: relative;
@@ -1574,6 +1574,7 @@ main > :first-child {
 
 
 #terminal-output {
+    contain: size;
     flex: 1;
     min-height: 0;
     overflow-y: auto;
