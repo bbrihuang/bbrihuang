@@ -1724,8 +1724,10 @@ body:has(.up-next) .site-footer {
 }
 
 .contact-heading {
-    margin: 0 0 12px;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--fog);
+    margin: 0 0 var(--space-sm);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
 }
