@@ -59,6 +59,7 @@ function addLine(output, className, text) {
     line.className = className;
     line.textContent = text;
     output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
     return line;
 }
 
@@ -71,6 +72,7 @@ async function runTerminal(output) {
 
         for (const character of step.command) {
             typed.textContent += character;
+            output.scrollTop = output.scrollHeight;
             await sleep(70);
         }
 
