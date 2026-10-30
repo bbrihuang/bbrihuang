@@ -30,7 +30,7 @@ body {
     margin: 0;
     background-color: var(--bg);
     color: var(--text);
-    font-family: "Outfit", sans-serif;
+    font-family: "Geist", sans-serif;
     font-size: 17px;
     line-height: 1.6;
 }
@@ -68,7 +68,7 @@ section {
 
 .hero h1 {
     margin: 0 0 var(--space-xs);
-    font-family: "Outfit", sans-serif;
+    font-family: "Satoshi", sans-serif;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     line-height: 1.05;
@@ -165,7 +165,7 @@ section {
 
 .project-card .project-tag {
     margin: 0 0 var(--space-xs);
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -185,7 +185,7 @@ section {
     padding: 4px 10px;
     background-color: rgba(255, 255, 255, 0.06);
     border-radius: 6px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 13px;
 }
 
@@ -238,7 +238,7 @@ nav a {
 
 #experience article > p {
     margin: var(--space-xs) 0 var(--space-sm);
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 13px;
     color: var(--steel);
 }
@@ -440,7 +440,7 @@ nav a:hover,
     background-color: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 14px;
 }
 
@@ -490,7 +490,7 @@ nav a:hover,
 
 .case-header h1 {
     margin: 0 0 var(--space-sm);
-    font-family: "Outfit", sans-serif;
+    font-family: "Satoshi", sans-serif;
     font-size: clamp(2.25rem, 5vw, 3.5rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -498,7 +498,7 @@ nav a:hover,
 
 .case-header .project-tag {
     margin: 0 0 var(--space-xs);
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -559,7 +559,7 @@ nav a:hover,
 
 .stat strong {
     display: block;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Geist Mono", monospace;
     font-size: 1.25rem;
     color: var(--hardware);
 }
