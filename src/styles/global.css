@@ -431,7 +431,10 @@ nav a:hover,
 }
 
 /* Case study pages */
+/* Case studies use most of the window: images, stats, tables and galleries
+   run full width, while text stays at a readable line length. */
 .case-study {
+    max-width: 1280px;
     padding-bottom: var(--space-3xl);
 }
 
@@ -475,7 +478,10 @@ nav a:hover,
     margin: 0;
 }
 
-.case-body {
+.case-body > h2,
+.case-body > p,
+.case-body > ul,
+.case-body > ol {
     max-width: 760px;
 }
 
@@ -542,7 +548,7 @@ nav a:hover,
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-sm);
     margin: var(--space-md) 0;
 }
@@ -555,11 +561,6 @@ nav a:hover,
     border-radius: 6px;
 }
 
-@media (max-width: 640px) {
-    .gallery {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* Project card cover: one image, same 16:9 crop on every card */
 .project-card {
