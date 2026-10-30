@@ -702,9 +702,9 @@ main {
 }
 
 .site-header nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     height: 56px;
     padding: 0 8px 0 20px;
     border: 1px solid rgba(255, 255, 255, 0.09);
@@ -718,6 +718,7 @@ main {
 }
 
 .site-header .nav-name {
+    justify-self: start;
     font-weight: 600;
     letter-spacing: -0.01em;
 }
@@ -743,13 +744,40 @@ main {
     color: var(--snow);
 }
 
+.site-header nav ul a[aria-current="page"] {
+    background-color: var(--snow);
+    color: var(--void);
+    box-shadow: 0 6px 20px -6px rgba(255, 255, 255, 0.5);
+}
+
+.nav-socials {
+    display: flex;
+    gap: 2px;
+    justify-self: end;
+}
+
+.nav-socials a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    color: var(--fog);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-socials a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--snow);
+}
+
 @media (max-width: 560px) {
     .site-header .nav-name {
         display: none;
     }
 
     .site-header nav {
-        justify-content: center;
+        grid-template-columns: auto 1fr;
         padding: 0 8px;
     }
 
