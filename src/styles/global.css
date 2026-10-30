@@ -620,10 +620,12 @@ nav a:hover,
 #featured { --line: var(--projects); }
 #experience { --line: var(--experience); }
 #stack { --line: var(--software); }
+#education { --line: #cc0000; }
 #involvement { --line: var(--hardware); }
 
 /* Frosted glass panels: a faint white wash over a heavy blur of the
    background shapes, with a lit top edge. Borders stay as set above. */
+.education,
 .project-card,
 .job-list,
 .job-detail,
@@ -2088,4 +2090,95 @@ main > :first-child {
 
 .action-text:hover {
     color: var(--text);
+}
+
+/* Education: logo with a soft BU-red glow, degree on the left, class year on the right */
+.education {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    overflow: hidden;
+    padding: var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.education::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(204, 0, 0, 0.22), transparent 65%);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.education img {
+    position: relative;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.education h3,
+.education p {
+    margin: 0;
+    line-height: 1.35;
+}
+
+.education-main {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.education h3 {
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+}
+
+.education-main p {
+    margin-top: 4px;
+    color: var(--fog);
+}
+
+.education-when {
+    flex-shrink: 0;
+    padding-left: var(--space-md);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: right;
+}
+
+.education-class {
+    font-weight: 600;
+}
+
+.education-date {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fog);
+}
+
+@media (max-width: 560px) {
+    .education {
+        flex-wrap: wrap;
+    }
+
+    .education-main {
+        flex-basis: calc(100% - 56px - var(--space-md));
+    }
+
+    .education-when {
+        width: 100%;
+        padding: var(--space-sm) 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: none;
+        text-align: left;
+    }
 }
