@@ -8,6 +8,8 @@ export const projects = [
         github: "https://github.com/bbrihuang/temperature-sensor",
         featured: true,
         slug: "room-temperature-monitor",
+        cover: "/projects/room-temperature-monitor/hero.webp",
+        coverAlt: "The finished Room Temperature Monitor in its black 3D-printed case.",
     },
     {
         title: "Project JetHexa",
@@ -16,6 +18,8 @@ export const projects = [
         chips: [],
         status: "In progress | 2026",
         placeholder: true,
+        cover: "/projects/jethexa/cover.webp",
+        coverAlt: "The JetHexa hexapod robot.",
     },
     {
         title: "Local LLM Research",
@@ -24,5 +28,7 @@ export const projects = [
         chips: ["llama.cpp", "Python", "PyTorch"],
         status: "In progress | 2026",
         github: "https://github.com/bbrihuang/local-llm-lab",
+        cover: "/projects/local-llm-lab/cover.webp",
+        coverAlt: "Chart of KL divergence against file size for plain and importance-matrix quantization.",
     },
 ];

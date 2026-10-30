@@ -531,3 +531,25 @@ nav a:hover,
         grid-template-columns: 1fr;
     }
 }
+
+/* Project card cover: one image, same 16:9 crop on every card */
+.project-card {
+    overflow: hidden;
+}
+
+.project-cover {
+    aspect-ratio: 16 / 9;
+    margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) var(--space-md);
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.project-card.featured .project-cover {
+    margin: calc(var(--space-lg) * -1) calc(var(--space-lg) * -1) var(--space-md);
+}
+
+.project-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
