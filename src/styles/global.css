@@ -1945,8 +1945,8 @@ main > :first-child {
 }
 
 
-/* Narrow screens: Skills and Involvement step out so the rest fits on one line. */
-@media (max-width: 760px) {
+/* Narrow screens: Skills, Education and Involvement step out so the rest fits on one line. */
+@media (max-width: 900px) {
     .nav-wide {
         display: none;
     }
