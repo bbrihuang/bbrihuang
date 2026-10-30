@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 const { title, description } = Astro.props;
 ---
 
@@ -16,8 +18,6 @@ const { title, description } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=Geist+Mono&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
-    <script is:inline src="/script.js" defer></script>
     <title>{title}</title>
 </head>
 
@@ -29,5 +29,9 @@ const { title, description } = Astro.props;
     </div>
 
     <slot />
+
+    <script>
+        import "../scripts/main.js";
+    </script>
 </body>
 </html>
