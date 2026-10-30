@@ -213,7 +213,7 @@ section {
     }
 }
 
-h2 {
+.section-title {
     margin: 0 0 var(--space-lg);
     font-size: 2rem;
     font-weight: 600;
@@ -632,12 +632,12 @@ nav a:hover,
 }
 
 /* Section headings: a short colored "line" ending in a station dot */
-h2 {
+.section-title {
     display: flex;
     align-items: center;
 }
 
-h2::before {
+.section-title::before {
     content: "";
     width: 40px;
     height: 4px;
@@ -646,7 +646,7 @@ h2::before {
     background-color: var(--line, var(--text));
 }
 
-h2::after {
+.section-title::after {
     content: "";
     width: 14px;
     height: 14px;
@@ -667,15 +667,6 @@ h2::after {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: 3px solid var(--experience);
     border-radius: 6px;
-}
-
-.case-body h2 {
-    display: block;
-}
-
-.case-body h2::before,
-.case-body h2::after {
-    content: none;
 }
 
 /* Frosted glass panels: a faint white wash over a heavy blur of the
