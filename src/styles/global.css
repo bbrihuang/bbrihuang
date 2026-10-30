@@ -1381,17 +1381,11 @@ main > :first-child {
 }
 
 /* Running text stays at a readable line length on the wide layout. */
-/* Top of the right column: portrait with a one-line caption. */
+/* Top of the right column: portrait. */
 .hero-top {
     margin: 0;
 }
 
-.hero-top figcaption {
-    margin-top: 12px;
-    font-family: "Geist Mono", monospace;
-    font-size: 13px;
-    color: var(--fog);
-}
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
@@ -2020,20 +2014,11 @@ main > :first-child {
     }
 }
 
-/* The photo and caption animate on their own, not as one block. */
+/* The photo animates on its own, not as one block. */
 .hero-side > .hero-top {
     animation: none;
 }
 
-.hero-top figcaption {
-    animation: rise 600ms var(--ease-out) 420ms backwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hero-top figcaption {
-        animation-name: fade-in;
-    }
-}
 
 
 /* Top bar links glide to their section. */
