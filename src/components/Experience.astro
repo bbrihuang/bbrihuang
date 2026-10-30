@@ -1,0 +1,18 @@
+---
+import { experience } from "../data/experience.js";
+---
+
+<section id="experience">
+    <h2>Experience</h2>
+    {experience.map((job) => (
+        <article>
+            <h3>{job.role}</h3>
+            <p>{[job.org, job.place, job.dates].join(" | ")}</p>
+            <ul>
+                {job.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                ))}
+            </ul>
+        </article>
+    ))}
+</section>
