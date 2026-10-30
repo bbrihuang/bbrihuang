@@ -1,0 +1,27 @@
+export const projects = [
+    {
+        title: "Room Temperature Monitor",
+        tag: "Hardware",
+        description: "Built an Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed.",
+        chips: ["Arduino UNO", "C++", "TMP36", "Onshape"],
+        status: "Done | 2026",
+        github: "https://github.com/bbrihuang/temperature-sensor",
+        featured: true,
+    },
+    {
+        title: "Project JetHexa",
+        tag: "Robotics",
+        description: "Details coming soon.",
+        chips: [],
+        status: "In progress | 2026",
+        placeholder: true,
+    },
+    {
+        title: "Local LLM Research",
+        tag: "AI",
+        description: "Ran twelve local LLM experiments on an RTX 5070, including a 2-bit model whose damage an importance matrix cut about 4x.",
+        chips: ["llama.cpp", "Python", "PyTorch"],
+        status: "In progress | 2026",
+        github: "https://github.com/bbrihuang/local-llm-lab",
+    },
+];

@@ -1,0 +1,17 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { projects } from "../data/projects.js";
+
+const featured = projects.find((project) => project.featured);
+const others = projects.filter((project) => !project.featured);
+---
+
+<section id="projects">
+    <h2>Projects</h2>
+    {featured && <ProjectCard project={featured} />}
+    <div class="project-grid">
+        {others.map((project) => (
+            <ProjectCard project={project} />
+        ))}
+    </div>
+</section>
