@@ -1666,3 +1666,29 @@ main > :first-child {
 .contact-links a:hover {
     background-color: rgba(255, 255, 255, 0.12);
 }
+
+/* Featured badge, pinned to the corner of the featured card's image */
+.project-cover {
+    position: relative;
+}
+
+.badge-featured {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    border-radius: 9999px;
+    background-color: rgba(11, 11, 12, 0.75);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fbbf24;
+}
