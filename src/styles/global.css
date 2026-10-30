@@ -1532,8 +1532,8 @@ main > :first-child {
 /* About: text, education and clubs on the left, a big photo card on the right */
 .about-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 340px;
-    gap: var(--space-xl);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--space-lg);
     align-items: start;
 }
 
