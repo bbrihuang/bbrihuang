@@ -1266,7 +1266,7 @@ main > :first-child {
 .hero-side {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-lg);
 }
 
 .hero-side .terminal {
@@ -1389,7 +1389,7 @@ main > :first-child {
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
-    width: min(100%, 324px);
+    width: min(100%, 308px);
     margin-inline: auto;
     aspect-ratio: 1;
     position: relative;
