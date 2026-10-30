@@ -1,3 +1,7 @@
+---
+import { clubs } from "../data/clubs.js";
+---
+
 <section id="about">
     <h2 class="section-title">About Me</h2>
     <p>Hi! I am Brian. I am a Computer Engineering student at Boston University. I do local LLM and robotics work with BU AI Society, lead software at GradientV for small businesses, and run Cubic Builds, my custom PC building business.</p>
@@ -11,4 +15,22 @@
             <p class="education-school">Boston University | Expected May 2029</p>
         </div>
     </div>
+
+    <h3 class="about-heading">Clubs & activities</h3>
+    <ul class="clubs">
+        {clubs.map((club) => (
+            <li>
+                <a href={club.href} target="_blank" rel="noopener noreferrer">
+                    {club.logo
+                        ? <img src={club.logo} alt="" width="44" height="44" loading="lazy">
+                        : <span class="club-initials" aria-hidden="true">{club.initials}</span>}
+                    <span class="club-text">
+                        <span class="club-name">{club.org}</span>
+                        <span class="club-role">{club.role}</span>
+                    </span>
+                    <span class="club-arrow" aria-hidden="true">&nearr;</span>
+                </a>
+            </li>
+        ))}
+    </ul>
 </section>
