@@ -9,6 +9,37 @@
 }
 
 body {
+    margin: 0;
     background-color: var(--bg);
     color: var(--text);
+    font-family: "Archivo", sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main,
+header nav {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+nav ul {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 24px 0;
+}
+
+a {
+    color: var(--text);
+}
+
+section {
+    padding: 64px 0;
 }
