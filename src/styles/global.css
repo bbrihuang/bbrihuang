@@ -619,7 +619,7 @@ nav a:hover,
 #projects { --line: var(--projects); }
 #featured { --line: var(--projects); }
 #experience { --line: var(--experience); }
-#stack { --line: var(--experience); }
+#stack { --line: var(--software); }
 
 /* Frosted glass panels: a faint white wash over a heavy blur of the
    background shapes, with a lit top edge. Borders stay as set above. */
