@@ -1255,8 +1255,6 @@ main > :first-child {
 }
 
 /* Home hero: headline and buttons on the left, profile card and terminal on the right */
-/* Both columns share a top and a bottom: the terminal stretches so it ends
-   where the intro ends. */
 .hero {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -1269,10 +1267,10 @@ main > :first-child {
     gap: var(--space-lg);
 }
 
+/* A fixed box: it never stretches with the left column or grows while typing. */
 .hero-side .terminal {
-    flex: 1 1 auto;
-    height: auto;
-    min-height: 252px;
+    flex: none;
+    height: 252px;
 }
 
 
@@ -1315,11 +1313,6 @@ main > :first-child {
 @media (max-width: 900px) {
     .hero {
         grid-template-columns: minmax(0, 1fr);
-    }
-
-    .hero-side .terminal {
-        flex: none;
-        height: 210px;
     }
 }
 
@@ -2163,4 +2156,9 @@ main > :first-child {
         border-left: none;
         text-align: left;
     }
+}
+
+/* The terminal fades in place so the box never appears to move. */
+.hero-side > .terminal {
+    animation-name: fade-in;
 }
