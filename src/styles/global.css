@@ -685,3 +685,79 @@ h2::after {
         inset 0 1px 0 rgba(255, 255, 255, 0.07),
         0 18px 40px -18px rgba(0, 0, 0, 0.7);
 }
+
+/* Floating pill nav, pinned to the top */
+html {
+    scroll-padding-top: 88px;
+}
+
+main {
+    padding-top: 72px;
+}
+
+.site-header {
+    position: fixed;
+    top: 12px;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 0 var(--space-sm);
+}
+
+.site-header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 8px 0 20px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 9999px;
+    background: linear-gradient(180deg, rgba(28, 28, 31, 0.72), rgba(20, 20, 22, 0.62));
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 12px 32px -12px rgba(0, 0, 0, 0.75);
+}
+
+.site-header .nav-name {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.site-header nav ul {
+    gap: 2px;
+    padding: 0;
+}
+
+.site-header nav ul a {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 9999px;
+    font-size: 15px;
+    color: var(--fog);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.site-header nav ul a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--snow);
+}
+
+@media (max-width: 560px) {
+    .site-header .nav-name {
+        display: none;
+    }
+
+    .site-header nav {
+        justify-content: center;
+        padding: 0 8px;
+    }
+
+    .site-header nav ul a {
+        padding: 0 10px;
+        font-size: 14px;
+    }
+}

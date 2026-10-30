@@ -7,8 +7,9 @@ const links = [
 ];
 ---
 
-<header>
-    <nav>
+<header class="site-header">
+    <nav aria-label="Primary">
+        <a class="nav-name" href="/">Brian Huang</a>
         <ul>
             {links.map((link) => (
                 <li><a href={link.href}>{link.label}</a></li>
