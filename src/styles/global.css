@@ -1496,7 +1496,7 @@ main > :first-child {
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
-    min-height: 340px;
+    min-height: 360px;
     position: relative;
     isolation: isolate;
     display: flex;
@@ -1582,7 +1582,7 @@ main > :first-child {
     width: 100%;
     min-height: 0;
     object-fit: cover;
-    object-position: 50% 45%;
+    object-position: 50% 60%;
 }
 
 
