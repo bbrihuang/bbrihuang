@@ -12,11 +12,12 @@
     --bg: var(--void);
     --card: var(--ash);
     --text: var(--snow);
-    --software: #4ade80;
-    --hardware: #fb923c;
     --purple: #871fff;
     --blue: #2f6bff;
     --accent: #b07cff;
+    --gradient: linear-gradient(100deg, var(--purple), var(--blue));
+    /* Lighter stops so gradient text stays readable on the dark background. */
+    --gradient-text: linear-gradient(90deg, #b57bff, #7da6ff);
 
     --space-xs: 8px;
     --space-sm: 16px;
@@ -224,12 +225,11 @@ nav a {
     }
 }
 
-.grad-software {
-    color: var(--software);
-}
-
-.grad-hardware {
-    color: var(--hardware);
+.hero-gradient {
+    background-image: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 /* Background: a grey lift at the top, faint green and orange light, the
@@ -1101,8 +1101,8 @@ main > :first-child {
 }
 
 .filters button[aria-pressed="true"] {
-    background-color: var(--accent);
-    color: var(--void);
+    background: var(--gradient);
+    color: var(--snow);
 }
 
 .project-count {
@@ -1275,11 +1275,11 @@ main > :first-child {
     border-radius: inherit;
     background: conic-gradient(
         from var(--frame-angle),
-        var(--software),
+        var(--purple),
         rgba(255, 255, 255, 0.08) 25%,
-        var(--hardware) 50%,
+        var(--blue) 50%,
         rgba(255, 255, 255, 0.08) 75%,
-        var(--software)
+        var(--purple)
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -1823,13 +1823,13 @@ main > :first-child {
 }
 
 .action-primary {
-    border: 1px solid var(--accent);
-    background-color: var(--accent);
-    color: var(--void);
+    border: 1px solid transparent;
+    background: var(--gradient) border-box;
+    color: var(--snow);
 }
 
 .action-primary:hover {
-    background-color: color-mix(in srgb, var(--accent) 85%, white);
+    background: linear-gradient(100deg, #9638ff, #4279ff) border-box;
 }
 
 .action-outline {
