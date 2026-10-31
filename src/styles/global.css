@@ -2236,3 +2236,8 @@ button {
 .club-card.linked:hover {
     border-color: var(--accent);
 }
+
+/* shortcut: flips the white chart dark in CSS, re-export it dark if the source script is handy. */
+img[src$="local-llm-lab/cover.webp"] {
+    filter: invert(1) hue-rotate(180deg);
+}

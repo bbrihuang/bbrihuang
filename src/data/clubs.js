@@ -17,7 +17,7 @@ export const clubs = [
         logo: "/clubs/bu-ai-society.png",
         href: "https://www.buaisociety.com/",
         gallery: [
-            { src: "/projects/jethexa/robot.png", alt: "The JetHexa hexapod robot the simulation models." },
+            { src: "/projects/jethexa/cover.webp", alt: "The JetHexa hexapod robot the simulation models." },
             { src: "/projects/jethexa/ik-demo.png", alt: "The simulated hexapod standing in Gazebo." },
             { src: "/projects/local-llm-lab/cover.webp", alt: "Chart comparing plain and importance-matrix quantization." },
         ],
