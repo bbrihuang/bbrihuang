@@ -797,8 +797,7 @@ export const projects = [
             {
                 title: "Build and test",
                 text: [
-                    "The nozzle was 3D printed in ABS-type resin and hot-fire tested. Photos of the printed part and two hot-fire clips are below.",
-                    "TODO: propellant, burn duration, measured results, and what I would change."
+                    "The nozzle was 3D printed in ABS-type resin and hot-fire tested. Photos of the printed part and two hot-fire clips are below."
                 ],
                 gallery: [
                     {
@@ -824,10 +823,6 @@ export const projects = [
                         caption: "Hot-fire test, longer clip (about 29 s)"
                     }
                 ]
-            },
-            {
-                title: "What I learned",
-                text: "TODO: what I learned."
             }
         ]
     },
