@@ -2236,3 +2236,10 @@ img[src$="local-llm-lab/cover.webp"] {
     flex-wrap: wrap;
     gap: var(--space-md);
 }
+
+/* Shapes stay in the margins at full strength and fade behind the page column. */
+.shapes {
+    opacity: 0.7;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(50% - 760px), rgba(0, 0, 0, 0.45) calc(50% - 600px), rgba(0, 0, 0, 0.45) calc(50% + 600px), #000 calc(50% + 760px));
+    mask-image: linear-gradient(90deg, #000 calc(50% - 760px), rgba(0, 0, 0, 0.45) calc(50% - 600px), rgba(0, 0, 0, 0.45) calc(50% + 600px), #000 calc(50% + 760px));
+}
