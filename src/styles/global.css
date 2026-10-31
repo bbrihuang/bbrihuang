@@ -14,8 +14,7 @@
     --text: var(--snow);
     --software: #4ade80;
     --hardware: #fb923c;
-    --experience: #60a5fa;
-    --projects: #a78bfa;
+    --accent: #fb923c;
 
     --space-xs: 8px;
     --space-sm: 16px;
@@ -223,21 +222,20 @@ nav a {
     }
 }
 
-.grad-software,
+.grad-software {
+    color: var(--software);
+}
+
 .grad-hardware {
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    padding-right: 0.1em;
-    margin-right: -0.1em;
+    color: var(--hardware);
 }
 
 .grad-software {
-    background-image: linear-gradient(90deg, var(--software), #86efac);
+    background-image: linear-gradient(90deg, var(--accent), #86efac);
 }
 
 .grad-hardware {
-    background-image: linear-gradient(90deg, var(--hardware), #fbbf24);
+    background-image: linear-gradient(90deg, var(--accent), #fbbf24);
 }
 
 /* Background: a grey lift at the top, faint green and orange light, the
@@ -291,7 +289,7 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--software);
+    color: var(--snow);
 }
 
 .shapes {
@@ -384,7 +382,7 @@ nav a:hover {
 
 .terminal-command::before {
     content: "$ ";
-    color: var(--software);
+    color: var(--accent);
 }
 
 .terminal-reply {
@@ -443,7 +441,7 @@ nav a:hover {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--hardware);
+    color: var(--accent);
 }
 
 .case-lede {
@@ -505,7 +503,7 @@ nav a:hover {
     display: block;
     font-variant-numeric: tabular-nums;
     font-size: 1.25rem;
-    color: var(--hardware);
+    color: var(--accent);
 }
 
 .stat span {
@@ -592,32 +590,6 @@ nav a:hover {
     display: flex;
     align-items: center;
 }
-
-.section-title::before {
-    content: "";
-    width: 40px;
-    height: 4px;
-    margin-right: var(--space-sm);
-    border-radius: 0;
-    background-color: var(--line, var(--text));
-}
-
-.section-title::after {
-    content: "";
-    width: 14px;
-    height: 14px;
-    order: -1;
-    border: 3px solid var(--line, var(--text));
-    border-radius: 50%;
-    background-color: var(--bg);
-}
-
-#projects { --line: var(--projects); }
-#featured { --line: var(--projects); }
-#experience { --line: var(--experience); }
-#stack { --line: var(--software); }
-#education { --line: #cc0000; }
-#involvement { --line: var(--hardware); }
 
 /* Flat panels: an opaque-enough fill so the background shapes stay behind the
    text. The nav is the only glass on the site. Borders stay as set above. */
@@ -881,8 +853,8 @@ main > :first-child {
 }
 
 .job-tab[aria-selected="true"] {
-    border-color: color-mix(in srgb, var(--experience) 45%, transparent);
-    background-color: color-mix(in srgb, var(--experience) 14%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    background-color: color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .job-marker {
@@ -896,8 +868,8 @@ main > :first-child {
 }
 
 .job-tab[aria-selected="true"] .job-marker {
-    border-color: var(--experience);
-    background-color: var(--experience);
+    border-color: var(--accent);
+    background-color: var(--accent);
 }
 
 .job-tab img,
@@ -941,7 +913,7 @@ main > :first-child {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--software);
+    color: var(--accent);
 }
 
 .badge-current::before {
@@ -1000,7 +972,7 @@ main > :first-child {
 }
 
 .job-detail-header a:hover {
-    color: var(--experience);
+    color: var(--accent);
 }
 
 .job-org-note {
@@ -1056,7 +1028,7 @@ main > :first-child {
     left: 2px;
     width: 6px;
     height: 6px;
-    background-color: var(--experience);
+    background-color: var(--accent);
     transform: rotate(45deg);
 }
 
@@ -1136,7 +1108,7 @@ main > :first-child {
 }
 
 .filters button[aria-pressed="true"] {
-    background-color: var(--projects);
+    background-color: var(--accent);
     color: var(--void);
 }
 
@@ -1200,9 +1172,7 @@ main > :first-child {
     border-radius: 50%;
 }
 
-.terminal-bar span:nth-child(1) { background-color: #ef4444; }
-.terminal-bar span:nth-child(2) { background-color: #eab308; }
-.terminal-bar span:nth-child(3) { background-color: #22c55e; }
+.terminal-bar span:nth-child(-n + 3) { background-color: var(--slate); }
 
 .terminal-title {
     margin-left: auto;
@@ -1265,7 +1235,7 @@ main > :first-child {
 }
 
 .project-card.linked:hover .project-link {
-    color: var(--projects);
+    color: var(--accent);
 }
 
 /* Running text stays at a readable line length on the wide layout. */
@@ -1451,23 +1421,6 @@ main > :first-child {
     }
 }
 
-@keyframes line-draw {
-    from {
-        transform: scaleX(0);
-    }
-}
-
-@keyframes dot-pop {
-    from {
-        opacity: 0;
-        transform: scale(0.4);
-    }
-    60% {
-        opacity: 1;
-        transform: scale(1.15);
-    }
-}
-
 /* Default: a group's direct children rise in one after another. */
 .js-reveal :is(main > section:not(.hero), .page-header, .case-header):not(.is-in) > *,
 .js-reveal .case-body > :not(.is-in) {
@@ -1485,18 +1438,9 @@ main > :first-child {
 :is(main > section, .page-header, .case-header).is-in > :nth-child(5) { animation-delay: 360ms; }
 :is(main > section, .page-header, .case-header).is-in > :nth-child(6) { animation-delay: 440ms; }
 
-/* Section titles: the dot pops, the line draws out of it, the words slide in. */
+/* Section titles slide in. */
 :is(main > section, .page-header, .case-header).is-in > .section-title {
     animation: enter-left 600ms var(--ease-out) backwards;
-}
-
-.is-in > .section-title::after {
-    animation: dot-pop 500ms var(--ease-out) 60ms backwards;
-}
-
-.is-in > .section-title::before {
-    transform-origin: left;
-    animation: line-draw 600ms var(--ease-out) 180ms backwards;
 }
 
 /* Reduced motion: every entrance becomes a plain fade. */
@@ -1734,7 +1678,7 @@ main > :first-child {
 }
 
 .nav-copy.is-copied {
-    color: var(--software);
+    color: var(--accent);
 }
 
 .copy-bubble {
@@ -1748,7 +1692,7 @@ main > :first-child {
     font-variant-numeric: tabular-nums;
     font-size: 12px;
     white-space: nowrap;
-    color: var(--software);
+    color: var(--accent);
     opacity: 0;
     transform: translate(-50%, -4px);
     transition:
@@ -1798,7 +1742,7 @@ main > :first-child {
     margin-top: var(--space-md);
     font-weight: 600;
     text-decoration: none;
-    color: var(--projects);
+    color: var(--accent);
 }
 
 .all-projects span {
@@ -1893,13 +1837,13 @@ main > :first-child {
 }
 
 .action-primary {
-    border: 1px solid var(--projects);
-    background-color: var(--projects);
+    border: 1px solid var(--accent);
+    background-color: var(--accent);
     color: var(--void);
 }
 
 .action-primary:hover {
-    background-color: color-mix(in srgb, var(--projects) 85%, white);
+    background-color: color-mix(in srgb, var(--accent) 85%, white);
 }
 
 .action-outline {
@@ -2119,7 +2063,7 @@ main > :first-child {
 .project-card .project-heading .project-meta {
     font-size: 15px;
     font-weight: 700;
-    color: var(--projects);
+    color: var(--accent);
 }
 
 /* Project cards: the tech stack sits at the bottom, whatever the text length */
@@ -2285,16 +2229,16 @@ main > :first-child {
 .club-related a {
     display: inline-block;
     padding: 4px 12px;
-    border: 1px solid color-mix(in srgb, var(--projects) 45%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
     border-radius: 0;
     font-size: 14px;
     text-decoration: none;
-    color: var(--projects);
+    color: var(--accent);
     transition: background-color 0.2s ease;
 }
 
 .club-related a:hover {
-    background-color: color-mix(in srgb, var(--projects) 16%, transparent);
+    background-color: color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 /* Headings: one family, wider as they get more important. */
