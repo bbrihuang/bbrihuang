@@ -2275,3 +2275,8 @@ img[src$="local-llm-lab/cover.webp"] {
     clip-path: inset(50%);
     white-space: nowrap;
 }
+
+/* Running text stops at a readable length; images keep the full width. */
+.case-body > p {
+    max-width: 70ch;
+}
