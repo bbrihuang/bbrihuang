@@ -16,8 +16,6 @@
     --blue: #2f6bff;
     --accent: #b07cff;
     --gradient: linear-gradient(100deg, var(--purple), var(--blue));
-    /* Lighter stops so gradient text stays readable on the dark background. */
-    --gradient-text: linear-gradient(90deg, #b57bff, #7da6ff);
 
     --space-xs: 8px;
     --space-sm: 16px;
@@ -226,10 +224,7 @@ nav a {
 }
 
 .hero-gradient {
-    background-image: var(--gradient-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--accent);
 }
 
 /* Background: a grey lift at the top, faint purple and blue light, the
