@@ -113,7 +113,7 @@ section {
     padding: var(--space-md);
     background-color: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 0;
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -154,7 +154,7 @@ section {
     padding: 4px 12px;
     background-color: rgba(255, 255, 255, 0.055);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 9999px;
+    border-radius: 0;
     font-variant-numeric: tabular-nums;
     font-size: 13px;
 }
@@ -377,7 +377,7 @@ nav a:hover {
     padding: 0 var(--space-md) var(--space-md);
     background-color: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 0;
     font-family: "IBM Plex Mono", monospace;
     font-size: 14px;
 }
@@ -485,7 +485,7 @@ nav a:hover {
     width: 100%;
     margin: var(--space-xl) 0 var(--space-lg);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .stat-grid {
@@ -498,7 +498,7 @@ nav a:hover {
     padding: var(--space-md);
     background-color: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .stat strong {
@@ -538,7 +538,7 @@ nav a:hover {
     height: 100%;
     object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 
@@ -598,7 +598,7 @@ nav a:hover {
     width: 40px;
     height: 4px;
     margin-right: var(--space-sm);
-    border-radius: 0 2px 2px 0;
+    border-radius: 0;
     background-color: var(--line, var(--text));
 }
 
@@ -635,7 +635,7 @@ nav a:hover {
         0 18px 40px -18px rgba(0, 0, 0, 0.7);
 }
 
-/* Floating pill nav, pinned to the top */
+/* Floating nav, pinned to the top */
 html {
     scroll-padding-top: 88px;
 }
@@ -666,7 +666,7 @@ main > :first-child {
     height: 56px;
     padding: 0 8px 0 20px;
     border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 9999px;
+    border-radius: 0;
     background: linear-gradient(180deg, rgba(28, 28, 31, 0.72), rgba(20, 20, 22, 0.62));
     -webkit-backdrop-filter: blur(24px) saturate(150%);
     backdrop-filter: blur(24px) saturate(150%);
@@ -691,7 +691,7 @@ main > :first-child {
     align-items: center;
     height: 40px;
     padding: 0 14px;
-    border-radius: 9999px;
+    border-radius: 0;
     font-size: 15px;
     color: var(--fog);
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -705,7 +705,6 @@ main > :first-child {
 .site-header nav ul a[aria-current="page"] {
     background-color: var(--snow);
     color: var(--void);
-    box-shadow: 0 6px 20px -6px rgba(255, 255, 255, 0.5);
 }
 
 .nav-socials {
@@ -719,7 +718,7 @@ main > :first-child {
     place-items: center;
     width: 40px;
     height: 40px;
-    border-radius: 9999px;
+    border-radius: 0;
     color: var(--fog);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -845,7 +844,7 @@ main > :first-child {
 .job-list,
 .job-detail {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 .job-list {
@@ -876,7 +875,7 @@ main > :first-child {
     width: 100%;
     padding: var(--space-sm) var(--space-sm) var(--space-sm) 8px;
     border: 1px solid transparent;
-    border-radius: 8px;
+    border-radius: 0;
     background: none;
     color: var(--text);
     font: inherit;
@@ -912,7 +911,7 @@ main > :first-child {
 .job-tab img,
 .job-detail-header img {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 0;
     object-fit: cover;
 }
 
@@ -945,7 +944,7 @@ main > :first-child {
     gap: 6px;
     padding: 2px 8px;
     border: 1px solid rgba(74, 222, 128, 0.3);
-    border-radius: 9999px;
+    border-radius: 0;
     font-variant-numeric: tabular-nums;
     font-size: 11px;
     text-transform: uppercase;
@@ -1021,7 +1020,7 @@ main > :first-child {
     grid-template-columns: repeat(3, 1fr);
     margin: 0 0 var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    border-radius: 0;
 }
 
 .job-facts div {
@@ -1118,7 +1117,7 @@ main > :first-child {
     gap: 2px;
     padding: 4px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 9999px;
+    border-radius: 0;
     background-color: rgba(255, 255, 255, 0.04);
 }
 
@@ -1130,7 +1129,7 @@ main > :first-child {
     height: 36px;
     padding: 0 var(--space-sm);
     border: none;
-    border-radius: 9999px;
+    border-radius: 0;
     background: none;
     color: var(--fog);
     font: inherit;
@@ -1369,7 +1368,7 @@ main > :first-child {
     gap: 6px;
     padding: 4px 10px;
     border: 1px solid rgba(251, 191, 36, 0.45);
-    border-radius: 9999px;
+    border-radius: 0;
     background-color: rgba(11, 11, 12, 0.75);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
@@ -1725,7 +1724,7 @@ main > :first-child {
     height: 40px;
     padding: 0;
     border: none;
-    border-radius: 9999px;
+    border-radius: 0;
     background: none;
     color: var(--fog);
     cursor: copy;
@@ -1754,7 +1753,7 @@ main > :first-child {
     left: 50%;
     padding: 4px 10px;
     border: 1px solid rgba(74, 222, 128, 0.35);
-    border-radius: 9999px;
+    border-radius: 0;
     background-color: rgba(11, 11, 12, 0.9);
     font-variant-numeric: tabular-nums;
     font-size: 12px;
@@ -1893,7 +1892,7 @@ main > :first-child {
 }
 
 .hero-actions a {
-    border-radius: 8px;
+    border-radius: 0;
     font-weight: 600;
     text-decoration: none;
 }
@@ -1941,7 +1940,7 @@ main > :first-child {
     overflow: hidden;
     padding: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 .education::before {
@@ -1961,7 +1960,7 @@ main > :first-child {
     position: relative;
     flex-shrink: 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border-radius: 0;
 }
 
 .education h3,
@@ -2049,7 +2048,7 @@ main > :first-child {
     margin: 0;
     padding: var(--space-sm);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    border-radius: 0;
     background-color: rgba(255, 255, 255, 0.04);
 }
 
@@ -2109,7 +2108,7 @@ main > :first-child {
     object-fit: contain;
     background-color: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .gallery figcaption {
@@ -2182,7 +2181,7 @@ main > :first-child {
     break-inside: avoid;
     margin-bottom: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 0;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
 }
 
@@ -2225,7 +2224,7 @@ main > :first-child {
     width: 52px;
     height: 52px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border-radius: 0;
     object-fit: cover;
 }
 
@@ -2297,7 +2296,7 @@ main > :first-child {
     display: inline-block;
     padding: 4px 12px;
     border: 1px solid color-mix(in srgb, var(--projects) 45%, transparent);
-    border-radius: 9999px;
+    border-radius: 0;
     font-size: 14px;
     text-decoration: none;
     color: var(--projects);
