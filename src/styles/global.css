@@ -422,7 +422,7 @@ nav a:hover {
     font-weight: 800;
     font-stretch: 125%;
     text-transform: uppercase;
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
 }
