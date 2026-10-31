@@ -1,4 +1,4 @@
-// Clubs and activities, with cultural clubs last. Logos live in public/clubs/;
+// Clubs and activities, with cultural clubs and high school last. Logos live in public/clubs/;
 // a club with no logo gets an initials tile. `gallery` is a list of { src, alt }
 // photos, shown in place of the logo cover. `projects` are slugs from projects.js.
 export const clubs = [
@@ -61,5 +61,10 @@ export const clubs = [
         role: "Member",
         logo: "/clubs/bu-csa.png",
         href: "https://www.instagram.com/teamcsa/",
+    },
+    {
+        org: "Forest Hills High School",
+        role: "Boys Varsity Volleyball Captain",
+        initials: "FH",
     },
 ];
