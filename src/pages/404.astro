@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<Layout title="Page not found | Brian Huang" description="This page doesn’t exist on Brian Huang’s portfolio.">
+    <Nav />
+    <main id="main">
+        <PageHeader title="Page not found" lede="This page doesn’t exist or has moved." color="var(--text)" />
+        <div class="hero-actions">
+            <a class="action-primary" href="/">Back to home</a>
+            <a class="action-outline" href="/projects/">View projects</a>
+        </div>
+    </main>
+</Layout>
