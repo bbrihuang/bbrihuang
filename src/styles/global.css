@@ -1320,14 +1320,14 @@ main > :first-child {
     align-items: center;
     gap: 6px;
     padding: 4px 10px;
-    border: 1px solid rgba(251, 191, 36, 0.45);
+    border: 1px solid var(--accent);
     border-radius: 0;
     background-color: rgba(11, 11, 12, 0.75);
     font-variant-numeric: tabular-nums;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #fbbf24;
+    color: var(--accent);
 }
 
 /* Hover motion, mouse only: touch screens fire a hover on tap. */

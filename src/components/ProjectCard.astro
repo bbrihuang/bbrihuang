@@ -6,7 +6,7 @@ const { project } = Astro.props;
 
 <article class:list={["project-card", { featured: project.featured, linked: project.slug }]}>
     <div class="project-cover">
-        {project.featured && <span class="badge-featured"><span aria-hidden="true">&#9733;</span> Featured</span>}
+        {project.featured && <span class="badge-featured">Featured</span>}
         {project.cover && <img src={project.cover} alt={project.coverAlt} loading="lazy">}
     </div>
     <div class="project-body">
