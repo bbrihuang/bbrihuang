@@ -2220,3 +2220,24 @@ a,
 button {
     touch-action: manipulation;
 }
+
+/* Clubs with a page open it from anywhere on the card. */
+.club-card.linked {
+    position: relative;
+    transition: border-color 0.2s ease;
+}
+
+.club-card.linked .club-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.club-card.linked .club-related a {
+    position: relative;
+    z-index: 1;
+}
+
+.club-card.linked:hover {
+    border-color: var(--accent);
+}

@@ -15,7 +15,7 @@ const cards = clubs.map((club) => ({
     <h2 class="section-title">Involvement</h2>
     <ul class="clubs">
         {cards.map((club) => (
-            <li class="club-card">
+            <li class:list={["club-card", { linked: club.description }]}>
                 {club.gallery?.length > 0 && (
                     <div class="club-cover">
                         {club.gallery.map((photo, index) => (
@@ -26,7 +26,12 @@ const cards = clubs.map((club) => ({
                 <div class="club-body">
                     <div class="club-top">
                         <div class="club-text">
-                            {club.href
+                            {club.description
+                                ? <a class="club-link" href={`/involvement/${club.slug}/`}>
+                                    <span class="club-name">{club.org}</span>
+                                    <span class="club-arrow" aria-hidden="true">&rarr;</span>
+                                </a>
+                                : club.href
                                 ? <a class="club-link" href={club.href} target="_blank" rel="noopener noreferrer">
                                     <span class="club-name">{club.org}</span>
                                     <span class="club-arrow" aria-hidden="true">&nearr;</span>
