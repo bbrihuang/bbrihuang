@@ -7,7 +7,7 @@ export const clubs = [
     {
         org: "BU AI Society",
         slug: "bu-ai-society",
-        description: "I work in BU AI Society in two roles. As a robotics simulation developer, I build the simulation an 8-person team uses to train a walking gait for the JetHexa hexapod. As a researcher in the Local LLM Division, I run hands-on experiments on language models on my own PC.",
+        description: "At BU AI Society I work across robotics and local AI. I build the simulation an 8-person team uses to train a walking gait for the JetHexa hexapod, and in the Local LLM Division I run hands-on experiments on language models on my own PC.",
         achievements: [
             "Built a ROS 2 and Gazebo simulation of an 18-DOF hexapod robot with lidar, RGB-D camera, and IMU.",
             "Documented reproducible Docker, WSL, and VM setups for an 8-person team training a PPO walking gait.",
