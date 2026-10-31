@@ -1,0 +1,69 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import { clubs } from "../../data/clubs.js";
+import { projects } from "../../data/projects.js";
+
+// One page per club with a `description`. Clubs without one stay plain cards.
+export function getStaticPaths() {
+    return clubs
+        .filter((club) => club.slug && club.description)
+        .map((club) => ({ params: { slug: club.slug }, props: { club } }));
+}
+
+const { club } = Astro.props;
+const related = (club.projects ?? [])
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter(Boolean);
+---
+
+<Layout title={`${club.org} | Brian Huang`} description={club.description}>
+    <Nav />
+    <main class="case-study">
+        <header class="case-header">
+            <a class="back-link" href="/#involvement">&larr; Involvement</a>
+            <h1>{club.org}</h1>
+            <p class="case-lede">{club.role}</p>
+            {club.href && (
+                <p class="case-links">
+                    <a href={club.href} target="_blank" rel="noopener noreferrer">Visit {club.org}</a>
+                </p>
+            )}
+        </header>
+        <article class="case-body">
+            <h2>About</h2>
+            <p>{club.description}</p>
+            {club.achievements?.length > 0 && (
+                <>
+                    <h2>Achievements</h2>
+                    <ul class="points">
+                        {club.achievements.map((item) => <li><p>{item}</p></li>)}
+                    </ul>
+                </>
+            )}
+            {club.gallery?.length > 0 && (
+                <>
+                    <h2>Photos</h2>
+                    <div class="gallery">
+                        {club.gallery.map((photo) => (
+                            <figure>
+                                <img src={photo.src} alt={photo.alt} loading="lazy">
+                                <figcaption>{photo.alt}</figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                </>
+            )}
+            {related.length > 0 && (
+                <>
+                    <h2>Related projects</h2>
+                    <ul class="club-related">
+                        {related.map((project) => (
+                            <li><a href={`/projects/${project.slug}/`}>{project.title}</a></li>
+                        ))}
+                    </ul>
+                </>
+            )}
+        </article>
+    </main>
+</Layout>
