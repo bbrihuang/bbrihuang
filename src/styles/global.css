@@ -2230,3 +2230,9 @@ button {
 img[src$="local-llm-lab/cover.webp"] {
     filter: invert(1) hue-rotate(180deg);
 }
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
