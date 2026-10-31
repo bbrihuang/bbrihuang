@@ -1161,6 +1161,7 @@ main > :first-child {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     gap: var(--space-xl);
+    padding: var(--space-xl) 0;
 }
 
 .hero-side {
@@ -1279,7 +1280,7 @@ main > :first-child {
 
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
-    width: min(100%, 308px);
+    width: min(100%, 224px);
     margin-inline: auto;
     aspect-ratio: 1;
     position: relative;
