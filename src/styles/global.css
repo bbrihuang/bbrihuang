@@ -1786,6 +1786,10 @@ main > :first-child {
         height: 44px;
     }
 
+    .job-tab-top {
+        flex-wrap: wrap;
+    }
+
     .job-dates {
         white-space: nowrap;
     }
