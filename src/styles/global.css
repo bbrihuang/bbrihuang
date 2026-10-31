@@ -38,7 +38,7 @@ body {
     margin: 0;
     background-color: var(--bg);
     color: var(--text);
-    font-family: "Geist", sans-serif;
+    font-family: "Archivo", sans-serif;
     font-size: 17px;
     line-height: 1.6;
 }
@@ -75,15 +75,17 @@ section {
    with the text below. */
 .hero h1 {
     margin: 0 0 var(--space-xs) -0.05em;
-    font-family: "Satoshi", sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4.25rem);
-    font-weight: 700;
+    font-weight: 800;
+    font-stretch: 125%;
+    text-transform: uppercase;
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
     line-height: 0.98;
     letter-spacing: -0.04em;
 }
 
 .hero-role {
-    margin: 0;
+    margin: var(--space-xs) 0 0;
+    font-stretch: 110%;
     font-size: clamp(1.25rem, 2.4vw, 1.75rem);
     font-weight: 500;
     color: var(--fog);
@@ -132,7 +134,7 @@ section {
 
 .project-card .project-tag {
     margin: 0 0 var(--space-xs);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -153,13 +155,13 @@ section {
     background-color: rgba(255, 255, 255, 0.055);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 9999px;
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 13px;
 }
 
 .project-meta {
     margin: 0;
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 13px;
     color: var(--fog);
 }
@@ -376,7 +378,7 @@ nav a:hover {
     background-color: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    font-family: "Geist Mono", monospace;
+    font-family: "IBM Plex Mono", monospace;
     font-size: 14px;
 }
 
@@ -427,7 +429,9 @@ nav a:hover {
 
 .case-header h1 {
     margin: 0 0 var(--space-sm) -0.05em;
-    font-family: "Satoshi", sans-serif;
+    font-weight: 800;
+    font-stretch: 125%;
+    text-transform: uppercase;
     font-size: clamp(2.25rem, 5vw, 3.5rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -435,7 +439,7 @@ nav a:hover {
 
 .case-header .project-tag {
     margin: 0 0 var(--space-xs);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -499,7 +503,7 @@ nav a:hover {
 
 .stat strong {
     display: block;
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 1.25rem;
     color: var(--hardware);
 }
@@ -757,7 +761,7 @@ main > :first-child {
 
 .stack dt {
     padding-top: 4px;
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -815,9 +819,10 @@ main > :first-child {
 
 .page-header h1 {
     margin: 0 0 var(--space-sm) -0.05em;
-    font-family: "Satoshi", sans-serif;
-    font-size: clamp(3rem, 9vw, 6rem);
-    font-weight: 700;
+    font-weight: 800;
+    font-stretch: 125%;
+    text-transform: uppercase;
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--page-color);
@@ -927,7 +932,7 @@ main > :first-child {
 }
 
 .job-dates {
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -941,7 +946,7 @@ main > :first-child {
     padding: 2px 8px;
     border: 1px solid rgba(74, 222, 128, 0.3);
     border-radius: 9999px;
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1028,7 +1033,7 @@ main > :first-child {
 }
 
 .job-facts dt {
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -1146,7 +1151,7 @@ main > :first-child {
 
 .project-count {
     margin: var(--space-xs) 0 var(--space-md);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 13px;
     color: var(--steel);
 }
@@ -1368,7 +1373,7 @@ main > :first-child {
     background-color: rgba(11, 11, 12, 0.75);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1751,7 +1756,7 @@ main > :first-child {
     border: 1px solid rgba(74, 222, 128, 0.35);
     border-radius: 9999px;
     background-color: rgba(11, 11, 12, 0.9);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     white-space: nowrap;
     color: var(--software);
@@ -1993,7 +1998,7 @@ main > :first-child {
 }
 
 .education-date {
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -2053,7 +2058,7 @@ main > :first-child {
 }
 
 .flow-number {
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 12px;
     color: var(--steel);
 }
@@ -2228,7 +2233,7 @@ main > :first-child {
     display: grid;
     place-items: center;
     background-color: var(--ash);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 16px;
     font-weight: 600;
     color: var(--mist);
@@ -2238,7 +2243,7 @@ main > :first-child {
     display: grid;
     place-items: center;
     background-color: var(--ash);
-    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
     font-size: 20px;
     font-weight: 600;
     color: var(--mist);
@@ -2301,4 +2306,22 @@ main > :first-child {
 
 .club-related a:hover {
     background-color: color-mix(in srgb, var(--projects) 16%, transparent);
+}
+
+/* Headings: one family, wider as they get more important. */
+h2,
+h3,
+.site-header .nav-name {
+    font-stretch: 115%;
+}
+
+.section-title,
+.site-header .nav-name {
+    font-weight: 700;
+    font-stretch: 125%;
+    text-transform: uppercase;
+}
+
+.site-header .nav-name {
+    font-size: 14px;
 }
