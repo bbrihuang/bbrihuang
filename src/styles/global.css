@@ -1779,7 +1779,15 @@ main > :first-child {
     .nav-socials a,
     .nav-copy {
         width: 30px;
-        height: 30px;
+        height: 44px;
+    }
+
+    .site-header nav ul a {
+        height: 44px;
+    }
+
+    .job-dates {
+        white-space: nowrap;
     }
 }
 
