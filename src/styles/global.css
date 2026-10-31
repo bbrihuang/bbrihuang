@@ -1835,17 +1835,6 @@ main > :first-child {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-.action-text {
-    padding: 12px var(--space-xs);
-    color: var(--fog);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-.action-text:hover {
-    color: var(--text);
-}
-
 /* Education: a ruled row, not a card. */
 .education {
     display: grid;
