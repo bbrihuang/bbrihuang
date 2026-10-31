@@ -593,7 +593,6 @@ nav a:hover {
 
 /* Flat panels: an opaque-enough fill so the background shapes stay behind the
    text. The nav is the only glass on the site. Borders stay as set above. */
-.education,
 .project-card,
 .job-list,
 .job-detail,
@@ -1865,94 +1864,38 @@ main > :first-child {
     color: var(--text);
 }
 
-/* Education: logo with a soft BU-red glow, degree on the left, class year on the right */
+/* Education: a ruled row, not a card. */
 .education {
-    position: relative;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr) auto;
     gap: var(--space-md);
-    overflow: hidden;
-    padding: var(--space-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0;
-}
-
-.education::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -40px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(204, 0, 0, 0.22), transparent 65%);
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-.education img {
-    position: relative;
-    flex-shrink: 0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0;
+    align-items: baseline;
+    padding: var(--space-sm) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .education h3,
 .education p {
     margin: 0;
-    line-height: 1.35;
-}
-
-.education-main {
-    position: relative;
-    flex: 1;
-    min-width: 0;
 }
 
 .education h3 {
-    font-size: 1.25rem;
-    letter-spacing: -0.01em;
+    font-size: 1.125rem;
 }
 
-.education-main p {
-    margin-top: 4px;
+.education p {
     color: var(--fog);
 }
 
 .education-when {
-    flex-shrink: 0;
-    padding-left: var(--space-md);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: right;
-}
-
-.education-class {
-    font-weight: 600;
-}
-
-.education-date {
     font-variant-numeric: tabular-nums;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--fog);
 }
 
-@media (max-width: 560px) {
+@media (max-width: 760px) {
     .education {
-        flex-wrap: wrap;
-    }
-
-    .education-main {
-        flex-basis: calc(100% - 56px - var(--space-md));
-    }
-
-    .education-when {
-        width: 100%;
-        padding: var(--space-sm) 0 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        border-left: none;
-        text-align: left;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2px;
     }
 }
 
