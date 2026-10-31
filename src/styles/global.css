@@ -76,16 +76,23 @@ section {
 .hero h1 {
     margin: 0 0 var(--space-xs) -0.05em;
     font-family: "Satoshi", sans-serif;
-    font-size: clamp(2.75rem, 7vw, 6.25rem);
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
     font-weight: 700;
     line-height: 0.98;
     letter-spacing: -0.04em;
 }
 
+.hero-role {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 500;
+    color: var(--fog);
+}
+
 .hero-intro {
     max-width: 640px;
     margin: var(--space-md) 0 0;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--fog);
 }
 
@@ -1366,21 +1373,6 @@ main > :first-child {
     color: #fbbf24;
 }
 
-/* Hero greeting: the name comes first */
-.hero-greeting {
-    margin: 0 0 var(--space-sm);
-    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-    font-weight: 500;
-    color: var(--fog);
-}
-
-.hero-name {
-    font-family: "Satoshi", sans-serif;
-    font-weight: 700;
-    color: var(--text);
-}
-
-
 /* Hover motion, mouse only: touch screens fire a hover on tap. */
 @media (hover: hover) and (pointer: fine) {
     .project-card:hover {
@@ -1430,27 +1422,6 @@ main > :first-child {
     }
 }
 
-/* A single wave next to the greeting, once the entrance has settled. */
-.wave {
-    display: inline-block;
-    transform-origin: 70% 80%;
-    animation: wave 1200ms var(--ease-in-out) 700ms 1 both;
-}
-
-@keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    15% { transform: rotate(14deg); }
-    30% { transform: rotate(-8deg); }
-    45% { transform: rotate(14deg); }
-    60% { transform: rotate(-4deg); }
-    75% { transform: rotate(10deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .wave {
-        animation: none;
-    }
-}
 
 
 #terminal-output {
