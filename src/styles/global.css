@@ -14,7 +14,9 @@
     --text: var(--snow);
     --software: #4ade80;
     --hardware: #fb923c;
-    --accent: #fb923c;
+    --purple: #871fff;
+    --blue: #2f6bff;
+    --accent: #b07cff;
 
     --space-xs: 8px;
     --space-sm: 16px;
@@ -898,7 +900,7 @@ main > :first-child {
     align-items: center;
     gap: 6px;
     padding: 2px 8px;
-    border: 1px solid rgba(74, 222, 128, 0.3);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
     border-radius: 0;
     font-variant-numeric: tabular-nums;
     font-size: 11px;
@@ -1670,7 +1672,7 @@ main > :first-child {
     top: calc(100% + 10px);
     left: 50%;
     padding: 4px 10px;
-    border: 1px solid rgba(74, 222, 128, 0.35);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
     border-radius: 0;
     background-color: rgba(11, 11, 12, 0.9);
     font-variant-numeric: tabular-nums;
@@ -2194,8 +2196,8 @@ html {
 }
 
 ::selection {
-    background-color: var(--accent);
-    color: var(--void);
+    background-color: var(--purple);
+    color: var(--snow);
 }
 
 :focus-visible {
