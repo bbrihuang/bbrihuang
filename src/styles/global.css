@@ -1161,6 +1161,7 @@ main > :first-child {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     gap: var(--space-xl);
+    align-items: center;
     padding: var(--space-xl) 0;
 }
 
