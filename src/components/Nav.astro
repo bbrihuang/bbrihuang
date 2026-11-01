@@ -23,7 +23,11 @@ const socials = [
 
 // Home only matches the home page; the others also match their subpages.
 const path = Astro.url.pathname;
-const isCurrent = (href) => (href === "/" ? path === "/" : path.startsWith(href.slice(0, -1)));
+const isCurrent = (href) => {
+    if (href === "/") return path === "/";
+    // A section link also marks that section's own pages, like /involvement/burpg/.
+    return path.startsWith(href.includes("#") ? `/${href.split("#")[1]}/` : href);
+};
 ---
 
 <header class="site-header">
