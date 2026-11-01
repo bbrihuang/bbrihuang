@@ -5,6 +5,10 @@ import Backdrop from "../components/Backdrop.astro";
 import Footer from "../components/Footer.astro";
 
 const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const image = new URL("/og.png", Astro.site);
+// Search results cut off around 160 characters, so long summaries use their first sentence.
+const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : description;
 ---
 
 <!doctype html>
@@ -12,9 +16,13 @@ const { title, description } = Astro.props;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content={description}>
+    <meta name="description" content={summary}>
     <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
+    <meta property="og:description" content={summary}>
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content={image}>
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href={canonical}>
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#0b0b0c">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
