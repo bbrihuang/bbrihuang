@@ -14,8 +14,8 @@ const cards = clubs.map((club) => ({
 <section id="involvement">
     <h2 class="section-title">Involvement</h2>
     <ul class="clubs">
-        {cards.map((club) => (
-            <li class:list={["club-card", { linked: club.description }]}>
+        {cards.map((club, index) => (
+            <li class:list={["club-card", { linked: club.description }]} style={`--i: ${index}`}>
                 {club.gallery?.length > 0 && (
                     <div class="club-cover">
                         {club.gallery.map((photo, index) => (

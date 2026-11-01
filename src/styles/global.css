@@ -1444,22 +1444,14 @@ main > :first-child {
     animation: none;
 }
 
-.js-reveal #involvement:not(.is-in) .clubs li {
+.js-reveal #involvement:not(.is-in) .clubs > li {
     opacity: 0;
 }
 
-#involvement.is-in .clubs li {
+#involvement.is-in .clubs > li {
     animation: enter-up 600ms var(--ease-out) backwards;
+    animation-delay: calc(100ms + var(--i) * 45ms);
 }
-
-#involvement.is-in .clubs li:nth-child(1) { animation-delay: 100ms; }
-#involvement.is-in .clubs li:nth-child(2) { animation-delay: 145ms; }
-#involvement.is-in .clubs li:nth-child(3) { animation-delay: 190ms; }
-#involvement.is-in .clubs li:nth-child(4) { animation-delay: 235ms; }
-#involvement.is-in .clubs li:nth-child(5) { animation-delay: 280ms; }
-#involvement.is-in .clubs li:nth-child(6) { animation-delay: 325ms; }
-#involvement.is-in .clubs li:nth-child(7) { animation-delay: 370ms; }
-#involvement.is-in .clubs li:nth-child(8) { animation-delay: 415ms; }
 
 .photo-card {
     animation: photo-in 900ms var(--ease-out) 350ms backwards;
