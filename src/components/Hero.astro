@@ -1,3 +1,7 @@
+---
+import { terminalScript } from "../data/terminal.js";
+---
+
 <section class="hero">
     <div class="hero-main">
         <h1>Brian Huang</h1>
@@ -22,7 +26,17 @@
                 <span></span><span></span><span></span>
                 <span class="terminal-title">brian@portfolio ~</span>
             </div>
-            <div id="terminal-output"></div>
+            <div id="terminal-output">
+                <!-- Without JavaScript the lines simply show; main.js replaces them with typing. -->
+                <div class="terminal-static">
+                    {terminalScript.map((step) => (
+                        <>
+                            <div class="terminal-command">{step.command}</div>
+                            <div class="terminal-reply">{step.reply}</div>
+                        </>
+                    ))}
+                </div>
+            </div>
         </div>
     </div>
 </section>

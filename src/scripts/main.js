@@ -1,3 +1,5 @@
+import { terminalScript } from "../data/terminal.js";
+
 import { layoutFor } from "./shape-layouts.js";
 
 const shapes = document.querySelectorAll(".shape");
@@ -44,11 +46,6 @@ function placeShapes() {
     });
 }
 
-const terminalScript = [
-    { command: "cat current-build.txt", reply: "JetHexa: hexapod robot, simulated in ROS 2 and Gazebo" },
-    { command: "cat latest-result.txt", reply: "2-bit local LLM: importance matrix cut damage about 4x" },
-];
-
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -63,6 +60,8 @@ function addLine(output, className, text) {
 }
 
 async function runTerminal(output) {
+    // Wait for the box to finish fading in, so the first command is seen.
+    await sleep(900);
     for (const step of terminalScript) {
         const line = addLine(output, "terminal-command", "");
         const typed = document.createElement("span");
@@ -72,13 +71,13 @@ async function runTerminal(output) {
         for (const character of step.command) {
             typed.textContent += character;
             output.scrollTop = output.scrollHeight;
-            await sleep(70);
+            await sleep(35 + Math.random() * 50);
         }
 
         typed.classList.remove("typing");
-        await sleep(300);
+        await sleep(200);
         addLine(output, "terminal-reply", step.reply);
-        await sleep(600);
+        await sleep(450);
     }
 }
 
@@ -92,8 +91,16 @@ function showTerminalAtOnce(output) {
 function startTerminal() {
     const output = document.querySelector("#terminal-output");
     if (!output) return;
+    output.replaceChildren();
 
-    if (reduceMotion.matches) {
+    // Typing is a first-visit touch; coming back to Home shouldn't mean waiting again.
+    let seen = false;
+    try {
+        seen = sessionStorage.getItem("terminal-seen") === "1";
+        sessionStorage.setItem("terminal-seen", "1");
+    } catch {}
+
+    if (reduceMotion.matches || seen) {
         showTerminalAtOnce(output);
     } else {
         const observer = new IntersectionObserver((entries) => {

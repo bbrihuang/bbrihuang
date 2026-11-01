@@ -2360,3 +2360,7 @@ img[src$="local-llm-lab/cover.webp"] {
 #projects.is-in.is-filtered .project-slot:nth-child(n) {
     animation: fade-in 150ms var(--ease-out);
 }
+
+.js-reveal .terminal-static {
+    visibility: hidden;
+}
