@@ -256,7 +256,8 @@ export const projects = [
                         caption: "The same tiny model run with 1, 2, 8 and 100 steps"
                     },
                     {
-                        src: "/projects/llm-research/flow_animation.gif",
+                        src: "/projects/llm-research/flow_animation.mp4",
+                        loop: true,
                         alt: "Animation titled “Following the learned field”, with a time counter. A round cloud of about two thousand blue dots, over a grid of grey arrows showing the learned field, is moved step by step into a shape.",
                         caption: "A tiny model turning noise into a shape, step by step"
                     }
