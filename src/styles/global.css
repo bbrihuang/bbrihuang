@@ -2313,8 +2313,10 @@ img[src$="local-llm-lab/cover.webp"] {
         padding-bottom: var(--space-xl);
     }
 
+    /* Offset with top, because the entrance animates transform. */
     .project-grid:not(:has(.project-slot[hidden])) .project-slot:nth-child(3n + 2) {
-        transform: translateY(var(--space-xl));
+        position: relative;
+        top: var(--space-xl);
     }
 }
 
