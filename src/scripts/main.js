@@ -154,6 +154,7 @@ function setUpProjectFilters() {
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
             const filter = button.dataset.filter;
+            document.querySelector("#projects").classList.add("is-filtered");
             buttons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
             let shown = 0;
             slots.forEach((slot) => {

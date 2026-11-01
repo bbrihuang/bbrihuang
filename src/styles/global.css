@@ -2352,3 +2352,8 @@ img[src$="local-llm-lab/cover.webp"] {
         visibility: hidden;
     }
 }
+
+/* Once filtered, cards answer at once instead of replaying the page entrance. */
+#projects.is-in.is-filtered .project-slot:nth-child(n) {
+    animation: fade-in 150ms var(--ease-out);
+}
