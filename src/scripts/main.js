@@ -213,6 +213,25 @@ function setUpClubPhotos() {
     });
 }
 
+// Top bar on Home: mark the section in the middle of the screen. Sections with
+// no link of their own, like the hero, count as Home.
+let sectionSpy;
+
+function setUpSectionSpy() {
+    sectionSpy?.disconnect();
+    if (window.location.pathname !== "/") return;
+
+    const links = [...document.querySelectorAll(".site-header nav ul a")];
+    sectionSpy = new IntersectionObserver((entries) => {
+        entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
+            const hash = `/#${entry.target.id}`;
+            const active = links.find((link) => link.getAttribute("href") === hash) ?? links[0];
+            links.forEach((link) => (link === active ? link.setAttribute("aria-current", "page") : link.removeAttribute("aria-current")));
+        });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll("main > section").forEach((section) => sectionSpy.observe(section));
+}
+
 // Section entrances. An inline script in the layout adds .js-reveal to <html>
 // before the page paints, which holds each section in its starting pose; a
 // section gets .is-in when it scrolls into view (straight away if it's
@@ -254,6 +273,7 @@ document.addEventListener("astro:page-load", () => {
     setUpReveal();
     setUpCopyEmail();
     setUpClubPhotos();
+    setUpSectionSpy();
     // Hiding the other Experience panels shrinks the page, so coming from another
     // page the section is no longer where the browser scrolled to. Land on it again.
     if (window.location.hash) {
