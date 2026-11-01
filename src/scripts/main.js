@@ -213,23 +213,40 @@ function setUpClubPhotos() {
     });
 }
 
-// Top bar on Home: mark the section in the middle of the screen. Sections with
-// no link of their own, like the hero, count as Home.
+// Top bar on Home: mark the section at the top of the screen. Sections with no
+// link of their own, like the hero, count as Home. A section that was clicked
+// stays marked until the visitor scrolls, because short sections near the end
+// of the page can't reach the top.
 let sectionSpy;
 
 function setUpSectionSpy() {
-    sectionSpy?.disconnect();
+    sectionSpy?.abort();
     if (window.location.pathname !== "/") return;
+    sectionSpy = new AbortController();
+    const { signal } = sectionSpy;
 
     const links = [...document.querySelectorAll(".site-header nav ul a")];
-    sectionSpy = new IntersectionObserver((entries) => {
-        entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
-            const hash = `/#${entry.target.id}`;
-            const active = links.find((link) => link.getAttribute("href") === hash) ?? links[0];
-            links.forEach((link) => (link === active ? link.setAttribute("aria-current", "page") : link.removeAttribute("aria-current")));
-        });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    document.querySelectorAll("main > section").forEach((section) => sectionSpy.observe(section));
+    const sections = [...document.querySelectorAll("main > section")];
+    const linkFor = (hash) => links.find((link) => link.getAttribute("href") === `/${hash}`);
+    const mark = (active) => links.forEach((link) => (link === active ? link.setAttribute("aria-current", "page") : link.removeAttribute("aria-current")));
+    let held = linkFor(window.location.hash);
+
+    function update() {
+        if (held) return mark(held);
+        const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+        const section = atEnd ? sections.at(-1) : sections.findLast((item) => item.getBoundingClientRect().top <= 120);
+        mark(section && linkFor(`#${section.id}`) || links[0]);
+    }
+
+    links.forEach((link) => link.addEventListener("click", () => {
+        held = link === links[0] ? undefined : link;
+        update();
+    }, { signal }));
+    ["wheel", "touchmove", "keydown", "pointerdown"].forEach((type) => {
+        window.addEventListener(type, () => { held = undefined; }, { signal, passive: true });
+    });
+    window.addEventListener("scroll", update, { signal, passive: true });
+    update();
 }
 
 // Section entrances. An inline script in the layout adds .js-reveal to <html>
