@@ -1,5 +1,6 @@
 // Tech stack, grouped from core skills to supporting tools. Each item has
-// either a simple-icons `icon` or a `glyph` from glyphs.js.
+// either a simple-icons `icon` (shown in its brand color) or a `glyph` from
+// glyphs.js with a `color`.
 export const stack = [
     {
         group: "Languages",
@@ -9,7 +10,7 @@ export const stack = [
             { name: "C", icon: "siC" },
             { name: "TypeScript", icon: "siTypescript" },
             { name: "JavaScript", icon: "siJavascript" },
-            { name: "SQL", glyph: "db" },
+            { name: "SQL", glyph: "db", color: "#336791" },
             { name: "HTML/CSS", icon: "siHtml5" },
         ],
     },
@@ -17,18 +18,18 @@ export const stack = [
         group: "Hardware & CAD",
         items: [
             { name: "Arduino", icon: "siArduino" },
-            { name: "SOLIDWORKS", glyph: "cad" },
-            { name: "Onshape", glyph: "cad" },
-            { name: "MATLAB", glyph: "wave" },
-            { name: "3D printing", glyph: "layers" },
-            { name: "PC assembly & overclocking", glyph: "chip" },
+            { name: "SOLIDWORKS", glyph: "cad", color: "#da291c" },
+            { name: "Onshape", glyph: "cad", color: "#00a6de" },
+            { name: "MATLAB", glyph: "wave", color: "#e16737" },
+            { name: "3D printing", glyph: "layers", color: "#f472b6" },
+            { name: "PC assembly & overclocking", glyph: "chip", color: "#a3e635" },
         ],
     },
     {
         group: "Robotics",
         items: [
             { name: "ROS 2", icon: "siRos" },
-            { name: "Gazebo", glyph: "gazebo" },
+            { name: "Gazebo", glyph: "gazebo", color: "#f58113" },
         ],
     },
     {
@@ -36,8 +37,8 @@ export const stack = [
         items: [
             { name: "Ollama / llama.cpp", icon: "siOllama" },
             { name: "PyTorch", icon: "siPytorch" },
-            { name: "Agents & tool calling", glyph: "agent" },
-            { name: "Embeddings & RAG", glyph: "vector" },
+            { name: "Agents & tool calling", glyph: "agent", color: "#a78bfa" },
+            { name: "Embeddings & RAG", glyph: "vector", color: "#34d399" },
         ],
     },
     {

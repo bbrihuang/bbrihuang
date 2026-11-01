@@ -2,13 +2,15 @@
 import * as icons from "simple-icons";
 import { stack } from "../data/stack.js";
 import { glyphs } from "../data/glyphs.js";
+import { onDark } from "../data/color.js";
 
 // Logo for one item: a filled brand mark, or a stroked glyph.
 function logo(item) {
     if (item.icon) {
-        return { svg: `<path d="${icons[item.icon].path}"/>`, filled: true };
+        const icon = icons[item.icon];
+        return { color: onDark(icon.hex), svg: `<path d="${icon.path}"/>`, filled: true };
     }
-    return { svg: glyphs[item.glyph], filled: false };
+    return { color: onDark(item.color), svg: glyphs[item.glyph], filled: false };
 }
 ---
 
@@ -29,6 +31,7 @@ function logo(item) {
                                         viewBox="0 0 24 24"
                                         width="14"
                                         height="14"
+                                        style={`color: ${mark.color}`}
                                         aria-hidden="true"
                                         set:html={mark.svg}
                                     />
