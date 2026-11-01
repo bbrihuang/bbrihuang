@@ -2020,8 +2020,9 @@ main > :first-child {
 /* Involvement: staggered cards with alternating photos, the logo beside the name, and links
    to related projects. Without JavaScript the first photo simply stays. */
 .clubs {
-    columns: 3 300px;
-    column-gap: var(--space-md);
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-md);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -2294,5 +2295,32 @@ img[src$="local-llm-lab/cover.webp"] {
 
     .project-grid:not(:has(.project-slot[hidden])) .project-slot:nth-child(3n + 2) {
         transform: translateY(var(--space-xl));
+    }
+}
+
+/* Clubs with photos lead two across; the rest sit three across, and a leftover
+   card fills its row so no hole is left. */
+.club-card {
+    grid-column: span 2;
+    margin-bottom: 0;
+}
+
+.club-card:has(.club-cover) {
+    grid-column: span 3;
+}
+
+.club-card:last-child:nth-child(3n) {
+    grid-column: 1 / -1;
+}
+
+.club-card:last-child:nth-child(3n + 1) {
+    grid-column: span 4;
+}
+
+@media (max-width: 800px) {
+    .club-card,
+    .club-card:has(.club-cover),
+    .club-card:last-child:nth-child(n) {
+        grid-column: 1 / -1;
     }
 }
