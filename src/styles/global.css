@@ -445,13 +445,6 @@ nav a:hover {
     margin: 0;
 }
 
-.case-body > h2,
-.case-body > p,
-.case-body > ul,
-.case-body > ol {
-    max-width: 760px;
-}
-
 .case-body h2 {
     margin: var(--space-2xl) 0 var(--space-sm);
     font-size: 1.75rem;
@@ -2244,7 +2237,7 @@ img[src$="local-llm-lab/cover.webp"] {
 .case-body > h2,
 .case-body > p,
 .case-body > ul,
-.case-body > ol {
+.case-body > ol:not(.flow) {
     max-width: 600px;
 }
 
@@ -2258,11 +2251,29 @@ img[src$="local-llm-lab/cover.webp"] {
     color: var(--accent);
 }
 
-/* Shown at its own size so a smaller image is never stretched and blurred. */
+/* Every cover is the full page width in one crop, so the right edge holds. */
 .case-hero {
-    width: auto;
-    max-width: 100%;
-    max-height: 560px;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+}
+
+.stat-grid,
+.flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 1000px) {
+    .stat-grid,
+    .flow {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .job-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 @media (min-width: 1000px) {
