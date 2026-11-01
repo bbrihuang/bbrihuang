@@ -744,6 +744,7 @@ main > :first-child {
 
 .stack-logo {
     flex-shrink: 0;
+    color: var(--fog);
     fill: currentColor;
 }
 
