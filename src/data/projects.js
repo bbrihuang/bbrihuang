@@ -106,7 +106,7 @@ export const projects = [
         areas: [
             "software"
         ],
-        tag: "Software (AI/ML)",
+        tag: "Software · AI/ML",
         description: "Ran twelve local LLM experiments on an RTX 5070, including a 2-bit model whose damage an importance matrix cut about 4x.",
         chips: [
             "llama.cpp",
@@ -273,7 +273,7 @@ export const projects = [
         areas: [
             "software"
         ],
-        tag: "Software (AI/ML)",
+        tag: "Software · AI/ML",
         description: "Turns live menus from BU’s four dining halls into meal plans that hit your macros.",
         chips: [
             "TypeScript",
@@ -569,7 +569,7 @@ export const projects = [
         areas: [
             "hardware"
         ],
-        tag: "Hardware (Aerospace)",
+        tag: "Hardware · Aerospace",
         description: "Designed, analyzed, printed and hot-fire tested an 80% bell nozzle for a small hybrid rocket motor.",
         chips: [
             "SOLIDWORKS",

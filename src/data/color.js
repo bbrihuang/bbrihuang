@@ -20,7 +20,7 @@ function mixWithWhite(hex, t) {
         .join("");
 }
 
-export function onDark(hex, minContrast = 3.4) {
+export function onDark(hex, minContrast = 4.5) {
     const base = hex.replace("#", "");
     // Black marks (Vercel, Ollama, ...) are monochrome brands: show them white.
     if (luminance(base) < 0.005) return "#e4e4e7";

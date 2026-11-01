@@ -2375,3 +2375,8 @@ img[src$="local-llm-lab/cover.webp"] {
 .js-reveal .terminal-static {
     visibility: hidden;
 }
+
+/* One tone across covers, so bright photos sit with the dark ones. */
+.project-cover img:not([src$="local-llm-lab/cover.webp"]) {
+    filter: brightness(0.88);
+}
