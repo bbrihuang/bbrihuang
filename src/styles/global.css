@@ -2168,6 +2168,7 @@ img[src$="local-llm-lab/cover.webp"] {
 
 /* Every cover is the full page width in one crop, so the right edge holds. */
 .case-hero {
+    height: auto;
     aspect-ratio: 2 / 1;
     object-fit: cover;
 }

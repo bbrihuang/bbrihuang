@@ -2,6 +2,8 @@
 // A project's write-up from src/data/projects.js. Each section has a title and
 // any of: text, flow (pipeline steps), stats, points and gallery. Everything
 // sits directly in .case-body so it matches the Markdown case studies.
+import { imageSize } from "../data/imageSize.js";
+
 const { project } = Astro.props;
 const asList = (value) => (value == null ? [] : Array.isArray(value) ? value : [value]);
 const point = (item) => (typeof item === "string" ? { text: item } : item);
@@ -12,9 +14,13 @@ const sections = [
     ...(project.caseStudy ?? []),
     ...(project.gallery?.length ? [{ title: "Gallery", gallery: project.gallery }] : []),
 ];
+const cover = project.cover && await imageSize(project.cover);
+const sizes = Object.fromEntries(await Promise.all(
+    sections.flatMap((section) => section.gallery ?? []).filter((item) => !isVideo(item.src)).map(async (item) => [item.src, await imageSize(item.src)]),
+));
 ---
 
-<img class="case-hero" src={project.cover} alt={project.coverAlt}>
+<img class="case-hero" src={project.cover} alt={project.coverAlt} width={cover?.width} height={cover?.height}>
 
 {sections.map((section) => (
     <>
@@ -57,7 +63,7 @@ const sections = [
                     <figure>
                         {isVideo(item.src)
                             ? <video src={item.src} poster={item.poster} aria-label={item.alt} controls preload="metadata" playsinline autoplay={item.loop} loop={item.loop} muted={item.loop}></video>
-                            : <img src={item.src} alt={item.alt} loading="lazy">}
+                            : <img src={item.src} alt={item.alt} width={sizes[item.src].width} height={sizes[item.src].height} loading="lazy">}
                         {item.caption && <figcaption>{item.caption}</figcaption>}
                     </figure>
                 ))}

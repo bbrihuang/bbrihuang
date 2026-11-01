@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import { clubs } from "../../data/clubs.js";
 import { projects } from "../../data/projects.js";
+import { imageSize } from "../../data/imageSize.js";
 
 // One page per club with a `description`. Clubs without one stay plain cards.
 export function getStaticPaths() {
@@ -15,6 +16,9 @@ const { club } = Astro.props;
 const related = (club.projects ?? [])
     .map((slug) => projects.find((project) => project.slug === slug))
     .filter(Boolean);
+const sizes = Object.fromEntries(await Promise.all(
+    (club.gallery ?? []).map(async (photo) => [photo.src, await imageSize(photo.src)]),
+));
 ---
 
 <Layout title={`${club.org} | Brian Huang`} description={club.description}>
@@ -47,7 +51,7 @@ const related = (club.projects ?? [])
                     <div class="gallery">
                         {club.gallery.map((photo) => (
                             <figure>
-                                <img src={photo.src} alt={photo.alt} loading="lazy">
+                                <img src={photo.src} alt={photo.alt} width={sizes[photo.src].width} height={sizes[photo.src].height} loading="lazy">
                                 <figcaption>{photo.alt}</figcaption>
                             </figure>
                         ))}
