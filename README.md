@@ -12,7 +12,7 @@ Robotics, embedded systems and AI inference: work where code controls or runs on
 
 - **Room Temperature Monitor.** An Arduino temperature monitor that sounds an alarm outside 60 to 80°F and runs about 7.8 hours on a 9V battery, in a 3D-printed ABS case I designed. ([repo](https://github.com/bbrihuang/temperature-sensor))
 - **Local LLM Research.** Twelve experiments running language models on my own RTX 5070, from quantization to inference engines. ([repo](https://github.com/bbrihuang/local-llm-lab))
-- **Project JetHexa.** A hexapod robot simulation with BU AI Society. Write-up coming soon.
+- **Project JetHexa.** A hexapod robot simulation with BU AI Society. ([write-up](https://www.bbrihuang.com/projects/jethexa/))
 
 ## Experience
 
