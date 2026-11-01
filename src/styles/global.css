@@ -2245,9 +2245,52 @@ img[src$="local-llm-lab/cover.webp"] {
     white-space: nowrap;
 }
 
-/* Running text stops at a readable length; images keep the full width. */
-.case-body > p {
-    max-width: 70ch;
+/* Project pages: one text width, with year, stack and links in a rail beside it. */
+.case-lede,
+.case-body > h2,
+.case-body > p,
+.case-body > ul,
+.case-body > ol {
+    max-width: 600px;
+}
+
+.case-header .project-tag {
+    color: var(--steel);
+}
+
+.case-header .project-meta {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* Shown at its own size so a smaller image is never stretched and blurred. */
+.case-hero {
+    width: auto;
+    max-width: 100%;
+    max-height: 560px;
+}
+
+@media (min-width: 1000px) {
+    .case-header {
+        display: grid;
+        grid-template-columns: 600px minmax(0, 1fr);
+        column-gap: var(--space-2xl);
+        align-items: start;
+    }
+
+    .case-header > * {
+        grid-column: 1 / -1;
+    }
+
+    .case-header > .case-lede {
+        grid-column: 1;
+        grid-row: span 3;
+    }
+
+    .case-header > :is(.project-meta, .chips, .case-links) {
+        grid-column: 2;
+    }
 }
 
 /* Project cards: one cover ratio and equal rows, with the middle column set one
