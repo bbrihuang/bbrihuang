@@ -1,11 +1,7 @@
 ---
 import { experience, formatRange, duration } from "../data/experience.js";
 
-const jobs = experience.map((job, index) => ({
-    ...job,
-    id: `job-${index}`,
-    current: job.end === null && job.badge !== false,
-}));
+const jobs = experience.map((job, index) => ({ ...job, id: `job-${index}` }));
 ---
 
 <!-- A list of roles on the left and the selected role's details on the
@@ -30,7 +26,6 @@ const jobs = experience.map((job, index) => ({
                 <span class="job-tab-text">
                     <span class="job-tab-top">
                         <span class="job-dates">{formatRange(job.start, job.end)}</span>
-                        {job.current && <span class="badge-current">Current</span>}
                     </span>
                     <span class="job-tab-role">{job.role}</span>
                     <span class="job-tab-org">{job.org}</span>

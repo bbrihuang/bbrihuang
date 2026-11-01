@@ -1,6 +1,5 @@
 // Work experience, in the order shown (current roles first). Dates are
-// "YYYY-MM" so durations can be worked out; `end: null` means a current role,
-// which gets a green CURRENT badge unless `badge: false`.
+// "YYYY-MM" so durations can be worked out; `end: null` means a current role,.
 export const experience = [
     {
         role: "Lead Software Engineer",

@@ -890,28 +890,6 @@ main > :first-child {
     color: var(--steel);
 }
 
-.badge-current {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 2px 8px;
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    border-radius: 0;
-    font-variant-numeric: tabular-nums;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-}
-
-.badge-current::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: currentColor;
-}
-
 .job-tab-role {
     font-weight: 600;
     line-height: 1.3;
