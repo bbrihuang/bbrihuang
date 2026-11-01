@@ -239,8 +239,14 @@ function setUpSectionSpy() {
         mark(section && linkFor(`#${section.id}`) || links[0]);
     }
 
-    links.forEach((link) => link.addEventListener("click", () => {
+    links.forEach((link) => link.addEventListener("click", (event) => {
         held = link === links[0] ? undefined : link;
+        if (!held) {
+            // Already on Home: glide to the top rather than reloading the hero.
+            event.preventDefault();
+            history.replaceState(null, "", "/");
+            window.scrollTo({ top: 0 });
+        }
         update();
     }, { signal }));
     ["wheel", "touchmove", "keydown", "pointerdown"].forEach((type) => {
