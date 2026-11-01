@@ -791,7 +791,6 @@ main > :first-child {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     gap: var(--space-md);
-    align-items: start;
 }
 
 .job-list,
@@ -2323,5 +2322,19 @@ img[src$="local-llm-lab/cover.webp"] {
     .club-card:has(.club-cover),
     .club-card:last-child:nth-child(n) {
         grid-column: 1 / -1;
+    }
+}
+
+/* Once a role is selected, all panels share one cell, so the tallest sets the
+   height, the list matches it and nothing below jumps. Without JavaScript no
+   panel is hidden and they stack as normal. */
+@media (min-width: 801px) {
+    .job-panels:has(.job-detail[hidden]) > .job-detail {
+        grid-area: 1 / 1;
+    }
+
+    .job-detail[hidden] {
+        display: block;
+        visibility: hidden;
     }
 }
