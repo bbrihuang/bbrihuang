@@ -17,12 +17,14 @@ const links = [
             <p class="project-tag">{frontmatter.tag}</p>
             <h1>{frontmatter.title}</h1>
             <p class="case-lede">{frontmatter.description}</p>
-            <p class="project-meta">{frontmatter.year}</p>
-            <ul class="chips">
-                {frontmatter.chips.map((chip) => (
-                    <li>{chip}</li>
-                ))}
-            </ul>
+            {frontmatter.year && <p class="project-meta">{frontmatter.year}</p>}
+            {frontmatter.chips.length > 0 && (
+                <ul class="chips">
+                    {frontmatter.chips.map((chip) => (
+                        <li>{chip}</li>
+                    ))}
+                </ul>
+            )}
             {links.length > 0 && (
                 <p class="case-links">
                     {links.map((link) => (

@@ -842,16 +842,16 @@ export const projects = [
         ]
     },
     {
-        title: "Finance Dashboard / Paycheck Splitter",
+        title: "Finance Dashboard",
         areas: [
             "software"
         ],
         tag: "Software",
-        description: "A personal finance dashboard with a paycheck splitter.",
+        description: "A personal finance dashboard with a paycheck splitter. Write-up in progress.",
         chips: [],
         slug: "finance-dashboard",
         cover: "/projects/finance-dashboard/cover.svg",
-        coverAlt: "Cover image for Finance Dashboard / Paycheck Splitter.",
-        summary: "A personal finance dashboard with a paycheck splitter. The full write-up is still being written."
+        coverAlt: "Cover image for Finance Dashboard.",
+        summary: "A personal finance dashboard with a paycheck splitter. Write-up in progress."
     },
 ];
