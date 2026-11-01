@@ -2016,20 +2016,6 @@ main > :first-child {
 
 /* Staggered cards: each is only as tall as its content. The Projects page packs
    them into columns; Home keeps its three in one row, starting level. */
-#projects .project-grid {
-    display: block;
-    columns: 3 300px;
-    column-gap: var(--space-md);
-}
-
-#projects .project-slot {
-    break-inside: avoid;
-    margin-bottom: var(--space-md);
-}
-
-#featured .project-grid {
-    align-items: start;
-}
 
 /* Involvement: staggered cards with alternating photos, the logo beside the name, and links
    to related projects. Without JavaScript the first photo simply stays. */
@@ -2283,4 +2269,30 @@ img[src$="local-llm-lab/cover.webp"] {
 /* Running text stops at a readable length; images keep the full width. */
 .case-body > p {
     max-width: 70ch;
+}
+
+/* Project cards: one cover ratio and equal rows, with the middle column set one
+   step lower so the stagger reads as a rule. Filtering moves cards between
+   columns, so a filtered grid sits flat. */
+.project-cover {
+    overflow: hidden;
+}
+
+.project-slot {
+    display: flex;
+}
+
+.project-slot > .project-card {
+    width: 100%;
+}
+
+@media (min-width: 1000px) {
+    :is(#featured, #projects) .project-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding-bottom: var(--space-xl);
+    }
+
+    .project-grid:not(:has(.project-slot[hidden])) .project-slot:nth-child(3n + 2) {
+        transform: translateY(var(--space-xl));
+    }
 }
