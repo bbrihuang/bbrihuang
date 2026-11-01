@@ -32,7 +32,6 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
     <title>{title}</title>
     <ClientRouter />
-    <Analytics />
     <!-- Hold sections in their starting pose before the first paint so their
          entrances play (see setUpReveal in main.js). If the main script never
          runs, show everything after 3 seconds. -->
@@ -51,6 +50,9 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <slot />
 
     <Footer />
+
+    <!-- In the body because a custom element in the head ends the head early. -->
+    <Analytics />
 
     <script>
         import "../scripts/main.js";
