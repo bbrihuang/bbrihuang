@@ -43,14 +43,7 @@ export const projects = [
         caseStudy: [
             {
                 title: "The problem",
-                text: "The JetHexa is a six-legged robot with 18 servos and a Jetson Nano onboard. Teaching it to walk by trial and error on the real robot is slow and hard on the hardware, so the team needed a simulation faithful enough to develop and check a gait first. Training itself happens in MuJoCo on the same robot model; Gazebo is where a policy gets checked against the full ROS 2 stack and sensors.",
-                gallery: [
-                    {
-                        src: "/projects/jethexa/robot.png",
-                        alt: "The green and black JetHexa hexapod robot with six jointed legs, a lidar on top, and an RGB-D camera on the front.",
-                        caption: "The JetHexa hexapod the simulation models"
-                    }
-                ]
+                text: "The JetHexa is a six-legged robot with 18 servos and a Jetson Nano onboard. Teaching it to walk by trial and error on the real robot is slow and hard on the hardware, so the team needed a simulation faithful enough to develop and check a gait first. Training itself happens in MuJoCo on the same robot model; Gazebo is where a policy gets checked against the full ROS 2 stack and sensors."
             },
             {
                 title: "How it works",
@@ -585,8 +578,8 @@ export const projects = [
         ],
         year: "2026",
         slug: "burpg-hip",
-        cover: "/projects/burpg-hip/cover-169.webp",
-        coverAlt: "Cover image for BURPG HIP: Rocket Nozzle Design.",
+        cover: "/projects/burpg-hip/nozzle-photo-1.webp",
+        coverAlt: "The 3D-printed amber resin nozzle on its flange, sitting on a lab bench.",
         links: [
             {
                 label: "Wikifactory project",
