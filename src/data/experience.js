@@ -21,7 +21,6 @@ export const experience = [
         role: "Founder",
         org: "Cubic Builds",
         orgNote: "Custom PC building business",
-        url: "https://cubicbuilds.vercel.app",
         logo: "/logos/cubic-builds.svg",
         place: "New York, NY",
         start: "2023-01",
