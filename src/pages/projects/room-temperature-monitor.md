@@ -52,10 +52,10 @@ Wires are color-coded: red for power, black for ground, orange for data, white f
 **Designing the case around the parts.** I modeled the enclosure in Onshape with cutouts for the LCD, switch, USB-B port, power jack, both LEDs and the buzzer, plus a separate battery holder, then checked the print in the slicer before printing in ABS.
 
 <div class="gallery">
-  <img src="/projects/room-temperature-monitor/cad-iso.webp" alt="CAD render of the closed enclosure with the LCD window on top.">
-  <img src="/projects/room-temperature-monitor/cad-interior.webp" alt="CAD render of the open enclosure showing the battery bay and Arduino mount.">
-  <img src="/projects/room-temperature-monitor/cad-top.webp" alt="Top view of the CAD model showing the battery and Arduino layout.">
-  <img src="/projects/room-temperature-monitor/print-preview.webp" alt="Slicer preview of the battery holder with support material.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/cad-iso.webp" alt="CAD render of the closed enclosure with the LCD window on top.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/cad-interior.webp" alt="CAD render of the open enclosure showing the battery bay and Arduino mount.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/cad-top.webp" alt="Top view of the CAD model showing the battery and Arduino layout.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/print-preview.webp" alt="Slicer preview of the battery holder with support material.">
 </div>
 
 ## Results
@@ -76,8 +76,8 @@ Testing the finished build showed me where it was weakest:
 ## Build photos
 
 <div class="gallery">
-  <img src="/projects/room-temperature-monitor/top.webp" alt="Top view of the finished monitor.">
-  <img src="/projects/room-temperature-monitor/interior-1.webp" alt="Inside the case: Arduino, wiring and battery.">
-  <img src="/projects/room-temperature-monitor/interior-2.webp" alt="Interior wiring close-up.">
-  <img src="/projects/room-temperature-monitor/interior-3.webp" alt="Interior from another angle.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/top.webp" alt="Top view of the finished monitor.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/interior-1.webp" alt="Inside the case: Arduino, wiring and battery.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/interior-2.webp" alt="Interior wiring close-up.">
+  <img loading="lazy" src="/projects/room-temperature-monitor/interior-3.webp" alt="Interior from another angle.">
 </div>
