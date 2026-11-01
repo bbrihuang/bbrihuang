@@ -197,7 +197,7 @@ function setUpCopyEmail() {
     });
 }
 
-// Involvement: each club's photos take turns behind its logo, one card at a
+// Involvement: each club's photos take turns, one card at a
 // time so they don't all change together. Hovering a card holds its photo.
 let clubTimers = [];
 

@@ -2,7 +2,6 @@
     --void: #0b0b0c;
     --coal: #111113;
     --ash: #19191c;
-    --graphite: #232327;
     --slate: #3a3a40;
     --steel: #8e8e98;
     --fog: #a1a1aa;
@@ -70,7 +69,6 @@ section {
     padding: var(--space-2xl) 0;
 }
 
-
 /* Large letters carry built-in left spacing, so pull them back to line up
    with the text below. */
 .hero h1 {
@@ -98,11 +96,6 @@ section {
     color: var(--fog);
 }
 
-
-
-
-
-
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -120,7 +113,6 @@ section {
 .project-card:hover {
     border-color: rgba(255, 255, 255, 0.2);
 }
-
 
 .project-card p {
     margin: 0;
@@ -188,7 +180,6 @@ nav a {
     text-decoration: none;
 }
 
-
 /* Hero entrance: greeting, headline and intro, then the two cards, each
    rising in a little after the one before. */
 @keyframes rise {
@@ -250,7 +241,7 @@ nav a {
 .backdrop::before {
     background:
         radial-gradient(circle at 15% 10%, rgba(135, 31, 255, 0.13), transparent 40%),
-        radial-gradient(circle at 85% 40%, rgba(47, 107, 255, 0.11), transparent 40%);
+        radial-gradient(circle at 85% 40%, rgba(42, 94, 240, 0.11), transparent 40%);
 }
 
 .backdrop-grid {
@@ -301,7 +292,7 @@ nav a:hover {
 
 .shape-pos {
     transform: translate3d(var(--left), var(--top), 0) rotate(var(--r, 0deg)) scale(var(--s, 1));
-    transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1.8s var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -360,7 +351,6 @@ nav a:hover {
 .terminal {
     display: flex;
     flex-direction: column;
-    height: 260px;
     padding: 0 var(--space-md) var(--space-md);
     background-color: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -521,7 +511,6 @@ nav a:hover {
     border-radius: 0;
 }
 
-
 /* Project card cover: one image, same 16:9 crop on every card */
 .project-card {
     overflow: hidden;
@@ -567,7 +556,7 @@ nav a:hover {
     object-fit: cover;
 }
 
-/* Section headings: a short colored "line" ending in a station dot */
+/* Section headings */
 .section-title {
     display: flex;
     align-items: center;
@@ -726,7 +715,6 @@ main > :first-child {
         gap: var(--space-xs);
     }
 }
-
 
 /* Tech stack logos: brand marks are filled, glyphs are drawn as lines */
 .stack .chips li {
@@ -1015,8 +1003,6 @@ main > :first-child {
     }
 }
 
-
-
 /* Projects: "More projects" heading with filter tabs */
 .projects-more {
     display: flex;
@@ -1081,7 +1067,6 @@ main > :first-child {
     display: none;
 }
 
-
 /* Home hero: headline and buttons on the left, profile card and terminal on the right */
 .hero {
     display: grid;
@@ -1102,17 +1087,6 @@ main > :first-child {
     flex: none;
     height: 252px;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* Terminal window bar: three dots and a title */
 .terminal-bar {
@@ -1202,7 +1176,6 @@ main > :first-child {
     margin: 0;
 }
 
-
 /* The card matches the left column's height; the photo crops to fill it. */
 .photo-card {
     width: min(100%, 224px);
@@ -1218,8 +1191,7 @@ main > :first-child {
     box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.8);
 }
 
-/* Photo frame: one effect only, a ring that turns slowly from green (software)
-   to orange (hardware). */
+/* Photo frame: one effect only, a ring that turns slowly from purple to blue. */
 @property --frame-angle {
     syntax: "<angle>";
     inherits: false;
@@ -1269,10 +1241,6 @@ main > :first-child {
     object-position: 50% 50%;
 }
 
-
-
-
-
 /* Featured badge, pinned to the corner of the featured card's image */
 .project-cover {
     position: relative;
@@ -1304,7 +1272,6 @@ main > :first-child {
     .project-card.featured:hover {
         transform: translateY(-4px);
     }
-
 
     .project-cover img {
         transition: transform 400ms var(--ease-out);
@@ -1348,8 +1315,6 @@ main > :first-child {
         transform: none;
     }
 }
-
-
 
 #terminal-output {
     contain: size;
@@ -1419,19 +1384,6 @@ main > :first-child {
 }
 
 /* Hero photo: fades up into its frame. Clubs cascade in Involvement. */
-@keyframes photo-in {
-    from {
-        opacity: 0;
-        transform: scale(0.97);
-    }
-}
-
-@keyframes photo-settle {
-    from {
-        transform: scale(1.06);
-    }
-}
-
 .js-reveal #involvement:not(.is-in) > .clubs {
     opacity: 1;
 }
@@ -1450,11 +1402,7 @@ main > :first-child {
 }
 
 .photo-card {
-    animation: photo-in 900ms var(--ease-out) 350ms backwards;
-}
-
-.photo-card img {
-    animation: photo-settle 1400ms var(--ease-out) 350ms backwards;
+    animation: fade-in 500ms var(--ease-out) 210ms backwards;
 }
 
 /* Tech stack: groups rise in turn, and each row's chips cascade after it. */
@@ -1488,15 +1436,8 @@ main > :first-child {
 }
 
 /* Page titles rise in, then the intro follows. */
-@keyframes title-rise {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-}
-
 .page-header.is-in h1 {
-    animation: title-rise 800ms var(--ease-out) backwards;
+    animation: enter-up 800ms var(--ease-out) backwards;
 }
 
 .js-reveal .page-header:not(.is-in) > .page-header-text {
@@ -1517,13 +1458,6 @@ main > :first-child {
 
 /* Experience: the panel appears, its timeline draws down, the roles rise in
    one by one, then the details slide in from the right. */
-@keyframes plop {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-}
-
 @keyframes rail-draw {
     from {
         transform: scaleY(0);
@@ -1559,18 +1493,12 @@ main > :first-child {
 }
 
 #experience.is-in .job-tab {
-    animation: plop 550ms var(--ease-out) backwards;
+    animation: enter-up 550ms var(--ease-out) backwards;
     animation-delay: calc(150ms + var(--i) * 110ms);
 }
 
 #experience.is-in .job-panels {
     animation: enter-right 700ms var(--ease-out) 450ms backwards;
-}
-
-/* Projects: the featured card rises with its image settling, then the grid
-   cards follow one at a time. */
-#projects.is-in > .project-card.featured .project-cover img {
-    animation: photo-settle 1200ms var(--ease-out) backwards;
 }
 
 .js-reveal #projects:not(.is-in) > .project-grid {
@@ -1672,7 +1600,6 @@ main > :first-child {
     }
 }
 
-
 /* Narrow screens: Skills, Education and Involvement step out so the rest fits on one line. */
 @media (max-width: 900px) {
     .nav-wide {
@@ -1764,8 +1691,6 @@ main > :first-child {
 .hero-side > .hero-top {
     animation: none;
 }
-
-
 
 /* Top bar links glide to their section. */
 @media (prefers-reduced-motion: no-preference) {
@@ -2043,16 +1968,6 @@ main > :first-child {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0;
     object-fit: cover;
-}
-
-.club-initials {
-    display: grid;
-    place-items: center;
-    background-color: var(--ash);
-    font-variant-numeric: tabular-nums;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--mist);
 }
 
 .club-initials {

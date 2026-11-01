@@ -1,6 +1,6 @@
 // Clubs and activities, with cultural clubs and high school last. Logos live in public/clubs/;
 // a club with no logo gets an initials tile. `gallery` is a list of { src, alt }
-// photos, shown in place of the logo cover. `projects` are slugs from projects.js.
+// photos, shown on its card. `projects` are slugs from projects.js.
 // A club with a `slug` and `description` gets its own page at /involvement/<slug>/,
 // with optional `achievements`, and its card opens that page.
 export const clubs = [
