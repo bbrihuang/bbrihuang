@@ -217,10 +217,10 @@ function setUpClubPhotos() {
     });
 }
 
-// Top bar on Home: mark the section at the top of the screen. Sections with no
-// link of their own, like the hero, count as Home. A section that was clicked
-// stays marked until the visitor scrolls, because short sections near the end
-// of the page can't reach the top.
+// Top bar on Home: mark the section at the top of the screen. Featured Projects
+// marks Projects; other sections with no link of their own, like the hero, count
+// as Home. A section that was clicked stays marked until the visitor scrolls,
+// because short sections near the end of the page can't reach the top.
 let sectionSpy;
 
 function setUpSectionSpy() {
@@ -232,6 +232,8 @@ function setUpSectionSpy() {
     const links = [...document.querySelectorAll(".site-header nav ul a")];
     const sections = [...document.querySelectorAll("main > section")];
     const linkFor = (hash) => links.find((link) => link.getAttribute("href") === `/${hash}`);
+    // The Featured Projects strip has no link of its own; it counts as the Projects page.
+    const projectsLink = links.find((link) => link.getAttribute("href") === "/projects/");
     const mark = (active) => links.forEach((link) => (link === active ? link.setAttribute("aria-current", "page") : link.removeAttribute("aria-current")));
     // No hash means nothing is held; linkFor("") would match the Home link and freeze the bar.
     let held = window.location.hash ? linkFor(window.location.hash) : undefined;
@@ -240,7 +242,7 @@ function setUpSectionSpy() {
         if (held) return mark(held);
         const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
         const section = atEnd ? sections.at(-1) : sections.findLast((item) => item.getBoundingClientRect().top <= 120);
-        mark(section && linkFor(`#${section.id}`) || links[0]);
+        mark(section && (linkFor(`#${section.id}`) || (section.id === "featured" && projectsLink)) || links[0]);
     }
 
     links.forEach((link) => link.addEventListener("click", (event) => {
