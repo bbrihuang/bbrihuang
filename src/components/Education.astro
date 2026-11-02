@@ -5,22 +5,26 @@ import { coursework } from "../data/education.js";
 <section id="education">
     <h2 class="section-title">Education</h2>
     <div class="education">
-        <h3><img src="/logos/bu-wordmark.png" alt="Boston University" width="500" height="224" loading="lazy"></h3>
-        <p>B.S. Computer Engineering · Boston, MA</p>
-        <p class="education-when">Class of 2029 · Expected May 2029</p>
+        <img src="/logos/bu-wordmark.png" alt="Boston University" width="500" height="224" loading="lazy">
+        <div>
+            <h3>B.S. Computer Engineering</h3>
+            <p>Boston, MA · Expected May 2029</p>
+        </div>
     </div>
-    <p class="rail-label coursework-title">Relevant coursework</p>
-    <dl class="stack coursework">
+    <h3 class="coursework-title">Relevant coursework</h3>
+    <dl class="coursework">
         {coursework.map((group) => (
-            <div class="stack-group">
+            <div class="course-group">
                 <dt>{group.group}</dt>
                 <dd>
-                    <ul class="chips">
+                    <ul class="course-list">
                         {group.courses.map((course) => (
                             <li>
-                                {course.name}
-                                <span class="course-code">{course.code}</span>
-                                {course.inProgress && <span class="course-status">In progress</span>}
+                                <span class="course-name">{course.name}</span>
+                                <span class="course-meta">
+                                    {course.code}
+                                    {course.inProgress && <span class="course-status">In progress</span>}
+                                </span>
                             </li>
                         ))}
                     </ul>
