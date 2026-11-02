@@ -9,20 +9,21 @@ const cards = clubs.map((club) => ({
         .map((slug) => projects.find((project) => project.slug === slug))
         .filter(Boolean),
 }));
+// Clubs with photos get cards; the rest sit in one ruled list.
+const featured = cards.filter((club) => club.gallery?.length > 0);
+const others = cards.filter((club) => !club.gallery?.length);
 ---
 
 <section id="involvement">
     <h2 class="section-title">Involvement</h2>
     <ul class="clubs">
-        {cards.map((club, index) => (
+        {featured.map((club, index) => (
             <li class:list={["club-card", { linked: club.description }]} style={`--i: ${index}`}>
-                {club.gallery?.length > 0 && (
-                    <div class="club-cover">
-                        {club.gallery.map((photo, index) => (
-                            <img class:list={["club-photo", { "is-active": index === 0 }]} src={photo.src} alt={photo.alt} loading="lazy">
-                        ))}
-                    </div>
-                )}
+                <div class="club-cover">
+                    {club.gallery.map((photo, index) => (
+                        <img class:list={["club-photo", { "is-active": index === 0 }]} src={photo.src} alt={photo.alt} loading="lazy">
+                    ))}
+                </div>
                 <div class="club-body">
                     <div class="club-top">
                         <div class="club-text">
@@ -50,6 +51,24 @@ const cards = clubs.map((club) => ({
                             ))}
                         </ul>
                     )}
+                </div>
+            </li>
+        ))}
+    </ul>
+    <ul class="club-list">
+        {others.map((club, index) => (
+            <li class="club-row" style={`--i: ${featured.length + index}`}>
+                {club.logo
+                    ? <img class="club-logo" src={club.logo} alt="" width="36" height="36" loading="lazy">
+                    : <span class="club-logo club-initials" aria-hidden="true">{club.initials}</span>}
+                <div class="club-text">
+                    {club.href
+                        ? <a class="club-link" href={club.href} target="_blank" rel="noopener noreferrer">
+                            <span class="club-name">{club.org}</span>
+                            <span class="club-arrow" aria-hidden="true">&nearr;</span>
+                        </a>
+                        : <span class="club-name">{club.org}</span>}
+                    <p class="club-role">{club.role}</p>
                 </div>
             </li>
         ))}

@@ -1385,19 +1385,19 @@ main > :first-child {
 }
 
 /* Hero photo: fades up into its frame. Clubs cascade in Involvement. */
-.js-reveal #involvement:not(.is-in) > .clubs {
+.js-reveal #involvement:not(.is-in) > :is(.clubs, .club-list) {
     opacity: 1;
 }
 
-#involvement.is-in > .clubs {
+#involvement.is-in > :is(.clubs, .club-list) {
     animation: none;
 }
 
-.js-reveal #involvement:not(.is-in) .clubs > li {
+.js-reveal #involvement:not(.is-in) :is(.clubs, .club-list) > li {
     opacity: 0;
 }
 
-#involvement.is-in .clubs > li {
+#involvement.is-in :is(.clubs, .club-list) > li {
     animation: enter-up 600ms var(--ease-out) backwards;
     animation-delay: calc(100ms + var(--i) * 45ms);
 }
@@ -1925,11 +1925,12 @@ main > :first-child {
 /* Staggered cards: each is only as tall as its content. The Projects page packs
    them into columns; Home keeps its three in one row, starting level. */
 
-/* Involvement: staggered cards with alternating photos, the logo beside the name, and links
-   to related projects. Without JavaScript the first photo simply stays. */
+/* Involvement: two photo cards with alternating photos, the logo beside the name and links
+   to related projects, then one ruled list for the rest. Without JavaScript the first photo
+   simply stays. */
 .clubs {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-md);
     margin: 0;
     padding: 0;
@@ -1938,8 +1939,6 @@ main > :first-child {
 
 .club-card {
     overflow: hidden;
-    break-inside: avoid;
-    margin-bottom: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0;
     background: rgba(17, 17, 19, 0.86);
@@ -2031,6 +2030,46 @@ main > :first-child {
     font-size: 15px;
     line-height: 1.45;
     color: var(--fog);
+}
+
+/* The rest of Involvement: ruled rows, the whole row opens the link. */
+.club-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-xl);
+    margin: var(--space-lg) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.club-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.club-row .club-logo {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+}
+
+.club-row .club-name {
+    font-size: 1rem;
+}
+
+.club-row .club-role {
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.club-row .club-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 }
 
 .club-related {
@@ -2260,30 +2299,10 @@ img[src$="local-llm-lab/cover.webp"] {
     }
 }
 
-/* Clubs with photos lead two across; the rest sit three across, and a leftover
-   card fills its row so no hole is left. */
-.club-card {
-    grid-column: span 2;
-    margin-bottom: 0;
-}
-
-.club-card:has(.club-cover) {
-    grid-column: span 3;
-}
-
-.club-card:last-child:nth-child(3n) {
-    grid-column: 1 / -1;
-}
-
-.club-card:last-child:nth-child(3n + 1) {
-    grid-column: span 4;
-}
-
 @media (max-width: 800px) {
-    .club-card,
-    .club-card:has(.club-cover),
-    .club-card:last-child:nth-child(n) {
-        grid-column: 1 / -1;
+    .clubs,
+    .club-list {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
