@@ -235,7 +235,8 @@ function setUpSectionSpy() {
     const sections = [...document.querySelectorAll("main > section")];
     const linkFor = (hash) => links.find((link) => link.getAttribute("href") === `/${hash}`);
     const mark = (active) => links.forEach((link) => (link === active ? link.setAttribute("aria-current", "page") : link.removeAttribute("aria-current")));
-    let held = linkFor(window.location.hash);
+    // No hash means nothing is held; linkFor("") would match the Home link and freeze the bar.
+    let held = window.location.hash ? linkFor(window.location.hash) : undefined;
 
     function update() {
         if (held) return mark(held);
