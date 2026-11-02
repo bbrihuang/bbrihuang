@@ -2406,9 +2406,24 @@ img[src$="local-llm-lab/cover.webp"] {
     }
 }
 
-/* Once filtered, cards answer at once instead of replaying the page entrance. */
-#projects.is-in.is-filtered .project-slot:nth-child(n) {
-    animation: fade-in 150ms var(--ease-out);
+/* Switching a filter: the cards on screen rise in again, a few at a time. It has its
+   own keyframes because CSS only restarts an animation when its name changes. */
+@keyframes filter-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+#projects.is-in .project-grid.is-switching .project-slot:not([hidden]) {
+    animation: filter-in 450ms var(--ease-out) backwards;
+    animation-delay: calc(min(var(--k, 0), 6) * 45ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #projects.is-in .project-grid.is-switching .project-slot:not([hidden]) {
+        animation-name: fade-in;
+    }
 }
 
 .js-reveal .terminal-static {

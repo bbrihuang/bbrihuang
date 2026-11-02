@@ -152,19 +152,27 @@ function setUpProjectFilters() {
 
     const buttons = [...group.querySelectorAll("button")];
     const slots = [...document.querySelectorAll(".project-slot")];
+    const grid = document.querySelector("#projects .project-grid");
     const count = document.querySelector(".project-count");
 
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
+            if (button.getAttribute("aria-pressed") === "true") return;
             const filter = button.dataset.filter;
-            document.querySelector("#projects").classList.add("is-filtered");
             buttons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
             let shown = 0;
             slots.forEach((slot) => {
                 slot.hidden = filter !== "all" && !slot.dataset.areas.split(" ").includes(filter);
-                if (!slot.hidden) shown += 1;
+                if (!slot.hidden) {
+                    slot.style.setProperty("--k", shown);
+                    shown += 1;
+                }
             });
             count.textContent = `${shown} project${shown === 1 ? "" : "s"}`;
+            // Replay the rise on every card that is showing, so the ones that stay answer too.
+            grid.classList.remove("is-switching");
+            void grid.offsetWidth;
+            grid.classList.add("is-switching");
         });
     });
 }
