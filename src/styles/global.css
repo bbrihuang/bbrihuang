@@ -1032,9 +1032,18 @@ main > :first-child {
     color: var(--text);
 }
 
+/* All wears the gradient; Software and Hardware each take one of its two colors. */
 .filters button[aria-pressed="true"] {
     background: var(--gradient);
     color: var(--snow);
+}
+
+.filters button[data-filter="software"][aria-pressed="true"] {
+    background: var(--blue);
+}
+
+.filters button[data-filter="hardware"][aria-pressed="true"] {
+    background: var(--purple);
 }
 
 .project-count {
