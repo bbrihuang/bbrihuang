@@ -693,9 +693,9 @@ main > :first-child {
 }
 
 .stack dt {
-    padding-top: 4px;
+    padding-top: 8px;
     font-variant-numeric: tabular-nums;
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--steel);
@@ -720,7 +720,9 @@ main > :first-child {
 .stack .chips li {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    padding: 6px 14px;
+    font-size: 14px;
 }
 
 .stack-logo {
@@ -1779,7 +1781,7 @@ main > :first-child {
 
 .course-group dt {
     padding-top: 2px;
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--steel);
