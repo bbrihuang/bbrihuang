@@ -2249,28 +2249,6 @@ img[src$="local-llm-lab/cover.webp"] {
     }
 }
 
-@media (min-width: 1000px) {
-    .case-header {
-        display: grid;
-        grid-template-columns: 600px minmax(0, 1fr);
-        column-gap: var(--space-2xl);
-        align-items: start;
-    }
-
-    .case-header > * {
-        grid-column: 1 / -1;
-    }
-
-    .case-header > .case-lede {
-        grid-column: 1;
-        grid-row: span 3;
-    }
-
-    .case-header > :is(.project-meta, .chips, .case-links) {
-        grid-column: 2;
-    }
-}
-
 /* Project pages: the rail (year, stack, links) stays beside the whole write-up, so
    the right side is never bare. Under 1000px it sits between the title and the text. */
 .case-rail {
@@ -2281,16 +2259,19 @@ img[src$="local-llm-lab/cover.webp"] {
     margin: 0 0 var(--space-sm);
 }
 
+.rail-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+}
+
 @media (min-width: 1000px) {
     .has-rail {
         display: grid;
         grid-template-columns: minmax(0, 1fr) 260px;
         column-gap: var(--space-2xl);
         align-items: start;
-    }
-
-    .has-rail .case-header {
-        display: block;
     }
 
     .has-rail > :is(.case-header, .case-body) {
