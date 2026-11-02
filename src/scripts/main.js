@@ -144,36 +144,64 @@ function setUpJobTabs() {
     select(tabs.find((tab) => tab.getAttribute("aria-expanded") === "true") ?? tabs[0]);
 }
 
-// Projects: show only software or hardware projects.
+// Projects: filter by topic tags (any selected) and a range of years.
 function setUpProjectFilters() {
-    const group = document.querySelector(".filters");
-    if (!group) return;
-    group.hidden = false;
+    const panel = document.querySelector(".filter-panel");
+    if (!panel) return;
+    panel.hidden = false;
 
-    const buttons = [...group.querySelectorAll("button")];
-    const slots = [...document.querySelectorAll(".project-slot")];
+    const tags = [...panel.querySelectorAll(".filter-tag")];
+    const from = panel.querySelector("#year-from");
+    const to = panel.querySelector("#year-to");
+    const clear = panel.querySelector(".filter-clear");
+    const count = panel.querySelector(".project-count");
+    const empty = document.querySelector(".projects-empty");
     const grid = document.querySelector("#projects .project-grid");
-    const count = document.querySelector(".project-count");
+    const slots = [...grid.querySelectorAll(".project-slot")];
+    const full = { from: Number(from.options[0].value), to: Number(to.options[to.options.length - 1].value) };
 
-    buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-            if (button.getAttribute("aria-pressed") === "true") return;
-            const filter = button.dataset.filter;
-            buttons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
-            let shown = 0;
-            slots.forEach((slot) => {
-                slot.hidden = filter !== "all" && !slot.dataset.areas.split(" ").includes(filter);
-                if (!slot.hidden) {
-                    slot.style.setProperty("--k", shown);
-                    shown += 1;
-                }
-            });
-            count.textContent = `${shown} project${shown === 1 ? "" : "s"}`;
-            // Replay the rise on every card that is showing, so the ones that stay answer too.
-            grid.classList.remove("is-switching");
-            void grid.offsetWidth;
-            grid.classList.add("is-switching");
+    function apply() {
+        const topics = tags.filter((tag) => tag.getAttribute("aria-pressed") === "true").map((tag) => tag.dataset.topic);
+        const low = Number(from.value);
+        const high = Number(to.value);
+        const narrowed = low > full.from || high < full.to;
+        let shown = 0;
+        slots.forEach((slot) => {
+            const topicMatch = !topics.length || slot.dataset.topics.split(" ").some((topic) => topics.includes(topic));
+            // A project with no year only shows while the whole range is selected.
+            const yearMatch = !narrowed || (slot.dataset.from && Number(slot.dataset.from) <= high && Number(slot.dataset.to) >= low);
+            slot.hidden = !(topicMatch && yearMatch);
+            if (!slot.hidden) {
+                slot.style.setProperty("--k", shown);
+                shown += 1;
+            }
         });
+        count.textContent = `${shown} project${shown === 1 ? "" : "s"}`;
+        clear.hidden = !topics.length && !narrowed;
+        empty.hidden = shown > 0;
+        // Replay the rise on every card that is showing, so the ones that stay answer too.
+        grid.classList.remove("is-switching");
+        void grid.offsetWidth;
+        grid.classList.add("is-switching");
+    }
+
+    tags.forEach((tag) => tag.addEventListener("click", () => {
+        tag.setAttribute("aria-pressed", String(tag.getAttribute("aria-pressed") !== "true"));
+        apply();
+    }));
+    from.addEventListener("change", () => {
+        if (Number(from.value) > Number(to.value)) to.value = from.value;
+        apply();
+    });
+    to.addEventListener("change", () => {
+        if (Number(to.value) < Number(from.value)) from.value = to.value;
+        apply();
+    });
+    clear.addEventListener("click", () => {
+        tags.forEach((tag) => tag.setAttribute("aria-pressed", "false"));
+        from.value = full.from;
+        to.value = full.to;
+        apply();
     });
 }
 

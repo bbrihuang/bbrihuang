@@ -986,71 +986,138 @@ main > :first-child {
 
 /* Projects: "More projects" heading with filter tabs */
 .projects-more {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
     margin-top: var(--space-xl);
 }
 
 .projects-more h2 {
-    margin: 0;
+    margin: 0 0 var(--space-sm);
     font-size: 1.75rem;
     font-weight: 600;
     letter-spacing: -0.02em;
 }
 
-.filters {
-    display: flex;
-    gap: 2px;
-    padding: 4px;
+/* One flat filter panel: topic tags, a year range, the count and a way to clear. */
+.filter-panel {
+    margin: 0 0 var(--space-md);
+    padding: 0 var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0;
-    background-color: rgba(255, 255, 255, 0.04);
+    background: rgba(17, 17, 19, 0.86);
 }
 
-.filters[hidden] {
-    display: none;
+.filter-row {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: var(--space-sm);
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.filters button {
-    height: 36px;
-    padding: 0 var(--space-sm);
-    border: none;
+.filter-label {
+    margin: 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+}
+
+.filter-tags,
+.filter-years {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.filter-tag,
+.filter-years select {
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 0;
-    background: none;
-    color: var(--fog);
-    font: inherit;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.filters button:hover {
+    background-color: transparent;
     color: var(--text);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
 }
 
-/* All wears the gradient; Software and Hardware each take one of its two colors. */
-.filters button[aria-pressed="true"] {
-    background: var(--gradient);
+.filter-tag {
+    padding: 0 var(--space-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-tag:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* A selected tag fills in: AI/ML takes the gradient, Software the blue, Hardware the purple. */
+.filter-tag[aria-pressed="true"] {
+    border-color: transparent;
     color: var(--snow);
 }
 
-.filters button[data-filter="software"][aria-pressed="true"] {
+.filter-tag[data-topic="ai-ml"][aria-pressed="true"] {
+    background: var(--gradient);
+}
+
+.filter-tag[data-topic="software"][aria-pressed="true"] {
     background: var(--blue);
 }
 
-.filters button[data-filter="hardware"][aria-pressed="true"] {
+.filter-tag[data-topic="hardware"][aria-pressed="true"] {
     background: var(--purple);
 }
 
+.filter-years select {
+    padding: 0 var(--space-sm);
+    background-color: var(--ash);
+    color-scheme: dark;
+    cursor: pointer;
+}
+
+.filter-years span {
+    color: var(--fog);
+}
+
+.filter-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+}
+
 .project-count {
-    margin: var(--space-xs) 0 var(--space-md);
+    margin: 0;
     font-variant-numeric: tabular-nums;
-    font-size: 13px;
-    color: var(--steel);
+    font-size: 14px;
+    color: var(--fog);
+}
+
+.filter-clear {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.projects-empty {
+    margin: var(--space-lg) 0;
+    color: var(--fog);
+}
+
+@media (max-width: 640px) {
+    .filter-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-xs);
+    }
 }
 
 .project-slot[hidden] {
@@ -1279,7 +1346,7 @@ main > :first-child {
 
 /* Press feedback: buttons give a little when clicked. */
 .hero-actions a,
-.filters button,
+.filter-tag,
 .job-tab,
 .nav-socials a,
 .site-header nav ul a {
@@ -1291,7 +1358,7 @@ main > :first-child {
 }
 
 .hero-actions a:active,
-.filters button:active,
+.filter-tag:active,
 .job-tab:active,
 .nav-socials a:active,
 .site-header nav ul a:active {

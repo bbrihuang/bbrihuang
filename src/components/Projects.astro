@@ -5,11 +5,28 @@ import { projects } from "../data/projects.js";
 const featured = projects.find((project) => project.featured);
 const others = projects.filter((project) => !project.featured);
 
-const filters = [
-    { value: "all", label: "All" },
+const topics = [
+    { value: "ai-ml", label: "AI/ML" },
     { value: "software", label: "Software" },
     { value: "hardware", label: "Hardware" },
 ];
+
+// A project's topics are its areas, plus AI/ML when its tag says so.
+const topicsOf = (project) => [...project.areas, ...(project.tag.includes("AI/ML") ? ["ai-ml"] : [])];
+
+// Years as numbers: "2026", "2025-2026" or "2024-Present".
+const thisYear = new Date().getFullYear();
+function spanOf(year) {
+    if (!year) return null;
+    const [start, end] = String(year).split("-");
+    return { from: Number(start), to: end === "Present" ? thisYear : Number(end ?? start) };
+}
+
+const slots = others.map((project) => ({ project, topics: topicsOf(project), span: spanOf(project.year) }));
+const spans = slots.map((slot) => slot.span).filter(Boolean);
+const first = Math.min(...spans.map((span) => span.from));
+const last = Math.max(...spans.map((span) => span.to));
+const years = Array.from({ length: last - first + 1 }, (_, index) => first + index);
 ---
 
 <section id="projects">
@@ -18,20 +35,45 @@ const filters = [
 
     <div class="projects-more">
         <h2>More projects</h2>
-        <!-- Filters only work with JavaScript, so they stay hidden without it. -->
-        <div class="filters" role="group" aria-label="Filter projects" hidden>
-            {filters.map((filter, index) => (
-                <button type="button" data-filter={filter.value} aria-pressed={index === 0 ? "true" : "false"}>
-                    {filter.label}
-                </button>
-            ))}
+    </div>
+
+    <!-- The filters only work with JavaScript, so they stay hidden without it. -->
+    <div class="filter-panel" role="group" aria-label="Filter projects" hidden>
+        <div class="filter-row">
+            <p class="filter-label" id="filter-topics-label">Topics</p>
+            <div class="filter-tags" role="group" aria-labelledby="filter-topics-label">
+                {topics.map((topic) => (
+                    <button type="button" class="filter-tag" data-topic={topic.value} aria-pressed="false">{topic.label}</button>
+                ))}
+            </div>
+        </div>
+        <div class="filter-row">
+            <p class="filter-label" id="filter-years-label">Years</p>
+            <div class="filter-years" role="group" aria-labelledby="filter-years-label">
+                <select id="year-from" aria-label="From year">
+                    {years.map((year, index) => <option value={year} selected={index === 0}>{year}</option>)}
+                </select>
+                <span aria-hidden="true">to</span>
+                <select id="year-to" aria-label="To year">
+                    {years.map((year, index) => <option value={year} selected={index === years.length - 1}>{year}</option>)}
+                </select>
+            </div>
+        </div>
+        <div class="filter-foot">
+            <p class="project-count" aria-live="polite">{others.length} projects</p>
+            <button type="button" class="filter-clear" hidden>Clear filters</button>
         </div>
     </div>
-    <p class="project-count" aria-live="polite">{others.length} projects</p>
+    <p class="projects-empty" hidden>No projects match those filters.</p>
 
     <div class="project-grid">
-        {others.map((project) => (
-            <div class="project-slot" data-areas={project.areas.join(" ")}>
+        {slots.map(({ project, topics, span }) => (
+            <div
+                class="project-slot"
+                data-topics={topics.join(" ")}
+                data-from={span?.from}
+                data-to={span?.to}
+            >
                 <ProjectCard project={project} />
             </div>
         ))}
