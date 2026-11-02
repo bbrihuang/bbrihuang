@@ -132,10 +132,8 @@ function setUpJobTabs() {
     tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
             select(tab, false);
-            // Stacked on narrow screens, so bring the details into view.
-            if (window.matchMedia("(max-width: 800px)").matches) {
-                document.getElementById(tab.getAttribute("aria-controls")).scrollIntoView({ block: "start" });
-            }
+            // On narrow screens each role opens under its own button, so keep that button in view.
+            if (window.matchMedia("(max-width: 800px)").matches) tab.scrollIntoView({ block: "start" });
         });
         tab.addEventListener("keydown", (event) => {
             const step = { ArrowDown: 1, ArrowUp: -1 }[event.key];

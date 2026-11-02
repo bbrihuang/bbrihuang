@@ -2355,6 +2355,38 @@ img[src$="local-llm-lab/cover.webp"] {
     }
 }
 
+/* Phones: no side-by-side. Each role is a button with its details opening right under it,
+   so the next role is never a long scroll away. */
+@media (max-width: 800px) {
+    .jobs {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .job-list,
+    .job-panels {
+        display: contents;
+    }
+
+    .job-tab {
+        order: calc(var(--i) * 2);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .job-detail {
+        order: calc(var(--i) * 2 + 1);
+    }
+
+    .js-reveal #experience:not(.is-in) .job-detail {
+        opacity: 0;
+    }
+
+    #experience.is-in .job-detail {
+        animation: fade-in 400ms var(--ease-out) backwards;
+    }
+}
+
 /* Once filtered, cards answer at once instead of replaying the page entrance. */
 #projects.is-in.is-filtered .project-slot:nth-child(n) {
     animation: fade-in 150ms var(--ease-out);

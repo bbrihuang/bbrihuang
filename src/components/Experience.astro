@@ -35,8 +35,8 @@ const jobs = experience.map((job, index) => ({ ...job, id: `job-${index}` }));
     </div>
 
     <div class="job-panels">
-        {jobs.map((job) => (
-            <article class="job-detail" id={job.id} role="tabpanel" aria-labelledby={`${job.id}-tab`}>
+        {jobs.map((job, index) => (
+            <article class="job-detail" style={`--i: ${index}`} id={job.id} role="tabpanel" aria-labelledby={`${job.id}-tab`}>
                 <header class="job-detail-header">
                     <img src={job.logo} alt="" width="64" height="64" loading="lazy">
                     <div>
