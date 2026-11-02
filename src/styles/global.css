@@ -2380,9 +2380,9 @@ img[src$="local-llm-lab/cover.webp"] {
     }
 }
 
-/* Project cards: one cover ratio and equal rows, with the middle column set one
-   step lower so the stagger reads as a rule. Filtering moves cards between
-   columns, so a filtered grid sits flat. */
+/* Project cards: one cover ratio and equal rows. On the Projects page the middle
+   column sits one step lower; filtering moves cards between columns, so a
+   filtered grid sits flat. The Home strip is always level. */
 .project-cover {
     overflow: hidden;
 }
@@ -2398,11 +2398,14 @@ img[src$="local-llm-lab/cover.webp"] {
 @media (min-width: 1000px) {
     :is(#featured, #projects) .project-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #projects .project-grid {
         padding-bottom: var(--space-xl);
     }
 
     /* Offset with top, because the entrance animates transform. */
-    .project-grid:not(:has(.project-slot[hidden])) .project-slot:nth-child(3n + 2) {
+    #projects .project-grid:not(:has(.project-slot[hidden])) .project-slot:nth-child(3n + 2) {
         position: relative;
         top: var(--space-xl);
     }
