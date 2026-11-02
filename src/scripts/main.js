@@ -113,37 +113,35 @@ function startTerminal() {
     }
 }
 
-// Experience: pick a role on the left to show its details on the right.
-// Up and down arrows move between roles.
+// Experience: each role is a button that opens its details (one at a time).
+// Up and down arrows move between the buttons.
 function setUpJobTabs() {
     const tabs = [...document.querySelectorAll(".job-tab")];
     if (!tabs.length) return;
 
-    function select(tab, focus) {
+    function select(tab) {
         tabs.forEach((other) => {
-            const selected = other === tab;
-            other.setAttribute("aria-selected", String(selected));
-            other.tabIndex = selected ? 0 : -1;
-            document.getElementById(other.getAttribute("aria-controls")).hidden = !selected;
+            const open = other === tab;
+            other.setAttribute("aria-expanded", String(open));
+            document.getElementById(other.getAttribute("aria-controls")).hidden = !open;
         });
-        if (focus) tab.focus();
     }
 
     tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
-            select(tab, false);
-            // On narrow screens each role opens under its own button, so keep that button in view.
+            select(tab);
+            // On narrow screens the details open under the button, so keep that button in view.
             if (window.matchMedia("(max-width: 800px)").matches) tab.scrollIntoView({ block: "start" });
         });
         tab.addEventListener("keydown", (event) => {
             const step = { ArrowDown: 1, ArrowUp: -1 }[event.key];
             if (!step) return;
             event.preventDefault();
-            select(tabs[(index + step + tabs.length) % tabs.length], true);
+            tabs[(index + step + tabs.length) % tabs.length].focus();
         });
     });
 
-    select(tabs.find((tab) => tab.getAttribute("aria-selected") === "true") ?? tabs[0], false);
+    select(tabs.find((tab) => tab.getAttribute("aria-expanded") === "true") ?? tabs[0]);
 }
 
 // Projects: show only software or hardware projects.

@@ -4,71 +4,65 @@ import { experience, formatRange, duration } from "../data/experience.js";
 const jobs = experience.map((job, index) => ({ ...job, id: `job-${index}` }));
 ---
 
-<!-- A list of roles on the left and the selected role's details on the
-     right. Without JavaScript every role's details show, one after another. -->
+<!-- Each role is a button with its details right after it, so reading order matches
+     what you see. On wide screens the buttons stack on the left and the open role's
+     details fill the right. Without JavaScript every role's details show. -->
 <section id="experience">
     <h2 class="section-title">Experience</h2>
-    <div class="jobs">
-    <div class="job-list" role="tablist" aria-label="Roles" aria-orientation="vertical">
+    <div class="jobs" style={`--n: ${jobs.length}`} role="group" aria-label="Roles">
         {jobs.map((job, index) => (
-            <button
-                type="button"
-                class="job-tab"
-                style={`--i: ${index}`}
-                role="tab"
-                id={`${job.id}-tab`}
-                aria-controls={job.id}
-                aria-selected={index === 0 ? "true" : "false"}
-                tabindex={index === 0 ? "0" : "-1"}
-            >
-                <span class="job-marker" aria-hidden="true"></span>
-                <img src={job.logo} alt="" width="44" height="44">
-                <span class="job-tab-text">
-                    <span class="job-tab-top">
-                        <span class="job-dates">{formatRange(job.start, job.end)}</span>
+            <>
+                <button
+                    type="button"
+                    class="job-tab"
+                    style={`--i: ${index}`}
+                    id={`${job.id}-tab`}
+                    aria-controls={job.id}
+                    aria-expanded={index === 0 ? "true" : "false"}
+                >
+                    <span class="job-marker" aria-hidden="true"></span>
+                    <img src={job.logo} alt="" width="44" height="44">
+                    <span class="job-tab-text">
+                        <span class="job-tab-top">
+                            <span class="job-dates">{formatRange(job.start, job.end)}</span>
+                        </span>
+                        <span class="job-tab-role">{job.role}</span>
+                        <span class="job-tab-org">{job.org}</span>
                     </span>
-                    <span class="job-tab-role">{job.role}</span>
-                    <span class="job-tab-org">{job.org}</span>
-                </span>
-            </button>
+                </button>
+                <article class="job-detail" style={`--i: ${index}`} id={job.id} role="region" aria-labelledby={`${job.id}-tab`}>
+                    <header class="job-detail-header">
+                        <img src={job.logo} alt="" width="64" height="64" loading="lazy">
+                        <div>
+                            <h3>{job.role}</h3>
+                            <p>
+                                {job.url
+                                    ? <a href={job.url} target="_blank" rel="noopener noreferrer">{job.org} &nearr;</a>
+                                    : job.org}
+                                <span class="job-org-note"> · {job.orgNote}</span>
+                            </p>
+                        </div>
+                    </header>
+
+                    <dl class="job-facts">
+                        <div><dt>Dates</dt><dd>{formatRange(job.start, job.end)}</dd></div>
+                        <div><dt>Duration</dt><dd>{duration(job.start, job.end)}</dd></div>
+                        <div><dt>Location</dt><dd>{job.place}</dd></div>
+                    </dl>
+
+                    <ul class="job-bullets">
+                        {job.bullets.map((bullet) => (
+                            <li>{bullet}</li>
+                        ))}
+                    </ul>
+
+                    <ul class="chips">
+                        {job.skills.map((skill) => (
+                            <li>{skill}</li>
+                        ))}
+                    </ul>
+                </article>
+            </>
         ))}
-    </div>
-
-    <div class="job-panels">
-        {jobs.map((job, index) => (
-            <article class="job-detail" style={`--i: ${index}`} id={job.id} role="tabpanel" aria-labelledby={`${job.id}-tab`}>
-                <header class="job-detail-header">
-                    <img src={job.logo} alt="" width="64" height="64" loading="lazy">
-                    <div>
-                        <h3>{job.role}</h3>
-                        <p>
-                            {job.url
-                                ? <a href={job.url} target="_blank" rel="noopener noreferrer">{job.org} &nearr;</a>
-                                : job.org}
-                            <span class="job-org-note"> · {job.orgNote}</span>
-                        </p>
-                    </div>
-                </header>
-
-                <dl class="job-facts">
-                    <div><dt>Dates</dt><dd>{formatRange(job.start, job.end)}</dd></div>
-                    <div><dt>Duration</dt><dd>{duration(job.start, job.end)}</dd></div>
-                    <div><dt>Location</dt><dd>{job.place}</dd></div>
-                </dl>
-
-                <ul class="job-bullets">
-                    {job.bullets.map((bullet) => (
-                        <li>{bullet}</li>
-                    ))}
-                </ul>
-
-                <ul class="chips">
-                    {job.skills.map((skill) => (
-                        <li>{skill}</li>
-                    ))}
-                </ul>
-            </article>
-        ))}
-    </div>
     </div>
 </section>
