@@ -268,7 +268,7 @@ function setUpSectionSpy() {
 // section gets .is-in when it scrolls into view (straight away if it's
 // already on screen) and its CSS entrance plays. Without JavaScript the class
 // is never added and everything shows as normal.
-const revealGroups = "main > section:not(.hero), .page-header, .case-header, .case-body > *";
+const revealGroups = "main > section:not(.hero), .page-header, .case-header, .case-rail, .case-body > *";
 
 function setUpReveal() {
     const root = document.documentElement;

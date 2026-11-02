@@ -1349,12 +1349,12 @@ main > :first-child {
 }
 
 /* Default: a group's direct children rise in one after another. */
-.js-reveal :is(main > section:not(.hero), .page-header, .case-header):not(.is-in) > *,
+.js-reveal :is(main > section:not(.hero), .page-header, .case-header, .case-rail):not(.is-in) > *,
 .js-reveal .case-body > :not(.is-in) {
     opacity: 0;
 }
 
-:is(main > section:not(.hero), .page-header, .case-header).is-in > *,
+:is(main > section:not(.hero), .page-header, .case-header, .case-rail).is-in > *,
 .case-body > .is-in {
     animation: enter-up 700ms var(--ease-out) backwards;
 }
@@ -2268,6 +2268,41 @@ img[src$="local-llm-lab/cover.webp"] {
 
     .case-header > :is(.project-meta, .chips, .case-links) {
         grid-column: 2;
+    }
+}
+
+/* Project pages: the rail (year, stack, links) stays beside the whole write-up, so
+   the right side is never bare. Under 1000px it sits between the title and the text. */
+.case-rail {
+    margin-bottom: var(--space-lg);
+}
+
+.case-rail > * {
+    margin: 0 0 var(--space-sm);
+}
+
+@media (min-width: 1000px) {
+    .has-rail {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 260px;
+        column-gap: var(--space-2xl);
+        align-items: start;
+    }
+
+    .has-rail .case-header {
+        display: block;
+    }
+
+    .has-rail > :is(.case-header, .case-body) {
+        grid-column: 1;
+    }
+
+    .has-rail > .case-rail {
+        position: sticky;
+        top: 96px;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        margin-top: calc(var(--space-lg) + 1.5em);
     }
 }
 

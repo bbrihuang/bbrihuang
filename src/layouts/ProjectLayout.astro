@@ -11,12 +11,14 @@ const links = [
 
 <Layout title={`${frontmatter.title} | Brian Huang`} description={frontmatter.description}>
     <Nav />
-    <main id="main" class="case-study">
+    <main id="main" class="case-study has-rail">
         <header class="case-header">
             <a class="back-link" href="/projects/">&larr; All projects</a>
             <p class="project-tag">{frontmatter.tag}</p>
             <h1>{frontmatter.title}</h1>
             <p class="case-lede">{frontmatter.description}</p>
+        </header>
+        <aside class="case-rail" aria-label="Project details">
             {frontmatter.year && <p class="project-meta">{frontmatter.year}</p>}
             {frontmatter.chips.length > 0 && (
                 <ul class="chips">
@@ -32,7 +34,7 @@ const links = [
                     ))}
                 </p>
             )}
-        </header>
+        </aside>
         <article class="case-body">
             <slot />
         </article>
