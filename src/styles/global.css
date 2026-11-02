@@ -814,7 +814,6 @@ main > :first-child {
     grid-template-columns: 24px 44px 1fr;
     align-items: start;
     gap: var(--space-sm);
-    width: 100%;
     padding: var(--space-sm) var(--space-sm) var(--space-sm) 8px;
     border: 1px solid transparent;
     border-radius: 0;
