@@ -1805,6 +1805,28 @@ main > :first-child {
     font-variant-numeric: tabular-nums;
 }
 
+/* Coursework reuses the Skills rows; the code and status sit quietly after each name. */
+.coursework-title {
+    margin: var(--space-lg) 0 var(--space-xs);
+}
+
+.coursework .chips li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.course-code {
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    color: var(--steel);
+}
+
+.course-status {
+    font-size: 12px;
+    color: var(--accent);
+}
+
 @media (max-width: 760px) {
     .education {
         grid-template-columns: minmax(0, 1fr);

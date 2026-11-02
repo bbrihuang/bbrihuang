@@ -1,3 +1,7 @@
+---
+import { coursework } from "../data/education.js";
+---
+
 <section id="education">
     <h2 class="section-title">Education</h2>
     <div class="education">
@@ -5,4 +9,23 @@
         <p>B.S. Computer Engineering · Boston, MA</p>
         <p class="education-when">Class of 2029 · Expected May 2029</p>
     </div>
+    <p class="rail-label coursework-title">Relevant coursework</p>
+    <dl class="stack coursework">
+        {coursework.map((group) => (
+            <div class="stack-group">
+                <dt>{group.group}</dt>
+                <dd>
+                    <ul class="chips">
+                        {group.courses.map((course) => (
+                            <li>
+                                {course.name}
+                                <span class="course-code">{course.code}</span>
+                                {course.inProgress && <span class="course-status">In progress</span>}
+                            </li>
+                        ))}
+                    </ul>
+                </dd>
+            </div>
+        ))}
+    </dl>
 </section>
