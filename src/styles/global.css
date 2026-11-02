@@ -941,33 +941,10 @@ main > :first-child {
     color: var(--fog);
 }
 
-.job-facts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.job-meta {
     margin: 0 0 var(--space-md);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0;
-}
-
-.job-facts div {
-    padding: 12px var(--space-sm);
-}
-
-.job-facts div + div {
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.job-facts dt {
     font-variant-numeric: tabular-nums;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--steel);
-}
-
-.job-facts dd {
-    margin: 4px 0 0;
-    font-size: 15px;
+    color: var(--fog);
 }
 
 .job-bullets {
@@ -1003,14 +980,6 @@ main > :first-child {
         padding: var(--space-md);
     }
 
-    .job-facts {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .job-facts div + div {
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
 }
 
 /* Projects: "More projects" heading with filter tabs */

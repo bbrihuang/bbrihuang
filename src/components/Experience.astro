@@ -42,11 +42,7 @@ const jobs = experience.map((job, index) => ({ ...job, id: `job-${index}` }));
                         </div>
                     </header>
 
-                    <dl class="job-facts">
-                        <div><dt>Dates</dt><dd>{formatRange(job.start, job.end)}</dd></div>
-                        <div><dt>Duration</dt><dd>{duration(job.start, job.end)}</dd></div>
-                        <div><dt>Location</dt><dd>{job.place}</dd></div>
-                    </dl>
+                    <p class="job-meta">{formatRange(job.start, job.end)} · {duration(job.start, job.end)} · {job.place}</p>
 
                     <ul class="job-bullets">
                         {job.bullets.map((bullet) => (
