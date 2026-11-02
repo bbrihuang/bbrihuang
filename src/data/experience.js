@@ -1,4 +1,4 @@
-// Work experience, in the order shown (current roles first). Dates are
+// Work experience, newest start date first. Dates are
 // "YYYY-MM" so durations can be worked out; `end: null` means a current role,.
 export const experience = [
     {
@@ -16,21 +16,6 @@ export const experience = [
             "Let business owners ask questions about their own data, by developing LLM agents with RAG and API integrations.",
         ],
         skills: ["React", "Vercel", "LLM agents", "RAG", "SEO", "Accessibility"],
-    },
-    {
-        role: "Founder",
-        org: "Cubic Builds",
-        orgNote: "Custom PC building business",
-        logo: "/logos/cubic-builds.svg",
-        place: "New York, NY",
-        start: "2023-01",
-        end: null,
-        bullets: [
-            "Generated $10K+ in revenue by building and selling 10+ custom PCs at a $1,000 average, tailored to each client's budget and use (gaming, streaming).",
-            "Delivered reliable systems to clients across the US by stress testing every build with Prime95, MemTest86, OCCT and FurMark.",
-            "Gave customers a way to choose parts online by designing and building the storefront in React, with a live part customizer and a guided configurator.",
-        ],
-        skills: ["PC assembly", "Stress testing", "Overclocking", "Watercooling", "React"],
     },
     {
         role: "Student TechOps Assistant",
@@ -58,6 +43,21 @@ export const experience = [
             "Delivered usable AI speech training data across 500+ recording sessions by following detailed audio and video recording protocols.",
         ],
         skills: ["AI training data", "Audio/video capture", "Quality assurance"],
+    },
+    {
+        role: "Founder",
+        org: "Cubic Builds",
+        orgNote: "Custom PC building business",
+        logo: "/logos/cubic-builds.svg",
+        place: "New York, NY",
+        start: "2023-01",
+        end: null,
+        bullets: [
+            "Generated $10K+ in revenue by building and selling 10+ custom PCs at a $1,000 average, tailored to each client's budget and use (gaming, streaming).",
+            "Delivered reliable systems to clients across the US by stress testing every build with Prime95, MemTest86, OCCT and FurMark.",
+            "Gave customers a way to choose parts online by designing and building the storefront in React, with a live part customizer and a guided configurator.",
+        ],
+        skills: ["PC assembly", "Stress testing", "Overclocking", "Watercooling", "React"],
     },
 ];
 
