@@ -12,7 +12,6 @@
 ### Connect with me:
 
 <a href="https://www.linkedin.com/in/bbrihuang/"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="40"></a>
-<a href="https://bbrihuang.com"><img src="./bbrihuang-icon.svg" alt="bbrihuang.com" height="40"></a>
 
 ### Languages and Tools:
 
