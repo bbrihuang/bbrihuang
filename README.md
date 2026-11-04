@@ -12,6 +12,7 @@
 ### Connect with me:
 
 <a href="https://www.linkedin.com/in/bbrihuang/"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" height="40"></a>
+<a href="https://bbrihuang.com"><img src="./bbrihuang-icon.svg" alt="bbrihuang.com" height="40"></a>
 
 ### Languages and Tools:
 
@@ -20,5 +21,5 @@
   <br>
   <img src="https://skillicons.dev/icons?i=react,nodejs,tailwind,astro,vite,vercel,git,github,docker&perline=9" alt="Web and DevOps">
   <br>
-  <img src="https://skillicons.dev/icons?i=linux,ubuntu,bash,pytorch,arduino,raspberrypi,vscode,figma,latex&perline=9" alt="Systems and tools">
+  <img src="https://skillicons.dev/icons?i=linux,ubuntu,bash,claude,pytorch,arduino,raspberrypi,vscode,figma,latex&perline=9" alt="Systems and tools">
 </p>
