@@ -1,5 +1,8 @@
 node_modules/
 dist/
 .astro/
-.env
+.env*
+!.env.example
+.vercel/
+*.pem
 .DS_Store
