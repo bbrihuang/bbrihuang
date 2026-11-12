@@ -8,9 +8,9 @@ import PageHeader from "../components/PageHeader.astro";
     <Nav />
     <main id="main" style="min-height: 75vh">
         <PageHeader title="Page not found" lede="This page doesn’t exist or has moved." />
-        <div class="hero-actions">
-            <a class="action-primary" href="/">Back to home</a>
-            <a class="action-outline" href="/projects/">View projects</a>
-        </div>
+        <p class="not-found-actions">
+            <a class="bb-btn" href="/">Back to home <span class="bb-btn-arrow" aria-hidden="true">→</span></a>
+            <a class="bb-link" href="/projects/">View projects</a>
+        </p>
     </main>
 </Layout>
