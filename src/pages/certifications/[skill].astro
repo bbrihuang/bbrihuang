@@ -1,0 +1,42 @@
+---
+import fs from "node:fs";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { certifiedSkills, markOf, slugOf } from "../../data/skills.js";
+
+// One page per skill that has certificates, listing each one.
+export function getStaticPaths() {
+    return certifiedSkills.map((skill) => ({ params: { skill: slugOf(skill.name) }, props: { skill } }));
+}
+
+const { skill } = Astro.props;
+const mark = markOf(skill);
+// A certificate's image shows once its file is in public/.
+const hasImage = (cert) => cert.image && fs.existsSync(`${process.cwd()}/public${cert.image}`);
+const count = skill.certs.length;
+---
+
+<Layout title={`${skill.name} certificates | Brian Huang`} description={`${count === 1 ? "Certificate" : "Certificates"} Brian Huang holds in ${skill.name}.`}>
+    <Nav />
+    <main id="main">
+        <PageHeader title={skill.name} lede={count === 1 ? "One certificate" : `${count} certificates`}>
+            <a class="back-link" href="/#skills">&larr; Skills</a>
+        </PageHeader>
+        <ul class="certs">
+            {skill.certs.map((cert) => (
+                <li class="cert">
+                    {hasImage(cert) && <div class="shot"><img src={cert.image} alt={`${cert.name} certificate from ${cert.issuer}.`} loading="lazy"></div>}
+                    <div class="cert-text">
+                        <svg class:list={{ glyph: !mark.filled }} viewBox="0 0 24 24" width="28" height="28" style={`color: ${mark.color}`} aria-hidden="true" set:html={mark.svg} />
+                        <div>
+                            <h2>{cert.name}</h2>
+                            <p class="muted">{cert.issuer}</p>
+                        </div>
+                    </div>
+                    <p><a class="bb-btn" href={cert.href}>View on {cert.issuer} <span class="bb-btn-arrow" aria-hidden="true">↗</span></a></p>
+                </li>
+            ))}
+        </ul>
+    </main>
+</Layout>

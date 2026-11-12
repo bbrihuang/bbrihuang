@@ -1,41 +1,25 @@
 ---
-import * as icons from "simple-icons";
 import { stack } from "../data/stack.js";
-import { glyphs } from "../data/glyphs.js";
-import { onDark } from "../data/color.js";
-
-// Logo for one item: a filled brand mark, or a stroked glyph.
-function logo(item) {
-    if (item.icon) {
-        const icon = icons[item.icon];
-        return { color: onDark(icon.hex), svg: `<path d="${icon.path}"/>`, filled: true };
-    }
-    return { color: onDark(item.color), svg: glyphs[item.glyph], filled: false };
-}
+import { markOf, slugOf } from "../data/skills.js";
 ---
 
-<section id="stack">
-    <h2 class="section-title">Skills &amp; Technologies</h2>
-    <dl class="stack">
-        {stack.map((group, groupIndex) => (
-            <div class="stack-group" style={`--g: ${groupIndex}`}>
+<section id="skills" class="bb-section" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="bb-section-word">Skills</h2>
+    <dl class="skills">
+        {stack.map((group) => (
+            <div>
                 <dt>{group.group}</dt>
                 <dd>
-                    <ul class="chips">
-                        {group.items.map((item, itemIndex) => {
-                            const mark = logo(item);
+                    <ul>
+                        {group.items.map((item) => {
+                            const mark = markOf(item);
                             return (
-                                <li style={`--i: ${itemIndex}`}>
-                                    <svg
-                                        class:list={["stack-logo", { "is-glyph": !mark.filled }]}
-                                        viewBox="0 0 24 24"
-                                        width="14"
-                                        height="14"
-                                        style={`color: ${mark.color}`}
-                                        aria-hidden="true"
-                                        set:html={mark.svg}
-                                    />
-                                    {item.name}
+                                <li>
+                                    <svg class:list={{ glyph: !mark.filled }} viewBox="0 0 24 24" width="22" height="22" style={`color: ${mark.color}`} aria-hidden="true" set:html={mark.svg} />
+                                    <span>{item.name}</span>
+                                    {item.certs?.length > 0 && (
+                                        <a class="certified" href={`/certifications/${slugOf(item.name)}/`} aria-label={`${item.name} certificates`}>Certified</a>
+                                    )}
                                 </li>
                             );
                         })}

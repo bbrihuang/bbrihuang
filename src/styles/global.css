@@ -190,3 +190,33 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .club-row { padding: 12px 0; }
 .logo-initials { display: grid; place-items: center; font-weight: 600; font-size: 0.875rem; color: #121212; }
 @media (max-width: 860px) { .club-cards, .club-list { grid-template-columns: 1fr; } }
+
+/* ---------- Skills: groups of brand marks ---------- */
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px var(--bb-gutter); }
+.skills > div { border-top: 1px solid var(--bb-rule); padding-top: 12px; }
+.skills dt { margin-bottom: 14px; font-size: 1.0625rem; font-weight: 600; color: var(--bb-ink); }
+.skills ul { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.skills li { display: inline-flex; align-items: center; gap: 8px; font-size: 1.0625rem; font-weight: 500; line-height: 1.2; }
+.skills svg, .cert-text svg { flex: none; fill: currentColor; }
+.skills svg.glyph, .cert-text svg.glyph { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.skills li > span { color: var(--bb-ink); }
+/* A skill with certificates: a small button to its certificate page. */
+.certified { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; font-size: 0.75rem; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--bb-rule); transition: background-color var(--bb-dur) var(--bb-ease), color var(--bb-dur) var(--bb-ease); }
+.certified::before { content: ""; width: 7px; height: 7px; background: var(--bb-project-gradient); clip-path: polygon(0 0, 100% 0, 100% 100%); }
+/* Invisible padding keeps the tap area at 44px without making the button look bigger. */
+.certified { position: relative; }
+.certified::after { content: ""; position: absolute; inset: -10px -4px; }
+@media (hover: hover) { .certified:hover { background: var(--bb-ink); color: var(--bb-paper); } }
+@media (max-width: 860px) { .skills { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .skills { grid-template-columns: 1fr; } }
+
+/* ---------- Certificate pages ---------- */
+.back-link { justify-self: start; color: var(--bb-muted); text-decoration: none; }
+.back-link:hover { color: var(--bb-signal-text); }
+.certs { display: grid; gap: 40px; padding-top: clamp(32px, 4vw, 56px); max-width: 760px; }
+.cert { display: grid; gap: 18px; }
+.cert .shot { --n: 18px; }
+.cert .shot img { height: auto; object-fit: contain; }
+.cert-text { display: flex; align-items: center; gap: 14px; }
+.cert-text h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }

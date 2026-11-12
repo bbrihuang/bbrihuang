@@ -1,11 +1,16 @@
 // Tech stack, grouped from core skills to supporting tools. Each item has
 // either a simple-icons `icon` (shown in its brand color) or a `glyph` from
-// glyphs.js with a `color`.
+// glyphs.js with a `color`. `certs` lists certificates for a skill; each skill with
+// certificates gets a page at /certifications/<skill>/ showing them.
 export const stack = [
     {
         group: "Languages",
         items: [
-            { name: "Python", icon: "siPython" },
+            {
+                name: "Python",
+                icon: "siPython",
+                certs: [{ name: "Python", issuer: "Coddy", href: "https://coddy.tech/certifications/kZAs2y-python-ZP9neU", image: "/certs/python-coddy.png" }],
+            },
             { name: "C++", icon: "siCplusplus" },
             { name: "C", icon: "siC" },
             { name: "TypeScript", icon: "siTypescript" },
@@ -60,7 +65,3 @@ export const stack = [
     },
 ];
 
-// Certificates, each linking to its public record.
-export const certifications = [
-    { name: "Python", issuer: "Coddy", icon: "siPython", href: "https://coddy.tech/certifications/kZAs2y-python-ZP9neU" },
-];
