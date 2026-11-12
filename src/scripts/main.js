@@ -149,7 +149,11 @@ function setUpBuilder() {
     const hero = document.querySelector(".hero");
     const builder = hero?.querySelector(".builder");
     if (!builder) return;
-    if (reduceMotion.matches) return hero.classList.add("built", "bill-gone");
+    if (reduceMotion.matches || !root.classList.contains("awaiting-bill")) {
+        finishName();
+        hero.classList.add("bill-gone");
+        return;
+    }
     const rule = hero.querySelector(".bb-grad-rule");
     const says = hero.querySelector(".builder-says");
     const portal = hero.querySelector(".builder-portal");
@@ -160,6 +164,12 @@ function setUpBuilder() {
     const speed = 0.8; // pixels per millisecond
     let run = 0;
     let x = 0;
+
+    function finishName() {
+        hero.classList.add("built");
+        root.classList.remove("awaiting-build");
+        try { sessionStorage.setItem("bill-built-hero", "1"); } catch {}
+    }
 
     async function build() {
         const id = ++run;
@@ -258,9 +268,7 @@ function setUpBuilder() {
         await walkTo(width - size - 24, x, width - size - 24, speed);
         if (!current()) return;
         rule.getAnimations().forEach((animation) => animation.cancel());
-        hero.classList.add("built");
-        // The rest of the page now fades in.
-        root.classList.remove("awaiting-build");
+        finishName();
 
         // The tip pops up beside Bill.
         says.hidden = false;
