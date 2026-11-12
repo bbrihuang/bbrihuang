@@ -40,8 +40,8 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <script is:inline>
         document.documentElement.classList.add("js-reveal");
         // Give Bill a first visit to build the lobby. Section links and return trips open right away.
-        var builtLobby = false;
-        try { builtLobby = sessionStorage.getItem("bill-built-hero") === "1"; } catch (e) {}
+        var builtLobby = document.referrer.startsWith(location.origin + "/");
+        try { builtLobby ||= sessionStorage.getItem("bill-built-hero") === "1"; } catch (e) {}
         if (location.pathname === "/" && !builtLobby && !location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
             document.documentElement.classList.add("awaiting-build", "awaiting-bill");
             setTimeout(function () { document.documentElement.classList.remove("awaiting-build"); }, 6000);
