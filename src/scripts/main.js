@@ -155,33 +155,80 @@ function setUpClips() {
     });
 }
 
-// Hero builder: work out when the walking robot passes under each letter, so that
-// letter fills right then. Clicking the robot builds the name again.
+// Hero builder: a pixel builder walks the gradient line, laying it behind itself,
+// and under each word it jumps; the word fills and bounces as it gets bumped.
+// Clicking the builder builds the name again. With reduced motion the name is just there.
 function setUpBuilder() {
     const hero = document.querySelector(".hero");
-    const robot = hero?.querySelector(".builder");
-    if (!robot) return;
-    const ground = robot.parentElement;
-    function time() {
-        const walk = parseFloat(getComputedStyle(hero).getPropertyValue("--walk")) * 1000;
+    const builder = hero?.querySelector(".builder");
+    if (!builder) return;
+    if (reduceMotion.matches) return hero.classList.add("built");
+    const rule = hero.querySelector(".bb-grad-rule");
+    const ground = builder.parentElement;
+    const letters = [...hero.querySelectorAll(".letter")];
+    const words = [letters.slice(0, 5), letters.slice(5)];
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const speed = 0.8; // pixels per millisecond
+    let run = 0;
+
+    async function build() {
+        const id = ++run;
+        const current = () => id === run;
+        [builder, rule].forEach((element) => element.getAnimations().forEach((animation) => animation.cancel()));
+        hero.classList.remove("built");
+        letters.forEach((letter) => letter.classList.remove("on"));
+        builder.dataset.pose = "stand";
+
         const width = ground.clientWidth;
-        const bot = robot.offsetWidth;
-        // The robot's middle goes from bot/2 to width - bot/2 - 24 at a steady pace.
-        const travel = width - bot - 24;
-        const left = ground.getBoundingClientRect().left;
-        hero.querySelectorAll(".letter").forEach((letter) => {
-            const box = letter.getBoundingClientRect();
-            const middle = box.left + box.width / 2 - left - bot / 2;
-            letter.style.setProperty("--at", `${Math.max(0, Math.min(1, middle / travel)) * walk}ms`);
-        });
+        const size = builder.offsetWidth;
+        const origin = ground.getBoundingClientRect().left;
+        const under = (word) => (word[0].getBoundingClientRect().left + word.at(-1).getBoundingClientRect().right) / 2 - origin - size / 2;
+        let x = 0;
+
+        async function walkTo(to) {
+            const duration = Math.abs(to - x) / speed;
+            const timing = { duration, easing: "linear", fill: "forwards" };
+            builder.animate([{ transform: `translateX(${x}px)` }, { transform: `translateX(${to}px)` }], timing);
+            rule.animate([{ clipPath: `inset(0 ${width - x}px 0 0)` }, { clipPath: `inset(0 ${width - to}px 0 0)` }], timing);
+            const steps = setInterval(() => (builder.dataset.pose = builder.dataset.pose === "walk-b" ? "walk-a" : "walk-b"), 110);
+            await wait(duration);
+            clearInterval(steps);
+            builder.dataset.pose = "stand";
+            x = to;
+        }
+
+        async function jump(word) {
+            const lift = ground.clientHeight - builder.offsetHeight + 6;
+            builder.dataset.pose = "up";
+            builder.animate([
+                { transform: `translateX(${x}px) translateY(0)`, easing: "cubic-bezier(0.23, 1, 0.32, 1)" },
+                { transform: `translateX(${x}px) translateY(-${lift}px)`, offset: 0.45, easing: "cubic-bezier(0.55, 0, 1, 0.45)" },
+                { transform: `translateX(${x}px) translateY(0)` },
+            ], { duration: 520, fill: "forwards" });
+            await wait(230);
+            // The bump: the word fills and pops up a little.
+            word.forEach((letter, index) => {
+                letter.classList.add("on");
+                letter.animate([{ transform: "translateY(0)" }, { transform: "translateY(-0.06em)" }, { transform: "translateY(0)" }], { duration: 260, delay: index * 20, easing: "ease-out" });
+            });
+            await wait(290);
+            builder.dataset.pose = "stand";
+        }
+
+        for (const word of words) {
+            await walkTo(under(word));
+            if (!current()) return;
+            await jump(word);
+            if (!current()) return;
+        }
+        await walkTo(width - size - 24);
+        if (!current()) return;
+        rule.getAnimations().forEach((animation) => animation.cancel());
+        hero.classList.add("built");
     }
-    time();
-    robot.addEventListener("click", () => {
-        time();
-        hero.classList.add("rebuild");
-        void hero.offsetWidth;
-        hero.classList.remove("rebuild");
-    });
+
+    builder.addEventListener("click", build);
+    build();
 }
 
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
