@@ -253,23 +253,54 @@ function setUpBuilder() {
     build();
 }
 
-// Bill Durr's elevator. The car opens the "Where to?" panel. On the home page the
-// car follows the section you're on; picking a floor rides there while the page
-// scrolls, and Bill hops when he arrives.
-// Off the home page the floors are ordinary links back to it.
+// The car follows the home sections and rides into the basement for dedicated pages.
 function setUpElevator() {
     const elevator = document.querySelector(".elevator");
     if (!elevator) return;
     const car = elevator.querySelector(".car");
     const panel = elevator.querySelector(".where-to");
-    const floors = [...panel.querySelectorAll("a[data-floor]")];
-    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const stops = [...panel.querySelectorAll("a[data-floor]")];
+    const floors = stops.filter((link) => link.dataset.section);
+    const basement = stops.slice(floors.length);
+    const onHome = location.pathname === "/";
+    const sections = floors.map((link) => document.getElementById(link.dataset.section));
+    const initial = Number(elevator.style.getPropertyValue("--at"));
+    let current = initial;
+    let riding = false;
+    let ride = 0;
+    let leaving = false;
+
+    function arriveAt(floor) {
+        current = floor;
+        elevator.style.setProperty("--at", floor);
+        elevator.toggleAttribute("data-basement", floor >= floors.length);
+        stops.forEach((link, index) => {
+            if (index === floor) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+        });
+    }
+
+    function waitForCar() {
+        return Promise.allSettled(car.getAnimations().map((animation) => animation.finished));
+    }
+
+    function plainClick(event) {
+        return !event.defaultPrevented && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+    }
+
+    function floorFor(url) {
+        if (url.pathname === "/") {
+            return Math.max(0, floors.findIndex((link) => url.hash === `#${link.dataset.section}`));
+        }
+        const stop = basement.find((link) => url.pathname.startsWith(link.pathname) || url.pathname === link.pathname.slice(0, -1));
+        return stop ? Number(stop.dataset.floor) : undefined;
+    }
 
     // `focus` moves keyboard focus into the panel; Bill's own prompt leaves focus alone.
     function open(show, focus = true) {
         panel.hidden = !show;
         car.setAttribute("aria-expanded", String(show));
-        if (show && focus) (floors.find((link) => link.hasAttribute("aria-current")) ?? floors[0]).focus();
+        if (show && focus) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
     }
     car.addEventListener("click", () => open(panel.hidden));
     document.addEventListener("keydown", (event) => {
@@ -283,6 +314,7 @@ function setUpElevator() {
     // The first time Bill gets into the elevator, he asks "Where to?" himself. Only once
     // per visitor; the panel closes again as soon as they scroll.
     document.addEventListener("bill-arrived", () => {
+        if (window.scrollY > 24) return;
         try {
             if (localStorage.getItem("bill-asked")) return;
             localStorage.setItem("bill-asked", "1");
@@ -291,19 +323,8 @@ function setUpElevator() {
         window.addEventListener("scroll", () => open(false), { once: true, passive: true });
     });
 
-    if (window.location.pathname !== "/") return;
-    const sections = floors.map((link) => (link.dataset.section === "top" ? document.querySelector(".hero") : document.getElementById(link.dataset.section)));
-    let current = -1;
-    let riding = false;
-
-    function arriveAt(floor) {
-        current = floor;
-        elevator.style.setProperty("--at", floor);
-        floors.forEach((link, index) => (index === floor ? link.setAttribute("aria-current", "location") : link.removeAttribute("aria-current")));
-    }
-
     function follow() {
-        if (riding) return;
+        if (riding || leaving) return;
         const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
         let floor = 0;
         sections.forEach((section, index) => section && section.getBoundingClientRect().top <= window.innerHeight * 0.4 && (floor = index));
@@ -311,31 +332,78 @@ function setUpElevator() {
         if (floor !== current) arriveAt(floor);
     }
 
-    // Arriving: Bill hops in the car.
-    function build() {
+    document.addEventListener("click", async (event) => {
+        if (!plainClick(event)) return;
+        const link = event.target.closest("a[href]");
+        if (!link || (link.target && link.target !== "_self") || link.hasAttribute("download")) return;
+        const url = new URL(link.href);
+        if (url.origin !== location.origin || url.pathname === location.pathname) return;
+        const floor = floorFor(url);
+        if (floor === undefined || (floor < floors.length && current < floors.length)) return;
         if (reduceMotion.matches) return;
-        car.dataset.pose = "up";
-        car.querySelector(".bill").animate([{ transform: "translateY(0)" }, { transform: "translateY(-3px)" }, { transform: "translateY(0)" }], { duration: 260, easing: "ease-out" });
-        setTimeout(() => (car.dataset.pose = "stand"), 260);
+        event.preventDefault();
+        if (leaving) return;
+        leaving = true;
+        open(false);
+        arriveAt(floor);
+        await waitForCar();
+        location.assign(url.href);
+    });
+
+    // A page restored from the back-forward cache still has the car's departure position.
+    window.addEventListener("pageshow", (event) => {
+        if (!event.persisted) return;
+        leaving = riding = false;
+        ride += 1;
+        if (onHome) follow();
+        else arriveAt(initial);
+    });
+
+    if (!onHome) return;
+
+    function scrollToFloor(floor) {
+        const behavior = reduceMotion.matches ? "instant" : "smooth";
+        const move = () => {
+            if (floor === 0) window.scrollTo({ top: 0, behavior });
+            else sections[floor].scrollIntoView({ behavior });
+        };
+        const distance = floor === 0 ? window.scrollY : sections[floor].getBoundingClientRect().top;
+        if (reduceMotion.matches || Math.abs(distance) < 1) return move();
+
+        return new Promise((resolve) => {
+            const fallback = setTimeout(done, 1000);
+            function done() {
+                clearTimeout(fallback);
+                window.removeEventListener("scrollend", done);
+                resolve();
+            }
+            window.addEventListener("scrollend", done);
+            move();
+        });
     }
 
     floors.forEach((link, floor) => link.addEventListener("click", async (event) => {
+        if (!plainClick(event)) return;
         event.preventDefault();
+        if (leaving) return;
+        const trip = ++ride;
+        if (event.detail === 0) car.focus({ preventScroll: true });
         open(false);
         riding = true;
         arriveAt(floor);
-        history.replaceState(null, "", floor ? `#${link.dataset.section}` : "/");
-        const behavior = reduceMotion.matches ? "auto" : "smooth";
-        if (floor === 0) window.scrollTo({ top: 0, behavior });
-        else sections[floor].scrollIntoView({ behavior });
-        // Arrived once both the ride and the scroll are done.
-        await Promise.all([wait(700), Promise.race([new Promise((resolve) => window.addEventListener("scrollend", resolve, { once: true })), wait(1500)])]);
+        history.replaceState(history.state, "", floor ? `#${link.dataset.section}` : location.pathname + location.search);
+        await Promise.all([waitForCar(), scrollToFloor(floor)]);
+        if (trip !== ride || leaving) return;
         riding = false;
-        build();
+        follow();
     }));
 
     window.addEventListener("scroll", follow, { passive: true });
-    follow();
+    if (location.hash) arriveAt(floorFor(location));
+    else {
+        arriveAt(0);
+        follow();
+    }
 }
 
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
