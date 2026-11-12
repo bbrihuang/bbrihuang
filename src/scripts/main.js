@@ -463,8 +463,9 @@ function setUpElevator() {
     const sectionBuild = setUpSectionBuild({
         car,
         reduceMotion,
-        getSection: onHome ? () => sections[current] : undefined,
-        canBuild: () => !riding && !leaving && (!onHome || window.scrollY > 8 || current > 0),
+        // At the Lobby, Bill's next job is About, which is already on screen under the name.
+        getSection: onHome ? () => sections[current === 0 ? 1 : current] : undefined,
+        canBuild: () => !riding && !leaving,
     });
 
     if (!onHome) return;
