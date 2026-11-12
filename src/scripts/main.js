@@ -171,24 +171,6 @@ function setUpSeason() {
     }));
 }
 
-// Season buttons in the footer: show the current season and switch to another.
-// A pick is remembered; the inline script in Layout.astro applies it on every page.
-function setUpSeasonSwitch() {
-    const group = document.querySelector(".season-switch");
-    if (!group) return;
-    group.hidden = false;
-    const buttons = [...group.querySelectorAll("button")];
-    const mark = () => buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.season === root.dataset.season)));
-    buttons.forEach((button) => button.addEventListener("click", () => {
-        root.dataset.season = button.dataset.season;
-        try {
-            localStorage.setItem("season", button.dataset.season);
-        } catch {}
-        mark();
-    }));
-    mark();
-}
-
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
 // them back (see .js-reveal in global.css); this marks each one .is-in when it shows.
 function setUpReveal() {
@@ -209,7 +191,6 @@ const revealBlocks = "main > section:not(.hero) > :not(.project-grid, .club-card
 
 setUpReveal();
 setUpSeason();
-setUpSeasonSwitch();
 setUpThemeCorner();
 setUpJobTabs();
 setUpProjectFilters();
