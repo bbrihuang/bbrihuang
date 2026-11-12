@@ -5,6 +5,12 @@ const year = new Date().getFullYear();
 <footer class="bb-footer site-footer fit">
     <div class="footer-line bb-meta">
         <span>&copy; {year} Brian Huang</span>
+        <!-- Picks the background's season; hidden without JavaScript, since only the script can change it. -->
+        <div class="season-switch" role="group" aria-label="Season" hidden>
+            {["Spring", "Summer", "Fall", "Winter"].map((season) => (
+                <button type="button" data-season={season.toLowerCase()} aria-pressed="false">{season}</button>
+            ))}
+        </div>
         <span>Made with <a href="https://astro.build/">Astro</a> by yours truly</span>
     </div>
     <p class="bb-domain" aria-hidden="true">bbrihuang.com</p>
