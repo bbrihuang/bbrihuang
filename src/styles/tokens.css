@@ -47,25 +47,16 @@
   color-scheme: light;
 }
 
+/* Light is the default; dark only when chosen with the corner (not the computer's setting). */
 :root[data-theme="dark"] {
   --bb-paper: #1B1A17; --bb-paper-2: #262420; --bb-ink: #ECEAE4; --bb-muted: #96948D;
   --bb-rule: #ECEAE4; --bb-rule-soft: #3A3833; --bb-signal-text: #FF6B1F; color-scheme: dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bb-paper: #1B1A17; --bb-paper-2: #262420; --bb-ink: #ECEAE4; --bb-muted: #96948D;
-    --bb-rule: #ECEAE4; --bb-rule-soft: #3A3833; --bb-signal-text: #FF6B1F; color-scheme: dark;
-  }
 }
 
 /* Brand mark per theme */
 .bb-only-dark { display: none; }
 :root[data-theme="dark"] .bb-only-dark { display: inline-block; }
 :root[data-theme="dark"] .bb-only-light { display: none; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .bb-only-dark { display: inline-block; }
-  :root:not([data-theme="light"]) .bb-only-light { display: none; }
-}
 
 /* ---------- base ---------- */
 html { background: var(--bb-paper); color: var(--bb-ink); font-family: var(--bb-font); }
@@ -291,6 +282,3 @@ body:has(> .bb-corner) { position: relative; }
   --bb-accent: #2E9E6E;          /* green fills on paper */
 }
 :root[data-theme="dark"].bb-project-money { --bb-signal-text: #4FBF8B; --bb-accent: #4FBF8B; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]).bb-project-money { --bb-signal-text: #4FBF8B; --bb-accent: #4FBF8B; }
-}
