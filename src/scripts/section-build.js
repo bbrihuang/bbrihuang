@@ -1,4 +1,4 @@
-// Each heading is built once. The rest of the section
+// Each heading is built on its first visit in this tab. The rest of the section
 // uses the regular scroll entrances after the hammer strike reveals the heading.
 export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
     const root = document.documentElement;
@@ -9,10 +9,22 @@ export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
         && !root.classList.contains("awaiting-build") && !root.classList.contains("awaiting-bill");
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    function finish(section) {
-        if (!pending.has(section)) return;
+    function finish(section, remember = true) {
+        const entry = pending.get(section);
+        if (!entry) return;
         section.dataset.build = "built";
         pending.delete(section);
+        if (remember) {
+            try { sessionStorage.setItem(entry.key, "1"); } catch {}
+        }
+    }
+
+    function restore() {
+        for (const [section, { key }] of pending) {
+            try {
+                if (sessionStorage.getItem(key)) finish(section, false);
+            } catch {}
+        }
     }
 
     function isVisible(heading, limit = window.innerHeight) {
@@ -66,11 +78,13 @@ export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
     const headings = document.querySelectorAll("main > section.bb-section > h2.bb-section-word, main > :is(.page-head, .case-header) > h1");
     headings.forEach((heading) => {
         const section = heading.closest("section, main");
+        const key = `bill-built:${location.pathname}:${heading.id || heading.textContent.trim()}`;
         heading.classList.add("build-heading");
         section.dataset.build = "pending";
-        pending.set(section, { heading });
+        pending.set(section, { heading, key });
     });
 
+    restore();
     window.addEventListener("scroll", check, { passive: true });
     window.addEventListener("resize", check);
     window.addEventListener("pageshow", () => {
@@ -79,7 +93,7 @@ export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
     });
     document.addEventListener("bill-arrived", check);
     reduceMotion.addEventListener("change", () => {
-        if (reduceMotion.matches) pending.forEach((entry, section) => finish(section));
+        if (reduceMotion.matches) pending.forEach((entry, section) => finish(section, false));
     });
     check();
     return { build, check };
