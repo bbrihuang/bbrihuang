@@ -80,8 +80,11 @@ html.peeling::view-transition-new(root) {
 
 /* ---------- Shared: notched photo frame, logo tile ---------- */
 /* The same 1px ink frame and notch as the brand's note and panel. */
-.shot { --n: var(--bb-notch); background: var(--bb-ink); padding: 1px; overflow: hidden;
+.shot { --n: var(--bb-notch); position: relative; background: var(--bb-ink); padding: 1px; overflow: hidden;
     clip-path: polygon(0 0, calc(100% - var(--n)) 0, 100% var(--n), 100% 100%, 0 100%); }
+/* The ink line along the notch, drawn on top so the picture can't cover it. */
+.shot::after { content: ""; position: absolute; top: 0; right: 0; width: var(--n); height: var(--n); pointer-events: none;
+    background: linear-gradient(to bottom left, transparent 50%, var(--bb-ink) 50%, var(--bb-ink) calc(50% + 1.2px), transparent calc(50% + 1.2px)); }
 .shot > img, .shot > video { width: 100%; height: 100%; object-fit: cover; background: var(--bb-paper-2);
     transition: transform 0.5s var(--bb-ease); }
 /* Logos sit on a light tile in both themes, because several are dark marks on transparent. */
