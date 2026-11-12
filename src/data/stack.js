@@ -14,7 +14,6 @@ export const stack = [
             { name: "C++", icon: "siCplusplus" },
             { name: "C", icon: "siC" },
             { name: "TypeScript", icon: "siTypescript" },
-            { name: "JavaScript", icon: "siJavascript" },
             { name: "SQL", glyph: "db", color: "#336791" },
             { name: "HTML/CSS", icon: "siHtml5" },
         ],
