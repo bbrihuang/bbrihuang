@@ -2,11 +2,10 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-    <p>&copy; {year} Brian Huang</p>
-    <p class="footer-links">
-        <a href="mailto:bbhuang@bu.edu">bbhuang@bu.edu</a>
-        <a href="/Brian_Huang_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-    </p>
-    <p>Built with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>. Logos from <a href="https://simpleicons.org/" target="_blank" rel="noopener noreferrer">Simple Icons</a>.</p>
+<footer class="bb-footer site-footer fit">
+    <div class="footer-line bb-meta">
+        <span>&copy; {year} Brian Huang</span>
+        <span>Made with <a href="https://astro.build/">Astro</a> by yours truly</span>
+    </div>
+    <p class="bb-domain" aria-hidden="true">bbrihuang.com</p>
 </footer>

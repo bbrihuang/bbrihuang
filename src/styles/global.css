@@ -66,3 +66,9 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .site-nav a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--bb-dur) var(--bb-ease); }
 .site-nav a[aria-current] { background: var(--bb-project-gradient) bottom 10px left 0 / 100% 2px no-repeat; }
 @media (hover: hover) { .site-nav a:hover { color: var(--bb-signal-text); } }
+
+/* ---------- Footer: the domain fits the page, descender included ---------- */
+.site-footer { padding-top: clamp(88px, 11vw, 168px); padding-bottom: 20px; }
+.footer-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; border-top: 1px solid var(--bb-rule); padding-top: 14px; }
+.footer-line a { color: inherit; }
+.site-footer .bb-domain { font-size: calc(100cqw / 4.85); margin: 16px 0 0; line-height: 1; padding-bottom: 0.02em; }
