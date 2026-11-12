@@ -265,10 +265,11 @@ function setUpElevator() {
     const floors = [...panel.querySelectorAll("a[data-floor]")];
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    function open(show) {
+    // `focus` moves keyboard focus into the panel; Bill's own prompt leaves focus alone.
+    function open(show, focus = true) {
         panel.hidden = !show;
         car.setAttribute("aria-expanded", String(show));
-        if (show) (floors.find((link) => link.hasAttribute("aria-current")) ?? floors[0]).focus();
+        if (show && focus) (floors.find((link) => link.hasAttribute("aria-current")) ?? floors[0]).focus();
     }
     car.addEventListener("click", () => open(panel.hidden));
     document.addEventListener("keydown", (event) => {
@@ -278,6 +279,17 @@ function setUpElevator() {
         }
     });
     document.addEventListener("click", (event) => !panel.hidden && !elevator.contains(event.target) && open(false));
+
+    // The first time Bill gets into the elevator, he asks "Where to?" himself. Only once
+    // per visitor; the panel closes again as soon as they scroll.
+    document.addEventListener("bill-arrived", () => {
+        try {
+            if (localStorage.getItem("bill-asked")) return;
+            localStorage.setItem("bill-asked", "1");
+        } catch {}
+        open(true, false);
+        window.addEventListener("scroll", () => open(false), { once: true, passive: true });
+    });
 
     if (window.location.pathname !== "/") return;
     const sections = floors.map((link) => (link.dataset.section === "top" ? document.querySelector(".hero") : document.getElementById(link.dataset.section)));
