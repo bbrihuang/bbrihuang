@@ -41,15 +41,10 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
         setTimeout(function () {
             if (!window.__revealReady) document.documentElement.classList.remove("js-reveal");
         }, 3000);
-        // The season for the background: a saved pick, or today's (northern hemisphere).
-        var month = new Date().getMonth();
-        var season = ["winter", "winter", "spring", "spring", "spring", "summer", "summer", "summer", "fall", "fall", "fall", "winter"][month];
         try {
             var theme = localStorage.getItem("theme");
             if (theme) document.documentElement.dataset.theme = theme;
-            season = localStorage.getItem("season") || season;
         } catch (e) {}
-        document.documentElement.dataset.season = season;
     </script>
 </head>
 
