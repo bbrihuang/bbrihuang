@@ -417,11 +417,16 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
 .hero.bill-gone .builder { visibility: hidden; }
 html.awaiting-bill .elevator { opacity: 0; pointer-events: none; }
 
-/* Phones: no room for a shaft, so the car waits in the bottom-right corner and the panel opens above it. */
-@media (max-width: 860px) {
-    .elevator { --car: 50px; top: auto; bottom: 16px; right: 16px; height: auto; transform: none; }
-    .shaft, .basement { display: none; }
-    .car { position: relative; transform: none; }
-    .where-to { top: auto; bottom: calc(100% + 10px); right: 0; transform: none; }
+/* Compact screens: the car docks in the corner, with room to drop into the basement. */
+@media (max-width: 860px), (max-height: 460px) {
+    .elevator { --car: 50px; --car-bottom: calc(38px + env(safe-area-inset-bottom, 0px));
+        --car-drop: calc(max(0, var(--at, 0) - var(--floors) + 1) * 11px);
+        top: auto; bottom: var(--car-bottom); right: calc(16px + env(safe-area-inset-right, 0px)); height: auto; transform: none; }
+    .shaft { display: none; }
+    .basement { top: 6px; bottom: -27px; inset-inline: -6px; opacity: 0; transition: opacity 220ms var(--ease-out); }
+    .elevator[data-basement] .basement { opacity: 1; }
+    .car { position: relative; transform: translateY(var(--car-drop)); }
+    .where-to { top: auto; bottom: calc(100% + 10px - var(--car-drop)); right: 0; transform: none;
+        max-height: calc(100dvh - var(--car-bottom) - 1.25 * var(--car) - 26px + var(--car-drop)); }
     @keyframes where-open { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
 }
