@@ -1,8 +1,7 @@
 ---
+import "../styles/tokens.css";
 import "../styles/global.css";
-import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
-import Backdrop from "../components/Backdrop.astro";
 import Footer from "../components/Footer.astro";
 
 const { title, description } = Astro.props;
@@ -25,33 +24,31 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href={canonical}>
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#0b0b0c">
+    <meta name="theme-color" content="#ECEAE4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E0E0F" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <title>{title}</title>
-    <ClientRouter />
-    <!-- Hold sections in their starting pose before the first paint so their
-         entrances play (see setUpReveal in main.js). If the main script never
-         runs, show everything after 3 seconds. -->
+    <!-- Before the first paint: apply a saved theme, so the page never flashes the other one. -->
     <script is:inline>
-        document.documentElement.classList.add("js-reveal");
-        setTimeout(function () {
-            if (!window.__revealReady) document.documentElement.classList.remove("js-reveal");
-        }, 3000);
+        try {
+            var theme = localStorage.getItem("theme");
+            if (theme) document.documentElement.dataset.theme = theme;
+        } catch (e) {}
     </script>
 </head>
 
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Backdrop />
 
-    <slot />
-
-    <Footer />
+    <div class="bb-page">
+        <slot />
+        <Footer />
+    </div>
 
     <!-- In the body because a custom element in the head ends the head early. -->
     <Analytics />
