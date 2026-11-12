@@ -333,15 +333,12 @@ function setUpElevator() {
     let tipTimer;
     let switchedTheme = false;
     const labelled = window.matchMedia("(min-width: 1640px) and (min-height: 461px)");
-    const themeTip = tip.textContent;
 
-    // Bill says something in his bubble for a few seconds.
-    function say(text, ms = 3500) {
-        clearTimeout(tipTimer);
-        tip.textContent = text;
+    // Bill's theme tip, for a few seconds or until the visitor scrolls.
+    function showTip() {
         tip.hidden = false;
         window.addEventListener("scroll", hideTip, { once: true, passive: true });
-        tipTimer = setTimeout(hideTip, ms);
+        tipTimer = setTimeout(hideTip, 3500);
     }
 
     function arriveAt(floor) {
@@ -371,12 +368,11 @@ function setUpElevator() {
         return stop ? Number(stop.dataset.floor) : undefined;
     }
 
-    // `focus` moves keyboard focus into the panel; Bill's own prompt leaves focus alone.
-    function open(show, focus = true) {
+    function open(show) {
         hideTip();
         panel.hidden = !show;
         car.setAttribute("aria-expanded", String(show));
-        if (show && focus) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
+        if (show) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
     }
     car.addEventListener("click", () => {
         if (leaving) return;
@@ -406,7 +402,7 @@ function setUpElevator() {
 
     document.addEventListener("bill-arrived", () => {
         if (window.scrollY > 24 || !panel.hidden) return;
-        if (!switchedTheme) say(themeTip);
+        if (!switchedTheme) showTip();
     });
 
     function follow() {
