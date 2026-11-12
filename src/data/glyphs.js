@@ -1,7 +1,6 @@
 // Line glyphs (24 x 24, drawn with a stroke) for tech-stack items that have
 // no brand mark in simple-icons.
 export const glyphs = {
-    db: '<ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/>',
     gazebo: '<path d="m12 2.5 8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5L12 2.5z"/><path d="M15.5 9.5a4 4 0 1 0 .5 3.5h-3.5"/>',
     agent: '<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 8V4.5M12 4.5h.01M9.5 13h.01M14.5 13h.01M2.5 13v2M21.5 13v2"/>',
     vector: '<circle cx="5" cy="18" r="1.6"/><circle cx="12" cy="6" r="1.6"/><circle cx="19" cy="15" r="1.6"/><path d="M6.3 16.6 10.8 7.4M13.5 6.7l4.4 6.8M6.6 17.7l10.8-2.3"/>',
