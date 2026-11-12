@@ -44,6 +44,9 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
 
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <!-- The brand corner, which also switches light and dark. -->
+    <button class="corner" type="button" aria-label="Switch theme"></button>
+    <div class="peel" aria-hidden="true"></div>
 
     <div class="bb-page">
         <slot />
