@@ -460,9 +460,12 @@ function setUpElevator() {
         else if (event.persisted) arriveAt(initial);
     });
 
+    // Update the car's floor before the builder checks whether a heading needs work.
+    if (onHome) window.addEventListener("scroll", follow, { passive: true });
     const sectionBuild = setUpSectionBuild({
         car,
         reduceMotion,
+        getSection: onHome ? () => sections[current] : undefined,
         canBuild: () => !riding && !leaving && (!onHome || window.scrollY > 8 || current > 0),
     });
 
@@ -521,12 +524,12 @@ function setUpElevator() {
         }
     }));
 
-    window.addEventListener("scroll", follow, { passive: true });
     if (location.hash) arriveAt(floorFor(location));
     else {
         arriveAt(0);
         follow();
     }
+    sectionBuild.check();
 }
 
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
