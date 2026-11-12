@@ -325,7 +325,9 @@ function setUpElevator() {
         riding = true;
         arriveAt(floor);
         history.replaceState(null, "", floor ? `#${link.dataset.section}` : "/");
-        sections[floor].scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
+        const behavior = reduceMotion.matches ? "auto" : "smooth";
+        if (floor === 0) window.scrollTo({ top: 0, behavior });
+        else sections[floor].scrollIntoView({ behavior });
         // Arrived once both the ride and the scroll are done.
         await Promise.all([wait(700), Promise.race([new Promise((resolve) => window.addEventListener("scrollend", resolve, { once: true })), wait(1500)])]);
         riding = false;
