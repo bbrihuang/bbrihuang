@@ -157,14 +157,16 @@ function setUpClips() {
 function setUpSeason() {
     const sky = document.querySelector(".season-sky");
     if (!sky) return;
+    // [side, how far across that margin (0-1), start height (vh), size, seconds per fall, start offset]
     const pieces = [
-        [3, 12, 0.9, 19, -2], [9, 64, 0.6, 24, -11], [6, 38, 0.75, 21, -6], [13, 85, 0.55, 27, -17],
-        [94, 22, 0.85, 20, -4], [88, 70, 0.65, 25, -13], [97, 48, 0.7, 22, -9], [91, 5, 0.5, 28, -20],
-        [17, 30, 0.45, 30, -24], [84, 92, 0.5, 26, -15],
+        ["left", 0.2, 12, 0.9, 19, -2], ["left", 0.65, 64, 0.6, 24, -11], ["left", 0.4, 38, 0.75, 21, -6], ["left", 0.8, 85, 0.55, 27, -17],
+        ["right", 0.75, 22, 0.85, 20, -4], ["right", 0.3, 70, 0.65, 25, -13], ["right", 0.55, 48, 0.7, 22, -9], ["right", 0.15, 5, 0.5, 28, -20],
+        ["left", 0.55, 30, 0.45, 30, -24], ["right", 0.85, 92, 0.5, 26, -15],
     ];
-    sky.replaceChildren(...pieces.map(([x, y, size, seconds, delay], index) => {
+    sky.replaceChildren(...pieces.map(([side, across, y, size, seconds, delay], index) => {
         const piece = document.createElement("span");
-        piece.style.cssText = `--x: ${x}vw; --y: ${y}vh; --s: ${size}; --t: ${seconds}s; --d: ${delay}s; --sway: ${index % 2 ? -1 : 1}`;
+        piece.className = side;
+        piece.style.cssText = `--across: ${across}; --y: ${y}vh; --s: ${size}; --t: ${seconds}s; --d: ${delay}s; --sway: ${index % 2 ? -1 : 1}`;
         return piece;
     }));
 }
