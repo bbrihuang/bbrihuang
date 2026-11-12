@@ -26,11 +26,6 @@ export const stack = [
             { name: "MATLAB", glyph: "wave", color: "#e16737" },
             { name: "3D printing", glyph: "layers", color: "#f472b6" },
             { name: "PC assembly & overclocking", glyph: "chip", color: "#a3e635" },
-        ],
-    },
-    {
-        group: "Robotics",
-        items: [
             { name: "ROS 2", icon: "siRos" },
             { name: "Gazebo", glyph: "gazebo", color: "#f58113" },
         ],
