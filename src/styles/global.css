@@ -12,10 +12,10 @@ h1, h2, h3, h4, p, figure, ul, ol, dl, dd { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 img, video { display: block; max-width: 100%; }
 
-.bb-name, .bb-section-word, .bb-domain, .bb-word { font-family: "Archivo", sans-serif; }
-.bb-label, .bb-meta, .bb-facts-list dt, .bb-arrow, .bb-btn { font-family: var(--body), sans-serif; }
+.bb-name, .bb-section-word, .bb-domain { font-family: "Archivo", sans-serif; }
+.bb-meta, .bb-arrow, .bb-btn, .bb-btn-arrow { font-family: var(--body), sans-serif; }
 /* Labels: sentence case, normal tracking, muted, same face as the text. */
-.bb-label, .bb-meta, .bb-facts-list dt { text-transform: none; letter-spacing: 0; font-size: 0.875rem; font-weight: 400; color: var(--bb-muted); }
+.bb-meta { text-transform: none; letter-spacing: 0; font-size: 0.875rem; font-weight: 400; color: var(--bb-muted); }
 .muted { color: var(--bb-muted); }
 
 /* One page width, so the giant type stops growing on wide screens. */
@@ -95,7 +95,6 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .about-text a, .about-text strong { color: var(--bb-ink); font-weight: 600; text-decoration: none; }
 .about-text a { background: var(--bb-project-gradient) left bottom / 0 2px no-repeat; transition: background-size var(--bb-dur) var(--bb-ease), color var(--bb-dur) var(--bb-ease); }
 @media (hover: hover) { .about-text a:hover { background-size: 100% 2px; } }
-.about-main .bb-statement { font-size: clamp(1.375rem, 2.3vw, 2.125rem); line-height: 1.12; letter-spacing: -0.025em; }
 .edu { display: grid; gap: 18px; align-content: start; }
 .edu-head { display: flex; align-items: center; gap: 16px; }
 .edu-head img { width: auto; height: 56px; }
