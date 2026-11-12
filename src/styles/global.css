@@ -360,8 +360,8 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
    or with reduced motion, the finished name simply shows. */
 /* inline-block so each letter can scale when it pops in, from its baseline. */
 .hero .letter { display: inline-block; transform-origin: 50% 85%; transition: opacity 0.25s var(--ease-out); }
-.js-reveal .hero:not(.built) .letter:not(.on) { opacity: 0; }
-.js-reveal .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
+.js-reveal.awaiting-build .hero:not(.built) .letter:not(.on) { opacity: 0; }
+.js-reveal.awaiting-build .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
 
 /* The builder's speech bubble: an ink box beside the builder, in its lane under the name,
    its tail pointing at the builder. */
@@ -429,7 +429,7 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
 @keyframes where-open { from { opacity: 0; transform: translateY(-50%) translateX(8px) scale(0.97); } }
 
 /* Bill leaves the hero for his elevator; until he gets there, the elevator waits. */
-.hero.bill-gone .builder { visibility: hidden; }
+.hero.bill-gone .builder, html:not(.awaiting-bill) .hero .builder { visibility: hidden; }
 html.awaiting-bill .elevator { opacity: 0; visibility: hidden; }
 
 /* The elevator lights up as Bill comes through. */
