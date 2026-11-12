@@ -42,19 +42,16 @@ img, video { display: block; max-width: 100%; }
 @media (hover: hover) { .corner:hover::before { transform: scale(1.3); } }
 .corner:active::before { transform: scale(1.45); }
 
-/* The peel: the new theme wipes in from the corner, led by an orange edge.
-   The edge layer uses the same box as the page snapshot (scrollbar included), so it sits exactly on the wipe. */
-.peel { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
-html.peeling .peel { view-transition-name: peel; }
+/* The peel: the new theme sweeps in from the corner toward the bottom left through a
+   wide, soft edge. The mask is three times the page, opaque at its top right and clear
+   at its bottom left; sliding it across reveals the new page diagonally. */
 html.peeling::view-transition-old(root), html.peeling::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
-html.peeling::view-transition-old(peel), html.peeling::view-transition-new(peel) { display: none; }
-html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient); animation: peel-edge 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
-@keyframes peel { from { clip-path: polygon(100% 0, 100% 0, 100% 0); } to { clip-path: polygon(100% 0, calc(100% - 205vmax) 0, 100% 205vmax); } }
-@keyframes peel-edge {
-    from { clip-path: polygon(100% 0, calc(100% - 14px) 0, 100% 14px, 100% 0); }
-    to { clip-path: polygon(calc(100% - 205vmax) 0, calc(100% - 205vmax - 14px) 0, 100% calc(205vmax + 14px), 100% 205vmax); }
+html.peeling::view-transition-new(root) {
+    mask-image: linear-gradient(to bottom left, #000 42%, transparent 58%);
+    mask-size: 300% 300%;
+    animation: peel 0.9s cubic-bezier(0.77, 0, 0.175, 1) both;
 }
+@keyframes peel { from { mask-position: 0% 100%; } to { mask-position: 100% 0%; } }
 
 /* ---------- Top bar ---------- */
 .site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px;
