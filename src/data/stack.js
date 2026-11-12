@@ -59,3 +59,8 @@ export const stack = [
         ],
     },
 ];
+
+// Certificates, each linking to its public record.
+export const certifications = [
+    { name: "Python", issuer: "Coddy", icon: "siPython", href: "https://coddy.tech/certifications/kZAs2y-python-ZP9neU" },
+];
