@@ -356,12 +356,11 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .builder[data-pose="up"] .arm-carry, .builder[data-pose="down"] .arm-carry { display: none; }
 .builder[data-pose="up"] .arm-up, .builder[data-pose="down"] .arm-down { display: inline; }
 
-/* The build (setUpBuilder in main.js): until it runs, the name waits as outlines and the
-   line is hidden; each word fills as the builder hammers under it. Without JavaScript,
+/* The build (setUpBuilder in main.js): until it runs, the name and the line are hidden; each word fills as the builder hammers under it. Without JavaScript,
    or with reduced motion, the finished name simply shows. */
 /* inline-block so each letter can scale when it pops in, from its baseline. */
-.hero .letter { display: inline-block; transform-origin: 50% 85%; -webkit-text-stroke: 1.5px transparent; transition: color 0.25s var(--ease-out), -webkit-text-stroke-color 0.25s var(--ease-out); }
-.js-reveal .hero:not(.built) .letter:not(.on) { color: transparent; -webkit-text-stroke-color: var(--bb-ink); }
+.hero .letter { display: inline-block; transform-origin: 50% 85%; transition: opacity 0.25s var(--ease-out); }
+.js-reveal .hero:not(.built) .letter:not(.on) { opacity: 0; }
 .js-reveal .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
 
 /* The builder's speech bubble: an ink box over the builder's head, its tail pointing down at it. */

@@ -218,13 +218,12 @@ function setUpBuilder() {
         function popIn(word) {
             word.forEach((letter, index) => {
                 setTimeout(() => letter.classList.add("on"), index * 35);
-                // A quick dip, then a swell past full size, then settle. Letters wait at full size until their turn.
+                // From small and hidden, a swell past full size, then settle.
                 letter.animate([
+                    { transform: "translateY(0.1em) scale(0.6)" },
+                    { transform: "translateY(-0.04em) scale(1.1)", offset: 0.55 },
                     { transform: "translateY(0) scale(1)" },
-                    { transform: "translateY(0.05em) scale(0.86)", offset: 0.18 },
-                    { transform: "translateY(-0.04em) scale(1.1)", offset: 0.6 },
-                    { transform: "translateY(0) scale(1)" },
-                ], { duration: 420, delay: index * 35, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
+                ], { duration: 420, delay: index * 35, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "backwards" });
             });
         }
 
