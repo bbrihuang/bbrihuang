@@ -1,4 +1,13 @@
+---
+// Each letter is its own span so the name can power on letter by letter (see global.css).
+const name = "Brian Huang";
+---
+
 <section class="hero" aria-label="Introduction">
-    <div class="fit"><h1 class="bb-name">Brian Huang</h1></div>
+    <div class="fit">
+        <h1 class="bb-name" aria-label={name}>
+            {[...name].map((letter, index) => (letter === " " ? " " : <span class="letter" aria-hidden="true" style={`--i: ${index}`}>{letter}</span>))}
+        </h1>
+    </div>
     <hr class="bb-grad-rule">
 </section>
