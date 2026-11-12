@@ -1,6 +1,9 @@
 ---
 import { clubs } from "../data/clubs.js";
 
+// Who I am in a few words: what I study, where I'm from, what I do for fun.
+const traits = ["Computer engineering at BU", "From New York, NY", "Volleyball", "Basketball", "Eating", "Building PCs", "Video games"];
+
 // A few clubs as a preview; the rest are on the activities page.
 const preview = clubs.filter((club) => club.preview);
 ---
@@ -10,10 +13,9 @@ const preview = clubs.filter((club) => club.preview);
     <div class="bb-cols">
         <div class="about-main bb-span-7">
             <div class="shot portrait"><img src="/avatar.jpg" alt="Brian Huang" width="160" height="160"></div>
-            <dl class="bb-facts-list">
-                <div><dt>Hometown</dt><dd>New York, NY</dd></div>
-                <div><dt>Hobbies</dt><dd>Volleyball, basketball, eating, building PCs, video games</dd></div>
-            </dl>
+            <ul class="traits" aria-label="About me">
+                {traits.map((trait) => <li>{trait}</li>)}
+            </ul>
         </div>
         <div class="edu bb-span-5">
             <div class="edu-head">
