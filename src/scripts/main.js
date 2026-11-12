@@ -16,10 +16,17 @@ function setUpThemeCorner() {
             localStorage.setItem("theme", root.dataset.theme);
         } catch {}
         label();
+        // Apply the new colours now, while fades are still off.
+        void document.body.offsetWidth;
     };
     corner.addEventListener("click", async () => {
-        if (!document.startViewTransition || reduceMotion.matches) return flip();
+        // While the theme changes, colour fades are off (see html.peeling in global.css),
+        // so nothing fades from the old theme's colours after the switch.
         root.classList.add("peeling");
+        if (!document.startViewTransition || reduceMotion.matches) {
+            flip();
+            return root.classList.remove("peeling");
+        }
         try {
             await document.startViewTransition(flip).finished;
         } finally {
