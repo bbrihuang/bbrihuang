@@ -315,11 +315,7 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* One curve for arrivals: a strong ease-out. */
 :root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
 
-/* Load: the name rises in and the gradient rule draws across under it. */
-.hero .bb-name { animation: rise-in 0.9s var(--ease-out) both; }
-.hero .bb-grad-rule { animation: draw 1s var(--ease-out) 0.2s both; }
-@keyframes rise-in { from { opacity: 0; transform: translateY(0.12em); } }
-@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+/* Load: the hero builder (see "Hero builder" below). */
 
 /* Entrances: every block fades and rises once as it scrolls in. Siblings follow
    70ms apart. Same list as revealBlocks in main.js. */
@@ -353,3 +349,35 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .builder svg { display: block; width: 100%; overflow: visible; }
 .builder .far { color: var(--bb-muted); }
 .builder .leg { transform-box: view-box; }
+
+/* The build. The name starts as outlines. The robot walks the line for --walk, laying
+   the gradient line behind it, and each letter fills as the robot passes under it
+   (--at, measured by setUpBuilder in main.js; the fallback spaces them evenly).
+   With reduced motion nothing runs and the finished name simply shows. */
+.hero { --walk: 6s; --start: 0.5s; }
+.hero .letter { -webkit-text-stroke: 1.5px transparent;
+    animation: outline 0.5s var(--ease-out) calc(var(--i) * 30ms) backwards,
+               build 0.45s var(--ease-out) calc(var(--start) + var(--at, calc(var(--i) * var(--walk) / 11))) backwards; }
+@keyframes outline { from { opacity: 0; } }
+@keyframes build { from { color: transparent; -webkit-text-stroke-color: var(--bb-ink); } }
+/* The line is laid right behind the robot, then finishes once it stops. */
+.hero .bb-grad-rule { animation: lay-rest 0.5s var(--ease-out) calc(var(--start) + var(--walk)) backwards, lay var(--walk) linear var(--start) backwards; }
+@keyframes lay { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 calc(var(--bot) + 24px) 0 0); } }
+@keyframes lay-rest { from { clip-path: inset(0 calc(var(--bot) + 24px) 0 0); } to { clip-path: inset(0); } }
+/* The walk: across the line at a steady pace, stopping short of the corner. */
+/* both: the robot waits at the start, then stays where it stopped. */
+.builder { animation: walk var(--walk) linear var(--start) both; }
+@keyframes walk { from { transform: translateX(0); } to { transform: translateX(calc(100cqw - var(--bot) - 24px)); } }
+/* Tripod gait: three legs push back on the ground while the other three lift and swing forward. */
+.builder .leg { animation: step 0.5s ease-in-out var(--start) 12 backwards; }
+.builder .b { animation-delay: calc(var(--start) - 0.25s); }
+.builder .chassis { animation: bob 0.25s ease-in-out var(--start) 24 alternate backwards; }
+@keyframes step {
+    0% { transform: rotate(16deg) translateY(0); }
+    55% { transform: rotate(-16deg) translateY(0); }
+    78% { transform: rotate(0deg) translateY(-5px); }
+    100% { transform: rotate(16deg) translateY(0); }
+}
+@keyframes bob { to { transform: translateY(-1.5px); } }
+/* Replaying: drop every animation for a frame so they all start again. */
+.hero.rebuild *, .hero.rebuild { animation: none !important; }
