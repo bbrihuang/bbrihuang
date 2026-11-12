@@ -2,20 +2,19 @@ import { setUpSectionBuild } from "./section-build.js";
 
 const root = document.documentElement;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
 // The orange corner switches light and dark. The new theme wipes in from the
 // corner toward the bottom left; without view transitions, or for people who ask
-// for less motion, it switches at once. The choice is remembered.
+// for less motion, it switches at once. The choice lasts for this visit; every new visit opens light.
 function setUpThemeCorner() {
     const corner = document.querySelector(".corner");
     if (!corner) return;
-    const isDark = () => (root.dataset.theme ?? (systemDark.matches ? "dark" : "light")) === "dark";
+    const isDark = () => root.dataset.theme === "dark";
     const label = () => corner.setAttribute("aria-label", isDark() ? "Switch to light theme" : "Switch to dark theme");
     const flip = () => {
         root.dataset.theme = isDark() ? "light" : "dark";
         try {
-            localStorage.setItem("theme", root.dataset.theme);
+            sessionStorage.setItem("theme", root.dataset.theme);
         } catch {}
         label();
         // Apply the new colours now, while fades are still off.
@@ -38,7 +37,6 @@ function setUpThemeCorner() {
             root.classList.remove("peeling");
         }
     });
-    systemDark.addEventListener("change", label);
     label();
 }
 
