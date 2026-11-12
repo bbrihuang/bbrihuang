@@ -307,3 +307,37 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 
 /* ---------- 404 ---------- */
 .not-found-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 40px 0 120px; }
+
+/* ---------- Motion ---------- */
+/* One curve for arrivals: a strong ease-out. */
+:root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+
+/* Load: the name rises in and the gradient rule draws across under it. */
+.hero .bb-name { animation: rise-in 0.9s var(--ease-out) both; }
+.hero .bb-grad-rule { animation: draw 1s var(--ease-out) 0.2s both; }
+@keyframes rise-in { from { opacity: 0; transform: translateY(0.12em); } }
+@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+
+/* Entrances: every block fades and rises once as it scrolls in. Siblings follow
+   70ms apart. Same list as revealBlocks in main.js. */
+:where(main > section:not(.hero) > :not(.project-grid, .club-cards), .project-grid > *, .club-cards > *, .page-head > *, .case-header > *, .case-rail, .case-body > *, .certs > *, .site-footer > *, .not-found-actions) {
+    transition: opacity 0.6s var(--ease-out) var(--d, 0ms), transform 0.7s var(--ease-out) var(--d, 0ms);
+}
+/* :where keeps this at zero specificity, so it never outranks a block's own styles. */
+.js-reveal :where(main > section:not(.hero) > :not(.project-grid, .club-cards), .project-grid > *, .club-cards > *, .page-head > *, .case-header > *, .case-rail, .case-body > *, .certs > *, .site-footer > *, .not-found-actions):not(.is-in) { opacity: 0; transform: translateY(18px); }
+:is(main > section, .project-grid, .club-cards, .page-head, .case-header, .site-footer) > :nth-child(2) { --d: 70ms; }
+:is(main > section, .project-grid, .club-cards, .page-head, .case-header, .site-footer) > :nth-child(3) { --d: 140ms; }
+:is(main > section, .project-grid, .club-cards, .page-head, .case-header, .site-footer) > :nth-child(4) { --d: 210ms; }
+
+/* Experience: the newly opened role's details fade up into place. */
+.job-detail { transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out); }
+@starting-style { .job-detail { opacity: 0; transform: translateY(6px); } }
+
+/* Projects filter: the cards that remain rise back in, quickly, one after another. */
+.project-grid.is-switching .project-slot:not([hidden]) { animation: rise-small 0.3s var(--ease-out) calc(var(--k, 0) * 40ms) both; }
+@keyframes rise-small { from { opacity: 0; transform: translateY(10px); } }
+
+/* Press feedback on the solid buttons. */
+.bb-btn:active { transform: scale(0.97); }
+
+/* Less motion: tokens.css turns every transition and animation off, so blocks simply appear. */

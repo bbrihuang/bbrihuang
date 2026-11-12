@@ -145,6 +145,25 @@ function setUpClips() {
     });
 }
 
+// Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
+// them back (see .js-reveal in global.css); this marks each one .is-in when it shows.
+function setUpReveal() {
+    window.__revealReady = true;
+    const blocks = document.querySelectorAll(".js-reveal :is(" + revealBlocks + ")");
+    if (!("IntersectionObserver" in window)) return root.classList.remove("js-reveal");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    blocks.forEach((block) => observer.observe(block));
+}
+// Keep in step with the selector list in global.css.
+const revealBlocks = "main > section:not(.hero) > :not(.project-grid, .club-cards), .project-grid > *, .club-cards > *, .page-head > *, .case-header > *, .case-rail, .case-body > *, .certs > *, .site-footer > *, .not-found-actions";
+
+setUpReveal();
 setUpThemeCorner();
 setUpJobTabs();
 setUpProjectFilters();

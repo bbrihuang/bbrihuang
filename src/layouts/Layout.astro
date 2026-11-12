@@ -33,8 +33,14 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <title>{title}</title>
-    <!-- Before the first paint: apply a saved theme, so the page never flashes the other one. -->
+    <!-- Before the first paint: apply a saved theme, so the page never flashes the other one,
+         and hold blocks in their starting pose so their entrances play (see setUpReveal in
+         main.js). If the main script never runs, everything shows after 3 seconds. -->
     <script is:inline>
+        document.documentElement.classList.add("js-reveal");
+        setTimeout(function () {
+            if (!window.__revealReady) document.documentElement.classList.remove("js-reveal");
+        }, 3000);
         try {
             var theme = localStorage.getItem("theme");
             if (theme) document.documentElement.dataset.theme = theme;
