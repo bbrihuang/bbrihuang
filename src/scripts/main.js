@@ -475,7 +475,8 @@ function setUpElevator() {
         event.preventDefault();
         if (leaving) return;
         const trip = ++ride;
-        if (event.detail === 0) car.focus({ preventScroll: true });
+        const keyboard = event.detail === 0;
+        if (keyboard) car.focus({ preventScroll: true });
         open(false);
         riding = true;
         arriveAt(floor);
@@ -483,9 +484,15 @@ function setUpElevator() {
         await Promise.all([waitForCar(), scrollToFloor(floor)]);
         if (trip !== ride || leaving) return;
         riding = false;
-        sectionBuild.build(sections[floor]);
+        const build = sectionBuild.build(sections[floor]);
         follow();
         sectionBuild.check();
+        await build;
+        if (keyboard && trip === ride && current === floor && document.activeElement === car) {
+            const heading = floor === 0 ? document.querySelector(".hero h1") : headings[floor];
+            heading.tabIndex = -1;
+            heading.focus({ preventScroll: true });
+        }
     }));
 
     window.addEventListener("scroll", follow, { passive: true });
