@@ -42,17 +42,17 @@ img, video { display: block; max-width: 100%; }
 @media (hover: hover) { .corner:hover::before { transform: scale(1.3); } }
 .corner:active::before { transform: scale(1.45); }
 
-/* The peel: the new theme wipes in from the corner toward the bottom left, one sharp diagonal edge. */
+/* The peel: the new theme sweeps in from the orange corner toward the bottom left. */
 html.peeling::view-transition-old(root), html.peeling::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 /* No colour fades during the switch, or links and panels would fade from the old theme's colours afterwards. */
 html.peeling *, html.peeling *::before, html.peeling *::after { transition: none !important; }
 /* The new page starts fully clipped away, so the frame before the wipe's animation
    kicks in shows the old theme instead of blinking to the new one. */
-html.peeling::view-transition-new(root) { clip-path: polygon(100% 0, 100% 0, 100% 0); animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
-/* The triangle grows until its edge passes through the bottom-left corner. Plain percentages
-   (no mixed units) let Chrome run the wipe on the graphics card instead of redrawing each frame,
-   which stuttered on a 4K screen. */
-@keyframes peel { from { clip-path: polygon(100% 0, 100% 0, 100% 0); } to { clip-path: polygon(100% 0, -100% 0, 100% 200%); } }
+html.peeling::view-transition-new(root) { clip-path: circle(0 at 100% 0); animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
+/* A circle grows from the orange corner until it covers the far corner (radius 142% reaches
+   the opposite corner of any screen). Chrome animates circles smoothly on the graphics card;
+   a triangle with off-screen points stuttered and drew glitched frames on a 4K screen. */
+@keyframes peel { from { clip-path: circle(0 at 100% 0); } to { clip-path: circle(142% at 100% 0); } }
 
 /* ---------- Top bar ---------- */
 .site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px;
