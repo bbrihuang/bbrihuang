@@ -337,6 +337,7 @@ function setUpElevator() {
     const basement = stops.slice(floors.length);
     const onHome = location.pathname === "/";
     const sections = floors.map((link) => document.getElementById(link.dataset.section));
+    const headings = sections.map((section) => section?.querySelector(".bb-section-word"));
     const initial = Number(elevator.style.getPropertyValue("--at"));
     let current = initial;
     let riding = false;
@@ -398,9 +399,14 @@ function setUpElevator() {
 
     function follow() {
         if (riding || leaving) return;
-        const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+        const scrolled = window.scrollY > 8;
+        const atEnd = scrolled && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
         let floor = 0;
-        sections.forEach((section, index) => section && section.getBoundingClientRect().top <= window.innerHeight * 0.4 && (floor = index));
+        if (scrolled) {
+            headings.forEach((heading, index) => {
+                if (heading && heading.getBoundingClientRect().top <= window.innerHeight * 0.85) floor = index;
+            });
+        }
         if (atEnd) floor = sections.length - 1;
         if (floor !== current) arriveAt(floor);
     }
@@ -425,11 +431,12 @@ function setUpElevator() {
 
     // A page restored from the back-forward cache still has the car's departure position.
     window.addEventListener("pageshow", (event) => {
-        if (!event.persisted) return;
-        leaving = riding = false;
-        ride += 1;
+        if (event.persisted) {
+            leaving = riding = false;
+            ride += 1;
+        }
         if (onHome) follow();
-        else arriveAt(initial);
+        else if (event.persisted) arriveAt(initial);
     });
 
     const sectionBuild = setUpSectionBuild({
