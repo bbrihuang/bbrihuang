@@ -366,6 +366,7 @@ function setUpElevator() {
         if (url.pathname === "/") {
             return Math.max(0, floors.findIndex((link) => url.hash === `#${link.dataset.section}`));
         }
+        if (url.pathname.startsWith("/certifications/")) return floors.findIndex((link) => link.dataset.section === "skills");
         const stop = basement.find((link) => url.pathname.startsWith(link.pathname) || url.pathname === link.pathname.slice(0, -1));
         return stop ? Number(stop.dataset.floor) : undefined;
     }
@@ -420,7 +421,7 @@ function setUpElevator() {
         const url = new URL(link.href);
         if (url.origin !== location.origin || url.pathname === location.pathname) return;
         const floor = floorFor(url);
-        if (floor === undefined || (floor < floors.length && current < floors.length)) return;
+        if (floor === undefined) return;
         if (reduceMotion.matches) return;
         event.preventDefault();
         if (leaving) return;
