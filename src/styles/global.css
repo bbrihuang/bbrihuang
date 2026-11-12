@@ -449,8 +449,8 @@ html.awaiting-bill .elevator { opacity: 0; visibility: hidden; }
 @keyframes portal-arrival { from { opacity: 1; transform: translateY(-40%); } to { opacity: 0; transform: translateY(40%); } }
 
 /* Compact screens: the car docks in the corner, with room to drop into the basement.
-   Below 1420px the margin beside the 1280px page is too thin for the shaft, which would sit on the text. */
-@media (max-width: 1419px), (max-height: 460px) {
+   Below 1640px the margin beside the 1280px page is too thin for the shaft and its floor names. */
+@media (max-width: 1639px), (max-height: 460px) {
     .elevator { --car: 50px; --car-bottom: calc(38px + env(safe-area-inset-bottom, 0px));
         --car-drop: calc(max(0, var(--at, 0) - var(--floors) + 1) * 11px);
         top: auto; bottom: var(--car-bottom); right: calc(16px + env(safe-area-inset-right, 0px)); height: auto; transform: none; }
