@@ -5,11 +5,11 @@ const jobs = experience.map((job, index) => ({ ...job, id: `job-${index}` }));
 ---
 
 <!-- Each role is a button with its details right after it, so reading order matches
-     what you see. On wide screens the buttons stack on the left and the open role's
-     details fill the right. Without JavaScript every role's details show. -->
-<section id="experience">
-    <h2 class="section-title">Experience</h2>
-    <div class="jobs" style={`--n: ${jobs.length}`} role="group" aria-label="Roles">
+     what you see. On wide screens the buttons form a timeline on the left and the open
+     role's details fill the right. Without JavaScript every role's details show. -->
+<section id="experience" class="bb-section" aria-labelledby="experience-title">
+    <h2 id="experience-title" class="bb-section-word">Experience</h2>
+    <div class="jobs ruled" style={`--n: ${jobs.length}`} role="group" aria-label="Roles">
         {jobs.map((job, index) => (
             <>
                 <button
@@ -20,41 +20,33 @@ const jobs = experience.map((job, index) => ({ ...job, id: `job-${index}` }));
                     aria-controls={job.id}
                     aria-expanded={index === 0 ? "true" : "false"}
                 >
-                    <span class="job-marker" aria-hidden="true"></span>
-                    <img src={job.logo} alt="" width="44" height="44">
+                    <span class="logo"><img src={job.logo} alt="" width="32" height="32"></span>
                     <span class="job-tab-text">
                         <span class="job-tab-role">{job.role}</span>
                         <span class="job-tab-org">{job.org}</span>
                         <span class="job-dates">{formatRange(job.start, job.end)}</span>
                     </span>
                 </button>
-                <article class="job-detail" style={`--i: ${index}`} id={job.id} role="region" aria-labelledby={`${job.id}-tab`}>
-                    <header class="job-detail-header">
-                        <img src={job.logo} alt="" width="64" height="64" loading="lazy">
-                        <div>
-                            <h3>{job.role}</h3>
-                            <p>
-                                {job.url
-                                    ? <a href={job.url} target="_blank" rel="noopener noreferrer">{job.org} &nearr;</a>
-                                    : job.org}
-                                <span class="job-org-note"> · {job.orgNote}</span>
-                            </p>
-                        </div>
-                    </header>
-
-                    <p class="job-meta">{formatRange(job.start, job.end)} · {duration(job.start, job.end)} · {job.place}</p>
-
-                    <ul class="job-bullets">
-                        {job.bullets.map((bullet) => (
-                            <li>{bullet}</li>
-                        ))}
-                    </ul>
-
-                    <ul class="chips">
-                        {job.skills.map((skill) => (
-                            <li>{skill}</li>
-                        ))}
-                    </ul>
+                <article class="job-detail bb-panel" id={job.id} aria-labelledby={`${job.id}-tab`}>
+                    <div class="bb-panel-body">
+                        <header class="job-head">
+                            <span class="logo logo-big"><img src={job.logo} alt="" width="52" height="52" loading="lazy"></span>
+                            <div>
+                                <h3>{job.role}</h3>
+                                <p class="job-org">
+                                    {job.url ? <a class="bb-link" href={job.url}>{job.org}</a> : job.org}
+                                    {job.orgNote && <span>{job.orgNote}</span>}
+                                </p>
+                            </div>
+                        </header>
+                        <p class="job-meta">{formatRange(job.start, job.end)}<span>{duration(job.start, job.end)}</span><span>{job.place}</span></p>
+                        <ul class="bb-checks">
+                            {job.bullets.map((bullet) => <li>{bullet}</li>)}
+                        </ul>
+                        <ul class="tags">
+                            {job.skills.map((skill) => <li>{skill}</li>)}
+                        </ul>
+                    </div>
                 </article>
             </>
         ))}

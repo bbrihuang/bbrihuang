@@ -126,3 +126,39 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
     .work { grid-template-columns: 1fr 1fr; }
     .work > :first-child { grid-column: 1 / -1; }
 }
+
+/* ---------- Experience: a timeline of roles, the open one's details beside it ---------- */
+.jobs { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--bb-gutter); row-gap: 4px; align-items: start; }
+/* The timeline: one thin line through the markers. */
+.jobs::before { content: ""; position: absolute; left: 7px; top: calc(clamp(24px, 2.4vw, 36px) + 24px); height: calc(var(--n) * 108px - 72px); width: 1px; background: var(--bb-rule-soft); }
+.job-tab { position: relative; grid-column: 1; grid-row: calc(var(--i) + 1); display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start;
+    width: 100%; padding: 14px 16px 14px 32px; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+    transition: background-color var(--bb-dur) var(--bb-ease); }
+/* Each marker is a small corner triangle; the open role's turns orange. */
+.job-tab::before { content: ""; position: absolute; left: 2px; top: 30px; width: 11px; height: 11px; background: var(--bb-muted);
+    clip-path: polygon(0 0, 100% 0, 100% 100%); transition: background-color var(--bb-dur) var(--bb-ease); }
+.job-tab[aria-expanded="true"] { background: var(--bb-paper-2); }
+.job-tab[aria-expanded="true"]::before { background: var(--bb-project-gradient); }
+@media (hover: hover) { .job-tab:hover { background: var(--bb-paper-2); } }
+.job-tab-text { display: grid; gap: 2px; }
+.job-tab-role { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.015em; }
+.job-tab-org { color: var(--bb-muted); }
+.job-dates { margin-top: 4px; color: var(--bb-muted); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+.job-detail { grid-column: 2; grid-row: 1 / span var(--n); }
+.job-detail .bb-panel-body { display: grid; gap: 18px; padding: clamp(20px, 2.4vw, 32px); }
+.job-head { display: flex; align-items: center; gap: 18px; }
+.logo-big { width: 72px; height: 72px; padding: 10px; }
+.job-head h3 { font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; }
+.job-org { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 4px; }
+.job-org span, .job-meta { color: var(--bb-muted); }
+.job-meta { display: flex; flex-wrap: wrap; gap: 4px 18px; font-variant-numeric: tabular-nums; }
+.bb-checks li { line-height: 1.55; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li { padding: 6px 12px; border: 1px solid var(--bb-rule-soft); font-size: 0.875rem; line-height: 1.3; }
+/* Narrow: each role's details open right under its button. */
+@media (max-width: 860px) {
+    .jobs { grid-template-columns: 1fr; }
+    .jobs::before { display: none; }
+    .job-tab, .job-detail { grid-column: 1; grid-row: auto; }
+    .job-detail { margin: 4px 0 12px; }
+}
