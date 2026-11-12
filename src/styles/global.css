@@ -372,14 +372,6 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .js-reveal.awaiting-build .hero:not(.built) .letter:not(.on) { opacity: 0; }
 .js-reveal.awaiting-build .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
 
-/* The builder's speech bubble: an ink box beside the builder, in its lane under the name,
-   its tail pointing at the builder. */
-.builder-says { position: absolute; right: calc(24px + var(--sprite) + 12px); bottom: calc(var(--sprite) * 0.55); z-index: 2; max-width: min(300px, 60vw); padding: 10px 14px;
-    background: var(--bb-ink); color: var(--bb-paper); font-size: 0.875rem; font-weight: 500; line-height: 1.4; transform-origin: 100% 60%; }
-.builder-says::after { content: ""; position: absolute; right: -7px; top: 50%; width: 7px; height: 14px; margin-top: -7px;
-    background: var(--bb-ink); clip-path: polygon(0 0, 100% 50%, 0 100%); }
-.builder-says[hidden] { display: none; }
-
 /* The frame goes up on the first strike. The next one powers the opening. */
 .builder-portal { position: absolute; right: 0; bottom: 3px; z-index: 1; width: calc(var(--sprite) * 0.92);
     height: calc(var(--sprite) * 1.42); pointer-events: none; animation: portal-assemble 220ms var(--ease-out) both; }
