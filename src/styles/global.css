@@ -465,3 +465,22 @@ html.awaiting-bill .elevator { opacity: 0; visibility: hidden; }
         max-height: calc(100dvh - var(--car-bottom) - 1.25 * var(--car) - 26px + var(--car-drop)); }
     @keyframes where-open { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
 }
+
+/* Wide screens: every floor is named beside its mark on the shaft; click a name to ride there.
+   The list is always shown here, so the "Where to?" panel styling is dropped. */
+@media (min-width: 1640px) and (min-height: 461px) {
+    .elevator { right: 20px; }
+    .where-to, .where-to[hidden] { display: block; position: absolute; top: 0; bottom: 0; right: calc(100% + 12px); transform: none;
+        min-width: 0; max-height: none; padding: 0; overflow: visible; background: none; color: var(--bb-muted); animation: none; }
+    .where-title, .where-basement, .where-sign { display: none; }
+    .where-pages { margin: 0; padding: 0; border: 0; }
+    .where-to li { position: absolute; right: 0; top: calc(var(--i) * var(--floor)); transform: translateY(-50%); }
+    .where-to a { min-height: 28px; justify-content: flex-end; font-size: 0.875rem; white-space: nowrap; }
+    .where-to a span { display: none; }
+    .where-to a[aria-current] { color: var(--bb-ink); font-weight: 600; }
+    .where-to a[aria-current]::after { content: none; }
+    @media (hover: hover) { .where-to a:hover { color: var(--bb-signal-text); } }
+    /* Bill's bubbles sit above the shaft, clear of the names. */
+    .elevator-tip { top: auto; bottom: calc(100% + 14px); right: 0; transform: none; transform-origin: right bottom; }
+    .elevator-tip::after { top: auto; bottom: -7px; right: calc(var(--car) / 2 - 7px); width: 14px; height: 7px; transform: none; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+}
