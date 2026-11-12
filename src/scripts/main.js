@@ -171,6 +171,32 @@ function setUpBuilder() {
         try { sessionStorage.setItem("bill-built-hero", "1"); } catch {}
     }
 
+    function reachElevator() {
+        hero.classList.add("bill-gone");
+        root.classList.remove("awaiting-bill");
+        window.removeEventListener("scroll", skipWhenLeavingHero);
+        reduceMotion.removeEventListener("change", skipForReducedMotion);
+        document.dispatchEvent(new Event("bill-arrived"));
+    }
+
+    function skipIntro() {
+        run += 1;
+        [builder, rule, says, portal, ...letters].forEach((element) => {
+            element.getAnimations().forEach((animation) => animation.cancel());
+        });
+        says.hidden = portal.hidden = true;
+        finishName();
+        reachElevator();
+    }
+
+    function skipWhenLeavingHero() {
+        if (window.scrollY > 24 && ground.getBoundingClientRect().bottom < window.innerHeight * 0.3) skipIntro();
+    }
+
+    function skipForReducedMotion() {
+        if (reduceMotion.matches) skipIntro();
+    }
+
     async function build() {
         const id = ++run;
         const current = () => id === run;
@@ -200,6 +226,7 @@ function setUpBuilder() {
         // A short pop jump: a beat to wind up, a quick hop that bumps the word, a beat after landing.
         async function jump(word) {
             await wait(160);
+            if (!current()) return;
             const lift = ground.clientHeight - builder.offsetHeight + 6;
             builder.dataset.pose = "up";
             builder.animate([
@@ -208,6 +235,7 @@ function setUpBuilder() {
                 { transform: `translateX(${x}px) translateY(0)` },
             ], { duration: 300, fill: "forwards" });
             await wait(120);
+            if (!current()) return;
             popIn(word);
             await wait(180);
             builder.dataset.pose = "stand";
@@ -282,17 +310,18 @@ function setUpBuilder() {
         says.hidden = true;
         await enterPortal();
         if (!current()) return;
-        hero.classList.add("bill-gone");
         document.querySelector(".car")?.classList.add("portal-arrival");
-        root.classList.remove("awaiting-bill");
-        document.dispatchEvent(new Event("bill-arrived"));
+        reachElevator();
         await portal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220 }).finished.catch(() => {});
         portal.hidden = true;
     }
 
     // Once the visitor has switched themes, the tip has done its job.
     document.querySelector(".corner")?.addEventListener("click", () => (says.hidden = true));
+    window.addEventListener("scroll", skipWhenLeavingHero, { passive: true });
+    reduceMotion.addEventListener("change", skipForReducedMotion);
     build();
+    skipWhenLeavingHero();
 }
 
 // The car follows the home sections and rides into the basement for dedicated pages.
