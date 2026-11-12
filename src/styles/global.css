@@ -344,38 +344,3 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .bb-btn:active { transform: scale(0.97); }
 
 /* Less motion: tokens.css turns every transition and animation off, so blocks simply appear. */
-
-/* ---------- Seasonal background ---------- */
-/* A fixed layer behind everything. Each piece falls the full height of the screen at a
-   steady pace, swaying and turning; with reduced motion they rest where they start. */
-.season-sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-/* Pieces stay in the empty margins beside the page column, never behind content. */
-.season-sky { --margin: calc((100vw - var(--page)) / 2 - var(--bb-gutter) - 24px); }
-.season-sky span { position: absolute; top: var(--y); width: calc(26px * var(--s)); aspect-ratio: 1; opacity: 0.55;
-    animation: drift var(--t) linear var(--d) infinite; }
-.season-sky .left { left: calc(var(--margin) * var(--across)); }
-.season-sky .right { right: calc(var(--margin) * var(--across)); }
-/* No room beside the page: no pieces, and no season buttons, since they would change nothing. */
-@media (max-width: 1500px) { .season-sky, .season-switch { display: none; } }
-@keyframes drift {
-    from { transform: translate(0, calc(-1 * var(--y) - 40px)) rotate(0deg); }
-    50% { transform: translate(calc(var(--sway) * 14px), calc(50vh - var(--y))) rotate(calc(var(--sway) * 160deg)); }
-    to { transform: translate(0, calc(100vh - var(--y) + 40px)) rotate(calc(var(--sway) * 320deg)); }
-}
-
-/* Each season: a shape (used as a mask) and two colours, alternating between pieces. */
-.season-sky span { background: var(--piece-a); mask: var(--shape) center / contain no-repeat; }
-.season-sky span:nth-child(3n) { background: var(--piece-b); }
-html[data-season="fall"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20C4 10 10 4 20 4c0 10-6 16-16 16z'/%3E%3Cpath d='M3 21l7-7' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E"); --piece-a: #D9661F; --piece-b: #B5482A; }
-html[data-season="winter"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='7'/%3E%3C/svg%3E"); --piece-a: #A9B6C2; --piece-b: #C8D2DB; }
-html[data-season="spring"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3c4.5 4 4.5 14 0 18c-4.5-4-4.5-14 0-18z'/%3E%3C/svg%3E"); --piece-a: #E79AB0; --piece-b: #F0BCCB; }
-/* Summer: small warm motes that rise instead of fall. */
-html[data-season="summer"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E"); --piece-a: #FFB547; --piece-b: #FF8A3D; }
-html[data-season="summer"] .season-sky span { animation-direction: reverse; }
-
-/* Season buttons: plain words; the current one is underlined with the gradient. */
-.season-switch { display: flex; flex-wrap: wrap; gap: 0 16px; }
-.season-switch button { min-height: 32px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; transition: color var(--bb-dur) var(--bb-ease); }
-.season-switch button[aria-pressed="true"] { color: var(--bb-ink); background: var(--bb-project-gradient) left bottom 4px / 100% 2px no-repeat; }
-@media (hover: hover) { .season-switch button:hover { color: var(--bb-signal-text); } }
-.footer-line { align-items: center; }
