@@ -42,16 +42,10 @@ img, video { display: block; max-width: 100%; }
 @media (hover: hover) { .corner:hover::before { transform: scale(1.3); } }
 .corner:active::before { transform: scale(1.45); }
 
-/* The peel: the new theme sweeps in from the corner toward the bottom left through a
-   wide, soft edge. The mask is three times the page, opaque at its top right and clear
-   at its bottom left; sliding it across reveals the new page diagonally. */
+/* The peel: the new theme wipes in from the corner toward the bottom left, one sharp diagonal edge. */
 html.peeling::view-transition-old(root), html.peeling::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-html.peeling::view-transition-new(root) {
-    mask-image: linear-gradient(to bottom left, #000 42%, transparent 58%);
-    mask-size: 300% 300%;
-    animation: peel 0.9s cubic-bezier(0.77, 0, 0.175, 1) both;
-}
-@keyframes peel { from { mask-position: 0% 100%; } to { mask-position: 100% 0%; } }
+html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
+@keyframes peel { from { clip-path: polygon(100% 0, 100% 0, 100% 0); } to { clip-path: polygon(100% 0, calc(100% - 205vmax) 0, 100% 205vmax); } }
 
 /* ---------- Top bar ---------- */
 .site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px;
