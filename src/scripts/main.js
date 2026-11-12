@@ -156,40 +156,47 @@ function setUpClips() {
 }
 
 // Hero builder: a pixel builder walks the gradient line, laying it behind itself,
-// and under each word it jumps; the word fills and bounces as it gets bumped.
-// Clicking the builder builds the name again. With reduced motion the name is just there.
+// and under each word it hops; the word pops in as it gets bumped. At the end it
+// points out the theme corner. Clicking it walks it back to the start, fading the
+// name and taking the line up as it goes, then builds again.
+// With reduced motion the name is just there.
 function setUpBuilder() {
     const hero = document.querySelector(".hero");
     const builder = hero?.querySelector(".builder");
     if (!builder) return;
     if (reduceMotion.matches) return hero.classList.add("built");
     const rule = hero.querySelector(".bb-grad-rule");
+    const says = hero.querySelector(".builder-says");
     const ground = builder.parentElement;
     const letters = [...hero.querySelectorAll(".letter")];
     const words = [letters.slice(0, 5), letters.slice(5)];
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    const speed = 0.8; // pixels per millisecond
+    const speed = 0.8; // pixels per millisecond, building
+    const backSpeed = 1.1; // walking back
     let run = 0;
+    let x = 0;
 
     async function build() {
         const id = ++run;
         const current = () => id === run;
-        [builder, rule].forEach((element) => element.getAnimations().forEach((animation) => animation.cancel()));
-        hero.classList.remove("built");
-        letters.forEach((letter) => letter.classList.remove("on"));
-        builder.dataset.pose = "stand";
-
+        says.hidden = true;
         const width = ground.clientWidth;
         const size = builder.offsetWidth;
         const origin = ground.getBoundingClientRect().left;
-        const under = (word) => (word[0].getBoundingClientRect().left + word.at(-1).getBoundingClientRect().right) / 2 - origin - size / 2;
-        let x = 0;
+        // Start from wherever the builder is now, even mid-walk.
+        x = builder.getBoundingClientRect().left - origin;
+        const lineEnd = hero.classList.contains("built") ? width : x;
+        [builder, rule].forEach((element) => element.getAnimations().forEach((animation) => animation.cancel()));
+        builder.dataset.pose = "stand";
+        const middleOf = (box) => (box.left + box.right) / 2 - origin - size / 2;
 
-        async function walkTo(to) {
-            const duration = Math.abs(to - x) / speed;
+        // Walk to `to`, with the line's end going from `from` to `until` meanwhile.
+        async function walkTo(to, from, until, pace) {
+            const duration = Math.abs(to - x) / pace;
+            const face = to < x ? " scaleX(-1)" : "";
             const timing = { duration, easing: "linear", fill: "forwards" };
-            builder.animate([{ transform: `translateX(${x}px)` }, { transform: `translateX(${to}px)` }], timing);
-            rule.animate([{ clipPath: `inset(0 ${width - x}px 0 0)` }, { clipPath: `inset(0 ${width - to}px 0 0)` }], timing);
+            builder.animate([{ transform: `translateX(${x}px)${face}` }, { transform: `translateX(${to}px)${face}` }], timing);
+            rule.animate([{ clipPath: `inset(0 ${width - from}px 0 0)` }, { clipPath: `inset(0 ${width - until}px 0 0)` }], timing);
             const steps = setInterval(() => (builder.dataset.pose = builder.dataset.pose === "walk-b" ? "walk-a" : "walk-b"), 110);
             await wait(duration);
             clearInterval(steps);
@@ -227,19 +234,41 @@ function setUpBuilder() {
             });
         }
 
+        // Unbuilding: walk back to the start; each letter fades as the builder passes under it.
+        if (x > 1) {
+            hero.classList.remove("built");
+            letters.filter((letter) => letter.classList.contains("on")).forEach((letter) => {
+                const passes = Math.max(0, (x - middleOf(letter.getBoundingClientRect())) / backSpeed);
+                setTimeout(() => current() && letter.classList.remove("on"), passes);
+            });
+            await walkTo(0, lineEnd, 0, backSpeed);
+            if (!current()) return;
+            await wait(250);
+            if (!current()) return;
+        }
+        hero.classList.remove("built");
+        letters.forEach((letter) => letter.classList.remove("on"));
+
         for (const word of words) {
-            await walkTo(under(word));
+            const box = { left: word[0].getBoundingClientRect().left, right: word.at(-1).getBoundingClientRect().right };
+            await walkTo(middleOf(box), x, middleOf(box), speed);
             if (!current()) return;
             await jump(word);
             if (!current()) return;
         }
-        await walkTo(width - size - 24);
+        await walkTo(width - size - 24, x, width - size - 24, speed);
         if (!current()) return;
         rule.getAnimations().forEach((animation) => animation.cancel());
         hero.classList.add("built");
+
+        // The tip pops up over the builder's head.
+        says.hidden = false;
+        says.animate([{ opacity: 0, transform: "translateY(8px) scale(0.9)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
     }
 
     builder.addEventListener("click", build);
+    // Once the visitor has switched themes, the tip has done its job.
+    document.querySelector(".corner")?.addEventListener("click", () => (says.hidden = true));
     build();
 }
 
