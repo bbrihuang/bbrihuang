@@ -370,3 +370,7 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .builder-says::after { content: ""; position: absolute; right: -7px; top: 50%; width: 7px; height: 14px; margin-top: -7px;
     background: var(--bb-ink); clip-path: polygon(0 0, 100% 50%, 0 100%); }
 .builder-says[hidden] { display: none; }
+
+/* Before the first build finishes, everything under the name waits, then fades in. */
+main > section:not(.hero), .site-footer { transition: opacity 0.6s var(--ease-out); }
+html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer { opacity: 0; pointer-events: none; }
