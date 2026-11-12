@@ -28,7 +28,10 @@ function setUpThemeCorner() {
             return root.classList.remove("peeling");
         }
         try {
-            await document.startViewTransition(flip).finished;
+            const transition = document.startViewTransition(flip);
+            // The browser cancels the animation if the tab is hidden; the theme still changes.
+            transition.ready.catch(() => {});
+            await transition.finished;
         } finally {
             root.classList.remove("peeling");
         }
