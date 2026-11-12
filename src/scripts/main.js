@@ -167,9 +167,7 @@ function setUpBuilder() {
         const width = ground.clientWidth;
         const size = builder.offsetWidth;
         const origin = ground.getBoundingClientRect().left;
-        // Start from wherever the builder is now, even mid-walk.
-        x = builder.getBoundingClientRect().left - origin;
-        const lineEnd = hero.classList.contains("built") ? width : x;
+        x = 0;
         [builder, rule].forEach((element) => element.getAnimations().forEach((animation) => animation.cancel()));
         builder.dataset.pose = "stand";
         const middleOf = (box) => (box.left + box.right) / 2 - origin - size / 2;
@@ -232,7 +230,7 @@ function setUpBuilder() {
         if (!current()) return;
         rule.getAnimations().forEach((animation) => animation.cancel());
         hero.classList.add("built");
-        // The first time, the rest of the page now fades in; rebuilds leave it alone.
+        // The rest of the page now fades in.
         root.classList.remove("awaiting-build");
 
         // The tip pops up beside Bill.
