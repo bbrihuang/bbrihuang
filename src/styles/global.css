@@ -416,7 +416,7 @@ html.awaiting-bill .elevator { opacity: 0; pointer-events: none; }
 @media (max-width: 860px) {
     .elevator { --car: 44px; top: auto; bottom: 16px; right: 16px; height: auto; transform: none; }
     .shaft { display: none; }
-    .car { position: relative; transform: none; box-shadow: 0 2px 0 var(--bb-ink); }
+    .car { position: relative; transform: none; }
     .where-to { top: auto; bottom: calc(100% + 10px); right: 0; transform: none; }
     @keyframes where-open { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
 }
