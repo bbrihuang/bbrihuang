@@ -132,20 +132,6 @@ function setUpProjectFilters() {
     });
 }
 
-// Top bar on Home: underline the link for the section at the top of the screen.
-function setUpSectionSpy() {
-    if (window.location.pathname !== "/") return;
-    const links = [...document.querySelectorAll(".site-nav a[data-section]")];
-    const sections = links.map((link) => document.getElementById(link.dataset.section)).filter(Boolean);
-    function update() {
-        const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-        const current = atEnd ? sections.at(-1) : sections.findLast((section) => section.getBoundingClientRect().top <= 140);
-        links.forEach((link) => (current && link.dataset.section === current.id ? link.setAttribute("aria-current", "true") : link.removeAttribute("aria-current")));
-    }
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-}
-
 // The hot-fire clip plays when you point at its tile, then returns to its still.
 function setUpClips() {
     if (reduceMotion.matches) return;
@@ -368,5 +354,4 @@ setUpElevator();
 setUpThemeCorner();
 setUpJobTabs();
 setUpProjectFilters();
-setUpSectionSpy();
 setUpClips();
