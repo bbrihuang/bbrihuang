@@ -90,8 +90,8 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* ---------- About: a short description, then school and a few clubs ---------- */
 /* The description, beside school and clubs. */
 .about-main { display: grid; gap: 24px; align-content: start; }
-/* The description: plain paragraphs in muted ink; names stand out in full ink. */
-.about-text { display: grid; gap: 1em; max-width: 62ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.65; color: var(--bb-muted); }
+/* The description: plain paragraphs a step lighter than ink; names stand out in full ink. */
+.about-text { display: grid; gap: 1em; max-width: 62ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.65; color: color-mix(in srgb, var(--bb-ink) 80%, var(--bb-paper)); }
 .about-text a, .about-text strong { color: var(--bb-ink); font-weight: 600; text-decoration: none; }
 .about-text a { background: var(--bb-project-gradient) left bottom / 0 2px no-repeat; transition: background-size var(--bb-dur) var(--bb-ease), color var(--bb-dur) var(--bb-ease); }
 @media (hover: hover) { .about-text a:hover { background-size: 100% 2px; } }
