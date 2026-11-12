@@ -418,8 +418,8 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
 .bill .hat { fill: var(--bb-signal); }
 .bill .eye { fill: var(--bb-paper); }
 .car .legs-b, .car .arm-up, .car .arm-down { display: none; }
-.car[data-pose="up"] .arm-carry { display: none; }
-.car[data-pose="up"] .arm-up { display: inline; }
+.car:is([data-pose="up"], [data-pose="down"]) .arm-carry { display: none; }
+.car[data-pose="up"] .arm-up, .car[data-pose="down"] .arm-down { display: inline; }
 
 /* "Where to?": an ink panel beside the car, listing the floors and the other pages. */
 .where-to { position: absolute; right: calc(var(--car) + 14px); top: 50%; transform: translateY(-50%); min-width: 190px; padding: 14px 18px 12px;
