@@ -88,7 +88,7 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .logo { flex: none; width: 44px; height: 44px; padding: 6px; box-sizing: border-box; background: #F6F5F1; outline: 1px solid var(--bb-rule-soft); }
 .logo img { width: 100%; height: 100%; object-fit: contain; }
 
-/* ---------- About: statement and portrait, then school and coursework ---------- */
+/* ---------- About: statement and portrait, then school and a few clubs ---------- */
 .about-main { display: grid; grid-template-columns: clamp(88px, 9vw, 128px) minmax(0, 1fr); gap: 24px; align-items: start; }
 .about-main .shot { aspect-ratio: 1; }
 .about-main .bb-statement { font-size: clamp(1.375rem, 2.3vw, 2.125rem); line-height: 1.12; letter-spacing: -0.025em; }
@@ -96,17 +96,16 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .edu-head { display: flex; align-items: center; gap: 16px; }
 .edu-head img { width: auto; height: 56px; }
 .edu-degree { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.015em; }
-.courses { display: grid; gap: 12px; border-top: 1px solid var(--bb-rule-soft); padding-top: 14px; }
-.courses > div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 12px; }
-.courses dt { font-weight: 600; }
-.courses li { line-height: 1.45; }
-/* This semester's courses carry a small corner triangle, explained under the list. */
-.courses li.now::after, .now-key::before { content: ""; display: inline-block; width: 8px; height: 8px; margin: 0 6px 0.12em;
-    background: var(--bb-project-gradient); clip-path: polygon(0 0, 100% 0, 100% 100%); }
-.now-key { font-size: 0.875rem; }
-.now-key::before { margin-left: 0; }
-.edu-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
-@media (max-width: 520px) { .courses > div { grid-template-columns: 1fr; gap: 4px; } }
+/* A few clubs, each a row that opens its page. */
+.club-preview { border-top: 1px solid var(--bb-rule-soft); }
+.club-preview li { border-bottom: 1px solid var(--bb-rule-soft); }
+.club-preview a { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 10px 0; text-decoration: none; }
+.club-preview-text { display: grid; }
+.club-preview-name { font-weight: 600; transition: transform var(--bb-dur) var(--bb-ease), color var(--bb-dur) var(--bb-ease); }
+@media (hover: hover) {
+    .club-preview a:hover .club-preview-name { transform: translateX(4px); color: var(--bb-signal-text); }
+    .club-preview a:hover .bb-arrow { color: var(--bb-signal-text); }
+}
 
 /* ---------- Photo tiles (home projects) ---------- */
 .tile { display: grid; gap: 12px; align-content: start; text-decoration: none; }
