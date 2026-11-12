@@ -366,3 +366,10 @@ html[data-season="spring"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg
 /* Summer: small warm motes that rise instead of fall. */
 html[data-season="summer"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E"); --piece-a: #FFB547; --piece-b: #FF8A3D; }
 html[data-season="summer"] .season-sky span { animation-direction: reverse; }
+
+/* Season buttons: plain words; the current one is underlined with the gradient. */
+.season-switch { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.season-switch button { min-height: 32px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; transition: color var(--bb-dur) var(--bb-ease); }
+.season-switch button[aria-pressed="true"] { color: var(--bb-ink); background: var(--bb-project-gradient) left bottom 4px / 100% 2px no-repeat; }
+@media (hover: hover) { .season-switch button:hover { color: var(--bb-signal-text); } }
+.footer-line { align-items: center; }
