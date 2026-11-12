@@ -1,30 +1,24 @@
 ---
-// With a case study, the whole card (thumbnail included) opens it: the title
+// With a case study, the whole card (picture included) opens it: the title
 // link stretches over the card.
 const { project } = Astro.props;
 ---
 
 <article class:list={["project-card", { featured: project.featured, linked: project.slug }]}>
-    <div class="project-cover">
-        {project.featured && <span class="badge-featured">Featured</span>}
+    <div class="shot">
         {project.cover && <img src={project.cover} alt={project.coverAlt} loading={project.featured ? "eager" : "lazy"}>}
     </div>
     <div class="project-body">
-        <p class="project-tag">{project.tag}</p>
-        <div class="project-heading">
-            <h3>
-                {project.slug
-                    ? <a class="project-link" href={`/projects/${project.slug}/`}>{project.title}</a>
-                    : project.title}
-            </h3>
-            {project.year && <p class="project-meta">{project.year}</p>}
-        </div>
-        <p>{project.description}</p>
+        <p class="project-meta bb-meta"><span>{project.tag}</span>{project.year && <span>{project.year}</span>}</p>
+        <h3>
+            {project.slug
+                ? <a class="project-link" href={`/projects/${project.slug}/`}>{project.title}</a>
+                : project.title}
+        </h3>
+        <p class="muted">{project.description}</p>
         {project.chips.length > 0 && (
-            <ul class="chips">
-                {project.chips.slice(0, 4).map((chip) => (
-                    <li>{chip}</li>
-                ))}
+            <ul class="tags">
+                {project.chips.slice(0, 4).map((chip) => <li>{chip}</li>)}
             </ul>
         )}
     </div>
