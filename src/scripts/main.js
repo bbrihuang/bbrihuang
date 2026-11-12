@@ -203,18 +203,14 @@ function setUpBuilder() {
         const width = ground.clientWidth;
         const size = builder.offsetWidth;
         const origin = ground.getBoundingClientRect().left;
-        x = 0;
-        [builder, rule].forEach((element) => element.getAnimations().forEach((animation) => animation.cancel()));
-        builder.dataset.pose = "stand";
         const middleOf = (box) => (box.left + box.right) / 2 - origin - size / 2;
 
-        // Walk to `to`, with the line's end going from `from` to `until` meanwhile.
-        async function walkTo(to, from, until, pace) {
-            const duration = Math.abs(to - x) / pace;
-            const face = to < x ? " scaleX(-1)" : "";
+        // Walk to `to`, laying the line up to where Bill is.
+        async function walkTo(to) {
+            const duration = Math.abs(to - x) / speed;
             const timing = { duration, easing: "linear", fill: "forwards" };
-            builder.animate([{ transform: `translateX(${x}px)${face}` }, { transform: `translateX(${to}px)${face}` }], timing);
-            rule.animate([{ clipPath: `inset(0 ${width - from}px 0 0)` }, { clipPath: `inset(0 ${width - until}px 0 0)` }], timing);
+            builder.animate([{ transform: `translateX(${x}px)` }, { transform: `translateX(${to}px)` }], timing);
+            rule.animate([{ clipPath: `inset(0 ${width - x}px 0 0)` }, { clipPath: `inset(0 ${width - to}px 0 0)` }], timing);
             const steps = setInterval(() => (builder.dataset.pose = builder.dataset.pose === "walk-b" ? "walk-a" : "walk-b"), 110);
             await wait(duration);
             clearInterval(steps);
@@ -282,17 +278,14 @@ function setUpBuilder() {
             await entry.finished.catch(() => {});
         }
 
-        hero.classList.remove("built");
-        letters.forEach((letter) => letter.classList.remove("on"));
-
         for (const word of words) {
             const box = { left: word[0].getBoundingClientRect().left, right: word.at(-1).getBoundingClientRect().right };
-            await walkTo(middleOf(box), x, middleOf(box), speed);
+            await walkTo(middleOf(box));
             if (!current()) return;
             await jump(word);
             if (!current()) return;
         }
-        await walkTo(width - size - 24, x, width - size - 24, speed);
+        await walkTo(width - size - 24);
         if (!current()) return;
         rule.getAnimations().forEach((animation) => animation.cancel());
         finishName();
