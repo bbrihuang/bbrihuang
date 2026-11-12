@@ -21,21 +21,30 @@ function setUpThemeCorner() {
         // Apply the new colours now, while fades are still off.
         void document.body.offsetWidth;
     };
-    corner.addEventListener("click", async () => {
-        // While the theme changes, colour fades are off (see html.peeling in global.css),
-        // so nothing fades from the old theme's colours after the switch.
+    // While the theme changes, colour fades are off (see html.peeling in global.css),
+    // so nothing fades from the old theme's colours after the switch. The class goes on
+    // only after the browser has captured the old page, so that capture matches the screen.
+    const switchTheme = () => {
         root.classList.add("peeling");
+        flip();
+    };
+    let switching = false;
+    corner.addEventListener("click", async () => {
+        // A second click mid-wipe would cut the first one short and blink to its end.
+        if (switching) return;
         if (!document.startViewTransition || reduceMotion.matches) {
-            flip();
+            switchTheme();
             return root.classList.remove("peeling");
         }
+        switching = true;
         try {
-            const transition = document.startViewTransition(flip);
+            const transition = document.startViewTransition(switchTheme);
             // The browser cancels the animation if the tab is hidden; the theme still changes.
             transition.ready.catch(() => {});
             await transition.finished;
         } finally {
             root.classList.remove("peeling");
+            switching = false;
         }
     });
     systemDark.addEventListener("change", label);
