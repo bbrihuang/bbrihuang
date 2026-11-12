@@ -155,24 +155,22 @@ function setUpClips() {
     });
 }
 
-// Hero builder: a pixel builder walks the gradient line, laying it behind itself,
-// and under each word it hops; the word pops in as it gets bumped. At the end it
-// points out the theme corner. Clicking it walks it back to the start, fading the
-// name and taking the line up as it goes, then builds again.
-// With reduced motion the name is just there.
+// Hero builder: Bill Durr walks the gradient line, laying it behind himself, and under
+// each word he hops; the word pops in as he bumps it. At the end he points out the
+// theme corner, then walks off to his elevator (setUpElevator).
+// With reduced motion the name is just there and Bill waits in the elevator.
 function setUpBuilder() {
     const hero = document.querySelector(".hero");
     const builder = hero?.querySelector(".builder");
     if (!builder) return;
-    if (reduceMotion.matches) return hero.classList.add("built");
+    if (reduceMotion.matches) return hero.classList.add("built", "bill-gone");
     const rule = hero.querySelector(".bb-grad-rule");
     const says = hero.querySelector(".builder-says");
     const ground = builder.parentElement;
     const letters = [...hero.querySelectorAll(".letter")];
     const words = [letters.slice(0, 5), letters.slice(5)];
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    const speed = 0.8; // pixels per millisecond, building
-    const backSpeed = 1.1; // walking back
+    const speed = 0.8; // pixels per millisecond
     let run = 0;
     let x = 0;
 
@@ -234,18 +232,6 @@ function setUpBuilder() {
             });
         }
 
-        // Unbuilding: walk back to the start; each letter fades as the builder passes under it.
-        if (x > 1) {
-            hero.classList.remove("built");
-            letters.filter((letter) => letter.classList.contains("on")).forEach((letter) => {
-                const passes = Math.max(0, (x - middleOf(letter.getBoundingClientRect())) / backSpeed);
-                setTimeout(() => current() && letter.classList.remove("on"), passes);
-            });
-            await walkTo(0, lineEnd, 0, backSpeed);
-            if (!current()) return;
-            await wait(250);
-            if (!current()) return;
-        }
         hero.classList.remove("built");
         letters.forEach((letter) => letter.classList.remove("on"));
 
@@ -263,9 +249,18 @@ function setUpBuilder() {
         // The first time, the rest of the page now fades in; rebuilds leave it alone.
         root.classList.remove("awaiting-build");
 
-        // The tip pops up over the builder's head.
+        // The tip pops up beside Bill.
         says.hidden = false;
         says.animate([{ opacity: 0, transform: "translateY(8px) scale(0.9)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
+
+        // Then Bill walks off the end of the line to his elevator, which appears with him in it.
+        await wait(3500);
+        if (!current()) return;
+        await says.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200 }).finished;
+        says.hidden = true;
+        await walkTo(width + size, width, width, speed);
+        hero.classList.add("bill-gone");
+        root.classList.remove("awaiting-bill");
     }
 
     // Once the visitor has switched themes, the tip has done its job.

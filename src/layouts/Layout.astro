@@ -43,8 +43,9 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
         // time (setUpBuilder in main.js). Not when arriving at a section link, not with
         // reduced motion, and never for more than 6 seconds.
         if (location.pathname === "/" && !location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            document.documentElement.classList.add("awaiting-build");
+            document.documentElement.classList.add("awaiting-build", "awaiting-bill");
             setTimeout(function () { document.documentElement.classList.remove("awaiting-build"); }, 6000);
+            setTimeout(function () { document.documentElement.classList.remove("awaiting-bill"); }, 12000);
         }
         setTimeout(function () {
             if (!window.__revealReady) document.documentElement.classList.remove("js-reveal");

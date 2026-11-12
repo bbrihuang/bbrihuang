@@ -407,3 +407,7 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
 /* The panel pops open from the car. */
 .where-to:not([hidden]) { animation: where-open 0.2s var(--ease-out); }
 @keyframes where-open { from { opacity: 0; transform: translateY(-50%) translateX(8px) scale(0.97); } }
+
+/* Bill leaves the hero for his elevator; until he gets there, the elevator waits. */
+.hero.bill-gone .builder { visibility: hidden; }
+html.awaiting-bill .elevator { opacity: 0; pointer-events: none; }
