@@ -90,7 +90,6 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* ---------- About: statement and portrait, then school and a few clubs ---------- */
 /* Photo, then a line of traits under it. */
 .about-main { display: grid; gap: 24px; align-content: start; }
-.portrait { width: clamp(160px, 16vw, 220px); aspect-ratio: 1; }
 /* Traits read as one line of words, split by short orange bars, like a tagline. */
 .traits { display: flex; flex-wrap: wrap; row-gap: 6px; max-width: 34em; font-size: clamp(1.25rem, 1.9vw, 1.625rem); line-height: 1.35; letter-spacing: -0.01em; }
 /* The bar belongs to the word before it, so a wrapped line ends with a bar instead of starting with one. */
