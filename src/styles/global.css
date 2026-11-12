@@ -344,3 +344,12 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .bb-btn:active { transform: scale(0.97); }
 
 /* Less motion: tokens.css turns every transition and animation off, so blocks simply appear. */
+
+/* ---------- Hero builder: a hexapod that walks the line ---------- */
+/* The robot stands on the gradient line, in its own lane under the name. */
+.hero { --bot: clamp(88px, 9vw, 128px); }
+.ground { position: relative; padding-top: calc(var(--bot) * 0.55); }
+.builder { position: absolute; left: 0; bottom: 3px; width: var(--bot); padding: 0; border: 0; background: none; color: var(--bb-ink); cursor: pointer; }
+.builder svg { display: block; width: 100%; overflow: visible; }
+.builder .far { color: var(--bb-muted); }
+.builder .leg { transform-box: view-box; }
