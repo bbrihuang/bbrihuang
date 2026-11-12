@@ -55,3 +55,14 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
     from { clip-path: polygon(100% 0, calc(100% - 14px) 0, 100% 14px, 100% 0); }
     to { clip-path: polygon(calc(100% - 205vmax) 0, calc(100% - 205vmax - 14px) 0, 100% calc(205vmax + 14px), 100% 205vmax); }
 }
+
+/* ---------- Top bar ---------- */
+.site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px;
+    padding-block: 12px; border-bottom: 1px solid var(--bb-rule);
+    /* Keep the links clear of the corner at any window width. */
+    padding-right: max(0px, calc(var(--bb-corner) + 8px - max(var(--bb-gutter), (100vw - var(--page)) / 2))); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: -0.02em; }
+.site-nav { align-items: center; }
+.site-nav a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--bb-dur) var(--bb-ease); }
+.site-nav a[aria-current] { background: var(--bb-project-gradient) bottom 10px left 0 / 100% 2px no-repeat; }
+@media (hover: hover) { .site-nav a:hover { color: var(--bb-signal-text); } }
