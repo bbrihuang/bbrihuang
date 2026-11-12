@@ -39,10 +39,10 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
          main.js). If the main script never runs, everything shows after 3 seconds. -->
     <script is:inline>
         document.documentElement.classList.add("js-reveal");
-        // On the home page, the rest of the page waits until the name is built the first
-        // time (setUpBuilder in main.js). Not when arriving at a section link, not with
-        // reduced motion, and never for more than 6 seconds.
-        if (location.pathname === "/" && !location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        // Give Bill a first visit to build the lobby. Section links and return trips open right away.
+        var builtLobby = false;
+        try { builtLobby = sessionStorage.getItem("bill-built-hero") === "1"; } catch (e) {}
+        if (location.pathname === "/" && !builtLobby && !location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
             document.documentElement.classList.add("awaiting-build", "awaiting-bill");
             setTimeout(function () { document.documentElement.classList.remove("awaiting-build"); }, 6000);
             setTimeout(function () { document.documentElement.classList.remove("awaiting-bill"); }, 12000);
