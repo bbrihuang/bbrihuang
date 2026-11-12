@@ -49,7 +49,7 @@ export const stack = [
         ],
     },
     {
-        group: "Homelab & Cloud",
+        group: "DevOps",
         items: [
             { name: "Docker", icon: "siDocker" },
             { name: "Linux", icon: "siLinux" },
