@@ -327,6 +327,7 @@ function setUpElevator() {
     const initial = Number(elevator.style.getPropertyValue("--at"));
     let current = initial;
     let riding = false;
+    let parkedAt = null;
     let ride = 0;
     let leaving = false;
     let tipTimer;
@@ -414,7 +415,8 @@ function setUpElevator() {
     });
 
     function follow() {
-        if (riding || leaving) return;
+        if (riding || leaving || (parkedAt !== null && Math.abs(window.scrollY - parkedAt) <= 2)) return;
+        parkedAt = null;
         const scrolled = window.scrollY > 8;
         const atEnd = scrolled && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
         let floor = 0;
@@ -450,7 +452,10 @@ function setUpElevator() {
 
     // A page restored from the back-forward cache still has the car's departure position.
     window.addEventListener("pageshow", (event) => {
-        if (event.persisted) leaving = riding = false;
+        if (event.persisted) {
+            leaving = riding = false;
+            parkedAt = null;
+        }
         if (onHome) follow();
         else if (event.persisted) arriveAt(initial);
     });
@@ -463,14 +468,18 @@ function setUpElevator() {
 
     if (!onHome) return;
 
+    function floorScrollY(floor) {
+        if (floor === 0) return 0;
+        const top = window.scrollY + sections[floor].getBoundingClientRect().top;
+        const bottom = Math.max(0, root.scrollHeight - window.innerHeight);
+        return Math.min(top, bottom);
+    }
+
     function scrollToFloor(floor) {
         const behavior = reduceMotion.matches ? "instant" : "smooth";
-        const move = () => {
-            if (floor === 0) window.scrollTo({ top: 0, behavior });
-            else sections[floor].scrollIntoView({ behavior });
-        };
-        const distance = floor === 0 ? window.scrollY : sections[floor].getBoundingClientRect().top;
-        if (reduceMotion.matches || Math.abs(distance) < 1) return move();
+        const top = floorScrollY(floor);
+        const move = () => window.scrollTo({ top, behavior });
+        if (reduceMotion.matches || Math.abs(window.scrollY - top) < 1) return move();
 
         return new Promise((resolve) => {
             const fallback = setTimeout(done, 1000);
@@ -497,9 +506,12 @@ function setUpElevator() {
         history.replaceState(history.state, "", floor ? `#${link.dataset.section}` : location.pathname + location.search);
         await Promise.all([waitForCar(), scrollToFloor(floor)]);
         if (trip !== ride || leaving) return;
+        // The ride's scroll can bring another heading into view. Stay at the chosen
+        // stop until the page moves again, unless the scroll was interrupted.
+        parkedAt = Math.abs(window.scrollY - floorScrollY(floor)) <= 2 ? window.scrollY : null;
         riding = false;
-        const build = sectionBuild.build(sections[floor]);
         follow();
+        const build = sectionBuild.build(sections[current]);
         sectionBuild.check();
         await build;
         if (keyboard && trip === ride && current === floor && document.activeElement === car) {
