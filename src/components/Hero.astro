@@ -1,6 +1,6 @@
 ---
-// Each letter is its own span, so the robot can build the name letter by letter
-// as it walks under it (see the hero motion in global.css and setUpBuilder in main.js).
+// Each letter is its own span, so the builder can fill the name a word at a time
+// (see setUpBuilder in main.js and the hero builder in global.css).
 const name = "Brian Huang";
 ---
 
@@ -12,24 +12,18 @@ const name = "Brian Huang";
     </div>
     <div class="fit ground">
         <hr class="bb-grad-rule">
-        <!-- A side view of a hexapod: near legs in ink, far legs muted; legs a and b alternate. -->
-        <button class="builder" type="button" aria-label="Build the name again">
-            <svg viewBox="0 0 86 44" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <g class="far">
-                    <path class="leg b" style="transform-origin: 22px 20px" d="M22 20 L14 12 L8 40" />
-                    <path class="leg a" style="transform-origin: 43px 20px" d="M43 20 L43 10 L43 40" />
-                    <path class="leg b" style="transform-origin: 64px 20px" d="M64 20 L72 12 L78 40" />
-                </g>
-                <g class="chassis">
-                    <rect x="16" y="15" width="54" height="11" rx="3" fill="var(--bb-paper)" />
-                    <path d="M43 15 V8 M37 8 H49" />
-                    <circle cx="66" cy="20.5" r="1.6" fill="currentColor" stroke="none" />
-                </g>
-                <g>
-                    <path class="leg a" style="transform-origin: 24px 22px" d="M24 22 L15 14 L10 41" />
-                    <path class="leg b" style="transform-origin: 43px 22px" d="M43 22 L43 12 L43 41" />
-                    <path class="leg a" style="transform-origin: 62px 22px" d="M62 22 L71 14 L76 41" />
-                </g>
+        <!-- A pixel-art builder in a hard hat, facing right. Poses are swapped by data-pose. -->
+        <button class="builder" type="button" aria-label="Build the name again" data-pose="stand">
+            <svg viewBox="0 0 12 16" width="48" height="64" aria-hidden="true">
+                <g class="hat"><rect x="3" y="0" width="6" height="1" /><rect x="2" y="1" width="8" height="1" /><rect x="2" y="2" width="9" height="1" /></g>
+                <rect x="3" y="3" width="6" height="3" fill="currentColor" />
+                <rect class="eye" x="7" y="4" width="1" height="1" />
+                <rect x="4" y="6" width="4" height="5" fill="currentColor" />
+                <g class="arm-carry" fill="currentColor"><rect x="8" y="7" width="1" height="2" /><rect x="9" y="5" width="1" height="5" /><rect x="8" y="4" width="3" height="2" /></g>
+                <g class="arm-up" fill="currentColor"><rect x="8" y="4" width="1" height="3" /><rect x="9" y="2" width="1" height="4" /><rect x="8" y="0" width="3" height="2" /></g>
+                <g class="arm-down" fill="currentColor"><rect x="8" y="8" width="2" height="1" /><rect x="10" y="9" width="1" height="3" /><rect x="9" y="12" width="3" height="2" /></g>
+                <g class="legs-a" fill="currentColor"><rect x="4" y="11" width="1" height="4" /><rect x="7" y="11" width="1" height="4" /><rect x="3" y="15" width="2" height="1" /><rect x="7" y="15" width="2" height="1" /></g>
+                <g class="legs-b" fill="currentColor"><rect x="5" y="11" width="1" height="4" /><rect x="6" y="11" width="1" height="4" /><rect x="5" y="15" width="3" height="1" /></g>
             </svg>
         </button>
     </div>

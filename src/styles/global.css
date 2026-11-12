@@ -341,43 +341,24 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 
 /* Less motion: tokens.css turns every transition and animation off, so blocks simply appear. */
 
-/* ---------- Hero builder: a hexapod that walks the line ---------- */
-/* The robot stands on the gradient line, in its own lane under the name. */
-.hero { --bot: clamp(88px, 9vw, 128px); }
-.ground { position: relative; padding-top: calc(var(--bot) * 0.55); }
-.builder { position: absolute; left: 0; bottom: 3px; width: var(--bot); padding: 0; border: 0; background: none; color: var(--bb-ink); cursor: pointer; }
-.builder svg { display: block; width: 100%; overflow: visible; }
-.builder .far { color: var(--bb-muted); }
-.builder .leg { transform-box: view-box; }
+/* ---------- Hero builder: a pixel builder in a hard hat ---------- */
+/* It stands on the gradient line, in its own lane under the name. */
+.hero { --sprite: clamp(40px, 4vw, 48px); }
+.ground { position: relative; padding-top: calc(var(--sprite) * 1.5); }
+.builder { position: absolute; left: 0; bottom: 3px; width: var(--sprite); padding: 0; border: 0; background: none; color: var(--bb-ink); cursor: pointer; }
+.builder svg { display: block; width: 100%; height: auto; shape-rendering: crispEdges; }
+.builder .hat { fill: var(--bb-signal); }
+.builder .eye { fill: var(--bb-paper); }
+/* Poses: standing and walking carry the hammer; walk-b swaps the legs; up and down swing it. */
+.builder .legs-b, .builder .arm-up, .builder .arm-down { display: none; }
+.builder[data-pose="walk-b"] .legs-a { display: none; }
+.builder[data-pose="walk-b"] .legs-b { display: inline; }
+.builder[data-pose="up"] .arm-carry, .builder[data-pose="down"] .arm-carry { display: none; }
+.builder[data-pose="up"] .arm-up, .builder[data-pose="down"] .arm-down { display: inline; }
 
-/* The build. The name starts as outlines. The robot walks the line for --walk, laying
-   the gradient line behind it, and each letter fills as the robot passes under it
-   (--at, measured by setUpBuilder in main.js; the fallback spaces them evenly).
-   With reduced motion nothing runs and the finished name simply shows. */
-.hero { --walk: 6s; --start: 0.5s; }
-.hero .letter { -webkit-text-stroke: 1.5px transparent;
-    animation: outline 0.5s var(--ease-out) calc(var(--i) * 30ms) backwards,
-               build 0.45s var(--ease-out) calc(var(--start) + var(--at, calc(var(--i) * var(--walk) / 11))) backwards; }
-@keyframes outline { from { opacity: 0; } }
-@keyframes build { from { color: transparent; -webkit-text-stroke-color: var(--bb-ink); } }
-/* The line is laid right behind the robot, then finishes once it stops. */
-.hero .bb-grad-rule { animation: lay-rest 0.5s var(--ease-out) calc(var(--start) + var(--walk)) backwards, lay var(--walk) linear var(--start) backwards; }
-@keyframes lay { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 calc(var(--bot) + 24px) 0 0); } }
-@keyframes lay-rest { from { clip-path: inset(0 calc(var(--bot) + 24px) 0 0); } to { clip-path: inset(0); } }
-/* The walk: across the line at a steady pace, stopping short of the corner. */
-/* both: the robot waits at the start, then stays where it stopped. */
-.builder { animation: walk var(--walk) linear var(--start) both; }
-@keyframes walk { from { transform: translateX(0); } to { transform: translateX(calc(100cqw - var(--bot) - 24px)); } }
-/* Tripod gait: three legs push back on the ground while the other three lift and swing forward. */
-.builder .leg { animation: step 0.5s ease-in-out var(--start) 12 backwards; }
-.builder .b { animation-delay: calc(var(--start) - 0.25s); }
-.builder .chassis { animation: bob 0.25s ease-in-out var(--start) 24 alternate backwards; }
-@keyframes step {
-    0% { transform: rotate(16deg) translateY(0); }
-    55% { transform: rotate(-16deg) translateY(0); }
-    78% { transform: rotate(0deg) translateY(-5px); }
-    100% { transform: rotate(16deg) translateY(0); }
-}
-@keyframes bob { to { transform: translateY(-1.5px); } }
-/* Replaying: drop every animation for a frame so they all start again. */
-.hero.rebuild *, .hero.rebuild { animation: none !important; }
+/* The build (setUpBuilder in main.js): until it runs, the name waits as outlines and the
+   line is hidden; each word fills as the builder hammers under it. Without JavaScript,
+   or with reduced motion, the finished name simply shows. */
+.hero .letter { -webkit-text-stroke: 1.5px transparent; transition: color 0.25s var(--ease-out), -webkit-text-stroke-color 0.25s var(--ease-out); }
+.js-reveal .hero:not(.built) .letter:not(.on) { color: transparent; -webkit-text-stroke-color: var(--bb-ink); }
+.js-reveal .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
