@@ -345,7 +345,7 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* It stands on the gradient line, in its own lane under the name. */
 .hero { --sprite: clamp(40px, 4vw, 48px); }
 .ground { position: relative; padding-top: calc(var(--sprite) * 1.5); }
-.builder { position: absolute; left: 0; bottom: 3px; width: var(--sprite); padding: 0; border: 0; background: none; color: var(--bb-ink); cursor: pointer; }
+.builder { position: absolute; left: 0; bottom: 3px; width: var(--sprite); color: var(--bb-ink); }
 .builder svg { display: block; width: 100%; height: auto; shape-rendering: crispEdges; }
 .builder .hat { fill: var(--bb-signal); }
 .builder .eye { fill: var(--bb-paper); }

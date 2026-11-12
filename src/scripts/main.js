@@ -268,7 +268,6 @@ function setUpBuilder() {
         says.animate([{ opacity: 0, transform: "translateY(8px) scale(0.9)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
     }
 
-    builder.addEventListener("click", build);
     // Once the visitor has switched themes, the tip has done its job.
     document.querySelector(".corner")?.addEventListener("click", () => (says.hidden = true));
     build();

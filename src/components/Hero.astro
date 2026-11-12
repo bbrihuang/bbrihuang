@@ -1,4 +1,6 @@
 ---
+import Bill from "./Bill.astro";
+
 // Each letter is its own span, so the builder can fill the name a word at a time
 // (see setUpBuilder in main.js and the hero builder in global.css).
 const name = "Brian Huang";
@@ -14,19 +16,7 @@ const name = "Brian Huang";
         <hr class="bb-grad-rule">
         <!-- What the builder says once the name is built; shown by setUpBuilder. -->
         <p class="builder-says" role="status" hidden>Click the orange corner at the top right of the page to switch themes!</p>
-        <!-- A pixel-art builder in a hard hat, facing right. Poses are swapped by data-pose. -->
-        <button class="builder" type="button" aria-label="Build the name again" data-pose="stand">
-            <svg viewBox="0 0 12 16" width="48" height="64" aria-hidden="true">
-                <g class="hat"><rect x="3" y="0" width="6" height="1" /><rect x="2" y="1" width="8" height="1" /><rect x="2" y="2" width="9" height="1" /></g>
-                <rect x="3" y="3" width="6" height="3" fill="currentColor" />
-                <rect class="eye" x="7" y="4" width="1" height="1" />
-                <rect x="4" y="6" width="4" height="5" fill="currentColor" />
-                <g class="arm-carry" fill="currentColor"><rect x="8" y="7" width="1" height="2" /><rect x="9" y="5" width="1" height="5" /><rect x="8" y="4" width="3" height="2" /></g>
-                <g class="arm-up" fill="currentColor"><rect x="8" y="4" width="1" height="3" /><rect x="9" y="2" width="1" height="4" /><rect x="8" y="0" width="3" height="2" /></g>
-                <g class="arm-down" fill="currentColor"><rect x="8" y="8" width="2" height="1" /><rect x="10" y="9" width="1" height="3" /><rect x="9" y="12" width="3" height="2" /></g>
-                <g class="legs-a" fill="currentColor"><rect x="4" y="11" width="1" height="4" /><rect x="7" y="11" width="1" height="4" /><rect x="3" y="15" width="2" height="1" /><rect x="7" y="15" width="2" height="1" /></g>
-                <g class="legs-b" fill="currentColor"><rect x="5" y="11" width="1" height="4" /><rect x="6" y="11" width="1" height="4" /><rect x="5" y="15" width="3" height="1" /></g>
-            </svg>
-        </button>
+        <!-- Bill Durr builds the name, then heads to his elevator (see setUpBuilder). -->
+        <span class="builder" data-pose="stand"><Bill /></span>
     </div>
 </section>
