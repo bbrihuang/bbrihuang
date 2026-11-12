@@ -42,4 +42,13 @@ const level = basement < 0 ? (path.startsWith("/certifications/") ? floors.lengt
         </ul>
         <p class="where-sign">Operated by Bill Durr</p>
     </div>
+    {path === "/" && (
+        <script is:inline>
+            if (location.hash) {
+                const elevator = document.currentScript.parentElement;
+                const stop = [...elevator.querySelectorAll("a[data-section]")].find((link) => location.hash === `#${link.dataset.section}`);
+                if (stop) elevator.style.setProperty("--at", stop.dataset.floor);
+            }
+        </script>
+    )}
 </nav>
