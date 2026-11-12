@@ -197,22 +197,35 @@ function setUpBuilder() {
             x = to;
         }
 
+        // A short pop jump: a beat to wind up, a quick hop that bumps the word, a beat after landing.
         async function jump(word) {
+            await wait(160);
             const lift = ground.clientHeight - builder.offsetHeight + 6;
             builder.dataset.pose = "up";
             builder.animate([
                 { transform: `translateX(${x}px) translateY(0)`, easing: "cubic-bezier(0.23, 1, 0.32, 1)" },
-                { transform: `translateX(${x}px) translateY(-${lift}px)`, offset: 0.45, easing: "cubic-bezier(0.55, 0, 1, 0.45)" },
+                { transform: `translateX(${x}px) translateY(-${lift}px)`, offset: 0.4, easing: "cubic-bezier(0.55, 0, 1, 0.45)" },
                 { transform: `translateX(${x}px) translateY(0)` },
-            ], { duration: 520, fill: "forwards" });
-            await wait(230);
-            // The bump: the word fills and pops up a little.
-            word.forEach((letter, index) => {
-                letter.classList.add("on");
-                letter.animate([{ transform: "translateY(0)" }, { transform: "translateY(-0.06em)" }, { transform: "translateY(0)" }], { duration: 260, delay: index * 20, easing: "ease-out" });
-            });
-            await wait(290);
+            ], { duration: 300, fill: "forwards" });
+            await wait(120);
+            popIn(word);
+            await wait(180);
             builder.dataset.pose = "stand";
+            await wait(180);
+        }
+
+        // The word pops in letter by letter: each one fills and pops.
+        function popIn(word) {
+            word.forEach((letter, index) => {
+                setTimeout(() => letter.classList.add("on"), index * 35);
+                // A quick dip, then a swell past full size, then settle. Letters wait at full size until their turn.
+                letter.animate([
+                    { transform: "translateY(0) scale(1)" },
+                    { transform: "translateY(0.05em) scale(0.86)", offset: 0.18 },
+                    { transform: "translateY(-0.04em) scale(1.1)", offset: 0.6 },
+                    { transform: "translateY(0) scale(1)" },
+                ], { duration: 420, delay: index * 35, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
+            });
         }
 
         for (const word of words) {
