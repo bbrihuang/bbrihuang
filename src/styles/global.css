@@ -349,11 +349,17 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* A fixed layer behind everything. Each piece falls the full height of the screen at a
    steady pace, swaying and turning; with reduced motion they rest where they start. */
 .season-sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.season-sky span { position: absolute; left: var(--x); top: var(--y); width: calc(26px * var(--s)); aspect-ratio: 1; opacity: 0.55;
+/* Pieces stay in the empty margins beside the page column, never behind content. */
+.season-sky { --margin: calc((100vw - var(--page)) / 2 - var(--bb-gutter) - 24px); }
+.season-sky span { position: absolute; top: var(--y); width: calc(26px * var(--s)); aspect-ratio: 1; opacity: 0.55;
     animation: drift var(--t) linear var(--d) infinite; }
+.season-sky .left { left: calc(var(--margin) * var(--across)); }
+.season-sky .right { right: calc(var(--margin) * var(--across)); }
+/* No room beside the page: no pieces. */
+@media (max-width: 1500px) { .season-sky { display: none; } }
 @keyframes drift {
     from { transform: translate(0, calc(-1 * var(--y) - 40px)) rotate(0deg); }
-    50% { transform: translate(calc(var(--sway) * 3vw), calc(50vh - var(--y))) rotate(calc(var(--sway) * 160deg)); }
+    50% { transform: translate(calc(var(--sway) * 14px), calc(50vh - var(--y))) rotate(calc(var(--sway) * 160deg)); }
     to { transform: translate(0, calc(100vh - var(--y) + 40px)) rotate(calc(var(--sway) * 320deg)); }
 }
 
