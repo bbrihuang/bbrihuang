@@ -9,7 +9,7 @@ export const stack = [
             {
                 name: "Python",
                 icon: "siPython",
-                certs: [{ name: "Python", issuer: "Coddy", href: "https://coddy.tech/certifications/kZAs2y-python-ZP9neU", image: "/certs/python-coddy.png" }],
+                certs: [{ name: "Python Fundamentals", issuer: "Coddy", date: "November 10, 2026", href: "https://coddy.tech/certifications/kZAs2y-python-ZP9neU", image: "/certs/python-coddy.webp" }],
             },
             { name: "C++", icon: "siCplusplus" },
             { name: "C", icon: "siC" },

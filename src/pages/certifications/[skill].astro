@@ -26,12 +26,12 @@ const count = skill.certs.length;
         <ul class="certs">
             {skill.certs.map((cert) => (
                 <li class="cert">
-                    {hasImage(cert) && <div class="shot"><img src={cert.image} alt={`${cert.name} certificate from ${cert.issuer}.`} loading="lazy"></div>}
+                    {hasImage(cert) && <div class="shot"><img src={cert.image} alt={`${cert.name} certificate from ${cert.issuer}, awarded to Brian Huang.`} width="1600" height="1128"></div>}
                     <div class="cert-text">
                         <svg class:list={{ glyph: !mark.filled }} viewBox="0 0 24 24" width="28" height="28" style={`color: ${mark.color}`} aria-hidden="true" set:html={mark.svg} />
                         <div>
                             <h2>{cert.name}</h2>
-                            <p class="muted">{cert.issuer}</p>
+                            <p class="muted">{cert.issuer}{cert.date && `, ${cert.date}`}</p>
                         </div>
                     </div>
                     <p><a class="bb-btn" href={cert.href}>View on {cert.issuer} <span class="bb-btn-arrow" aria-hidden="true">↗</span></a></p>
