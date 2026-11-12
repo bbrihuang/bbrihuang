@@ -144,8 +144,7 @@ function setUpClips() {
 }
 
 // Hero builder: Bill Durr walks the gradient line, laying it behind himself, and under
-// each word he hops; the word pops in as he bumps it. At the end he points out the
-// theme corner and assembles a portal to his elevator.
+// each word he hops; the word pops in as he bumps it. Then he assembles a portal to his elevator.
 // With reduced motion the name is just there and Bill waits in the elevator.
 function setUpBuilder() {
     const hero = document.querySelector(".hero");
@@ -157,7 +156,6 @@ function setUpBuilder() {
         return;
     }
     const rule = hero.querySelector(".bb-grad-rule");
-    const says = hero.querySelector(".builder-says");
     const portal = hero.querySelector(".builder-portal");
     const ground = builder.parentElement;
     const letters = [...hero.querySelectorAll(".letter")];
@@ -183,10 +181,10 @@ function setUpBuilder() {
 
     function skipIntro() {
         run += 1;
-        [builder, rule, says, portal, ...letters].forEach((element) => {
+        [builder, rule, portal, ...letters].forEach((element) => {
             element.getAnimations().forEach((animation) => animation.cancel());
         });
-        says.hidden = portal.hidden = true;
+        portal.hidden = true;
         finishName();
         reachElevator();
     }
@@ -202,7 +200,6 @@ function setUpBuilder() {
     async function build() {
         const id = ++run;
         const current = () => id === run;
-        says.hidden = true;
         const width = ground.clientWidth;
         const size = builder.offsetWidth;
         const origin = ground.getBoundingClientRect().left;
@@ -300,16 +297,6 @@ function setUpBuilder() {
         rule.getAnimations().forEach((animation) => animation.cancel());
         finishName();
 
-        // The tip pops up beside Bill.
-        says.hidden = false;
-        says.animate([{ opacity: 0, transform: "translateY(8px) scale(0.9)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
-
-        // The portal frame goes up on the first strike and powers on with the second.
-        await wait(1800);
-        if (!current()) return;
-        await says.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200 }).finished.catch(() => {});
-        if (!current()) return;
-        says.hidden = true;
         await enterPortal();
         if (!current()) return;
         document.querySelector(".car")?.classList.add("portal-arrival");
@@ -318,8 +305,6 @@ function setUpBuilder() {
         portal.hidden = true;
     }
 
-    // Once the visitor has switched themes, the tip has done its job.
-    document.querySelector(".corner")?.addEventListener("click", () => (says.hidden = true));
     window.addEventListener("scroll", skipWhenLeavingHero, { passive: true });
     reduceMotion.addEventListener("change", skipForReducedMotion);
     build();
@@ -332,6 +317,7 @@ function setUpElevator() {
     if (!elevator) return;
     const car = elevator.querySelector(".car");
     const panel = elevator.querySelector(".where-to");
+    const tip = elevator.querySelector(".elevator-tip");
     const stops = [...panel.querySelectorAll("a[data-floor]")];
     const floors = stops.filter((link) => link.dataset.section);
     const basement = stops.slice(floors.length);
@@ -343,6 +329,8 @@ function setUpElevator() {
     let riding = false;
     let ride = 0;
     let leaving = false;
+    let tipTimer;
+    let switchedTheme = false;
 
     function arriveAt(floor) {
         current = floor;
@@ -373,6 +361,7 @@ function setUpElevator() {
 
     // `focus` moves keyboard focus into the panel; Bill's own prompt leaves focus alone.
     function open(show, focus = true) {
+        if (show) hideTip();
         panel.hidden = !show;
         car.setAttribute("aria-expanded", String(show));
         if (show && focus) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
@@ -381,23 +370,47 @@ function setUpElevator() {
         if (!leaving) open(panel.hidden);
     });
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !panel.hidden) {
+        if (event.key !== "Escape") return;
+        hideTip();
+        if (!panel.hidden) {
             open(false);
             car.focus();
         }
     });
     document.addEventListener("click", (event) => !panel.hidden && !elevator.contains(event.target) && open(false));
 
-    // The first time Bill gets into the elevator, he asks "Where to?" himself. Only once
-    // per visitor; the panel closes again as soon as they scroll.
-    document.addEventListener("bill-arrived", () => {
-        if (window.scrollY > 24) return;
+    function hideTip() {
+        clearTimeout(tipTimer);
+        tip.hidden = true;
+        window.removeEventListener("scroll", hideTip);
+    }
+
+    // Bill offers the destination menu once, without moving keyboard focus.
+    function offerRide() {
         try {
             if (localStorage.getItem("bill-asked")) return;
             localStorage.setItem("bill-asked", "1");
         } catch {}
         open(true, false);
         window.addEventListener("scroll", () => open(false), { once: true, passive: true });
+    }
+
+    document.querySelector(".corner")?.addEventListener("click", () => {
+        switchedTheme = true;
+        if (tip.hidden) return;
+        hideTip();
+        offerRide();
+    });
+
+    document.addEventListener("bill-arrived", () => {
+        if (window.scrollY > 24 || !panel.hidden) return;
+        if (switchedTheme) return offerRide();
+        tip.hidden = false;
+        window.addEventListener("scroll", hideTip, { once: true, passive: true });
+        tipTimer = setTimeout(() => {
+            hideTip();
+            offerRide();
+        }, 3500);
     });
 
     function follow() {
