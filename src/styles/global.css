@@ -58,8 +58,8 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .site-nav { align-items: center; }
 .site-nav a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--bb-dur) var(--bb-ease); }
 .site-nav a[aria-current] { background: var(--bb-project-gradient) bottom 10px left 0 / 100% 2px no-repeat; }
-/* Icon links: 44px tap targets, a short rule before them. */
-.socials { display: inline-flex; align-items: center; gap: 2px; padding-left: 16px; border-left: 1px solid var(--bb-rule-soft); }
+/* Icon links: 44px tap targets. */
+.socials { display: inline-flex; align-items: center; gap: 2px; }
 .socials a { justify-content: center; min-width: 40px; }
 @media (hover: hover) { .site-nav a:hover { color: var(--bb-signal-text); } }
 
