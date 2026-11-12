@@ -44,6 +44,8 @@ img, video { display: block; max-width: 100%; }
 
 /* The peel: the new theme wipes in from the corner toward the bottom left, one sharp diagonal edge. */
 html.peeling::view-transition-old(root), html.peeling::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+/* No colour fades during the switch, or links and panels would fade from the old theme's colours afterwards. */
+html.peeling *, html.peeling *::before, html.peeling *::after { transition: none !important; }
 html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
 @keyframes peel { from { clip-path: polygon(100% 0, 100% 0, 100% 0); } to { clip-path: polygon(100% 0, calc(100% - 205vmax) 0, 100% 205vmax); } }
 
