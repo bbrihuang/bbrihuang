@@ -143,7 +143,7 @@ function setUpClips() {
 
 // Hero builder: Bill Durr walks the gradient line, laying it behind himself, and under
 // each word he hops; the word pops in as he bumps it. At the end he points out the
-// theme corner, then walks off to his elevator (setUpElevator).
+// theme corner and assembles a portal to his elevator.
 // With reduced motion the name is just there and Bill waits in the elevator.
 function setUpBuilder() {
     const hero = document.querySelector(".hero");
@@ -152,6 +152,7 @@ function setUpBuilder() {
     if (reduceMotion.matches) return hero.classList.add("built", "bill-gone");
     const rule = hero.querySelector(".bb-grad-rule");
     const says = hero.querySelector(".builder-says");
+    const portal = hero.querySelector(".builder-portal");
     const ground = builder.parentElement;
     const letters = [...hero.querySelectorAll(".letter")];
     const words = [letters.slice(0, 5), letters.slice(5)];
@@ -216,6 +217,34 @@ function setUpBuilder() {
             });
         }
 
+        async function enterPortal() {
+            builder.dataset.pose = "up";
+            await wait(100);
+            if (!current()) return;
+            builder.dataset.pose = "down";
+            portal.hidden = false;
+            await wait(220);
+            if (!current()) return;
+            builder.dataset.pose = "up";
+            await wait(100);
+            if (!current()) return;
+            builder.dataset.pose = "down";
+            portal.dataset.active = "";
+            await wait(110);
+            if (!current()) return;
+
+            const opening = portal.offsetLeft + (portal.offsetWidth - size) / 2;
+            builder.dataset.pose = "walk-b";
+            const entry = builder.animate([
+                { transform: `translateX(${x}px)`, opacity: 1 },
+                { opacity: 1, offset: 0.35 },
+                { transform: `translateX(${opening}px)`, opacity: 0 },
+            ], { duration: 260, easing: "linear", fill: "forwards" });
+            await wait(110);
+            if (current()) builder.dataset.pose = "walk-a";
+            await entry.finished.catch(() => {});
+        }
+
         hero.classList.remove("built");
         letters.forEach((letter) => letter.classList.remove("on"));
 
@@ -237,15 +266,20 @@ function setUpBuilder() {
         says.hidden = false;
         says.animate([{ opacity: 0, transform: "translateY(8px) scale(0.9)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
 
-        // Then Bill walks off the end of the line to his elevator, which appears with him in it.
+        // The portal frame goes up on the first strike and powers on with the second.
         await wait(1800);
         if (!current()) return;
-        await says.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200 }).finished;
+        await says.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200 }).finished.catch(() => {});
+        if (!current()) return;
         says.hidden = true;
-        await walkTo(width + size, width, width, speed * 1.6);
+        await enterPortal();
+        if (!current()) return;
         hero.classList.add("bill-gone");
+        document.querySelector(".car")?.classList.add("portal-arrival");
         root.classList.remove("awaiting-bill");
         document.dispatchEvent(new Event("bill-arrived"));
+        await portal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220 }).finished.catch(() => {});
+        portal.hidden = true;
     }
 
     // Once the visitor has switched themes, the tip has done its job.
