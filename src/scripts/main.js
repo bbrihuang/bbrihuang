@@ -273,6 +273,82 @@ function setUpBuilder() {
     build();
 }
 
+// Bill Durr's elevator. The car opens the "Where to?" panel. On the home page the
+// car follows the section you're on; picking a floor rides there while the page
+// scrolls, and on arrival Bill builds the section: he hops and its title pops in.
+// Off the home page the floors are ordinary links back to it.
+function setUpElevator() {
+    const elevator = document.querySelector(".elevator");
+    if (!elevator) return;
+    const car = elevator.querySelector(".car");
+    const panel = elevator.querySelector(".where-to");
+    const floors = [...panel.querySelectorAll("a[data-floor]")];
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    function open(show) {
+        panel.hidden = !show;
+        car.setAttribute("aria-expanded", String(show));
+        if (show) (floors.find((link) => link.hasAttribute("aria-current")) ?? floors[0]).focus();
+    }
+    car.addEventListener("click", () => open(panel.hidden));
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !panel.hidden) {
+            open(false);
+            car.focus();
+        }
+    });
+    document.addEventListener("click", (event) => !panel.hidden && !elevator.contains(event.target) && open(false));
+
+    if (window.location.pathname !== "/") return;
+    const sections = floors.map((link) => (link.dataset.section === "top" ? document.querySelector(".hero") : document.getElementById(link.dataset.section)));
+    let current = -1;
+    let riding = false;
+
+    function arriveAt(floor) {
+        current = floor;
+        elevator.style.setProperty("--at", floor);
+        floors.forEach((link, index) => (index === floor ? link.setAttribute("aria-current", "location") : link.removeAttribute("aria-current")));
+    }
+
+    function follow() {
+        if (riding) return;
+        const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+        let floor = 0;
+        sections.forEach((section, index) => section && section.getBoundingClientRect().top <= window.innerHeight * 0.4 && (floor = index));
+        if (atEnd) floor = sections.length - 1;
+        if (floor !== current) arriveAt(floor);
+    }
+
+    // Bill builds the floor: a hop in the car, and the section's big title pops in.
+    function build(floor) {
+        if (reduceMotion.matches) return;
+        car.dataset.pose = "up";
+        car.querySelector(".bill").animate([{ transform: "translateY(0)" }, { transform: "translateY(-3px)" }, { transform: "translateY(0)" }], { duration: 260, easing: "ease-out" });
+        setTimeout(() => (car.dataset.pose = "stand"), 260);
+        sections[floor].querySelector(".bb-section-word")?.animate([
+            { transform: "scale(0.92)", opacity: 0.4 },
+            { transform: "scale(1.05)", opacity: 1, offset: 0.55 },
+            { transform: "scale(1)" },
+        ], { duration: 460, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
+    }
+
+    floors.forEach((link, floor) => link.addEventListener("click", async (event) => {
+        event.preventDefault();
+        open(false);
+        riding = true;
+        arriveAt(floor);
+        history.replaceState(null, "", floor ? `#${link.dataset.section}` : "/");
+        sections[floor].scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
+        // Arrived once both the ride and the scroll are done.
+        await Promise.all([wait(700), Promise.race([new Promise((resolve) => window.addEventListener("scrollend", resolve, { once: true })), wait(1500)])]);
+        riding = false;
+        build(floor);
+    }));
+
+    window.addEventListener("scroll", follow, { passive: true });
+    follow();
+}
+
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
 // them back (see .js-reveal in global.css); this marks each one .is-in when it shows.
 function setUpReveal() {
@@ -293,6 +369,7 @@ const revealBlocks = "main > section:not(.hero) > :not(.project-grid, .club-card
 
 setUpReveal();
 setUpBuilder();
+setUpElevator();
 setUpThemeCorner();
 setUpJobTabs();
 setUpProjectFilters();
