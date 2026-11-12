@@ -1,12 +1,13 @@
 // Each heading is built on its first visit in this tab. The rest of the section
 // uses the regular scroll entrances after the hammer strike reveals the heading.
-export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
+export function setUpSectionBuild({ car, canBuild, getSection, reduceMotion }) {
     const root = document.documentElement;
     const pending = new Map();
     let building = false;
 
     const ready = () => !reduceMotion.matches && canBuild()
         && !root.classList.contains("awaiting-build") && !root.classList.contains("awaiting-bill");
+    const isTarget = (section) => !getSection || getSection() === section;
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     function finish(section, remember = true) {
@@ -34,14 +35,14 @@ export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
 
     async function build(section) {
         const entry = pending.get(section);
-        if (!entry || building || !ready() || !isVisible(entry.heading)) return;
+        if (!entry || building || !ready() || !isTarget(section) || !isVisible(entry.heading)) return;
 
         building = true;
         try {
             car.dataset.pose = "up";
             await wait(120);
             // A fast scroll or another ride can take the heading out of view.
-            if (!pending.has(section) || !ready() || !isVisible(entry.heading)) return;
+            if (!pending.has(section) || !ready() || !isTarget(section) || !isVisible(entry.heading)) return;
             car.dataset.pose = "down";
             section.dataset.build = "building";
             const animations = entry.heading.getAnimations().map((animation) => animation.finished.catch(() => {}));
@@ -61,7 +62,7 @@ export function setUpSectionBuild({ car, canBuild, reduceMotion }) {
 
         const limit = window.innerHeight * 0.85;
         for (const [section, { heading }] of pending) {
-            if (isVisible(heading, limit)) {
+            if (isTarget(section) && isVisible(heading, limit)) {
                 build(section);
                 return;
             }
