@@ -356,3 +356,13 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
     50% { transform: translate(calc(var(--sway) * 3vw), calc(50vh - var(--y))) rotate(calc(var(--sway) * 160deg)); }
     to { transform: translate(0, calc(100vh - var(--y) + 40px)) rotate(calc(var(--sway) * 320deg)); }
 }
+
+/* Each season: a shape (used as a mask) and two colours, alternating between pieces. */
+.season-sky span { background: var(--piece-a); mask: var(--shape) center / contain no-repeat; }
+.season-sky span:nth-child(3n) { background: var(--piece-b); }
+html[data-season="fall"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20C4 10 10 4 20 4c0 10-6 16-16 16z'/%3E%3Cpath d='M3 21l7-7' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E"); --piece-a: #D9661F; --piece-b: #B5482A; }
+html[data-season="winter"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='7'/%3E%3C/svg%3E"); --piece-a: #A9B6C2; --piece-b: #C8D2DB; }
+html[data-season="spring"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3c4.5 4 4.5 14 0 18c-4.5-4-4.5-14 0-18z'/%3E%3C/svg%3E"); --piece-a: #E79AB0; --piece-b: #F0BCCB; }
+/* Summer: small warm motes that rise instead of fall. */
+html[data-season="summer"] .season-sky { --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E"); --piece-a: #FFB547; --piece-b: #FF8A3D; }
+html[data-season="summer"] .season-sky span { animation-direction: reverse; }
