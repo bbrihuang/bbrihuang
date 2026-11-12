@@ -411,3 +411,12 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
 /* Bill leaves the hero for his elevator; until he gets there, the elevator waits. */
 .hero.bill-gone .builder { visibility: hidden; }
 html.awaiting-bill .elevator { opacity: 0; pointer-events: none; }
+
+/* Phones: no room for a shaft, so the car waits in the bottom-right corner and the panel opens above it. */
+@media (max-width: 860px) {
+    .elevator { --car: 44px; top: auto; bottom: 16px; right: 16px; height: auto; transform: none; }
+    .shaft { display: none; }
+    .car { position: relative; transform: none; box-shadow: 0 2px 0 var(--bb-ink); }
+    .where-to { top: auto; bottom: calc(100% + 10px); right: 0; transform: none; }
+    @keyframes where-open { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
+}
