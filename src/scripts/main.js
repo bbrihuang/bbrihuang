@@ -332,7 +332,6 @@ function setUpElevator() {
     let leaving = false;
     let tipTimer;
     let switchedTheme = false;
-    // Wide screens name every floor beside the shaft, so there is no panel to open there.
     const labelled = window.matchMedia("(min-width: 1640px) and (min-height: 461px)");
     const themeTip = tip.textContent;
 
@@ -381,8 +380,8 @@ function setUpElevator() {
     }
     car.addEventListener("click", () => {
         if (leaving) return;
-        if (labelled.matches) return say("Where to? Pick a floor.", 2500);
-        open(panel.hidden);
+        // Wide screens name every floor beside the shaft, so there is no list to open.
+        if (!labelled.matches) open(panel.hidden);
     });
     document.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
@@ -400,17 +399,6 @@ function setUpElevator() {
         window.removeEventListener("scroll", hideTip);
     }
 
-    // Bill asks where to once: a bubble on wide screens, the menu (without moving focus) elsewhere.
-    function offerRide() {
-        try {
-            if (localStorage.getItem("bill-asked")) return;
-            localStorage.setItem("bill-asked", "1");
-        } catch {}
-        if (labelled.matches) return say("Where to? Pick a floor.");
-        open(true, false);
-        window.addEventListener("scroll", () => open(false), { once: true, passive: true });
-    }
-
     document.querySelector(".corner")?.addEventListener("click", () => {
         switchedTheme = true;
         tip.hidden = true;
@@ -418,12 +406,7 @@ function setUpElevator() {
 
     document.addEventListener("bill-arrived", () => {
         if (window.scrollY > 24 || !panel.hidden) return;
-        if (switchedTheme) return offerRide();
-        say(themeTip);
-        tipTimer = setTimeout(() => {
-            hideTip();
-            offerRide();
-        }, 3500);
+        if (!switchedTheme) say(themeTip);
     });
 
     function follow() {
