@@ -238,13 +238,14 @@ function setUpBuilder() {
         says.animate([{ opacity: 0, transform: "translateY(8px) scale(0.9)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
 
         // Then Bill walks off the end of the line to his elevator, which appears with him in it.
-        await wait(3500);
+        await wait(1800);
         if (!current()) return;
         await says.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200 }).finished;
         says.hidden = true;
-        await walkTo(width + size, width, width, speed);
+        await walkTo(width + size, width, width, speed * 1.6);
         hero.classList.add("bill-gone");
         root.classList.remove("awaiting-bill");
+        document.dispatchEvent(new Event("bill-arrived"));
     }
 
     // Once the visitor has switched themes, the tip has done its job.
