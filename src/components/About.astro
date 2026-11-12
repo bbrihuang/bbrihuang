@@ -1,9 +1,6 @@
 ---
 import { clubs } from "../data/clubs.js";
 
-// Who I am in a few words: what I study, where I'm from, what I do for fun.
-const traits = ["Computer engineering at BU", "From New York, NY", "Volleyball", "Basketball", "Eating", "Building PCs", "Video games"];
-
 // A few clubs as a preview; the rest are on the activities page.
 const preview = clubs.filter((club) => club.preview);
 ---
@@ -12,9 +9,11 @@ const preview = clubs.filter((club) => club.preview);
     <h2 id="about-title" class="bb-section-word">About</h2>
     <div class="bb-cols">
         <div class="about-main bb-span-7">
-            <ul class="traits" aria-label="About me">
-                {traits.map((trait) => <li>{trait}</li>)}
-            </ul>
+            <div class="about-text">
+                <p>Hi, I’m Brian, and I like building things where software meets hardware. I’m a sophomore studying computer engineering at Boston University, and I’m happiest when code has to work on something real: a hexapod robot learning to walk in simulation, a rocket nozzle that made it through a hot-fire test, a PC that runs its own AI models.</p>
+                <p>Right now I’m the Lead Software Engineer at <a href="https://gradientv.com/">GradientV</a>, building websites and AI tools for small businesses, and a Student TechOps Assistant at BU’s College of Communication. At <a href="/involvement/bu-ai-society/">BU AI Society</a> I lead the Local LLM group and build the simulation our team uses to train <a href="/projects/jethexa/">JetHexa</a>, and on the side I run <strong>PolygonPCs</strong>, building custom PCs for clients.</p>
+                <p>I’m from New York, and in my spare time you’ll usually find me playing volleyball or basketball, eating, building PCs or playing video games.</p>
+            </div>
         </div>
         <div class="edu bb-span-5">
             <div class="edu-head">
