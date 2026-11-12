@@ -3,9 +3,11 @@
 // photos, shown on its card. `projects` are slugs from projects.js.
 // A club with a `slug` and `description` gets its own page at /involvement/<slug>/,
 // with optional `achievements`, and its card opens that page.
+// `preview: true` shows a club in the About section on Home.
 export const clubs = [
     {
         org: "BU AI Society",
+        preview: true,
         slug: "bu-ai-society",
         description: "At BU AI Society I work across robotics and local AI. I build the simulation an 8-person team uses to train a walking gait for the JetHexa hexapod, and in the Local LLM Division I run hands-on experiments on language models on my own PC.",
         achievements: [
@@ -25,6 +27,7 @@ export const clubs = [
     },
     {
         org: "BU Rocket Propulsion Group",
+        preview: true,
         slug: "burpg",
         description: "For BURPG’s intro project, I designed, analyzed, printed and hot-fire tested a nozzle for a small hybrid rocket motor with Jacob Knight and Hikaru Uribe. We presented the Critical Design Review on 3/4/26.",
         achievements: [
@@ -62,6 +65,7 @@ export const clubs = [
     },
     {
         org: "BU Computer Science",
+        preview: true,
         role: "Member",
         logo: "/clubs/bu-computer-science.jpg",
         href: "https://www.instagram.com/bucomputerscience/",
