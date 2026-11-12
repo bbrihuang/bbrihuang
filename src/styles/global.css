@@ -257,3 +257,53 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
     .project-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 560px) { .project-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Case studies and club pages: write-up beside a sticky rail ---------- */
+.case-study { display: grid; grid-template-columns: minmax(0, 1fr) 260px; column-gap: clamp(32px, 5vw, 80px); align-items: start; }
+.case-header { grid-column: 1 / -1; display: grid; gap: 14px; padding: clamp(40px, 5vw, 72px) 0 clamp(28px, 3vw, 44px); border-bottom: 1px solid var(--bb-rule); margin-bottom: clamp(28px, 3vw, 44px); }
+.case-title { font-family: "Archivo", sans-serif; font-size: clamp(2.75rem, 7vw, 6rem); font-weight: 800; font-stretch: 62%; line-height: 0.88; text-transform: uppercase; letter-spacing: -0.015em; max-width: 14em; }
+.case-lede { max-width: 62ch; font-size: clamp(1.125rem, 1.6vw, 1.375rem); line-height: 1.45; color: var(--bb-muted); }
+.case-rail { grid-column: 2; grid-row: 2; position: sticky; top: 24px; display: grid; gap: 16px; padding-top: 4px; }
+.case-rail .project-meta { font-weight: 600; }
+.case-links, .club-related { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rail-label { font-weight: 600; }
+.case-body { grid-column: 1; grid-row: 2; min-width: 0; max-width: 680px; display: grid; gap: 18px; line-height: 1.65; }
+.case-body h2 { margin-top: 28px; font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+.case-body h3 { font-size: 1.125rem; font-weight: 600; }
+.case-body ul:not([class]), .case-body ol:not([class]) { display: grid; gap: 8px; padding-left: 1.2em; list-style: disc; }
+.case-body ol:not([class]) { list-style: decimal; }
+.case-body a { color: inherit; text-decoration-color: var(--bb-signal); text-underline-offset: 3px; }
+.case-body img, .case-body video { height: auto; }
+.case-hero { width: 100%; border: 1px solid var(--bb-rule); }
+.case-body table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.case-body th, .case-body td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--bb-rule-soft); text-align: left; vertical-align: top; }
+.case-body th { font-weight: 600; border-bottom-color: var(--bb-rule); }
+.stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; border-top: 1px solid var(--bb-rule); padding-top: 16px; }
+.stat { display: grid; gap: 4px; align-content: start; }
+.stat strong { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--bb-muted); font-size: 0.875rem; line-height: 1.4; }
+.points { display: grid; gap: 14px; }
+.points li { display: grid; gap: 4px; padding-left: 18px; position: relative; }
+.points li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; background: var(--bb-project-gradient); clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.point-title { font-weight: 600; }
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.flow li { display: grid; gap: 4px; align-content: start; padding: 14px; border: 1px solid var(--bb-rule-soft); }
+.flow-number { color: var(--bb-signal-text); font-weight: 600; font-variant-numeric: tabular-nums; }
+.flow-label { font-weight: 600; line-height: 1.3; }
+.flow-note { color: var(--bb-muted); font-size: 0.875rem; line-height: 1.45; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.gallery figure { display: grid; gap: 8px; align-content: start; }
+.gallery img, .gallery video { width: 100%; border: 1px solid var(--bb-rule-soft); }
+.gallery figcaption { color: var(--bb-muted); font-size: 0.875rem; line-height: 1.45; }
+@media (max-width: 1000px) {
+    .case-study { grid-template-columns: 1fr; }
+    .case-rail { grid-column: 1; grid-row: auto; position: static; margin-bottom: 28px; }
+    .case-body { grid-column: 1; grid-row: auto; }
+}
+@media (max-width: 600px) {
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+}
+
+/* ---------- 404 ---------- */
+.not-found-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 40px 0 120px; }

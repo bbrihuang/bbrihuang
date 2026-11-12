@@ -26,13 +26,13 @@ const sizes = Object.fromEntries(await Promise.all(
     <main id="main" class="case-study has-rail">
         <header class="case-header">
             <a class="back-link" href="/involvement/">&larr; Activities</a>
-            <h1>{club.org}</h1>
+            <h1 class="case-title">{club.org}</h1>
             <p class="case-lede">{club.role}</p>
         </header>
         <aside class="case-rail" aria-label="Club details">
             {club.href && (
                 <p class="case-links">
-                    <a href={club.href} target="_blank" rel="noopener noreferrer">Visit {club.org}</a>
+                    <a class="bb-link" href={club.href} target="_blank" rel="noopener noreferrer">Visit {club.org}</a>
                 </p>
             )}
             {related.length > 0 && (

@@ -14,14 +14,14 @@ const links = [
     <main id="main" class="case-study has-rail">
         <header class="case-header">
             <a class="back-link" href="/projects/">&larr; All projects</a>
-            <p class="project-tag">{frontmatter.tag}</p>
-            <h1>{frontmatter.title}</h1>
+            <p class="bb-meta">{frontmatter.tag}</p>
+            <h1 class="case-title">{frontmatter.title}</h1>
             <p class="case-lede">{frontmatter.description}</p>
         </header>
         <aside class="case-rail" aria-label="Project details">
             {frontmatter.year && <p class="project-meta">{frontmatter.year}</p>}
             {frontmatter.chips.length > 0 && (
-                <ul class="chips">
+                <ul class="tags">
                     {frontmatter.chips.map((chip) => (
                         <li>{chip}</li>
                     ))}
@@ -30,7 +30,7 @@ const links = [
             {links.length > 0 && (
                 <p class="case-links">
                     {links.map((link) => (
-                        <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                        <a class="bb-link" href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
                     ))}
                 </p>
             )}
