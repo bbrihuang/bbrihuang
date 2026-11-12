@@ -1,21 +1,23 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
 import { projects } from "../data/projects.js";
 
-// Home's quick look at current work, in the same cards as the Projects page.
-const shown = projects
-    .filter((project) => project.home)
-    .map((project) => ({ ...project, featured: false }));
+// The three projects marked `home`, in that order. A `clip` plays on hover in place of the cover.
+const shown = projects.filter((project) => project.home).sort((a, b) => a.home - b.home);
 ---
 
-<section id="featured">
-    <h2 class="section-title">Featured Projects</h2>
-    <div class="project-grid">
+<section id="projects" class="bb-section" aria-labelledby="projects-title">
+    <h2 id="projects-title" class="bb-section-word">Projects</h2>
+    <div class="work ruled">
         {shown.map((project) => (
-            <div class="project-slot">
-                <ProjectCard project={project} />
-            </div>
+            <a class="tile" href={`/projects/${project.slug}/`}>
+                <div class="shot">
+                    {project.clip
+                        ? <video src={project.clip.src} poster={project.clip.poster} muted playsinline preload="none" aria-label={project.coverAlt}></video>
+                        : <img src={project.cover} alt={project.coverAlt} loading="lazy">}
+                </div>
+                <p class="cap"><span>{project.short ?? project.title}</span><span class="bb-arrow" aria-hidden="true">↗</span></p>
+            </a>
         ))}
     </div>
-    <a class="all-projects" href="/projects/">All projects <span aria-hidden="true">&rarr;</span></a>
+    <p class="all"><a class="bb-btn" href="/projects/">All projects <span class="bb-btn-arrow" aria-hidden="true">→</span></a></p>
 </section>

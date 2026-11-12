@@ -107,3 +107,22 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .now-key::before { margin-left: 0; }
 .edu-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
 @media (max-width: 520px) { .courses > div { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- Photo tiles (home projects) ---------- */
+.tile { display: grid; gap: 12px; align-content: start; text-decoration: none; }
+.cap { display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    font-size: clamp(1.125rem, 1.6vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.cap span:first-child { transition: transform var(--bb-dur) var(--bb-ease), color var(--bb-dur) var(--bb-ease); }
+.bb-arrow { transition: color var(--bb-dur) var(--bb-ease); }
+@media (hover: hover) {
+    .tile:hover .shot > * { transform: scale(1.04); }
+    .tile:hover .cap span:first-child { transform: translateX(6px); color: var(--bb-signal-text); }
+    .tile:hover .bb-arrow { color: var(--bb-signal-text); }
+}
+.work { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--bb-gutter); }
+.work .shot { height: clamp(200px, 25vw, 330px); }
+.all { margin-top: clamp(28px, 3vw, 44px); }
+@media (max-width: 860px) {
+    .work { grid-template-columns: 1fr 1fr; }
+    .work > :first-child { grid-column: 1 / -1; }
+}
