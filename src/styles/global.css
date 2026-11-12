@@ -363,3 +363,10 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .hero .letter { display: inline-block; transform-origin: 50% 85%; -webkit-text-stroke: 1.5px transparent; transition: color 0.25s var(--ease-out), -webkit-text-stroke-color 0.25s var(--ease-out); }
 .js-reveal .hero:not(.built) .letter:not(.on) { color: transparent; -webkit-text-stroke-color: var(--bb-ink); }
 .js-reveal .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
+
+/* The builder's speech bubble: an ink box over the builder's head, its tail pointing down at it. */
+.builder-says { position: absolute; right: 24px; bottom: calc(var(--sprite) * 1.45 + 12px); z-index: 2; max-width: min(280px, 70vw); padding: 10px 14px;
+    background: var(--bb-ink); color: var(--bb-paper); font-size: 0.875rem; font-weight: 500; line-height: 1.4; transform-origin: calc(100% - var(--sprite) / 2) 100%; }
+.builder-says::after { content: ""; position: absolute; right: calc(var(--sprite) / 2 - 7px); bottom: -7px; width: 14px; height: 7px;
+    background: var(--bb-ink); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.builder-says[hidden] { display: none; }
