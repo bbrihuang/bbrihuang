@@ -1,12 +1,10 @@
 ---
-// Big page title in the section's color, with a short intro under it.
-const { title, lede, color } = Astro.props;
+// A page's giant title with a short intro under it.
+const { title, lede } = Astro.props;
 ---
 
-<header class="page-header" style={`--page-color: ${color}`}>
-    <div class="page-header-text">
-        <h1>{title}</h1>
-        {lede && <p>{lede}</p>}
-    </div>
+<header class="page-head">
+    <h1 class="bb-section-word">{title}</h1>
+    {lede && <p class="bb-lede">{lede}</p>}
     <slot />
 </header>

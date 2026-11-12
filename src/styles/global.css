@@ -164,3 +164,8 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
     .job-tab, .job-detail { grid-column: 1; grid-row: auto; }
     .job-detail { margin: 4px 0 12px; }
 }
+
+/* ---------- Page heads (projects, activities, 404) ---------- */
+.page-head { display: grid; gap: 16px; padding: clamp(48px, 6vw, 88px) 0 clamp(32px, 4vw, 56px); border-bottom: 1px solid var(--bb-rule); }
+.page-head .bb-section-word { margin: 0; font-size: clamp(3.5rem, 10vw, 8rem); }
+.page-head .bb-lede { color: var(--bb-muted); }
