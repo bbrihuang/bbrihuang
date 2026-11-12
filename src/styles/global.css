@@ -359,6 +359,7 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* The build (setUpBuilder in main.js): until it runs, the name waits as outlines and the
    line is hidden; each word fills as the builder hammers under it. Without JavaScript,
    or with reduced motion, the finished name simply shows. */
-.hero .letter { -webkit-text-stroke: 1.5px transparent; transition: color 0.25s var(--ease-out), -webkit-text-stroke-color 0.25s var(--ease-out); }
+/* inline-block so each letter can scale when it pops in, from its baseline. */
+.hero .letter { display: inline-block; transform-origin: 50% 85%; -webkit-text-stroke: 1.5px transparent; transition: color 0.25s var(--ease-out), -webkit-text-stroke-color 0.25s var(--ease-out); }
 .js-reveal .hero:not(.built) .letter:not(.on) { color: transparent; -webkit-text-stroke-color: var(--bb-ink); }
 .js-reveal .hero:not(.built) .bb-grad-rule { clip-path: inset(0 100% 0 0); }
