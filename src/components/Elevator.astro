@@ -4,8 +4,9 @@
 // Off the home page the floors are plain links back to it. See setUpElevator in main.js.
 import Bill from "./Bill.astro";
 
+const path = Astro.url.pathname;
 const floors = [
-    { id: "top", label: "Lobby", href: "/" },
+    { id: "top", label: "Lobby", href: path === "/" ? "#" : "/" },
     { id: "about", label: "About", href: "/#about" },
     { id: "projects", label: "Projects", href: "/#projects" },
     { id: "experience", label: "Experience", href: "/#experience" },
@@ -15,7 +16,6 @@ const pages = [
     { label: "All projects", href: "/projects/" },
     { label: "Activities", href: "/involvement/" },
 ];
-const path = Astro.url.pathname;
 ---
 
 <nav class="elevator" aria-label="Site" style={`--floors: ${floors.length}`}>
