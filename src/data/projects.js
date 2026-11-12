@@ -1,3 +1,5 @@
+// `home` (1, 2, 3) puts a project on the home page, in that order, under its `short` name.
+// A `clip` ({ src, poster }) plays there on hover in place of the cover.
 export const projects = [
     {
         title: "Room Temperature Monitor",
@@ -7,7 +9,8 @@ export const projects = [
         chips: ["Arduino UNO", "C++", "TMP36", "Onshape"],
         year: "2026",
         featured: true,
-        home: true,
+        home: 3,
+        short: "Temp monitor",
         slug: "room-temperature-monitor",
         cover: "/projects/room-temperature-monitor/hero.webp",
         coverAlt: "The finished Room Temperature Monitor in its black 3D-printed case.",
@@ -29,7 +32,8 @@ export const projects = [
             "URDF / SDF"
         ],
         year: "2026",
-        home: true,
+        home: 2,
+        short: "JetHexa",
         slug: "jethexa",
         cover: "/projects/jethexa/cover.webp",
         coverAlt: "The JetHexa hexapod robot.",
@@ -118,7 +122,6 @@ export const projects = [
             "Google Colab"
         ],
         year: "2026",
-        home: true,
         slug: "local-llm-research",
         cover: "/projects/local-llm-lab/cover.webp",
         coverAlt: "Chart of KL divergence against file size for plain and importance-matrix quantization.",
@@ -578,6 +581,9 @@ export const projects = [
             "Resin 3D printing"
         ],
         year: "2026",
+        home: 1,
+        short: "Rocket nozzle",
+        clip: { src: "/projects/burpg-hip/hotfire-short.mp4", poster: "/projects/burpg-hip/hotfire-short-poster.webp" },
         slug: "burpg-hip",
         cover: "/projects/burpg-hip/nozzle-photo-1.webp",
         coverAlt: "The 3D-printed amber resin nozzle on its flange, sitting on a lab bench.",
