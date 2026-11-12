@@ -376,7 +376,9 @@ function setUpElevator() {
         car.setAttribute("aria-expanded", String(show));
         if (show && focus) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
     }
-    car.addEventListener("click", () => open(panel.hidden));
+    car.addEventListener("click", () => {
+        if (!leaving) open(panel.hidden);
+    });
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && !panel.hidden) {
             open(false);
@@ -422,19 +424,19 @@ function setUpElevator() {
         if (reduceMotion.matches) return;
         event.preventDefault();
         if (leaving) return;
+        const trip = ++ride;
         leaving = true;
         open(false);
         arriveAt(floor);
         await waitForCar();
-        location.assign(url.href);
+        if (trip === ride) location.assign(url.href);
     });
+
+    window.addEventListener("pagehide", () => { ride += 1; });
 
     // A page restored from the back-forward cache still has the car's departure position.
     window.addEventListener("pageshow", (event) => {
-        if (event.persisted) {
-            leaving = riding = false;
-            ride += 1;
-        }
+        if (event.persisted) leaving = riding = false;
         if (onHome) follow();
         else if (event.persisted) arriveAt(initial);
     });
