@@ -377,7 +377,7 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
 
 /* ---------- Bill Durr's elevator: the site navigation, fixed to the right edge ---------- */
 /* A thin shaft with a mark per floor, and a car with Bill in it that rides to the current floor. */
-.elevator { --floor: 44px; --car: 34px; position: fixed; top: 50%; z-index: 40; height: calc(var(--floor) * (var(--floors) - 1));
+.elevator { --floor: clamp(46px, 8vh, 60px); --car: 44px; position: fixed; top: 50%; z-index: 40; height: calc(var(--floor) * (var(--floors) - 1));
     right: clamp(10px, calc((100vw - var(--page)) / 4 - var(--car) / 2), 120px); width: var(--car); transform: translateY(-50%);
     transition: opacity 0.5s var(--ease-out); }
 .shaft { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--bb-rule-soft); }
@@ -414,7 +414,7 @@ html.awaiting-bill .elevator { opacity: 0; pointer-events: none; }
 
 /* Phones: no room for a shaft, so the car waits in the bottom-right corner and the panel opens above it. */
 @media (max-width: 860px) {
-    .elevator { --car: 44px; top: auto; bottom: 16px; right: 16px; height: auto; transform: none; }
+    .elevator { --car: 50px; top: auto; bottom: 16px; right: 16px; height: auto; transform: none; }
     .shaft { display: none; }
     .car { position: relative; transform: none; }
     .where-to { top: auto; bottom: calc(100% + 10px); right: 0; transform: none; }
