@@ -87,7 +87,7 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 .logo { flex: none; width: 44px; height: 44px; padding: 6px; box-sizing: border-box; background: #F6F5F1; outline: 1px solid var(--bb-rule-soft); }
 .logo img { width: 100%; height: 100%; object-fit: contain; }
 
-/* ---------- About: statement and portrait, then school and a few clubs ---------- */
+/* ---------- About: a short description, then school and a few clubs ---------- */
 /* The description, beside school and clubs. */
 .about-main { display: grid; gap: 24px; align-content: start; }
 /* The description: plain paragraphs in muted ink; names stand out in full ink. */
