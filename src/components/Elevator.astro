@@ -32,13 +32,13 @@ const level = basement < 0 ? (path.startsWith("/certifications/") ? floors.lengt
         <p class="where-title">Where to?</p>
         <ul>
             {floors.map((floor, index) => (
-                <li><a href={floor.href} data-floor={index} data-section={floor.id}>{floor.label}</a></li>
+                <li style={`--i: ${index}`}><a href={floor.href} data-floor={index} data-section={floor.id}>{floor.label}</a></li>
             ))}
         </ul>
         <p class="where-basement" id="where-basement">Basement</p>
         <ul class="where-pages" aria-labelledby="where-basement">
             {pages.map((page, index) => (
-                <li><a href={page.href} data-floor={floors.length + index} aria-current={index === basement ? "location" : undefined}>{page.label}</a></li>
+                <li style={`--i: ${floors.length + index}`}><a href={page.href} data-floor={floors.length + index} aria-current={index === basement ? "location" : undefined}>{page.label}</a></li>
             ))}
         </ul>
         <p class="where-sign">Operated by Bill Durr</p>
