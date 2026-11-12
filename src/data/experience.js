@@ -46,9 +46,9 @@ export const experience = [
     },
     {
         role: "Founder",
-        org: "Cubic Builds",
+        org: "PolygonPCs",
         orgNote: "Custom PC building business",
-        logo: "/logos/cubic-builds.svg",
+        logo: "/logos/polygon-pcs.svg",
         place: "New York, NY",
         start: "2023-01",
         end: null,
