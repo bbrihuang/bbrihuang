@@ -1,3 +1,5 @@
+import { setUpSectionBuild } from "./section-build.js";
+
 const root = document.documentElement;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
@@ -430,6 +432,12 @@ function setUpElevator() {
         else arriveAt(initial);
     });
 
+    const sectionBuild = setUpSectionBuild({
+        car,
+        reduceMotion,
+        canBuild: () => !riding && !leaving && (!onHome || window.scrollY > 8 || current > 0),
+    });
+
     if (!onHome) return;
 
     function scrollToFloor(floor) {
@@ -466,7 +474,9 @@ function setUpElevator() {
         await Promise.all([waitForCar(), scrollToFloor(floor)]);
         if (trip !== ride || leaving) return;
         riding = false;
+        sectionBuild.build(sections[floor]);
         follow();
+        sectionBuild.check();
     }));
 
     window.addEventListener("scroll", follow, { passive: true });
