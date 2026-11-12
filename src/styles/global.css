@@ -46,7 +46,9 @@ img, video { display: block; max-width: 100%; }
 html.peeling::view-transition-old(root), html.peeling::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 /* No colour fades during the switch, or links and panels would fade from the old theme's colours afterwards. */
 html.peeling *, html.peeling *::before, html.peeling *::after { transition: none !important; }
-html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
+/* The new page starts fully clipped away, so the frame before the wipe's animation
+   kicks in shows the old theme instead of blinking to the new one. */
+html.peeling::view-transition-new(root) { clip-path: polygon(100% 0, 100% 0, 100% 0); animation: peel 0.8s cubic-bezier(0.5, 0, 0.2, 1) both; }
 /* The triangle grows just far enough to cover the screen (its edge reaches the far corner at the end). */
 @keyframes peel { from { clip-path: polygon(100% 0, 100% 0, 100% 0); } to { clip-path: polygon(100% 0, calc(100% - 100vw - 100vh) 0, 100% calc(100vw + 100vh)); } }
 
