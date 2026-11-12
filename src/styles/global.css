@@ -72,3 +72,8 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .footer-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; border-top: 1px solid var(--bb-rule); padding-top: 14px; }
 .footer-line a { color: inherit; }
 .site-footer .bb-domain { font-size: calc(100cqw / 4.85); margin: 16px 0 0; line-height: 1; padding-bottom: 0.02em; }
+
+/* ---------- Hero: the name and one gradient rule ---------- */
+.hero .bb-name { padding: clamp(40px, 6vw, 96px) 0 0.08em; }
+/* About sits closer to the name than sections sit to each other. */
+.hero + .bb-section { padding-top: clamp(48px, 6vw, 88px); }

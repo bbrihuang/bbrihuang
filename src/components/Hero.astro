@@ -1,43 +1,4 @@
----
-import { terminalScript } from "../data/terminal.js";
----
-
-<section class="hero">
-    <div class="hero-main">
-        <h1>Brian Huang</h1>
-        <p class="hero-role">Computer Engineer</p>
-        <p class="hero-intro">I’m a computer engineering student at Boston University, focused on robotics, embedded systems and AI inference. Right now I’m simulating a hexapod robot with BU AI Society and running local LLM experiments on my own RTX 5070. I build where <span class="hero-gradient">software meets hardware.</span></p>
-
-        <div class="hero-actions">
-            <a class="action-primary" href="/projects/">View projects</a>
-            <a class="action-outline" href="/Brian_Huang_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        </div>
-        <p class="hero-status"><strong>Open to summer 2027 internships</strong> <a href="mailto:bbhuang@bu.edu">bbhuang@bu.edu</a></p>
-    </div>
-
-    <div class="hero-side">
-        <figure class="hero-top">
-            <aside class="photo-card" aria-label="Profile">
-                <img src="/avatar.jpg" alt="Brian Huang" width="400" height="400">
-            </aside>
-        </figure>
-
-        <div class="terminal" aria-label="Terminal">
-            <div class="terminal-bar" aria-hidden="true">
-                <span></span><span></span><span></span>
-                <span class="terminal-title">brian@portfolio ~</span>
-            </div>
-            <div id="terminal-output">
-                <!-- Without JavaScript the lines simply show; main.js replaces them with typing. -->
-                <div class="terminal-static">
-                    {terminalScript.map((step) => (
-                        <>
-                            <div class="terminal-command">{step.command}</div>
-                            <div class="terminal-reply">{step.reply}</div>
-                        </>
-                    ))}
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="hero" aria-label="Introduction">
+    <div class="fit"><h1 class="bb-name">Brian Huang</h1></div>
+    <hr class="bb-grad-rule">
 </section>
