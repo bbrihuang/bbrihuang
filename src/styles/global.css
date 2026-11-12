@@ -355,8 +355,8 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
     animation: drift var(--t) linear var(--d) infinite; }
 .season-sky .left { left: calc(var(--margin) * var(--across)); }
 .season-sky .right { right: calc(var(--margin) * var(--across)); }
-/* No room beside the page: no pieces. */
-@media (max-width: 1500px) { .season-sky { display: none; } }
+/* No room beside the page: no pieces, and no season buttons, since they would change nothing. */
+@media (max-width: 1500px) { .season-sky, .season-switch { display: none; } }
 @keyframes drift {
     from { transform: translate(0, calc(-1 * var(--y) - 40px)) rotate(0deg); }
     50% { transform: translate(calc(var(--sway) * 14px), calc(50vh - var(--y))) rotate(calc(var(--sway) * 160deg)); }
