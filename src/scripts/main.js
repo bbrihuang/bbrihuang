@@ -362,7 +362,7 @@ function setUpElevator() {
 
     // `focus` moves keyboard focus into the panel; Bill's own prompt leaves focus alone.
     function open(show, focus = true) {
-        if (show) hideTip();
+        hideTip();
         panel.hidden = !show;
         car.setAttribute("aria-expanded", String(show));
         if (show && focus) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
@@ -398,9 +398,7 @@ function setUpElevator() {
 
     document.querySelector(".corner")?.addEventListener("click", () => {
         switchedTheme = true;
-        if (tip.hidden) return;
-        hideTip();
-        offerRide();
+        tip.hidden = true;
     });
 
     document.addEventListener("bill-arrived", () => {
