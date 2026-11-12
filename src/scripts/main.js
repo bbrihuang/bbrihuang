@@ -260,6 +260,8 @@ function setUpBuilder() {
         if (!current()) return;
         rule.getAnimations().forEach((animation) => animation.cancel());
         hero.classList.add("built");
+        // The first time, the rest of the page now fades in; rebuilds leave it alone.
+        root.classList.remove("awaiting-build");
 
         // The tip pops up over the builder's head.
         says.hidden = false;
