@@ -130,15 +130,17 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 }
 
 /* ---------- Experience: a timeline of roles, the open one's details beside it ---------- */
-.jobs { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--bb-gutter); row-gap: 4px; align-items: start; }
-/* The timeline: one thin line through the markers. */
-.jobs::before { content: ""; position: absolute; left: 7px; top: calc(clamp(24px, 2.4vw, 36px) + 24px); height: calc(var(--n) * 108px - 72px); width: 1px; background: var(--bb-rule-soft); }
+/* One row per role plus a spare last row that takes up the panel's extra height,
+   so the roles stay packed together however long the open panel is. */
+.jobs { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: repeat(var(--n), auto) 1fr; column-gap: var(--bb-gutter); row-gap: 4px; align-items: start; }
 .job-tab { position: relative; grid-column: 1; grid-row: calc(var(--i) + 1); display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start;
     width: 100%; padding: 14px 16px 14px 32px; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
     transition: background-color var(--bb-dur) var(--bb-ease); }
 /* Each marker is a small corner triangle; the open role's turns orange. */
 .job-tab::before { content: ""; position: absolute; left: 2px; top: 30px; width: 11px; height: 11px; background: var(--bb-muted);
     clip-path: polygon(0 0, 100% 0, 100% 100%); transition: background-color var(--bb-dur) var(--bb-ease); }
+/* The timeline: a thin line from each marker down to the next. */
+.job-tab:not(:nth-last-child(2))::after { content: ""; position: absolute; left: 7px; top: 41px; bottom: -34px; width: 1px; background: var(--bb-rule-soft); }
 .job-tab[aria-expanded="true"] { background: var(--bb-paper-2); }
 .job-tab[aria-expanded="true"]::before { background: var(--bb-project-gradient); }
 @media (hover: hover) { .job-tab:hover { background: var(--bb-paper-2); } }
@@ -146,7 +148,7 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .job-tab-role { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.015em; }
 .job-tab-org { color: var(--bb-muted); }
 .job-dates { margin-top: 4px; color: var(--bb-muted); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
-.job-detail { grid-column: 2; grid-row: 1 / span var(--n); }
+.job-detail { grid-column: 2; grid-row: 1 / -1; }
 .job-detail .bb-panel-body { display: grid; gap: 18px; padding: clamp(20px, 2.4vw, 32px); }
 .job-head { display: flex; align-items: center; gap: 18px; }
 .logo-big { width: 72px; height: 72px; padding: 10px; }
@@ -159,8 +161,8 @@ html.peeling::view-transition-group(peel) { background: var(--bb-signal-gradient
 .tags li { padding: 6px 12px; border: 1px solid var(--bb-rule-soft); font-size: 0.875rem; line-height: 1.3; }
 /* Narrow: each role's details open right under its button. */
 @media (max-width: 860px) {
-    .jobs { grid-template-columns: 1fr; }
-    .jobs::before { display: none; }
+    .jobs { grid-template-columns: 1fr; grid-template-rows: none; }
+    .job-tab::after { display: none; }
     .job-tab, .job-detail { grid-column: 1; grid-row: auto; }
     .job-detail { margin: 4px 0 12px; }
 }
