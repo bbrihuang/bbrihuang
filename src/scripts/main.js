@@ -332,6 +332,18 @@ function setUpElevator() {
     let leaving = false;
     let tipTimer;
     let switchedTheme = false;
+    // Wide screens name every floor beside the shaft, so there is no panel to open there.
+    const labelled = window.matchMedia("(min-width: 1640px) and (min-height: 461px)");
+    const themeTip = tip.textContent;
+
+    // Bill says something in his bubble for a few seconds.
+    function say(text, ms = 3500) {
+        clearTimeout(tipTimer);
+        tip.textContent = text;
+        tip.hidden = false;
+        window.addEventListener("scroll", hideTip, { once: true, passive: true });
+        tipTimer = setTimeout(hideTip, ms);
+    }
 
     function arriveAt(floor) {
         current = floor;
@@ -368,7 +380,9 @@ function setUpElevator() {
         if (show && focus) (stops.find((link) => link.hasAttribute("aria-current")) ?? stops[0]).focus();
     }
     car.addEventListener("click", () => {
-        if (!leaving) open(panel.hidden);
+        if (leaving) return;
+        if (labelled.matches) return say("Where to? Pick a floor.", 2500);
+        open(panel.hidden);
     });
     document.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
@@ -386,12 +400,13 @@ function setUpElevator() {
         window.removeEventListener("scroll", hideTip);
     }
 
-    // Bill offers the destination menu once, without moving keyboard focus.
+    // Bill asks where to once: a bubble on wide screens, the menu (without moving focus) elsewhere.
     function offerRide() {
         try {
             if (localStorage.getItem("bill-asked")) return;
             localStorage.setItem("bill-asked", "1");
         } catch {}
+        if (labelled.matches) return say("Where to? Pick a floor.");
         open(true, false);
         window.addEventListener("scroll", () => open(false), { once: true, passive: true });
     }
@@ -404,8 +419,7 @@ function setUpElevator() {
     document.addEventListener("bill-arrived", () => {
         if (window.scrollY > 24 || !panel.hidden) return;
         if (switchedTheme) return offerRide();
-        tip.hidden = false;
-        window.addEventListener("scroll", hideTip, { once: true, passive: true });
+        say(themeTip);
         tipTimer = setTimeout(() => {
             hideTip();
             offerRide();
