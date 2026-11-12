@@ -3,6 +3,7 @@ import "../styles/tokens.css";
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
 import Footer from "../components/Footer.astro";
+import Elevator from "../components/Elevator.astro";
 
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -59,6 +60,8 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <a class="skip-link" href="#main">Skip to content</a>
     <!-- The brand corner, which also switches light and dark. -->
     <button class="corner" type="button" aria-label="Switch theme"></button>
+
+    <Elevator />
 
     <div class="bb-page">
         <slot />

@@ -1,0 +1,43 @@
+---
+// Bill Durr's elevator: the site's navigation, fixed to the right edge. Each floor is a
+// section of the home page; the car (with Bill in it) opens the "Where to?" panel.
+// Off the home page the floors are plain links back to it. See setUpElevator in main.js.
+import Bill from "./Bill.astro";
+
+const floors = [
+    { id: "top", label: "Lobby", href: "/" },
+    { id: "about", label: "About", href: "/#about" },
+    { id: "projects", label: "Projects", href: "/#projects" },
+    { id: "experience", label: "Experience", href: "/#experience" },
+    { id: "skills", label: "Skills", href: "/#skills" },
+];
+const pages = [
+    { label: "All projects", href: "/projects/" },
+    { label: "Activities", href: "/involvement/" },
+];
+const path = Astro.url.pathname;
+---
+
+<nav class="elevator" aria-label="Site" style={`--floors: ${floors.length}`}>
+    <div class="shaft" aria-hidden="true">
+        {floors.map((floor, index) => <span class="floor-mark" style={`--i: ${index}`}></span>)}
+    </div>
+    <button class="car" type="button" aria-expanded="false" aria-controls="where-to" data-pose="stand">
+        <span class="sr-only">Where to? Open Bill Durr's elevator</span>
+        <Bill />
+    </button>
+    <div class="where-to" id="where-to" hidden>
+        <p class="where-title">Where to?</p>
+        <ul>
+            {floors.map((floor, index) => (
+                <li><a href={floor.href} data-floor={index} data-section={floor.id}>{floor.label}</a></li>
+            ))}
+        </ul>
+        <ul class="where-pages">
+            {pages.map((page) => (
+                <li><a href={page.href} aria-current={path.startsWith(page.href) ? "page" : undefined}>{page.label} <span aria-hidden="true">→</span></a></li>
+            ))}
+        </ul>
+        <p class="where-sign">Operated by Bill Durr</p>
+    </div>
+</nav>
