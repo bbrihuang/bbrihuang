@@ -155,6 +155,35 @@ function setUpClips() {
     });
 }
 
+// Hero builder: work out when the walking robot passes under each letter, so that
+// letter fills right then. Clicking the robot builds the name again.
+function setUpBuilder() {
+    const hero = document.querySelector(".hero");
+    const robot = hero?.querySelector(".builder");
+    if (!robot) return;
+    const ground = robot.parentElement;
+    function time() {
+        const walk = parseFloat(getComputedStyle(hero).getPropertyValue("--walk")) * 1000;
+        const width = ground.clientWidth;
+        const bot = robot.offsetWidth;
+        // The robot's middle goes from bot/2 to width - bot/2 - 24 at a steady pace.
+        const travel = width - bot - 24;
+        const left = ground.getBoundingClientRect().left;
+        hero.querySelectorAll(".letter").forEach((letter) => {
+            const box = letter.getBoundingClientRect();
+            const middle = box.left + box.width / 2 - left - bot / 2;
+            letter.style.setProperty("--at", `${Math.max(0, Math.min(1, middle / travel)) * walk}ms`);
+        });
+    }
+    time();
+    robot.addEventListener("click", () => {
+        time();
+        hero.classList.add("rebuild");
+        void hero.offsetWidth;
+        hero.classList.remove("rebuild");
+    });
+}
+
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
 // them back (see .js-reveal in global.css); this marks each one .is-in when it shows.
 function setUpReveal() {
@@ -174,6 +203,7 @@ function setUpReveal() {
 const revealBlocks = "main > section:not(.hero) > :not(.project-grid, .club-cards), .project-grid > *, .club-cards > *, .page-head > *, .case-header > *, .case-rail, .case-body > *, .certs > *, .site-footer > *, .not-found-actions";
 
 setUpReveal();
+setUpBuilder();
 setUpThemeCorner();
 setUpJobTabs();
 setUpProjectFilters();
