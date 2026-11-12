@@ -254,7 +254,7 @@ function setUpBuilder() {
 
 // Bill Durr's elevator. The car opens the "Where to?" panel. On the home page the
 // car follows the section you're on; picking a floor rides there while the page
-// scrolls, and on arrival Bill builds the section: he hops and its title pops in.
+// scrolls, and Bill hops when he arrives.
 // Off the home page the floors are ordinary links back to it.
 function setUpElevator() {
     const elevator = document.querySelector(".elevator");
@@ -298,17 +298,12 @@ function setUpElevator() {
         if (floor !== current) arriveAt(floor);
     }
 
-    // Bill builds the floor: a hop in the car, and the section's big title pops in.
-    function build(floor) {
+    // Arriving: Bill hops in the car.
+    function build() {
         if (reduceMotion.matches) return;
         car.dataset.pose = "up";
         car.querySelector(".bill").animate([{ transform: "translateY(0)" }, { transform: "translateY(-3px)" }, { transform: "translateY(0)" }], { duration: 260, easing: "ease-out" });
         setTimeout(() => (car.dataset.pose = "stand"), 260);
-        sections[floor].querySelector(".bb-section-word")?.animate([
-            { transform: "scale(0.92)", opacity: 0.4 },
-            { transform: "scale(1.05)", opacity: 1, offset: 0.55 },
-            { transform: "scale(1)" },
-        ], { duration: 460, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
     }
 
     floors.forEach((link, floor) => link.addEventListener("click", async (event) => {
@@ -321,7 +316,7 @@ function setUpElevator() {
         // Arrived once both the ride and the scroll are done.
         await Promise.all([wait(700), Promise.race([new Promise((resolve) => window.addEventListener("scrollend", resolve, { once: true })), wait(1500)])]);
         riding = false;
-        build(floor);
+        build();
     }));
 
     window.addEventListener("scroll", follow, { passive: true });
