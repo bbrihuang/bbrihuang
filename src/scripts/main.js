@@ -152,6 +152,23 @@ function setUpClips() {
     });
 }
 
+// Seasonal background: a handful of pieces in the page's side margins, each with its
+// own size, speed, sway and start, from a fixed list so every visit looks the same.
+function setUpSeason() {
+    const sky = document.querySelector(".season-sky");
+    if (!sky) return;
+    const pieces = [
+        [3, 12, 0.9, 19, -2], [9, 64, 0.6, 24, -11], [6, 38, 0.75, 21, -6], [13, 85, 0.55, 27, -17],
+        [94, 22, 0.85, 20, -4], [88, 70, 0.65, 25, -13], [97, 48, 0.7, 22, -9], [91, 5, 0.5, 28, -20],
+        [17, 30, 0.45, 30, -24], [84, 92, 0.5, 26, -15],
+    ];
+    sky.replaceChildren(...pieces.map(([x, y, size, seconds, delay], index) => {
+        const piece = document.createElement("span");
+        piece.style.cssText = `--x: ${x}vw; --y: ${y}vh; --s: ${size}; --t: ${seconds}s; --d: ${delay}s; --sway: ${index % 2 ? -1 : 1}`;
+        return piece;
+    }));
+}
+
 // Entrances: blocks fade and rise as they scroll into view, once. The CSS holds
 // them back (see .js-reveal in global.css); this marks each one .is-in when it shows.
 function setUpReveal() {
@@ -171,6 +188,7 @@ function setUpReveal() {
 const revealBlocks = "main > section:not(.hero) > :not(.project-grid, .club-cards), .project-grid > *, .club-cards > *, .page-head > *, .case-header > *, .case-rail, .case-body > *, .certs > *, .site-footer > *, .not-found-actions";
 
 setUpReveal();
+setUpSeason();
 setUpThemeCorner();
 setUpJobTabs();
 setUpProjectFilters();
