@@ -1,12 +1,15 @@
 ---
 // With a case study, the whole card (picture included) opens it: the title
 // link stretches over the card.
+import { imageSize } from "../data/imageSize.js";
+
 const { project } = Astro.props;
+const size = project.cover && await imageSize(project.cover);
 ---
 
 <article class:list={["project-card", { featured: project.featured, linked: project.slug }]}>
     <div class="shot">
-        {project.cover && <img src={project.cover} alt={project.coverAlt} loading={project.featured ? "eager" : "lazy"}>}
+        {project.cover && <img src={project.cover} alt={project.coverAlt} width={size.width} height={size.height} loading={project.featured ? "eager" : "lazy"}>}
     </div>
     <div class="project-body">
         <p class="project-meta bb-meta"><span>{project.tag}</span>{project.year && <span>{project.year}</span>}</p>

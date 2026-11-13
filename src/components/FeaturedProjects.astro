@@ -1,8 +1,12 @@
 ---
 import { projects } from "../data/projects.js";
+import { imageSize } from "../data/imageSize.js";
 
 // The three projects marked `home`, in that order. A `clip` plays on hover in place of the cover.
 const shown = projects.filter((project) => project.home).sort((a, b) => a.home - b.home);
+const sizes = Object.fromEntries(await Promise.all(
+    shown.filter((project) => !project.clip && project.cover).map(async (project) => [project.cover, await imageSize(project.cover)]),
+));
 ---
 
 <section id="projects" class="bb-section" aria-labelledby="projects-title">
@@ -13,7 +17,7 @@ const shown = projects.filter((project) => project.home).sort((a, b) => a.home -
                 <div class="shot">
                     {project.clip
                         ? <video src={project.clip.src} poster={project.clip.poster} muted playsinline preload="none" aria-label={project.coverAlt}></video>
-                        : <img src={project.cover} alt={project.coverAlt} loading="lazy">}
+                        : <img src={project.cover} alt={project.coverAlt} width={sizes[project.cover].width} height={sizes[project.cover].height} loading="lazy">}
                 </div>
                 <p class="cap"><span>{project.short ?? project.title}</span><span class="bb-arrow" aria-hidden="true">↗</span></p>
             </a>
