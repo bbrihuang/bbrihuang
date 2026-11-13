@@ -73,12 +73,13 @@ const person = {
     <!-- The brand corner, which also switches light and dark. -->
     <button class="corner" type="button" aria-label="Switch theme"></button>
 
-    <Elevator />
-
     <div class="bb-page">
         <slot />
         <Footer />
     </div>
+
+    <!-- After the page so keyboard order starts at the brand link; it is fixed-position. -->
+    <Elevator />
 
     <!-- In the body because a custom element in the head ends the head early. -->
     <Analytics />
