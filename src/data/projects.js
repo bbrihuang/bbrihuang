@@ -310,8 +310,8 @@ export const projects = [
         highlights: [
             "Came up with TerrierTrays and led its web app, so students can plan a day of BU dining-hall meals in one place instead of clicking between menus, items and days.",
             "Placed 2nd in the Information Access track at Hackcessability 2026 with a team of four, by making open dining data easy to find, understand and act on.",
-            "Kept the plans honest with a daily scraper, a 24-hour freshness check and allergen filters that never read empty as safe, so the app pauses suggestions instead of planning from stale food.",
-            "Held the calorie model to validation instead of training score, so it refuses inputs outside its training range and asks for an Apply tap before anything changes."
+            "Built the app to label menus older than 24 hours and pause suggestions, and to treat dishes with no allergen list as unknown, so it never plans from stale food or reads an empty list as safe.",
+            "Wired the team’s calorie model into a review step, so students see the estimate and tap Apply before any target changes."
         ],
         caseStudy: [
             {
