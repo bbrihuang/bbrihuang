@@ -132,12 +132,21 @@ function setUpProjectFilters() {
     });
 }
 
-// The hot-fire clip plays when you point at its tile, then returns to its still.
+// The hot-fire clip plays once on its own when its tile scrolls into view, and again when you point at it, then returns to its still.
 function setUpClips() {
     if (reduceMotion.matches) return;
+    const seen = "IntersectionObserver" in window && new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            seen.unobserve(entry.target);
+            entry.target.querySelector("video").play().catch(() => {});
+        });
+    }, { threshold: 0.6 });
     document.querySelectorAll(".tile video").forEach((video) => {
-        video.closest(".tile").addEventListener("mouseenter", () => video.play().catch(() => {}));
+        const tile = video.closest(".tile");
+        tile.addEventListener("mouseenter", () => video.play().catch(() => {}));
         video.addEventListener("ended", () => video.load());
+        if (seen) seen.observe(tile);
     });
 }
 
