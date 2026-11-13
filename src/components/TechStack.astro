@@ -18,7 +18,7 @@ import { markOf, slugOf } from "../data/skills.js";
                                     <svg class:list={{ glyph: !mark.filled }} viewBox="0 0 24 24" width="22" height="22" style={`color: ${mark.color}`} aria-hidden="true" set:html={mark.svg} />
                                     <span>{item.name}</span>
                                     {item.certs?.length > 0 && (
-                                        <a class="certified" href={`/certifications/${slugOf(item.name)}/`} aria-label={`${item.name} certificates`}>Certified</a>
+                                        <a class="certified" href={`/certifications/${slugOf(item.name)}/`} aria-label={`Certified: ${item.name} certificates`}>Certified</a>
                                     )}
                                 </li>
                             );
