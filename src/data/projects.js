@@ -618,7 +618,7 @@ export const projects = [
                 href: "https://wikifactory.com/+burpg/hybrid-intro-project"
             }
         ],
-        summary: "A converging–diverging nozzle for a small hybrid rocket motor, taken from chamber conditions to hand calculations, CAD, FEA, a 3D print and a hot-fire test. Critical Design Review presented 3/4/26.",
+        summary: "A converging–diverging nozzle for a small hybrid rocket motor, taken from chamber conditions to hand calculations, CAD, FEA, a 3D print and a hot-fire test. Critical Design Review presented March 4, 2026.",
         highlights: [
             "Sized a de Laval nozzle from the chamber conditions: 7.22 mm throat, 18.45 mm exit, area ratio 6.52.",
             "Chose an 80% bell over a cone and a 100% bell for near-maximum thrust efficiency at much lower length and weight.",
@@ -628,7 +628,7 @@ export const projects = [
         caseStudy: [
             {
                 title: "Overview",
-                text: "I designed, analyzed, printed and hot-fire tested a converging–diverging (de Laval) nozzle for a small hybrid rocket motor. This was BURPG’s intro project, done with Jacob Knight and Hikaru Uribe, and we presented the Critical Design Review on 3/4/26."
+                text: "I designed, analyzed, printed and hot-fire tested a converging–diverging (de Laval) nozzle for a small hybrid rocket motor. This was BURPG’s intro project, done with Jacob Knight and Hikaru Uribe, and we presented the Critical Design Review on March 4, 2026."
             },
             {
                 title: "Design inputs",

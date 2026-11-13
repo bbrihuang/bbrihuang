@@ -29,7 +29,7 @@ export const clubs = [
         org: "BU Rocket Propulsion Group",
         preview: true,
         slug: "burpg",
-        description: "For BURPG’s intro project, I designed, analyzed, printed and hot-fire tested a nozzle for a small hybrid rocket motor with Jacob Knight and Hikaru Uribe. We presented the Critical Design Review on 3/4/26.",
+        description: "For BURPG’s intro project, I designed, analyzed, printed and hot-fire tested a nozzle for a small hybrid rocket motor with Jacob Knight and Hikaru Uribe. We presented the Critical Design Review on March 4, 2026.",
         achievements: [
             "Sized a de Laval nozzle from the chamber conditions: 7.22 mm throat, 18.45 mm exit, area ratio 6.52.",
             "Ran FEA in SOLIDWORKS Simulation, with a minimum factor of safety of about 25.",
@@ -72,7 +72,7 @@ export const clubs = [
     },
     {
         org: "BU Japanese Student Association",
-        role: "Member | Kyodai Family, Member",
+        role: "Member, Kyodai Family",
         logo: "/clubs/bu-jsa.png",
         href: "https://www.instagram.com/thebujsa/",
     },
