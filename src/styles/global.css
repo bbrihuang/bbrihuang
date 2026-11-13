@@ -142,6 +142,8 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 /* The timeline: a thin line from each marker down to the next. */
 .job-tab:not(:nth-last-child(2))::after { content: ""; position: absolute; left: 7px; top: 41px; bottom: -34px; width: 1px; background: var(--bb-rule-soft); }
 .job-tab[aria-expanded="true"] { background: var(--bb-paper-2); box-shadow: inset 3px 0 0 var(--bb-ink); }
+/* Without JavaScript every role shows, so the buttons would do nothing: hide them. */
+html:not(.js-reveal) .job-tab { display: none; }
 .job-tab[aria-expanded="true"]::before { background: var(--bb-project-gradient); }
 @media (hover: hover) { .job-tab:hover { background: var(--bb-paper-2); } }
 .job-tab-text { display: grid; gap: 2px; }
