@@ -215,7 +215,7 @@ html.peeling::view-transition-new(root) { animation: peel 0.8s cubic-bezier(0.5,
 
 /* ---------- Certificate pages ---------- */
 .back-link { justify-self: start; color: var(--bb-muted); text-decoration: none; }
-.back-link:hover { color: var(--bb-signal-text); }
+@media (hover: hover) { .back-link:hover { color: var(--bb-signal-text); } }
 .certs { display: grid; gap: 40px; padding-top: clamp(32px, 4vw, 56px); max-width: 760px; }
 .cert { display: grid; gap: 18px; }
 .cert .shot { --n: 18px; }
@@ -405,7 +405,8 @@ html.awaiting-build main > section:not(.hero), html.awaiting-build .site-footer 
     display: flex; align-items: flex-end; border: 1.5px solid var(--bb-ink); background: var(--bb-paper); color: var(--bb-ink); cursor: pointer;
     transform: translateY(calc(var(--at, 0) * var(--floor) - 50%)); transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1); }
 .car .bill { width: 100%; height: auto; shape-rendering: crispEdges; }
-.car[aria-expanded="true"], .car:hover { border-color: var(--bb-signal-text); }
+.car[aria-expanded="true"] { border-color: var(--bb-signal-text); }
+@media (hover: hover) { .car:hover { border-color: var(--bb-signal-text); } }
 .bill .hat { fill: var(--bb-signal); }
 .bill .eye { fill: var(--bb-paper); }
 .car .legs-b, .car .arm-up, .car .arm-down { display: none; }
