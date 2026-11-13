@@ -358,7 +358,7 @@ export const projects = [
             },
             {
                 title: "Who did what",
-                text: "I came up with the idea, designed the front end (UI and UX), brought everything together in React, Tailwind and Vite, and shipped the site on Vercel.Aladin Crnolic wrote the Python scraper for BU Dining menu, nutrition and allergen data, and automated the daily updates and freshness checks with GitHub Actions. Adrian Miller built the linear regression calorie model and the data cleaning. Erik Wang helped build the website.",
+                text: "I came up with the idea, designed the front end (UI and UX), brought everything together in React, Tailwind and Vite, and shipped the site on Vercel. Aladin Crnolic wrote the Python scraper for BU Dining menu, nutrition and allergen data, and automated the daily updates and freshness checks with GitHub Actions. Adrian Miller built the linear regression calorie model and the data cleaning. Erik Wang helped build the website.",
                 gallery: [
                     {
                         src: "/projects/terriertrays/team.webp",
