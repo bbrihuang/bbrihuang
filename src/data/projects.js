@@ -259,6 +259,7 @@ export const projects = [
                     },
                     {
                         src: "/projects/llm-research/flow_animation.mp4",
+                        poster: "/projects/llm-research/flow_animation-poster.webp",
                         loop: true,
                         alt: "Animation titled “Following the learned field”, with a time counter. A round cloud of about two thousand blue dots, over a grid of grey arrows showing the learned field, is moved step by step into a shape.",
                         caption: "A tiny model turning noise into a shape, step by step"
