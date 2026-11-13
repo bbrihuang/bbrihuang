@@ -62,7 +62,7 @@ const sizes = Object.fromEntries(await Promise.all(
                 {section.gallery.map((item) => (
                     <figure>
                         {isVideo(item.src)
-                            ? <video src={item.src} poster={item.poster} aria-label={item.alt} controls preload="metadata" playsinline autoplay={item.loop} loop={item.loop} muted={item.loop}></video>
+                            ? <video src={item.src} poster={item.poster} aria-label={item.alt} controls preload={item.loop ? "none" : "metadata"} playsinline loop={item.loop} muted={item.loop} data-scroll-play={item.loop ? "" : undefined}></video>
                             : <img src={item.src} alt={item.alt} width={sizes[item.src].width} height={sizes[item.src].height} loading="lazy">}
                         {item.caption && <figcaption>{item.caption}</figcaption>}
                     </figure>

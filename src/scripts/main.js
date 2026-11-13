@@ -148,6 +148,12 @@ function setUpClips() {
         video.addEventListener("ended", () => video.load());
         if (seen) seen.observe(tile);
     });
+    // Looping case-study videos play only while in view.
+    if (!("IntersectionObserver" in window)) return;
+    const looping = new IntersectionObserver((entries) => {
+        entries.forEach(({ target, isIntersecting }) => isIntersecting ? target.play().catch(() => {}) : target.pause());
+    }, { threshold: 0.4 });
+    document.querySelectorAll("video[data-scroll-play]").forEach((video) => looping.observe(video));
 }
 
 // Hero builder: Bill Durr walks the gradient line, laying it behind himself, and under
