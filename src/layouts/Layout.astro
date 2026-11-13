@@ -10,6 +10,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const image = new URL("/og.png", Astro.site);
 // Search results cut off around 160 characters, so long summaries use their first sentence.
 const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : description;
+const person = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Brian Huang",
+    url: "https://www.bbrihuang.com",
+    alumniOf: { "@type": "CollegeOrUniversity", name: "Boston University" },
+    sameAs: ["https://github.com/bbrihuang", "https://www.linkedin.com/in/bbrihuang/"],
+};
 ---
 
 <!doctype html>
@@ -35,6 +43,7 @@ const summary = description.length > 160 ? description.split(/(?<=\.)\s/)[0] : d
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    {Astro.url.pathname === "/" && <script type="application/ld+json" set:html={JSON.stringify(person)} />}
     <title>{title}</title>
     <!-- Before the first paint: apply a saved theme, so the page never flashes the other one,
          and hold blocks in their starting pose so their entrances play (see setUpReveal in
