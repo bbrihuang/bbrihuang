@@ -45,6 +45,7 @@ function setUpThemeCorner() {
 function setUpJobTabs() {
     const tabs = [...document.querySelectorAll(".job-tab")];
     if (!tabs.length) return;
+    document.documentElement.classList.add("tabs-on");
 
     function select(tab) {
         tabs.forEach((other) => {
