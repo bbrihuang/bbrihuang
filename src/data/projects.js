@@ -32,8 +32,6 @@ export const projects = [
             "URDF / SDF"
         ],
         year: "2026",
-        home: 2,
-        short: "JetHexa",
         slug: "jethexa",
         cover: "/projects/jethexa/cover.webp",
         coverAlt: "The JetHexa hexapod robot.",
@@ -269,6 +267,130 @@ export const projects = [
             {
                 title: "Who did what",
                 text: "I ran every command and measurement myself. Claude helped write and explain the scripts, drafted the reports and slide decks, and summarized the reading material; the READMEs say where that applies. Where a result is unexplained or unverified, the write-up says so."
+            }
+        ]
+    },
+    {
+        title: "TerrierTrays",
+        areas: [
+            "software"
+        ],
+        tag: "Software · Hackathon",
+        description: "Placed 2nd in the Information Access track at Hackcessability 2026 with a web app that plans BU dining-hall meals to a calorie and macro target.",
+        chips: [
+            "TypeScript",
+            "React",
+            "Tailwind CSS",
+            "Vite",
+            "Zod",
+            "Vitest",
+            "Python",
+            "scikit-learn",
+            "GitHub Actions",
+            "Vercel"
+        ],
+        year: "2026",
+        home: 2,
+        short: "TerrierTrays",
+        slug: "terriertrays",
+        cover: "/projects/terriertrays/plan.webp",
+        coverAlt: "The TerrierTrays Plan tab showing Your daily totals as four rings for calories, protein, carbs and fat, above a dinner plate of 705 kcal.",
+        github: "https://github.com/bbrihuang/terriertrays",
+        links: [
+            {
+                label: "Live site",
+                href: "https://terriertrays.vercel.app"
+            },
+            {
+                label: "Devpost write-up",
+                href: "https://devpost.com/software/in-progress-ywnsm5"
+            }
+        ],
+        summary: "A web app that turns Boston University’s dining menus into a meal plan. It reads the real menus for three halls, suggests plates against a daily calorie target, and keeps track of calories, protein, carbs and fat. A team of four built it at Hackcessability 2026 and took 2nd place in the Information Access track.",
+        highlights: [
+            "Came up with TerrierTrays and led its web app, so students can plan a day of BU dining-hall meals in one place instead of clicking between menus, items and days.",
+            "Placed 2nd in the Information Access track at Hackcessability 2026 with a team of four, by making open dining data easy to find, understand and act on.",
+            "Kept the plans honest with a daily scraper, a 24-hour freshness check and allergen filters that never read empty as safe, so the app pauses suggestions instead of planning from stale food.",
+            "Held the calorie model to validation instead of training score, so it refuses inputs outside its training range and asks for an Apply tap before anything changes."
+        ],
+        caseStudy: [
+            {
+                title: "The problem",
+                text: "BU Dining publishes menus, nutrition and allergens, but on a slow site. Planning meals to a calorie or macro target means clicking between menus, items and days. Hackcessability is run by Kappa Theta Pi Lambda Chapter, the BU Cybersecurity Association and CDS Student Government. The Information Access track asks teams to use open data to make hidden or complex information easier to find, understand or act on. The team also did the cybersecurity subtrack."
+            },
+            {
+                title: "How it works",
+                flow: [
+                    {
+                        label: "Scraper",
+                        note: "Python, daily at 5:30 am New York time"
+                    },
+                    {
+                        label: "Freshness check",
+                        note: "Validates the data in GitHub Actions"
+                    },
+                    {
+                        label: "menu-data branch",
+                        note: "JSON per hall, per day"
+                    },
+                    {
+                        label: "Site build",
+                        note: "Pulls the data in on Vercel"
+                    },
+                    {
+                        label: "React app",
+                        note: "Plans in the browser"
+                    }
+                ],
+                text: "The app reads real menus for West Campus, Warren Towers and Marciano Commons up to a week ahead, meal by meal with hours. For the current meal it suggests up to three plates in whole dining-hall servings against a daily calorie target. “Not this” swaps a dish and “Why this plan?” explains the choice. You can also build your own plate from the Menu tab. Daily totals across halls show as four rings, and the Week tab plans seven days at one hall. Filters cover allergens and vegetarian, vegan, halal and gluten-free. It runs in the browser with no account and no tracking, and the measurements behind the calorie estimate are never saved or sent.",
+                gallery: [
+                    {
+                        src: "/projects/terriertrays/plan.webp",
+                        alt: "The TerrierTrays Plan tab: Dinner at West Campus, the meal times, and Your daily totals as four rings for calories (705 of 2,400), protein, carbs and fat.",
+                        caption: "The Plan tab, with daily totals across halls as four rings"
+                    },
+                    {
+                        src: "/projects/terriertrays/menu.webp",
+                        alt: "The TerrierTrays Menu tab listing West Campus dinner dishes with their calories per serving and a plus button on each.",
+                        caption: "The Menu tab: the West Campus dinner list, ready to build a plate from"
+                    }
+                ]
+            },
+            {
+                title: "Who did what",
+                text: "I came up with the idea and led the web app. Aladin Crnolic wrote the Python scraper for BU Dining menu, nutrition and allergen data, and automated the daily updates and freshness checks with GitHub Actions. Adrian Miller built the linear regression calorie model and the data cleaning. Erik Wang helped design and build the website.",
+                gallery: [
+                    {
+                        src: "/projects/terriertrays/team.webp",
+                        alt: "The four teammates standing together in front of tall windows with a view over the Charles River and Boston.",
+                        caption: "The team at Hackcessability 2026"
+                    }
+                ]
+            },
+            {
+                title: "Challenges",
+                points: [
+                    {
+                        title: "Allergens BU doesn’t list",
+                        text: "BU leaves the allergen list empty for many dishes. Allergens are known for only 46% to 60% of items per hall. So an empty list never means allergen-free, and when a filter is on, dishes with unknown allergens are left out of suggestions."
+                    },
+                    {
+                        title: "Menus that go stale",
+                        text: "A plan built on old data is worse than no plan. The scraper checks freshness before it publishes. If the menus are over 24 hours old, the app labels them as old and pauses suggestions instead of planning from stale food."
+                    },
+                    {
+                        title: "A model that only looks good on training data",
+                        text: "The calorie model is a linear regression on age, gender, height, weight and activity level, and it is typically off by about 111 kcal. The team hit data leakage and overfitting along the way, and learned that a high R² on training data doesn’t make a model reliable. So validation came before training score. The model refuses inputs outside its training range, and you review the number and tap Apply before anything changes."
+                    },
+                    {
+                        title: "Accessibility",
+                        text: "The goal was WCAG 2.2 AA: 44 px touch targets, keyboard and screen-reader paths, and reduced motion."
+                    }
+                ]
+            },
+            {
+                title: "Where it stands",
+                text: "It is live and works for West Campus, Warren Towers and Marciano Commons. Fenway and Granby are not included yet. Next ideas are logins, hall picks that know your class schedule, and dining dollars."
             }
         ]
     },
