@@ -308,7 +308,7 @@ export const projects = [
         ],
         summary: "A web app that turns Boston University’s dining menus into a meal plan. It reads the real menus for three halls, suggests plates against a daily calorie target, and keeps track of calories, protein, carbs and fat. A team of four built it at Hackcessability 2026 and took 2nd place in the Information Access track.",
         highlights: [
-            "Came up with TerrierTrays and led its web app, so students can plan a day of BU dining-hall meals in one place instead of clicking between menus, items and days.",
+            "Came up with TerrierTrays, designed its front end and built the web app in React, Tailwind and Vite, so students can plan a day of BU dining-hall meals in one place instead of clicking between menus, items and days.",
             "Placed 2nd in the Information Access track at Hackcessability 2026 with a team of four, by making open dining data easy to find, understand and act on.",
             "Built the app to label menus older than 24 hours and pause suggestions, and to treat dishes with no allergen list as unknown, so it never plans from stale food or reads an empty list as safe.",
             "Wired the team’s calorie model into a review step, so students see the estimate and tap Apply before any target changes."
@@ -358,7 +358,7 @@ export const projects = [
             },
             {
                 title: "Who did what",
-                text: "I came up with the idea and led the web app. Aladin Crnolic wrote the Python scraper for BU Dining menu, nutrition and allergen data, and automated the daily updates and freshness checks with GitHub Actions. Adrian Miller built the linear regression calorie model and the data cleaning. Erik Wang helped design and build the website.",
+                text: "I came up with the idea, designed the front end (UI and UX), brought everything together in React, Tailwind and Vite, and shipped the site on Vercel.Aladin Crnolic wrote the Python scraper for BU Dining menu, nutrition and allergen data, and automated the daily updates and freshness checks with GitHub Actions. Adrian Miller built the linear regression calorie model and the data cleaning. Erik Wang helped build the website.",
                 gallery: [
                     {
                         src: "/projects/terriertrays/team.webp",
