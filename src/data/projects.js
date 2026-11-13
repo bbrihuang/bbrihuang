@@ -146,6 +146,7 @@ export const projects = [
                 href: "https://huggingface.co/bbrihuang"
             }
         ],
+        metaDescription: "As a researcher in BU AI Society’s Local LLM Division, I ran twelve hands-on experiments on running language models on my own PC and rented Colab GPUs.",
         summary: "As a researcher in BU AI Society’s Local LLM Division, I ran twelve hands-on experiments on running language models on my own PC (an RTX 5070 with 12 GB) and a few rented Colab GPUs: speed, compression, attention, inference engines, agents, benchmarks and diffusion. Each one asks a question, measures it, and says what the numbers do and do not show.",
         highlights: [
             "Measured prefill and decode speed on an RTX 5070, then shrank Qwen3.5-4B from 16 bits to 2 bits and showed an importance matrix cuts the 2-bit damage about 4x.",

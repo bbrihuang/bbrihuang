@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 const frontmatter = {
     title: project.title,
-    description: project.summary,
+    description: project.metaDescription ?? project.summary,
     tag: project.tag,
     year: project.year,
     chips: project.chips,
